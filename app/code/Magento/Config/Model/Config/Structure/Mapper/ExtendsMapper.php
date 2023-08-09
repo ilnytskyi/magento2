@@ -9,6 +9,12 @@
  */
 namespace Magento\Config\Model\Config\Structure\Mapper;
 
+use function array_keys;
+use function explode;
+use function is_array;
+use function sprintf;
+use function str_replace;
+
 /**
  * @api
  * @since 100.0.2

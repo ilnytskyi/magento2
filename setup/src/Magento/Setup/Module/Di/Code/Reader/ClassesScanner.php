@@ -11,6 +11,14 @@ use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\Exception\FileSystemException;
 
+use function array_merge;
+use function class_exists;
+use function is_array;
+use function preg_match;
+use function realpath;
+use function str_replace;
+use function strpos;
+
 /**
  * Class ClassesScanner
  */

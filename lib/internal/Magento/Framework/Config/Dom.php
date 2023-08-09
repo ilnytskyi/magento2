@@ -13,6 +13,19 @@ use Magento\Framework\Config\Dom\UrnResolver;
 use Magento\Framework\Config\Dom\ValidationSchemaException;
 use Magento\Framework\Phrase;
 
+use function array_unshift;
+use function count;
+use function function_exists;
+use function implode;
+use function is_array;
+use function libxml_get_errors;
+use function libxml_set_external_entity_loader;
+use function libxml_use_internal_errors;
+use function preg_match_all;
+use function str_replace;
+use function strpos;
+use function trim;
+
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  * @api

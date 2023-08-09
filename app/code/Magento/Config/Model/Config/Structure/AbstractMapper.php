@@ -9,6 +9,10 @@
  */
 namespace Magento\Config\Model\Config\Structure;
 
+use function array_key_exists;
+use function explode;
+use function is_array;
+
 /**
  * @api
  * @since 100.0.2
@@ -24,7 +28,7 @@ abstract class AbstractMapper implements MapperInterface
      */
     protected function _hasValue($key, $target)
     {
-        if (false == is_array($target)) {
+        if (!is_array($target)) {
             return false;
         }
 

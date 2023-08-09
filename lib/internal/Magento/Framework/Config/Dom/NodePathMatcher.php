@@ -5,6 +5,9 @@
  */
 namespace Magento\Framework\Config\Dom;
 
+use function preg_match;
+use function preg_replace;
+
 /**
  * Matching of XPath expressions to path patterns
  */
