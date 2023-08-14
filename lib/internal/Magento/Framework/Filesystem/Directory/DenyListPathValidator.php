@@ -12,6 +12,8 @@ use Magento\Framework\Exception\ValidatorException;
 use Magento\Framework\Filesystem\DriverInterface;
 use Magento\Framework\Phrase;
 
+use function in_array;
+
 /**
  * Validates paths using driver.
  */

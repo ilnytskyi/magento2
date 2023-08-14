@@ -13,6 +13,9 @@ use Magento\Framework\Exception\ValidatorException;
 use Magento\Framework\Filesystem\DriverInterface;
 use Magento\Framework\Phrase;
 
+use function dirname;
+use function implode;
+
 /**
  * Write Interface implementation
  */
@@ -215,7 +218,7 @@ class Write extends Read implements WriteInterface
             if (!empty($exceptionMessages)) {
                 throw new FileSystemException(
                     new Phrase(
-                        \implode(' ', $exceptionMessages)
+                        implode(' ', $exceptionMessages)
                     )
                 );
             }
@@ -250,7 +253,7 @@ class Write extends Read implements WriteInterface
         if (!empty($exceptionMessages)) {
             throw new FileSystemException(
                 new Phrase(
-                    \implode(' ', $exceptionMessages)
+                    implode(' ', $exceptionMessages)
                 )
             );
         }

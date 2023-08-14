@@ -11,6 +11,27 @@ use Magento\Framework\Filesystem\DriverInterface;
 use Magento\Framework\Filesystem\Glob;
 use Magento\Framework\Phrase;
 
+use function array_pop;
+use function clearstatcache;
+use function count;
+use function end;
+use function explode;
+use function fclose;
+use function fflush;
+use function flock;
+use function fputcsv;
+use function implode;
+use function in_array;
+use function is_string;
+use function ltrim;
+use function preg_replace;
+use function realpath;
+use function rtrim;
+use function str_replace;
+use function strlen;
+use function strpos;
+use function substr;
+
 /**
  * Filesystem driver that uses the local filesystem.
  *
@@ -484,7 +505,7 @@ class File implements DriverInterface
         if (!empty($exceptionMessages)) {
             throw new FileSystemException(
                 new Phrase(
-                    \implode(' ', $exceptionMessages)
+                    implode(' ', $exceptionMessages)
                 )
             );
         }

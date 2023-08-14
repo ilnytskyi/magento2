@@ -8,6 +8,9 @@ namespace Magento\Framework\Filesystem\Directory;
 use Magento\Framework\Exception\FileSystemException;
 use Magento\Framework\Exception\ValidatorException;
 
+use function rtrim;
+use function str_replace;
+
 /**
  * Filesystem directory instance for read operations
  * @api
