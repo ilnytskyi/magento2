@@ -199,7 +199,7 @@ class ManagerTest extends TestCase
             ->with(Manager::DEFAULT_GROUP)
             ->willReturn($messageCollection);
 
-        $exception = new Exception($exceptionMessage);
+        $exception = new \Exception($exceptionMessage);
         $this->assertEquals($this->model, $this->model->addException($exception, $alternativeText));
     }
 
@@ -209,7 +209,7 @@ class ManagerTest extends TestCase
     public function testAddExceptionRenderable(): void
     {
         $exceptionMessage = 'exception message';
-        $exception = new Exception($exceptionMessage);
+        $exception = new \Exception($exceptionMessage);
         $this->logger->expects($this->once())->method('critical');
         $message = $this->getMockForAbstractClass(MessageInterface::class);
         $this->messageFactory->expects($this->never())->method('create');

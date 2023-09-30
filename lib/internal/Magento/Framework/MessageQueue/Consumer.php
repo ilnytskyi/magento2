@@ -257,7 +257,7 @@ class Consumer implements ConsumerInterface
             } catch (NotFoundException $exception) {
                 $queue->acknowledge($message);
                 $this->logger->warning($exception->getMessage());
-            } catch (Exception $exception) {
+            } catch (\Exception $exception) {
                 $queue->reject($message, false, $exception->getMessage());
                 if ($lock) {
                     $this->resource->getConnection()->delete(

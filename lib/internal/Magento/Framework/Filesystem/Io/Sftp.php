@@ -32,7 +32,7 @@ class Sftp extends AbstractIo
      *        string $args[password] Connection password
      *        int $args[timeout] Connection timeout [=10]
      * @return void
-     * @throws Exception
+     * @throws \Exception
      */
     public function open(array $args = [])
     {
@@ -48,7 +48,7 @@ class Sftp extends AbstractIo
         $this->_connection = new \phpseclib3\Net\SFTP($host, $port, $args['timeout']);
         if (!$this->_connection->login($args['username'], $args['password'])) {
             // phpcs:ignore Magento2.Exceptions.DirectThrow
-            throw new Exception(
+            throw new \Exception(
                 sprintf("Unable to open SFTP connection as %s@%s", $args['username'], $args['host'])
             );
         }
@@ -101,7 +101,7 @@ class Sftp extends AbstractIo
      * @param string $dir
      * @param bool $recursive
      * @return bool
-     * @throws Exception
+     * @throws \Exception
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     public function rmdir($dir, $recursive = false)
@@ -111,7 +111,7 @@ class Sftp extends AbstractIo
             $currentWorkingDir = $this->pwd();
             if (!$this->_connection->chdir($dir)) {
                 // phpcs:ignore Magento2.Exceptions.DirectThrow
-                throw new Exception("chdir(): {$dir}: Not a directory");
+                throw new \Exception("chdir(): {$dir}: Not a directory");
             }
             $list = $this->_connection->nlist();
             if (!count($list)) {

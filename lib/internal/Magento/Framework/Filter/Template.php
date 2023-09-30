@@ -195,7 +195,7 @@ class Template implements FilterInterface
     public function filter($value)
     {
         if (!is_string($value)) {
-            throw new InvalidArgumentException(__(
+            throw new \InvalidArgumentException(__(
                 'Argument \'value\' must be type of string, %1 given.',
                 gettype($value)
             )->render());
@@ -250,7 +250,7 @@ class Template implements FilterInterface
      *
      * @return array
      *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @throws \Magento\Framework\Exception\LocalizedException
      */
     private function processDirectives($value, $isSigned = false): array
@@ -259,7 +259,7 @@ class Template implements FilterInterface
 
         foreach ($this->directiveProcessors as $directiveProcessor) {
             if (!$directiveProcessor instanceof DirectiveProcessorInterface) {
-                throw new InvalidArgumentException(
+                throw new \InvalidArgumentException(
                     'Directive processors must implement ' . DirectiveProcessorInterface::class
                 );
             }

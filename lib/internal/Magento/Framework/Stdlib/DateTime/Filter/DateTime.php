@@ -29,7 +29,7 @@ class DateTime extends Date
         $this->_localToNormalFilter = new LocalizedToNormalized(
             [
                 'date_format' => $this->_localeDate->getDateTimeFormat(
-                    IntlDateFormatter::SHORT
+                    \IntlDateFormatter::SHORT
                 ),
             ]
         );
@@ -51,7 +51,7 @@ class DateTime extends Date
         try {
             $dateTime = $this->_localeDate->date($value, null, false);
             return $dateTime->format('Y-m-d H:i:s');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             throw new LocalizedException(
                 __('Invalid input datetime format of value "%1"', $value)
             );

@@ -66,13 +66,13 @@ class LocalizedToNormalized implements FilterInterface
     public function filter($value)
     {
         if (is_numeric($value)) {
-            $numberParse = new NumberParse($this->_options['locale'], NumberFormatter::PATTERN_DECIMAL);
+            $numberParse = new NumberParse($this->_options['locale'], \NumberFormatter::PATTERN_DECIMAL);
             return (string) $numberParse->filter($value);
         } elseif ($this->_options['date_format'] === null && strpos($value, ':') !== false) {
-            $formatter = new IntlDateFormatter(
+            $formatter = new \IntlDateFormatter(
                 $this->_options['locale'],
-                IntlDateFormatter::SHORT,
-                IntlDateFormatter::SHORT
+                \IntlDateFormatter::SHORT,
+                \IntlDateFormatter::SHORT
             );
             $formatter->setPattern($this->_options['date_format']);
             return $formatter->format(strtotime($value));
@@ -94,7 +94,7 @@ class LocalizedToNormalized implements FilterInterface
     {
         try {
             $date = $this->parseDate($date);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return false;
         }
         $options = $this->_options;

@@ -123,7 +123,7 @@ class ActionList
      * @param string $namespace
      * @param string $action
      * @return null|string
-     * @throws ReflectionException
+     * @throws \ReflectionException
      */
     public function get($module, $area, $namespace, $action)
     {
@@ -148,7 +148,7 @@ class ActionList
             if ($this->validateActionClass($fullPath)) {
                 return $this->actions[$fullPath];
             }
-        } catch (ReflectionException $e) {
+        } catch (\ReflectionException $e) {
             return null;
         }
 
@@ -160,7 +160,7 @@ class ActionList
      *
      * @param string $fullPath
      * @return bool
-     * @throws ReflectionException
+     * @throws \ReflectionException
      */
     private function validateActionClass(string $fullPath): bool
     {

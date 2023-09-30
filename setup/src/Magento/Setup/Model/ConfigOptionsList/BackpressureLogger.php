@@ -19,6 +19,7 @@ use Magento\Framework\Setup\ConfigOptionsListInterface;
 use Magento\Framework\Setup\Option\SelectConfigOption;
 use Magento\Framework\Setup\Option\TextConfigOption;
 use Magento\Setup\Validator\RedisConnectionValidator;
+use function hash;
 
 /**
  * Deployment configuration options needed to configure backpressure logger
@@ -290,6 +291,6 @@ class BackpressureLogger implements ConfigOptionsListInterface
     private function generatePrefix(): string
     {
         // phpcs:ignore Magento2.Functions.DiscouragedFunction
-        return substr(\hash('sha256', dirname(__DIR__, 6)), 0, 3) . '_';
+        return substr(hash('sha256', dirname(__DIR__, 6)), 0, 3) . '_';
     }
 }

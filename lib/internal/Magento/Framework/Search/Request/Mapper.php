@@ -75,8 +75,8 @@ class Mapper
      * @param string $rootQueryName
      * @param array $aggregations
      * @param array $filters
-     * @throws Exception
-     * @throws InvalidArgumentException
+     * @throws \Exception
+     * @throws \InvalidArgumentException
      * @throws StateException
      */
     public function __construct(
@@ -97,8 +97,8 @@ class Mapper
      * Get Query Interface by name
      *
      * @return QueryInterface
-     * @throws Exception
-     * @throws InvalidArgumentException
+     * @throws \Exception
+     * @throws \InvalidArgumentException
      * @throws StateException
      */
     public function getRootQuery()
@@ -117,8 +117,8 @@ class Mapper
      *
      * @param string $queryName
      * @return QueryInterface
-     * @throws Exception
-     * @throws InvalidArgumentException
+     * @throws \Exception
+     * @throws \InvalidArgumentException
      * @throws StateException
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
@@ -126,7 +126,7 @@ class Mapper
     {
         if (!isset($this->queries[$queryName])) {
             // phpcs:ignore Magento2.Exceptions.DirectThrow
-            throw new Exception('Query ' . $queryName . ' does not exist');
+            throw new \Exception('Query ' . $queryName . ' does not exist');
         } elseif (in_array($queryName, $this->mappedQueries)) {
             throw new StateException(new Phrase(
                 'A cycle was found. The "%1" query is already used in the request hierarchy.',
@@ -156,7 +156,7 @@ class Mapper
                     $referenceType = Filter::REFERENCE_FILTER;
                 } else {
                     // phpcs:ignore Magento2.Exceptions.DirectThrow
-                    throw new Exception('Reference is not provided');
+                    throw new \Exception('Reference is not provided');
                 }
                 $query = $this->objectManager->create(
                     Filter::class,
@@ -179,7 +179,7 @@ class Mapper
                 );
                 break;
             default:
-                throw new InvalidArgumentException('Invalid query type');
+                throw new \InvalidArgumentException('Invalid query type');
         }
         return $query;
     }
@@ -188,17 +188,17 @@ class Mapper
      * Convert array to Filter instance
      *
      * @param string $filterName
-     * @throws Exception
+     * @throws \Exception
      * @return FilterInterface
-     * @throws Exception
-     * @throws InvalidArgumentException
+     * @throws \Exception
+     * @throws \InvalidArgumentException
      * @throws StateException
      */
     private function mapFilter($filterName)
     {
         if (!isset($this->filters[$filterName])) {
             // phpcs:ignore Magento2.Exceptions.DirectThrow
-            throw new Exception('Filter ' . $filterName . ' does not exist');
+            throw new \Exception('Filter ' . $filterName . ' does not exist');
         } elseif (in_array($filterName, $this->mappedFilters)) {
             throw new StateException(
                 new Phrase(
@@ -252,7 +252,7 @@ class Mapper
                 );
                 break;
             default:
-                throw new InvalidArgumentException('Invalid filter type');
+                throw new \InvalidArgumentException('Invalid filter type');
         }
         return $filter;
     }

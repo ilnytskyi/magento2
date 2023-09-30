@@ -69,13 +69,13 @@ class FilterManager
      * @param string $filterAlias
      * @param array $arguments
      * @return FilterInterface
-     * @throws UnexpectedValueException
+     * @throws \UnexpectedValueException
      */
     public function get($filterAlias, array $arguments = [])
     {
         $filter = $this->createFilterInstance($filterAlias, $arguments);
         if (!$filter instanceof FilterInterface) {
-            throw new UnexpectedValueException(sprintf(
+            throw new \UnexpectedValueException(sprintf(
                 'Filter object must implement %s interface, %s was given',
                 FilterInterface::class,
                 get_class($filter)
@@ -90,7 +90,7 @@ class FilterManager
      * @param string $filterAlias
      * @param array $arguments
      * @return FilterInterface
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     protected function createFilterInstance($filterAlias, $arguments)
     {
@@ -99,7 +99,7 @@ class FilterManager
                 return $factory->createFilter($filterAlias, $arguments);
             }
         }
-        throw new InvalidArgumentException(sprintf(
+        throw new \InvalidArgumentException(sprintf(
             'Filter was not found by given alias %s',
             $filterAlias
         ));
@@ -109,7 +109,7 @@ class FilterManager
      * Get registered factories
      *
      * @return FactoryInterface[]
-     * @throws UnexpectedValueException
+     * @throws \UnexpectedValueException
      */
     protected function getFilterFactories()
     {
@@ -117,7 +117,7 @@ class FilterManager
             foreach ($this->config->getFactories() as $class) {
                 $factory = $this->objectManager->create($class);
                 if (!$factory instanceof FactoryInterface) {
-                    throw new UnexpectedValueException(sprintf(
+                    throw new \UnexpectedValueException(sprintf(
                         'Filter factory must implement %s interface, %s was given.',
                         FactoryInterface::class,
                         get_class($factory)

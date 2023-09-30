@@ -27,11 +27,11 @@ class ClassReader implements ClassReaderInterface
      *
      * @param  string $className
      * @return array|null
-     * @throws ReflectionException
+     * @throws \ReflectionException
      */
     public function getConstructor($className)
     {
-        $class = new ReflectionClass($className);
+        $class = new \ReflectionClass($className);
         $result = null;
         $constructor = $class->getConstructor();
         if ($constructor) {
@@ -48,13 +48,13 @@ class ClassReader implements ClassReaderInterface
                         $this->getReflectionParameterDefaultValue($parameter),
                         $parameter->isVariadic(),
                     ];
-                } catch (ReflectionException $e) {
+                } catch (\ReflectionException $e) {
                     $message = sprintf(
                         'Impossible to process constructor argument %s of %s class',
                         $parameter->__toString(),
                         $className
                     );
-                    throw new ReflectionException($message, 0, $e);
+                    throw new \ReflectionException($message, 0, $e);
                 }
             }
         }
@@ -65,10 +65,10 @@ class ClassReader implements ClassReaderInterface
     /**
      * Get reflection parameter default value
      *
-     * @param  ReflectionParameter $parameter
+     * @param  \ReflectionParameter $parameter
      * @return array|mixed|null
      */
-    private function getReflectionParameterDefaultValue(ReflectionParameter $parameter)
+    private function getReflectionParameterDefaultValue(\ReflectionParameter $parameter)
     {
         if ($parameter->isVariadic()) {
             return [];

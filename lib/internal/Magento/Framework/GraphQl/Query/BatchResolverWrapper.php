@@ -83,14 +83,14 @@ class BatchResolverWrapper implements ResolverInterface, ResetAfterRequestInterf
      * Find resolved data for given request.
      *
      * @param BatchRequestItemInterface $item
-     * @throws Throwable
+     * @throws \Throwable
      * @return mixed
      */
     private function findResolvedFor(BatchRequestItemInterface $item)
     {
         try {
             return $this->resolveFor($item);
-        } catch (Throwable $exception) {
+        } catch (\Throwable $exception) {
             $this->clearAggregated();
             throw $exception;
         }
@@ -101,12 +101,12 @@ class BatchResolverWrapper implements ResolverInterface, ResetAfterRequestInterf
      *
      * @param BatchRequestItemInterface $item
      * @return mixed|Value
-     * @throws Throwable
+     * @throws \Throwable
      */
     private function resolveFor(BatchRequestItemInterface $item)
     {
         if (!$this->request) {
-            throw new RuntimeException('Unknown batch request item');
+            throw new \RuntimeException('Unknown batch request item');
         }
 
         if (!$this->response) {

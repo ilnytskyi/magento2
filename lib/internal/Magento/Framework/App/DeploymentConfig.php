@@ -10,6 +10,7 @@ use Magento\Framework\Config\ConfigOptionsListConstants;
 use Magento\Framework\Exception\FileSystemException;
 use Magento\Framework\Exception\RuntimeException;
 use Magento\Framework\Phrase;
+use function strpos;
 
 /**
  * Application deployment configuration
@@ -234,7 +235,7 @@ class DeploymentConfig
             // MAGENTO_DC_{path}, like db/connection/default/host =>
             // can be overwritten by MAGENTO_DC_DB__CONNECTION__DEFAULT__HOST
             foreach (getenv() as $key => $value) {
-                if (false !== \strpos($key, self::MAGENTO_ENV_PREFIX)
+                if (false !== strpos($key, self::MAGENTO_ENV_PREFIX)
                     && $key !== self::OVERRIDE_KEY
                 ) {
                     // convert MAGENTO_DC_DB__CONNECTION__DEFAULT__HOST into db/connection/default/host

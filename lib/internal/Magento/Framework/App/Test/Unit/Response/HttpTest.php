@@ -335,7 +335,7 @@ class HttpTest extends TestCase
         $this->expectException('RuntimeException');
         $this->expectExceptionMessage('ObjectManager isn\'t initialized');
         /* ensure that the test preconditions are met */
-        $objectManagerClass = new ReflectionClass(AppObjectManager::class);
+        $objectManagerClass = new \ReflectionClass(AppObjectManager::class);
         $instanceProperty = $objectManagerClass->getProperty('_instance');
         $instanceProperty->setAccessible(true);
         $instanceProperty->setValue(null);

@@ -15,6 +15,7 @@ use Magento\Framework\Setup\Option\FlagConfigOption;
 use Magento\Framework\Setup\Option\SelectConfigOption;
 use Magento\Framework\Setup\Option\TextConfigOption;
 use Magento\Setup\Validator\RedisConnectionValidator;
+use function hash;
 
 /**
  * Deployment configuration options for the default cache
@@ -294,6 +295,6 @@ class Cache implements ConfigOptionsListInterface
     private function generateCachePrefix(): string
     {
         // phpcs:ignore Magento2.Functions.DiscouragedFunction
-        return substr(\hash('sha256', dirname(__DIR__, 6)), 0, 3) . '_';
+        return substr(hash('sha256', dirname(__DIR__, 6)), 0, 3) . '_';
     }
 }

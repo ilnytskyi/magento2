@@ -39,7 +39,7 @@ class StringType extends \GraphQL\Type\Definition\StringType
      * @param Node $valueNode
      * @param array|null $variables
      * @return string
-     * @throws Exception
+     * @throws \Exception
      */
     public function parseLiteral(Node $valueNode, ?array $variables = null): string
     {
@@ -52,7 +52,7 @@ class StringType extends \GraphQL\Type\Definition\StringType
                     'loc' => $valueNode->loc
                 ]);
             }
-        } catch (Exception $e) {} // @codingStandardsIgnoreLine
+        } catch (\Exception $e) {} // @codingStandardsIgnoreLine
         return parent::parseLiteral($valueNode, $variables);
     }
 }

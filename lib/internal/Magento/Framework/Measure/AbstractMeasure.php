@@ -89,7 +89,7 @@ abstract class AbstractMeasure
      */
     public function setLocale(string $locale = null): AbstractMeasure
     {
-        $this->locale = $locale ?? Locale::getDefault();
+        $this->locale = $locale ?? \Locale::getDefault();
 
         return $this;
     }
@@ -106,10 +106,10 @@ abstract class AbstractMeasure
     public function setValue($value, string $type, string $locale): AbstractMeasure
     {
         try {
-            $numberParse = new NumberParse($locale, NumberFormatter::TYPE_DEFAULT);
+            $numberParse = new NumberParse($locale, \NumberFormatter::TYPE_DEFAULT);
             $this->value = (string) $numberParse->filter($value);
             $this->setType($type);
-        } catch (Exception $exception) {
+        } catch (\Exception $exception) {
             throw new MeasureException(
                 __($exception->getMessage()),
                 $exception->getCode(),
@@ -132,7 +132,7 @@ abstract class AbstractMeasure
         $result = $round < 0 ? $this->value : round((float) $this->value, $round);
 
         if ($locale !== null) {
-            $numberParse = new NumberParse($locale, NumberFormatter::TYPE_DEFAULT);
+            $numberParse = new NumberParse($locale, \NumberFormatter::TYPE_DEFAULT);
             return (string) $numberParse->filter($result);
         }
 

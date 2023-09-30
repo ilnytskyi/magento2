@@ -163,7 +163,7 @@ class UrlTest extends TestCase
         $objectManager = new ObjectManager($this);
         $model = $objectManager->getObject(Url::class, $arguments);
 
-        $modelProperty = (new ReflectionClass(get_class($model)))
+        $modelProperty = (new \ReflectionClass(get_class($model)))
             ->getProperty('urlModifier');
 
         $modelProperty->setAccessible(true);

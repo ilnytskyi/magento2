@@ -36,7 +36,7 @@ class SystemTest extends TestCase
     /**
      * @inheritdoc
      *
-     * @throws Exception
+     * @throws \Exception
      */
     protected function setUp(): void
     {
@@ -66,7 +66,7 @@ class SystemTest extends TestCase
     public function testWriteException()
     {
         $record = $this->getRecord();
-        $record['context']['exception'] = new Exception('Some exception');
+        $record['context']['exception'] = new \Exception('Some exception');
 
         $this->exceptionHandlerMock->expects($this->once())
             ->method('handle')
@@ -94,7 +94,7 @@ class SystemTest extends TestCase
             'level' => $level,
             'level_name' => Logger::getLevelName($level),
             'channel' => 'test',
-            'datetime' => DateTime::createFromFormat(
+            'datetime' => \DateTime::createFromFormat(
                 'U.u',
                 sprintf('%.6F', microtime(true))
             ),

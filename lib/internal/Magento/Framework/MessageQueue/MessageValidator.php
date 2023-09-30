@@ -56,7 +56,7 @@ class MessageValidator
      * @param mixed $message
      * @param bool $requestType
      * @return void
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @throws LocalizedException
      */
     public function validate($topic, $message, $requestType = true)
@@ -124,7 +124,7 @@ class MessageValidator
             $compareType = preg_replace('/\[\]/', '', $messageType);
         }
         if ($realType !== $compareType) {
-            throw new InvalidArgumentException(
+            throw new \InvalidArgumentException(
                 new Phrase(
                     'Data in topic "%topic" must be of type "%expectedType". '
                     . '"%actualType" given.',
@@ -158,7 +158,7 @@ class MessageValidator
             $compareType = preg_replace('/\[\]/', '', $messageType);
         }
         if (!($message instanceof $compareType)) {
-            throw new InvalidArgumentException(
+            throw new \InvalidArgumentException(
                 new Phrase(
                     'Data in topic "%topic" must be of type "%expectedType". '
                     . '"%actualType" given.',

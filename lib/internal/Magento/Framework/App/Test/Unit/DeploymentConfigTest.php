@@ -16,6 +16,7 @@ use Magento\Framework\Exception\FileSystemException;
 use Magento\Framework\Exception\RuntimeException;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use function strpos;
 
 class DeploymentConfigTest extends TestCase
 {
@@ -200,7 +201,7 @@ class DeploymentConfigTest extends TestCase
     protected function tearDown(): void
     {
         foreach (array_keys(getenv()) as $key) {
-            if (false !== \strpos($key, 'MAGENTO_DC')) {
+            if (false !== strpos($key, 'MAGENTO_DC')) {
                 putenv($key);
             }
         }

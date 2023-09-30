@@ -29,7 +29,7 @@ class DateTimeTest extends TestCase
         )->method(
             'getDateTimeFormat'
         )->with(
-            IntlDateFormatter::SHORT
+            \IntlDateFormatter::SHORT
         )->willReturn(
             'HH:mm:ss MM-dd-yyyy'
         );
@@ -58,7 +58,7 @@ class DateTimeTest extends TestCase
      */
     public function testFilterWithException($inputData)
     {
-        $this->expectException(Exception::class);
+        $this->expectException(\Exception::class);
 
         $localeMock = $this->getMockForAbstractClass(TimezoneInterface::class);
         $localeMock->expects(
@@ -66,7 +66,7 @@ class DateTimeTest extends TestCase
         )->method(
             'getDateFormat'
         )->with(
-            IntlDateFormatter::SHORT
+            \IntlDateFormatter::SHORT
         )->willReturn(
             'MM-dd-yyyy'
         );

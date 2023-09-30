@@ -43,5 +43,10 @@ $config->setFinder($finder)
         'ordered_imports' => true,
         'standardize_not_equals' => true,
         'ternary_operator_spaces' => true,
+        'global_namespace_import' => [
+                'import_classes' => false,
+                'import_constants' => false,
+                'import_functions' => true
+        ]
     ]);
 return $config;

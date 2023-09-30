@@ -9,6 +9,7 @@
 namespace Magento\Framework\Interception\Definition;
 
 use Magento\Framework\Interception\DefinitionInterface;
+use function lcfirst;
 
 class Runtime implements DefinitionInterface
 {
@@ -46,7 +47,7 @@ class Runtime implements DefinitionInterface
             foreach ($allMethods as $method) {
                 $prefix = substr($method, 0, 5);
                 if (isset($this->_typesByPrefixes[$prefix])) {
-                    $methodName = \lcfirst(substr($method, $this->prefixLengths[$this->_typesByPrefixes[$prefix]]));
+                    $methodName = lcfirst(substr($method, $this->prefixLengths[$this->_typesByPrefixes[$prefix]]));
                     $methods[$methodName] = isset(
                         $methods[$methodName]
                     ) ? $methods[$methodName] | $this->_typesByPrefixes[$prefix] : $this->_typesByPrefixes[$prefix];

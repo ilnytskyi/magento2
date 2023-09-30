@@ -60,9 +60,9 @@ class Helper
      */
     public function rm($path, $skipPaths = [], $removeRoot = false)
     {
-        $filesystemIterator = new RecursiveIteratorIterator(
-            new RecursiveDirectoryIterator($path),
-            RecursiveIteratorIterator::CHILD_FIRST
+        $filesystemIterator = new \RecursiveIteratorIterator(
+            new \RecursiveDirectoryIterator($path),
+            \RecursiveIteratorIterator::CHILD_FIRST
         );
 
         $iterator = new Filter($filesystemIterator, $skipPaths);
@@ -103,9 +103,9 @@ class Helper
             $info['size'] = 0;
         }
 
-        $filesystemIterator = new RecursiveIteratorIterator(
-            new RecursiveDirectoryIterator($path),
-            RecursiveIteratorIterator::CHILD_FIRST
+        $filesystemIterator = new \RecursiveIteratorIterator(
+            new \RecursiveDirectoryIterator($path),
+            \RecursiveIteratorIterator::CHILD_FIRST
         );
 
         $iterator = new Filter($filesystemIterator, $skipFiles);

@@ -172,7 +172,7 @@ class StandardTest extends TestCase
      */
     public function testDefaultOutputFactory(): void
     {
-        $method = new ReflectionMethod($this->driver, '_getOutputFactory');
+        $method = new \ReflectionMethod($this->driver, '_getOutputFactory');
         $method->setAccessible(true);
         $this->assertInstanceOf(
             Factory::class,

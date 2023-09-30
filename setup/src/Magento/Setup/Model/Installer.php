@@ -1231,7 +1231,7 @@ class Installer
     {
         try {
             $remoteStorageValidator = $this->objectManagerProvider->get()->get(RemoteStorageValidator::class);
-        } catch (ReflectionException $e) { // RemoteStorage module is not available; return early
+        } catch (\ReflectionException $e) { // RemoteStorage module is not available; return early
             return;
         }
 

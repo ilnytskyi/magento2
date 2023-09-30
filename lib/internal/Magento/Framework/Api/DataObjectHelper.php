@@ -7,6 +7,7 @@
 namespace Magento\Framework\Api;
 
 use Magento\Framework\Reflection\MethodsMap;
+use function count;
 
 /**
  * Service class allow populating object from array data
@@ -121,7 +122,7 @@ class DataObjectHelper
             $simpleData = array_intersect_key($simpleData, $setMethods);
             $dataObject->addData($simpleData);
             $data = array_diff_key($data, $simpleData);
-            if (\count($data) === 0) {
+            if (count($data) === 0) {
                 return $this;
             }
         }

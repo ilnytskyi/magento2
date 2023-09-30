@@ -10,6 +10,7 @@ namespace Magento\Framework\App;
 use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\Filesystem;
 use Magento\Framework\Filesystem\Directory\ReadFactory;
+use function strlen;
 
 /**
  * This class calculates if document root is set to pub
@@ -54,6 +55,6 @@ class DocRootLocator
         $rootBasePath = $this->request->getServer('DOCUMENT_ROOT') ?? '';
         $readDirectory = $this->filesystem->getDirectoryRead(DirectoryList::ROOT);
 
-        return (substr($rootBasePath, -\strlen('/pub')) === '/pub') && ! $readDirectory->isExist('setup');
+        return (substr($rootBasePath, -strlen('/pub')) === '/pub') && ! $readDirectory->isExist('setup');
     }
 }

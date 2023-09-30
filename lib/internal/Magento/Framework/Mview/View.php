@@ -180,13 +180,13 @@ class View extends DataObject implements ViewInterface, ViewSubscriptionInterfac
      *
      * @param string $viewId
      * @return ViewInterface
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     public function load($viewId)
     {
         $view = $this->config->getView($viewId);
         if (empty($view) || empty($view['view_id']) || $view['view_id'] !== $viewId) {
-            throw new InvalidArgumentException("{$viewId} view does not exist.");
+            throw new \InvalidArgumentException("{$viewId} view does not exist.");
         }
 
         $this->setId($viewId);
@@ -199,7 +199,7 @@ class View extends DataObject implements ViewInterface, ViewSubscriptionInterfac
      * Create subscriptions
      *
      * @return ViewInterface
-     * @throws Exception
+     * @throws \Exception
      */
     public function subscribe()
     {
@@ -222,7 +222,7 @@ class View extends DataObject implements ViewInterface, ViewSubscriptionInterfac
      * Remove subscriptions
      *
      * @return ViewInterface
-     * @throws Exception
+     * @throws \Exception
      */
     public function unsubscribe()
     {
@@ -243,7 +243,7 @@ class View extends DataObject implements ViewInterface, ViewSubscriptionInterfac
      * Materialize view by IDs in changelog
      *
      * @return void
-     * @throws Exception
+     * @throws \Exception
      */
     public function update()
     {
@@ -328,7 +328,7 @@ class View extends DataObject implements ViewInterface, ViewSubscriptionInterfac
      * Suspend view updates and set version ID to changelog's end
      *
      * @return void
-     * @throws Exception
+     * @throws \Exception
      */
     public function suspend()
     {
@@ -344,7 +344,7 @@ class View extends DataObject implements ViewInterface, ViewSubscriptionInterfac
      * Resume view updates
      *
      * @return void
-     * @throws Exception
+     * @throws \Exception
      */
     public function resume()
     {

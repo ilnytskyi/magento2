@@ -115,7 +115,7 @@ class InterceptionConfigurationBuilderTest extends TestCase
      */
     public function getInterceptionConfigurationDataProvider()
     {
-        $someInstance = new stdClass();
+        $someInstance = new \stdClass();
         return [
             [null],
             [['plugin' => ['instance' => $someInstance]]],

@@ -14,6 +14,7 @@ use Magento\Setup\Model\ConfigOptionsList\BackpressureLogger;
 use Magento\Setup\Validator\RedisConnectionValidator;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use function hash;
 
 class BackpressureLoggerTest extends TestCase
 {
@@ -263,6 +264,6 @@ class BackpressureLoggerTest extends TestCase
      */
     private function expectedIdPrefix(): string
     {
-        return substr(\hash('sha256', dirname(__DIR__, 8)), 0, 3) . '_';
+        return substr(hash('sha256', dirname(__DIR__, 8)), 0, 3) . '_';
     }
 }

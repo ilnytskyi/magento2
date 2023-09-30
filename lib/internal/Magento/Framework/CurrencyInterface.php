@@ -94,17 +94,17 @@ interface CurrencyInterface
     /**
      * Returns the set cache
      *
-     * @return Zend_Cache_Core The set cache
+     * @return \Zend_Cache_Core The set cache
      */
     public static function getCache();
 
     /**
      * Sets a cache for \Magento\Framework\Currency
      *
-     * @param  Zend_Cache_Core $cache Cache to set
+     * @param  \Zend_Cache_Core $cache Cache to set
      * @return void
      */
-    public static function setCache(Zend_Cache_Core $cache);
+    public static function setCache(\Zend_Cache_Core $cache);
 
     /**
      * Returns true when a cache is set

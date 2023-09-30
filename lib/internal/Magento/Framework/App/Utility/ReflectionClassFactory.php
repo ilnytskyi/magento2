@@ -21,11 +21,11 @@ class ReflectionClassFactory
      *
      * @param object|string $objectOrClass
      *
-     * @return ReflectionClass
-     * @throws ReflectionException
+     * @return \ReflectionClass
+     * @throws \ReflectionException
      */
-    public function create($objectOrClass): ReflectionClass
+    public function create($objectOrClass): \ReflectionClass
     {
-        return new ReflectionClass($objectOrClass);
+        return new \ReflectionClass($objectOrClass);
     }
 }

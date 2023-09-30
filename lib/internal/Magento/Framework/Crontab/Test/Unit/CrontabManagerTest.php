@@ -62,7 +62,7 @@ class CrontabManagerTest extends TestCase
      */
     public function testGetTasksNoCrontab(): void
     {
-        $exception = new Exception('crontab: no crontab for user');
+        $exception = new \Exception('crontab: no crontab for user');
         $localizedException = new LocalizedException(new Phrase('Some error'), $exception);
 
         $this->shellMock->expects($this->once())
@@ -136,7 +136,7 @@ class CrontabManagerTest extends TestCase
     {
         $this->expectException('Magento\Framework\Exception\LocalizedException');
         $this->expectExceptionMessage('Shell error');
-        $exception = new Exception('Shell error');
+        $exception = new \Exception('Shell error');
         $localizedException = new LocalizedException(new Phrase('Some error'), $exception);
 
         $this->shellMock

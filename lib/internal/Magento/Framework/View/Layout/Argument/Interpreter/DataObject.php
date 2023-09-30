@@ -11,6 +11,8 @@ use Magento\Framework\App\ObjectManager;
 use Magento\Framework\Data\Argument\InterpreterInterface;
 use Magento\Framework\ObjectManagerInterface;
 use Magento\Framework\Stdlib\BooleanUtils;
+use function sprintf;
+use function get_class;
 
 /**
  * Interpreter that instantiates object by a class name
@@ -62,7 +64,7 @@ class DataObject implements InterpreterInterface
 
         if ($this->expectedClass && !$result instanceof $this->expectedClass) {
             throw new \UnexpectedValueException(
-                \sprintf('Instance of %s is expected, got %s instead.', $this->expectedClass, \get_class($result))
+                sprintf('Instance of %s is expected, got %s instead.', $this->expectedClass, get_class($result))
             );
         }
 

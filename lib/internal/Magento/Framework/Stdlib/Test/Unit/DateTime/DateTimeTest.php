@@ -26,8 +26,8 @@ class DateTimeTest extends TestCase
     private $testDate = '2015-04-02 21:03:00';
 
     /**
-     * @param int|string|DateTimeInterface $input
-     * @throws Exception
+     * @param int|string|\DateTimeInterface $input
+     * @throws \Exception
      *
      * @dataProvider dateTimeInputDataProvider
      */
@@ -43,8 +43,8 @@ class DateTimeTest extends TestCase
     }
 
     /**
-     * @param int|string|DateTimeInterface $input
-     * @throws Exception
+     * @param int|string|\DateTimeInterface $input
+     * @throws \Exception
      *
      * @dataProvider dateTimeInputDataProvider
      */
@@ -98,14 +98,14 @@ class DateTimeTest extends TestCase
      * Data provider
      *
      * @return array
-     * @throws Exception
+     * @throws \Exception
      */
     public function dateTimeInputDataProvider()
     {
         return [
             'string' => [$this->testDate],
             'int' => [strtotime($this->testDate)],
-            DateTimeInterface::class => [new DateTimeImmutable($this->testDate)],
+            \DateTimeInterface::class => [new \DateTimeImmutable($this->testDate)],
         ];
     }
 }

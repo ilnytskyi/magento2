@@ -9,6 +9,14 @@ namespace Magento\Framework\Cache\Backend;
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\Cache\CompositeStaleCacheNotifier;
 use Magento\Framework\Cache\StaleCacheNotifierInterface;
+use function hash;
+use function implode;
+use function getmypid;
+use function crc32;
+use function gethostname;
+use function bin2hex;
+use function random_bytes;
+use function uniqid;
 
 /**
  * Remote synchronized cache
@@ -147,7 +155,7 @@ class RemoteSynchronizedCache extends \Zend_Cache_Backend implements \Zend_Cache
      */
     private function getDataVersion(string $data)
     {
-        return \hash('sha256', $data);
+        return hash('sha256', $data);
     }
 
     /**
@@ -457,17 +465,17 @@ class RemoteSynchronizedCache extends \Zend_Cache_Backend implements \Zend_Cache
      */
     private function generateLockSign()
     {
-        $sign = \implode(
+        $sign = implode(
             '-',
             [
-                \getmypid(), \crc32(\gethostname())
+                getmypid(), crc32(gethostname())
             ]
         );
 
         try {
-            $sign .= '-' . \bin2hex(\random_bytes(4));
+            $sign .= '-' . bin2hex(random_bytes(4));
         } catch (\Exception $e) {
-            $sign .= '-' . \uniqid('-uniqid-');
+            $sign .= '-' . uniqid('-uniqid-');
         }
 
         return $sign;

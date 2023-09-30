@@ -26,7 +26,7 @@ class LaminasClient extends Client implements ResetAfterRequestInterface
 
     /**
      * @param null|string $uri
-     * @param null|array|Traversable $options
+     * @param null|array|\Traversable $options
      */
     public function __construct($uri = null, $options = null)
     {

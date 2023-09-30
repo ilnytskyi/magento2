@@ -12,6 +12,7 @@ use Magento\Framework\Lock\Backend\Cache;
 use Magento\Framework\TestFramework\Unit\Helper\ObjectManager as ObjectManagerHelper;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use function uniqid;
 
 class CacheTest extends TestCase
 {
@@ -85,7 +86,7 @@ class CacheTest extends TestCase
         $this->frontendCacheMock
             ->expects($this->once())->method('load')
             ->with(self::LOCK_PREFIX . $identifier)
-            ->willReturn(\uniqid('some_rand-', true));
+            ->willReturn(uniqid('some_rand-', true));
 
         $this->assertFalse($this->cache->unlock($identifier));
     }
@@ -160,7 +161,7 @@ class CacheTest extends TestCase
         $this->frontendCacheMock
             ->expects($this->once())->method('load')
             ->with(self::LOCK_PREFIX . $identifier)
-            ->willReturn(\uniqid('some_rand-', true));
+            ->willReturn(uniqid('some_rand-', true));
 
         $this->assertEquals(false, $this->cache->lock($identifier, 0));
     }

@@ -396,7 +396,7 @@ class SubscriptionTest extends TestCase
      * Test ignored columns for mview specified at the subscription level.
      *
      * @return void
-     * @throws ReflectionException
+     * @throws \ReflectionException
      */
     public function testBuildStatementIgnoredColumnSubscriptionLevel(): void
     {
@@ -476,7 +476,7 @@ class SubscriptionTest extends TestCase
             $statementPostprocessorMock
         );
 
-        $method = new ReflectionMethod($model, 'buildStatement');
+        $method = new \ReflectionMethod($model, 'buildStatement');
         $method->setAccessible(true);
         $statement = $method->invoke($model, Trigger::EVENT_UPDATE, $this->viewMock);
 

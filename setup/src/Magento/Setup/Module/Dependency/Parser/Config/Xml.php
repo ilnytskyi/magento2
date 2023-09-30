@@ -6,6 +6,7 @@
 namespace Magento\Setup\Module\Dependency\Parser\Config;
 
 use Magento\Setup\Module\Dependency\ParserInterface;
+use function simplexml_load_file;
 
 /**
  * Config xml parser
@@ -67,7 +68,7 @@ class Xml implements ParserInterface
      */
     protected function getModuleConfig($file)
     {
-        return \simplexml_load_file($file)->xpath('/config/module')[0];
+        return simplexml_load_file($file)->xpath('/config/module')[0];
     }
 
     /**

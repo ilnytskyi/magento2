@@ -49,7 +49,7 @@ class Snapshot extends Filesystem
     /**
      * Implementation Rollback functionality for Snapshot
      *
-     * @throws Exception
+     * @throws \Exception
      * @return bool
      */
     public function rollback()
@@ -60,7 +60,7 @@ class Snapshot extends Filesystem
 
         try {
             $this->_getDbBackupManager()->rollback();
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->_removeDbBackup();
             throw $e;
         }
@@ -74,7 +74,7 @@ class Snapshot extends Filesystem
     /**
      * Implementation Create Backup functionality for Snapshot
      *
-     * @throws Exception
+     * @throws \Exception
      * @return bool
      */
     public function create()
@@ -83,7 +83,7 @@ class Snapshot extends Filesystem
 
         try {
             $result = parent::create();
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->_removeDbBackup();
             throw $e;
         }

@@ -11,6 +11,7 @@ use Magento\Framework\App\Cache\Tag\Resolver;
 use Magento\Framework\App\Cache\Type\FrontendPool;
 use Magento\Framework\Model\AbstractModel;
 use Magento\Framework\Model\ResourceModel\AbstractResource;
+use function array_unique;
 
 /**
  * Automatic cache cleaner plugin
@@ -111,7 +112,7 @@ class FlushCacheByTags
             if ($this->cacheState->isEnabled($cacheType)) {
                 $this->cachePool->get($cacheType)->clean(
                     \Zend_Cache::CLEANING_MODE_MATCHING_ANY_TAG,
-                    $uniqueTags = $uniqueTags ?? \array_unique($tags)
+                    $uniqueTags = $uniqueTags ?? array_unique($tags)
                 );
             }
         }

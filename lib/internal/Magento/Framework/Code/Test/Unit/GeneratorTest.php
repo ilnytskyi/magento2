@@ -240,7 +240,7 @@ class GeneratorTest extends TestCase
             . 'directory permission is set to write --- the requested class did not generate properly, then '
             . 'you must add the generated class object to the signature of the related construct method, only.';
         $FinalErrorMessage = implode(PHP_EOL, $errorMessages) . "\n" . $mainErrorMessage;
-        $this->expectException(RuntimeException::class);
+        $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage($FinalErrorMessage);
 
         /** @var EntityAbstract|Mock $entityGeneratorMock */

@@ -1192,7 +1192,7 @@ class LayoutTest extends TestCase
      */
     public function testRenderNonCachedElementWithException(): void
     {
-        $exception = new Exception('Error message');
+        $exception = new \Exception('Error message');
 
         $builderMock = $this->createMock(BuilderInterface::class);
         $builderMock->expects($this->once())

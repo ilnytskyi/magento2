@@ -40,7 +40,7 @@ class FloatType extends \GraphQL\Type\Definition\FloatType
      * @param Node $valueNode
      * @param array|null $variables
      * @return float
-     * @throws Exception
+     * @throws \Exception
      */
     public function parseLiteral(Node $valueNode, ?array $variables = null): float
     {
@@ -54,7 +54,7 @@ class FloatType extends \GraphQL\Type\Definition\FloatType
                     'loc' => $valueNode->loc
                 ]);
             }
-        } catch (Exception $e) {} // @codingStandardsIgnoreLine
+        } catch (\Exception $e) {} // @codingStandardsIgnoreLine
         return parent::parseLiteral($valueNode, $variables);
     }
 }

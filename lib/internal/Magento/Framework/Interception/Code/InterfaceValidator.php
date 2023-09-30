@@ -166,11 +166,11 @@ class InterfaceValidator
     /**
      * Get parameters type
      *
-     * @param ReflectionParameter $parameter
+     * @param \ReflectionParameter $parameter
      *
      * @return string
      */
-    protected function getParametersType(ReflectionParameter $parameter)
+    protected function getParametersType(\ReflectionParameter $parameter)
     {
         $parameterClass = $this->getParameterClass($parameter);
         $parameterType = $parameter->getType();

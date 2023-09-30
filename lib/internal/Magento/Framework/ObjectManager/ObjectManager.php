@@ -4,6 +4,7 @@
  * See COPYING.txt for license details.
  */
 namespace Magento\Framework\ObjectManager;
+use function ltrim;
 
 /**
  * Magento object manager. Responsible for instantiating objects taking into account:
@@ -67,7 +68,7 @@ class ObjectManager implements \Magento\Framework\ObjectManagerInterface
      */
     public function get($type)
     {
-        $type = \ltrim($type, '\\');
+        $type = ltrim($type, '\\');
         $type = $this->_config->getPreference($type);
         if (!isset($this->_sharedInstances[$type])) {
             $this->_sharedInstances[$type] = $this->_factory->create($type);

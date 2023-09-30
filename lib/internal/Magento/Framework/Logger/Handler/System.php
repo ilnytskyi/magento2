@@ -36,7 +36,7 @@ class System extends Base
      * @param DriverInterface $filesystem
      * @param ExceptionHandler $exceptionHandler
      * @param string|null $filePath
-     * @throws Exception
+     * @throws \Exception
      */
     public function __construct(
         DriverInterface $filesystem,

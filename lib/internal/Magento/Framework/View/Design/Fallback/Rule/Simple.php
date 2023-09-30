@@ -45,7 +45,7 @@ class Simple implements RuleInterface
      *
      * @param array $params array of parameters
      * @return array folders to perform a search
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     public function getPatternDirs(array $params)
     {
@@ -56,7 +56,7 @@ class Simple implements RuleInterface
                     if (in_array($placeholder, $this->optionalParams)) {
                         return [];
                     } else {
-                        throw new InvalidArgumentException("Required parameter '{$placeholder}' was not passed");
+                        throw new \InvalidArgumentException("Required parameter '{$placeholder}' was not passed");
                     }
                 }
                 $pattern = str_replace('<' . $placeholder . '>', $params[$placeholder], $pattern);

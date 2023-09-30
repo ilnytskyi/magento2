@@ -22,7 +22,7 @@ class Monolog extends Logger
         string $name,
         array $handlers = [],
         array $processors = [],
-        ?DateTimeZone $timezone = null
+        ?\DateTimeZone $timezone = null
     ) {
         /**
          * TODO: This should be eliminated with MAGETWO-53989

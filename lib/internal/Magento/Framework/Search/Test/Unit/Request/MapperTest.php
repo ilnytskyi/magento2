@@ -277,7 +277,7 @@ class MapperTest extends TestCase
 
     public function testGetQueryFilterReferenceException(): void
     {
-        $this->expectException(Exception::class);
+        $this->expectException(\Exception::class);
         $this->expectExceptionMessage('Reference is not provided');
         /** @var Mapper $mapper */
         $mapper = $this->helper->getObject(
@@ -349,7 +349,7 @@ class MapperTest extends TestCase
      */
     public function testGetQueryInvalidArgumentException(): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(\InvalidArgumentException::class);
         /** @var Mapper $mapper */
         $mapper = $this->helper->getObject(
             Mapper::class,
@@ -374,7 +374,7 @@ class MapperTest extends TestCase
      */
     public function testGetQueryException(): void
     {
-        $this->expectException(Exception::class);
+        $this->expectException(\Exception::class);
         /** @var Mapper $mapper */
         $mapper = $this->helper->getObject(
             Mapper::class,
@@ -788,7 +788,7 @@ class MapperTest extends TestCase
      */
     public function testGetFilterInvalidArgumentException(): void
     {
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Invalid filter type');
         $queries = [
             self::ROOT_QUERY => [
@@ -827,7 +827,7 @@ class MapperTest extends TestCase
      */
     public function testGetFilterException(): void
     {
-        $this->expectException(Exception::class);
+        $this->expectException(\Exception::class);
         $queries = [
             self::ROOT_QUERY => [
                 'type' => QueryInterface::TYPE_FILTER,

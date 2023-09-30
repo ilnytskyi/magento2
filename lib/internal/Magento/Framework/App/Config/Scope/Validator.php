@@ -58,7 +58,7 @@ class Validator implements ValidatorInterface
         try {
             $scopeResolver = $this->scopeResolverPool->get($scope);
             $scopeResolver->getScope($scopeCode)->getId();
-        } catch (InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             throw new LocalizedException(
                 new Phrase('The "%1" value doesn\'t exist. Enter another value and try again.', [$scope])
             );

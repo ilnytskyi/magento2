@@ -39,13 +39,13 @@ class ArrayType implements InterpreterInterface
     /**
      * @inheritdoc
      * @return array
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     public function evaluate(array $data): array
     {
         $items = $data['item'] ?? [];
         if (!is_array($items)) {
-            throw new InvalidArgumentException('Array items are expected.');
+            throw new \InvalidArgumentException('Array items are expected.');
         }
         $result = [];
         $items = $this->sortItemsHelper->sortItems($items);

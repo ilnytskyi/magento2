@@ -437,7 +437,7 @@ class EncryptorTest extends TestCase
      * Test that generated hashes can be later validated.
      *
      * @return void
-     * @throws Throwable
+     * @throws \Throwable
      */
     public function testValidation(): void
     {
@@ -461,7 +461,7 @@ class EncryptorTest extends TestCase
      * Test that upgraded generated hashes can be later validated.
      *
      * @return void
-     * @throws Throwable
+     * @throws \Throwable
      */
     public function testUpgradedValidation(): void
     {

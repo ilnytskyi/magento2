@@ -71,7 +71,7 @@ class Date implements FilterInterface
         try {
             $value = $this->_localeDate->date($value, null, false, false);
             return $value->format('Y-m-d');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             throw new LocalizedException(
                 __('Invalid input date format "%1"', $value)
             );

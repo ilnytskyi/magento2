@@ -12,7 +12,7 @@ use RuntimeException;
 /**
  * Exception thrown when index lock could not be acquired
  */
-class IndexMutexException extends RuntimeException
+class IndexMutexException extends \RuntimeException
 {
     /**
      * @param string $indexerName

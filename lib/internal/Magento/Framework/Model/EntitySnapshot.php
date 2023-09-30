@@ -9,6 +9,7 @@ namespace Magento\Framework\Model;
 
 use Magento\Framework\EntityManager\MetadataPool;
 use Magento\Framework\Model\EntitySnapshot\AttributeProvider;
+use function array_keys;
 
 /**
  * Class EntitySnapshot
@@ -58,7 +59,7 @@ class EntitySnapshot
         $entityData = $hydrator->extract($entity);
         $attributes = $this->attributeProvider->getAttributes($entityType);
         $this->snapshotData[$entityType][$entityData[$metadata->getIdentifierField()]]
-            = array_intersect(\array_keys($entityData), $attributes);
+            = array_intersect(array_keys($entityData), $attributes);
     }
 
     /**

@@ -35,7 +35,7 @@ trait ArgumentProcessor
             } elseif (is_string($value)) {
                 $output[$key] = ['S', $value];
             } else {
-                throw new InvalidArgumentException('Unknown argument type ' . gettype($value));
+                throw new \InvalidArgumentException('Unknown argument type ' . gettype($value));
             }
         }
 

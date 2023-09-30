@@ -13,6 +13,7 @@ use Magento\Framework\Setup\Option\TextConfigOption;
 use Magento\Setup\Model\ConfigOptionsList\PageCache;
 use Magento\Setup\Validator\RedisConnectionValidator;
 use PHPUnit\Framework\TestCase;
+use function hash;
 
 class PageCacheTest extends TestCase
 {
@@ -255,6 +256,6 @@ class PageCacheTest extends TestCase
      */
     private function expectedIdPrefix(): string
     {
-        return substr(\hash('sha256', dirname(__DIR__, 8)), 0, 3) . '_';
+        return substr(hash('sha256', dirname(__DIR__, 8)), 0, 3) . '_';
     }
 }

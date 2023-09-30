@@ -6,6 +6,7 @@
 declare(strict_types=1);
 
 namespace Magento\Setup\Module\Di\Code\Reader;
+use function is_file;
 
 /**
  * Class FileClassScanner
@@ -56,7 +57,7 @@ class FileClassScanner
         // phpcs:ignore
         $filename = realpath($filename);
         // phpcs:ignore
-        if (!file_exists($filename) || !\is_file($filename)) {
+        if (!file_exists($filename) || !is_file($filename)) {
             throw new InvalidFileException(
                 sprintf(
                     'The file "%s" does not exist or is not a file',

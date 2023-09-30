@@ -90,7 +90,7 @@ class Random
      *
      * @param int $length
      * @return string
-     * @throws Exception
+     * @throws \Exception
      */
     public function getRandomBytes(int $length) : string
     {

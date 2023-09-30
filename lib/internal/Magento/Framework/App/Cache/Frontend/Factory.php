@@ -160,7 +160,7 @@ class Factory
                 Zend::class,
                 [
                     'frontendFactory' => function () use ($frontend, $backend) {
-                        return Zend_Cache::factory(
+                        return \Zend_Cache::factory(
                             $frontend['type'],
                             $backend['type'],
                             $frontend,
@@ -198,14 +198,14 @@ class Factory
      *
      * @param FrontendInterface $frontend
      * @return FrontendInterface
-     * @throws LogicException
-     * @throws UnexpectedValueException
+     * @throws \LogicException
+     * @throws \UnexpectedValueException
      */
     private function _applyDecorators(FrontendInterface $frontend)
     {
         foreach ($this->_decorators as $decoratorConfig) {
             if (!isset($decoratorConfig['class'])) {
-                throw new LogicException('Class has to be specified for a cache frontend decorator.');
+                throw new \LogicException('Class has to be specified for a cache frontend decorator.');
             }
             $decoratorClass = $decoratorConfig['class'];
             $decoratorParams = isset($decoratorConfig['parameters']) ? $decoratorConfig['parameters'] : [];
@@ -213,7 +213,7 @@ class Factory
             // conventionally, 'frontend' argument is a decoration subject
             $frontend = $this->_objectManager->create($decoratorClass, $decoratorParams);
             if (!$frontend instanceof FrontendInterface) {
-                throw new UnexpectedValueException('Decorator has to implement the cache frontend interface.');
+                throw new \UnexpectedValueException('Decorator has to implement the cache frontend interface.');
             }
         }
         return $frontend;
@@ -286,7 +286,7 @@ class Factory
                 $backendType = RemoteSynchronizedCache::class;
                 $options['remote_backend'] = Database::class;
                 $options['remote_backend_options'] = $this->_getDbAdapterOptions();
-                $options['local_backend'] = Cm_Cache_Backend_File::class;
+                $options['local_backend'] = \Cm_Cache_Backend_File::class;
                 $cacheDir = $this->_filesystem->getDirectoryWrite(DirectoryList::CACHE);
                 $options['local_backend_options']['cache_dir'] = $cacheDir->getAbsolutePath();
                 $cacheDir->create();
@@ -301,7 +301,7 @@ class Factory
                             }
                         }
                     // phpcs:ignore Magento2.CodeAnalysis.EmptyBlock
-                    } catch (Exception $e) {
+                    } catch (\Exception $e) {
                     }
                 }
         }
@@ -431,7 +431,7 @@ class Factory
             Zend::class,
             [
                 'frontendFactory' => function () use ($frontend, $backend) {
-                    return Zend_Cache::factory(
+                    return \Zend_Cache::factory(
                         $frontend['type'],
                         $backend['type'],
                         $frontend,

@@ -66,7 +66,7 @@ class RedisClient
     ];
 
     /**
-     * @var Credis_Client
+     * @var \Credis_Client
      */
     private $pipeline;
 
@@ -77,7 +77,7 @@ class RedisClient
      */
     public function __construct(DeploymentConfig $config)
     {
-        $credisClient = new Credis_Client(
+        $credisClient = new \Credis_Client(
             $this->getHost($config),
             $this->getPort($config),
             $this->getTimeout($config),
@@ -95,7 +95,7 @@ class RedisClient
      *
      * @param string $key
      * @param int $decrement
-     * @return Credis_Client|int
+     * @return \Credis_Client|int
      */
     public function incrBy(string $key, int $decrement)
     {
@@ -107,7 +107,7 @@ class RedisClient
      *
      * @param string $key
      * @param int $timestamp
-     * @return Credis_Client|int
+     * @return \Credis_Client|int
      */
     public function expireAt(string $key, int $timestamp)
     {
@@ -118,7 +118,7 @@ class RedisClient
      * Returns value by key
      *
      * @param string $key
-     * @return bool|Credis_Client|string
+     * @return bool|\Credis_Client|string
      */
     public function get(string $key)
     {

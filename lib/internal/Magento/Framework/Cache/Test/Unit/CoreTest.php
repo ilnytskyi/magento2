@@ -228,7 +228,7 @@ class CoreTest extends TestCase
         ]);
         $core->setBackend($this->_mockBackend);
 
-        $this->expectException(Zend_Cache_Exception::class);
+        $this->expectException(\Zend_Cache_Exception::class);
         $this->expectExceptionMessage("Invalid id or tag '{prefix}_abc' : must use only [a-zA-Z0-9_]");
 
         $core->load($id);

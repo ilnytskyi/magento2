@@ -90,7 +90,7 @@ class File extends Http implements NotCacheableInterface
         $this->options = array_merge($this->options, $options);
         if (!isset($this->options['filePath'])) {
             if (!isset($this->options['fileName'])) {
-                throw new InvalidArgumentException("File name is required.");
+                throw new \InvalidArgumentException("File name is required.");
             }
             $this->options['contentType'] ??= self::DEFAULT_RAW_CONTENT_TYPE;
         }
@@ -105,7 +105,7 @@ class File extends Http implements NotCacheableInterface
         $forceHeaders = true;
         if (isset($this->options['filePath'])) {
             if (!$dir->isExist($this->options['filePath'])) {
-                throw new InvalidArgumentException("File '{$this->options['filePath']}' does not exists.");
+                throw new \InvalidArgumentException("File '{$this->options['filePath']}' does not exists.");
             }
             $filePath = $this->options['filePath'];
             $this->options['contentType'] ??= $dir->stat($filePath)['mimeType']

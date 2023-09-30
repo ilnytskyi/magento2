@@ -50,18 +50,18 @@ class ExceptionFormatter
      * This method only exposes exception message when exception implements ClientAware interface
      * (or when debug flags are passed).
      *
-     * @param Throwable $exception
+     * @param \Throwable $exception
      * @param string|null $internalErrorMessage
      * @return array
-     * @throws Throwable
+     * @throws \Throwable
      */
-    public function create(Throwable $exception, $internalErrorMessage = null): array
+    public function create(\Throwable $exception, $internalErrorMessage = null): array
     {
         if (!$this->shouldShowDetail()) {
             $reportId = uniqid("graph-ql-");
             $message = "Report ID: {$reportId}; Message: {$exception->getMessage()}";
             $code = $exception->getCode();
-            $loggedException = new Exception($message, $code, $exception);
+            $loggedException = new \Exception($message, $code, $exception);
             $this->logger->critical($loggedException);
         }
 

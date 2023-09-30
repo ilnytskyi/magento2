@@ -54,7 +54,7 @@ class ValidatorChain extends LaminasValidatorChain
 
                 return $object->isValid($value);
             }
-        } catch (ReflectionException $exception) {
+        } catch (\ReflectionException $exception) {
             throw new ValidateException($exception->getMessage());
         }
 

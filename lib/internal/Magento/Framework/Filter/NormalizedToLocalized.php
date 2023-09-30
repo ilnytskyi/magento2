@@ -63,23 +63,23 @@ class NormalizedToLocalized implements FilterInterface
      *
      * @param string $value
      * @return string
-     * @throws Exception
+     * @throws \Exception
      */
     public function filter($value)
     {
         if (is_array($value)) {
-            $formatter = new IntlDateFormatter(
+            $formatter = new \IntlDateFormatter(
                 $this->_options['locale'],
-                IntlDateFormatter::SHORT,
-                IntlDateFormatter::NONE
+                \IntlDateFormatter::SHORT,
+                \IntlDateFormatter::NONE
             );
             $formatter->setPattern($this->_options['date_format']);
             return $formatter->format(strtotime($value['month'] . '/' . $value['day'] . '/' . $value['year']));
         } elseif ($this->_options['precision'] === 0) {
-            $numberParse = new NumberParse($this->_options['locale'], NumberFormatter::PATTERN_DECIMAL);
+            $numberParse = new NumberParse($this->_options['locale'], \NumberFormatter::PATTERN_DECIMAL);
             return (string) $numberParse->filter($value);
         } elseif ($this->_options['precision'] === null) {
-            $numberParse = new NumberParse($this->_options['locale'], NumberFormatter::DECIMAL);
+            $numberParse = new NumberParse($this->_options['locale'], \NumberFormatter::DECIMAL);
             return (string) $numberParse->filter($value);
         }
 

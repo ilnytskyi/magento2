@@ -44,7 +44,7 @@ class ImageFactory
         $mediaReader = $this->filesystem->getDirectoryRead(DirectoryList::MEDIA);
         if (!$mediaReader->isFile($filename)) {
             #require_once 'Zend/Pdf/Exception.php';
-            throw new Zend_Pdf_Exception("Cannot create image resource. File not found.");
+            throw new \Zend_Pdf_Exception("Cannot create image resource. File not found.");
         }
         $tempFilenameFromBucketOrDisk = $this->createTemporaryFileAndPutContent($mediaReader, $filename);
         $tempResourceFilePath = $this->getFilePathOfTemporaryFile($tempFilenameFromBucketOrDisk);
@@ -69,7 +69,7 @@ class ImageFactory
         $tempFilenameFromBucketOrDisk = tmpfile();
         if ($tempFilenameFromBucketOrDisk === false) {
             #require_once 'Zend/Pdf/Exception.php';
-            throw new Zend_Pdf_Exception('Cannot create temporary file');
+            throw new \Zend_Pdf_Exception('Cannot create temporary file');
         }
         fwrite($tempFilenameFromBucketOrDisk, $mediaReader->readFile($filename));
         return $tempFilenameFromBucketOrDisk;
@@ -86,7 +86,7 @@ class ImageFactory
     {
         try {
             return stream_get_meta_data($tempFilenameFromBucketOrDisk)['uri'];
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return '';
         }
     }
@@ -102,7 +102,7 @@ class ImageFactory
     protected function getTypeOfImage(string $filepath, string $baseFileName)
     {
         if (class_exists('finfo', false) && !empty($filepath)) {
-            $finfo = new finfo(FILEINFO_MIME_TYPE);
+            $finfo = new \finfo(FILEINFO_MIME_TYPE);
             $classicMimeType = $finfo->file($filepath);
         } elseif (function_exists('mime_content_type') && !empty($filepath)) {
             $classicMimeType = mime_content_type($filepath);
@@ -144,7 +144,7 @@ class ImageFactory
                 break;
             default:
                 #require_once 'Zend/Pdf/Exception.php';
-                throw new Zend_Pdf_Exception(
+                throw new \Zend_Pdf_Exception(
                     "Cannot create image resource. File extension not known or unsupported type."
                 );
         }

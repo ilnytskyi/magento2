@@ -32,13 +32,13 @@ class AutoloaderRegistry
     /**
      * Returns the registered autoloader
      *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      * @return AutoloaderInterface
      */
     public static function getAutoloader(): AutoloaderInterface
     {
         if (!self::$autoloader instanceof AutoloaderInterface) {
-            throw new InvalidArgumentException('Autoloader is not registered, cannot be retrieved.');
+            throw new \InvalidArgumentException('Autoloader is not registered, cannot be retrieved.');
         }
 
         return self::$autoloader;

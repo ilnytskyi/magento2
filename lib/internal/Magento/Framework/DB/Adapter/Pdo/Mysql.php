@@ -218,7 +218,7 @@ class Mysql extends \Zend_Db_Adapter_Pdo_Mysql implements AdapterInterface, Rese
     /**
      * Map that links database error code to corresponding Magento exception
      *
-     * @var Zend_Db_Adapter_Exception[]
+     * @var \Zend_Db_Adapter_Exception[]
      */
     private $exceptionMap;
 
@@ -291,7 +291,7 @@ class Mysql extends \Zend_Db_Adapter_Pdo_Mysql implements AdapterInterface, Rese
         ];
         try {
             parent::__construct($config);
-        } catch (Zend_Db_Adapter_Exception $e) {
+        } catch (\Zend_Db_Adapter_Exception $e) {
             throw new \InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
         }
     }
@@ -437,8 +437,8 @@ class Mysql extends \Zend_Db_Adapter_Pdo_Mysql implements AdapterInterface, Rese
      * @SuppressWarnings(PHPMD.NPathComplexity)
      *
      * @return void
-     * @throws Zend_Db_Adapter_Exception
-     * @throws Zend_Db_Statement_Exception
+     * @throws \Zend_Db_Adapter_Exception
+     * @throws \Zend_Db_Statement_Exception
      */
     protected function _connect()
     {
@@ -448,15 +448,15 @@ class Mysql extends \Zend_Db_Adapter_Pdo_Mysql implements AdapterInterface, Rese
         }
 
         if (!extension_loaded('pdo_mysql')) {
-            throw new Zend_Db_Adapter_Exception('pdo_mysql extension is not installed');
+            throw new \Zend_Db_Adapter_Exception('pdo_mysql extension is not installed');
         }
 
         if (!isset($this->_config['host'])) {
-            throw new Zend_Db_Adapter_Exception('No host configured to connect');
+            throw new \Zend_Db_Adapter_Exception('No host configured to connect');
         }
 
         if (isset($this->_config['port'])) {
-            throw new Zend_Db_Adapter_Exception('Port must be configured within host parameter (like localhost:3306');
+            throw new \Zend_Db_Adapter_Exception('Port must be configured within host parameter (like localhost:3306');
         }
 
         unset($this->_config['port']);
@@ -531,7 +531,7 @@ class Mysql extends \Zend_Db_Adapter_Pdo_Mysql implements AdapterInterface, Rese
     {
         try {
             $result = $this->query($sql);
-        } catch (Zend_Db_Statement_Exception $e) {
+        } catch (\Zend_Db_Statement_Exception $e) {
             // Convert to \PDOException to maintain backwards compatibility with usage of MySQL adapter
             $e = $e->getPrevious();
             if (!($e instanceof \PDOException)) {
@@ -574,7 +574,7 @@ class Mysql extends \Zend_Db_Adapter_Pdo_Mysql implements AdapterInterface, Rese
      *
      * @param string|\Magento\Framework\DB\Select $sql
      * @return void
-     * @throws Zend_Db_Adapter_Exception
+     * @throws \Zend_Db_Adapter_Exception
      */
     protected function _checkDdlTransaction($sql)
     {
@@ -596,8 +596,8 @@ class Mysql extends \Zend_Db_Adapter_Pdo_Mysql implements AdapterInterface, Rese
      * @param string|\Magento\Framework\DB\Select $sql The SQL statement with placeholders.
      * @param mixed $bind An array of data or data itself to bind to the placeholders.
      * @return \Zend_Db_Statement_Pdo|void
-     * @throws Zend_Db_Adapter_Exception To re-throw \PDOException.
-     * @throws Zend_Db_Statement_Exception
+     * @throws \Zend_Db_Adapter_Exception To re-throw \PDOException.
+     * @throws \Zend_Db_Statement_Exception
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     protected function _query($sql, $bind = [])
@@ -628,7 +628,7 @@ class Mysql extends \Zend_Db_Adapter_Pdo_Mysql implements AdapterInterface, Rese
                 $pdoException = null;
                 if ($e instanceof \PDOException) {
                     $pdoException = $e;
-                } elseif (($e instanceof Zend_Db_Statement_Exception)
+                } elseif (($e instanceof \Zend_Db_Statement_Exception)
                     && ($e->getPrevious() instanceof \PDOException)
                 ) {
                     $pdoException = $e->getPrevious();
@@ -651,7 +651,7 @@ class Mysql extends \Zend_Db_Adapter_Pdo_Mysql implements AdapterInterface, Rese
                     // rethrow custom exception if needed
                     if ($pdoException && isset($this->exceptionMap[$pdoException->errorInfo[1]])) {
                         $customExceptionClass = $this->exceptionMap[$pdoException->errorInfo[1]];
-                        /** @var Zend_Db_Adapter_Exception $customException */
+                        /** @var \Zend_Db_Adapter_Exception $customException */
                         $customException = new $customExceptionClass($e->getMessage(), $pdoException->errorInfo[1], $e);
                         throw $customException;
                     }
@@ -669,7 +669,7 @@ class Mysql extends \Zend_Db_Adapter_Pdo_Mysql implements AdapterInterface, Rese
      * @param string|\Magento\Framework\DB\Select $sql The SQL statement with placeholders.
      * @param mixed $bind An array of data or data itself to bind to the placeholders.
      * @return \Zend_Db_Statement_Pdo|void
-     * @throws Zend_Db_Adapter_Exception To re-throw \PDOException.
+     * @throws \Zend_Db_Adapter_Exception To re-throw \PDOException.
      * @throws LocalizedException In case multiple queries are attempted at once, to protect from SQL injection
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
@@ -697,7 +697,7 @@ class Mysql extends \Zend_Db_Adapter_Pdo_Mysql implements AdapterInterface, Rese
      * @param string|\Magento\Framework\DB\Select $sql The SQL statement with placeholders.
      * @param mixed $bind An array of data or data itself to bind to the placeholders.
      * @return \Zend_Db_Statement_Pdo|void
-     * @throws Zend_Db_Adapter_Exception To re-throw \PDOException.
+     * @throws \Zend_Db_Adapter_Exception To re-throw \PDOException.
      * @throws LocalizedException In case multiple queries are attempted at once, to protect from SQL injection
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      * @deprecated 101.0.0
@@ -1247,8 +1247,8 @@ class Mysql extends \Zend_Db_Adapter_Pdo_Mysql implements AdapterInterface, Rese
      * @param string $schemaName
      * @return mixed
      * @throws LocalizedException
-     * @throws Zend_Db_Adapter_Exception
-     * @throws Zend_Db_Statement_Exception
+     * @throws \Zend_Db_Adapter_Exception
+     * @throws \Zend_Db_Statement_Exception
      */
     public function showTableStatus($tableName, $schemaName = null)
     {

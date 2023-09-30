@@ -30,12 +30,12 @@ class DateTest extends TestCase
         )->method(
             'getDateFormat'
         )->with(
-            IntlDateFormatter::SHORT
+            \IntlDateFormatter::SHORT
         )->willReturn(
             'MM-dd-yyyy'
         );
         $model = new Date($localeMock);
-        $localeMock->expects($this->once())->method('date')->willReturn(new DateTime($inputData));
+        $localeMock->expects($this->once())->method('date')->willReturn(new \DateTime($inputData));
 
         $this->assertEquals($expectedDate, $model->filter($inputData));
     }
@@ -57,7 +57,7 @@ class DateTest extends TestCase
      */
     public function testFilterWithException($inputData)
     {
-        $this->expectException(Exception::class);
+        $this->expectException(\Exception::class);
 
         $localeMock = $this->getMockForAbstractClass(TimezoneInterface::class);
         $localeMock->expects(
@@ -65,12 +65,12 @@ class DateTest extends TestCase
         )->method(
             'getDateFormat'
         )->with(
-            IntlDateFormatter::SHORT
+            \IntlDateFormatter::SHORT
         )->willReturn(
             'MM-dd-yyyy'
         );
         $model = new Date($localeMock);
-        $localeMock->expects($this->any())->method('date')->willReturn(new DateTime($inputData));
+        $localeMock->expects($this->any())->method('date')->willReturn(new \DateTime($inputData));
 
         $model->filter($inputData);
     }

@@ -69,7 +69,7 @@ class DataObject
     public function filter($object)
     {
         if (!$object instanceof \Magento\Framework\DataObject) {
-            throw new InvalidArgumentException('Expecting an instance of \Magento\Framework\DataObject');
+            throw new \InvalidArgumentException('Expecting an instance of \Magento\Framework\DataObject');
         }
         $class = get_class($object);
         $out = $this->_entityFactory->create($class);

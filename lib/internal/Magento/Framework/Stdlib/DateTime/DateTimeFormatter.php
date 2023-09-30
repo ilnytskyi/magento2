@@ -10,6 +10,7 @@ use Magento\Framework\App\ObjectManager;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Locale\ResolverInterface;
 use Magento\Framework\Phrase;
+use function defined;
 
 /**
  * {@inheritdoc}
@@ -34,7 +35,7 @@ class DateTimeFormatter implements DateTimeFormatterInterface
         $useIntlFormatObject = null,
         ResolverInterface $localeResolver = null
     ) {
-        $this->useIntlFormatObject = $useIntlFormatObject ?? !\defined('HHVM_VERSION');
+        $this->useIntlFormatObject = $useIntlFormatObject ?? !defined('HHVM_VERSION');
         $this->localeResolver = $localeResolver
             ?? ObjectManager::getInstance()->get(ResolverInterface::class);
     }

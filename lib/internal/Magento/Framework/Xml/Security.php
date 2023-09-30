@@ -56,7 +56,7 @@ class Security
             return $this->heuristicScan($xmlContent);
         }
 
-        $document = new DOMDocument();
+        $document = new \DOMDocument();
 
         if (version_compare(PHP_VERSION, '8.0') < 0) {
             // this function no longer has an effect in PHP 8.0, but it's required in earlier versions

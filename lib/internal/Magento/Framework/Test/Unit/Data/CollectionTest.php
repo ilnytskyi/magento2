@@ -60,7 +60,7 @@ class CollectionTest extends TestCase
     /**
      * Test that callback function works correctly with associative array in method params on php 8.0
      *
-     * @throws Exception
+     * @throws \Exception
      */
     public function testWalkWithAssociativeArrayInParameter()
     {

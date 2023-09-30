@@ -47,7 +47,7 @@ class Html extends AbstractAdapter
         $data = file_get_contents($this->_file);
         if ($data === false) {
             // phpcs:ignore Magento2.Exceptions.DirectThrow
-            throw new Exception('Failed to load file from disk.');
+            throw new \Exception('Failed to load file from disk.');
         }
 
         $this->extractPhrasesFromTransDirective($data);

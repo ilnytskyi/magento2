@@ -40,9 +40,9 @@ class Tar extends \Magento\Framework\Archive\Tar
     protected function _createTar($skipRoot = false, $finalize = false)
     {
         $path = $this->_getCurrentFile();
-        $filesystemIterator = new RecursiveIteratorIterator(
-            new RecursiveDirectoryIterator($path, RecursiveDirectoryIterator::FOLLOW_SYMLINKS),
-            RecursiveIteratorIterator::SELF_FIRST
+        $filesystemIterator = new \RecursiveIteratorIterator(
+            new \RecursiveDirectoryIterator($path, \RecursiveDirectoryIterator::FOLLOW_SYMLINKS),
+            \RecursiveIteratorIterator::SELF_FIRST
         );
 
         $iterator = new Filter(

@@ -17,12 +17,12 @@ trait GetParameterClassTrait
     /**
      * Get class by reflection parameter
      *
-     * @param ReflectionParameter $reflectionParameter
+     * @param \ReflectionParameter $reflectionParameter
      *
-     * @return ReflectionClass|null
+     * @return \ReflectionClass|null
      * @throws ReflectionException
      */
-    private function getParameterClass(ReflectionParameter $reflectionParameter): ?ReflectionClass
+    private function getParameterClass(\ReflectionParameter $reflectionParameter): ?\ReflectionClass
     {
         $parameterType = $reflectionParameter->getType();
         // In PHP8, $parameterType could be an instance of ReflectionUnionType, which doesn't have isBuiltin method.
@@ -31,7 +31,7 @@ trait GetParameterClassTrait
         }
 
         return $parameterType && !$parameterType->isBuiltin()
-            ? new ReflectionClass($parameterType->getName())
+            ? new \ReflectionClass($parameterType->getName())
             : null;
     }
 }

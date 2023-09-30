@@ -8,6 +8,7 @@ namespace Magento\Setup\Module\Di\Code\Reader;
 
 use Laminas\Code\Exception\InvalidArgumentException;
 use Laminas\Code\Exception\RuntimeException;
+use function array_key_exists;
 
 /**
  * FileScanner code reader
@@ -264,7 +265,7 @@ class FileScanner
                         goto SCANNER_USE_CONTINUE;
                     }
 
-                    if (\array_key_exists($this->tokenType, $namespaceContentTokenTypes)) {
+                    if (array_key_exists($this->tokenType, $namespaceContentTokenTypes)) {
                         if ($useAsContext == false) {
                             $infos[$infoIndex]['statements'][$useStatementIndex]['use'] .= $tokenContent;
                         } else {

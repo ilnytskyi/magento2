@@ -148,7 +148,7 @@ class AbstractDbTest extends TestCase
     public function testGetIdFieldname(): void
     {
         $data = 'MainTableName';
-        $idFieldNameProperty = new ReflectionProperty(
+        $idFieldNameProperty = new \ReflectionProperty(
             AbstractDb::class,
             '_idFieldName'
         );
@@ -176,7 +176,7 @@ class AbstractDbTest extends TestCase
      */
     public function testGetMainTable($tableName, $expectedResult): void
     {
-        $mainTableProperty = new ReflectionProperty(
+        $mainTableProperty = new \ReflectionProperty(
             AbstractDb::class,
             '_mainTable'
         );
@@ -218,7 +218,7 @@ class AbstractDbTest extends TestCase
         $this->_resourcesMock->expects($this->once())->method('getTableName')->with($data)->willReturn(
             'tableName'
         );
-        $tablesProperty = new ReflectionProperty(
+        $tablesProperty = new \ReflectionProperty(
             AbstractDb::class,
             '_tables'
         );
@@ -276,7 +276,7 @@ class AbstractDbTest extends TestCase
      */
     public function testResetUniqueField(): void
     {
-        $uniqueFields = new ReflectionProperty(
+        $uniqueFields = new \ReflectionProperty(
             AbstractDb::class,
             '_uniqueFields'
         );
@@ -291,7 +291,7 @@ class AbstractDbTest extends TestCase
      */
     public function testGetUniqueFields(): void
     {
-        $uniqueFieldsReflection = new ReflectionProperty(
+        $uniqueFieldsReflection = new \ReflectionProperty(
             AbstractDb::class,
             '_uniqueFields'
         );
@@ -374,13 +374,13 @@ class AbstractDbTest extends TestCase
         $this->_resourcesMock->expects($this->any())->method('getTableName')->with($data)->willReturn(
             'tableName'
         );
-        $mainTableReflection = new ReflectionProperty(
+        $mainTableReflection = new \ReflectionProperty(
             AbstractDb::class,
             '_mainTable'
         );
         $mainTableReflection->setAccessible(true);
         $mainTableReflection->setValue($this->_model, 'tableName');
-        $idFieldNameReflection = new ReflectionProperty(
+        $idFieldNameReflection = new \ReflectionProperty(
             AbstractDb::class,
             '_idFieldName'
         );
@@ -441,7 +441,7 @@ class AbstractDbTest extends TestCase
             true,
             ['__wakeup', 'getOrigData', 'getData']
         );
-        $mainTableProperty = new ReflectionProperty(
+        $mainTableProperty = new \ReflectionProperty(
             AbstractDb::class,
             '_mainTable'
         );
@@ -510,13 +510,13 @@ class AbstractDbTest extends TestCase
             'tableName'
         );
 
-        $mainTableReflection = new ReflectionProperty(
+        $mainTableReflection = new \ReflectionProperty(
             AbstractDb::class,
             '_mainTable'
         );
         $mainTableReflection->setAccessible(true);
         $mainTableReflection->setValue($this->_model, 'tableName');
-        $idFieldNameReflection = new ReflectionProperty(
+        $idFieldNameReflection = new \ReflectionProperty(
             AbstractDb::class,
             '_idFieldName'
         );
@@ -600,7 +600,7 @@ class AbstractDbTest extends TestCase
          */
         $reflectionMethod = new \ReflectionMethod($model, 'saveNewObject');
         $reflectionMethod->setAccessible(true);
-        $reflectionProperty = new ReflectionProperty($model, '_isPkAutoIncrement');
+        $reflectionProperty = new \ReflectionProperty($model, '_isPkAutoIncrement');
         $reflectionProperty->setAccessible(true);
         $reflectionProperty->setValue($model, $pkIncrement);
 

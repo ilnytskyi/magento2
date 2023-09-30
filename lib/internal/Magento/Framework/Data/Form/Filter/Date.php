@@ -46,7 +46,7 @@ class Date implements FilterInterface
      *
      * @param string $value
      * @return string
-     * @throws Exception
+     * @throws \Exception
      */
     public function inputFilter($value)
     {
@@ -70,7 +70,7 @@ class Date implements FilterInterface
      *
      * @param string $value
      * @return string
-     * @throws Exception
+     * @throws \Exception
      */
     public function outputFilter($value)
     {

@@ -7,6 +7,7 @@
 declare(strict_types=1);
 
 namespace Magento\Framework\Jwt;
+use function is_resource;
 
 /**
  * Initiates JWKs for various encryption types.
@@ -957,7 +958,7 @@ class JwkFactory
      */
     private function freeResource($resource): void
     {
-        if (\is_resource($resource) && (version_compare(PHP_VERSION, '8.0') < 0)) {
+        if (is_resource($resource) && (version_compare(PHP_VERSION, '8.0') < 0)) {
             openssl_free_key($resource);
         }
     }

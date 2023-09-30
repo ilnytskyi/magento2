@@ -39,7 +39,7 @@ class IntType extends \GraphQL\Type\Definition\IntType
      * @param Node $valueNode
      * @param array|null $variables
      * @return int
-     * @throws Exception
+     * @throws \Exception
      */
     public function parseLiteral(Node $valueNode, ?array $variables = null): int
     {
@@ -52,7 +52,7 @@ class IntType extends \GraphQL\Type\Definition\IntType
                     'loc' => $valueNode->loc
                 ]);
             }
-        } catch (Exception $e) {} // @codingStandardsIgnoreLine
+        } catch (\Exception $e) {} // @codingStandardsIgnoreLine
         return parent::parseLiteral($valueNode, $variables);
     }
 }

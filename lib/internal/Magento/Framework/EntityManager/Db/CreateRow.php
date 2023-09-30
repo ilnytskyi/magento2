@@ -87,7 +87,7 @@ class CreateRow
      * @param string $entityType
      * @param array $data
      * @return array
-     * @throws Exception
+     * @throws \Exception
      */
     public function execute($entityType, $data)
     {

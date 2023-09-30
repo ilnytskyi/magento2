@@ -8,6 +8,7 @@ namespace Magento\Framework\TestFramework\Unit\Matcher;
 
 use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\MockObject\Invocation as BaseInvocation;
+use function sprintf;
 
 /**
  * Class MethodInvokedAtIndex
@@ -84,7 +85,7 @@ class MethodInvokedAtIndex extends \PHPUnit\Framework\MockObject\Rule\Invocation
     {
         if ($this->currentIndex < $this->sequenceIndex) {
             throw new ExpectationFailedException(
-                \sprintf(
+                sprintf(
                     'The expected invocation at index %s was never reached.',
                     $this->sequenceIndex
                 )

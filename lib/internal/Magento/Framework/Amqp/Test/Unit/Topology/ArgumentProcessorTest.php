@@ -31,7 +31,7 @@ class ArgumentProcessorTest extends TestCase
             }
         ];
 
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(\InvalidArgumentException::class);
         $this->argumentProcessor->processArguments($arguments);
     }
 

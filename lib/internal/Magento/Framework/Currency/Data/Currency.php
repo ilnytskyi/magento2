@@ -29,7 +29,7 @@ class Currency
     public const LEFT = 32;
 
     /**
-     * @var Zend_Cache_Core
+     * @var \Zend_Cache_Core
      */
     private static $cache = null;
 
@@ -406,7 +406,7 @@ class Currency
     /**
      * Returns the set cache.
      *
-     * @return Zend_Cache_Core
+     * @return \Zend_Cache_Core
      */
     public static function getCache()
     {
@@ -416,10 +416,10 @@ class Currency
     /**
      * Sets a cache for Currency
      *
-     * @param Zend_Cache_Core $cache
+     * @param \Zend_Cache_Core $cache
      * @return void
      */
-    public static function setCache(Zend_Cache_Core $cache)
+    public static function setCache(\Zend_Cache_Core $cache)
     {
         self::$cache = $cache;
     }
@@ -469,7 +469,7 @@ class Currency
      */
     public function setLocale($locale = null): Currency
     {
-        $locale = $locale ?? Locale::getDefault();
+        $locale = $locale ?? \Locale::getDefault();
 
         if (strlen($locale) > 4) {
             $this->options['locale'] = $locale;

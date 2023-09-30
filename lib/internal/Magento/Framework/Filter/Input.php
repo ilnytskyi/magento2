@@ -142,7 +142,7 @@ class Input implements FilterInterface
      * @param array|null $filters
      * @param bool $isFilterListSimple
      * @return array
-     * @throws Exception when filter is not found or not instance of defined instances
+     * @throws \Exception when filter is not found or not instance of defined instances
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     protected function _filter(array $data, &$filters = null, $isFilterListSimple = false)
@@ -183,7 +183,7 @@ class Input implements FilterInterface
      * @param AbstractHelper $helper
      * @param array $filterData
      * @return mixed
-     * @throws Exception
+     * @throws \Exception
      */
     protected function _applyFiltrationWithHelper(
         $value,
@@ -206,7 +206,7 @@ class Input implements FilterInterface
      *
      * @param FilterInterface|array $filterData
      * @return false|AbstractHelper
-     * @throws Exception
+     * @throws \Exception
      */
     protected function _getFiltrationHelper($filterData)
     {
@@ -246,7 +246,7 @@ class Input implements FilterInterface
      *
      * @param array $filterData
      * @return FilterInterface
-     * @throws Exception
+     * @throws \Exception
      */
     protected function _createCustomLaminasFilter($filterData)
     {
@@ -271,7 +271,7 @@ class Input implements FilterInterface
      *
      * @param array $filterData
      * @return FilterInterface
-     * @throws Exception
+     * @throws \Exception
      */
     protected function _createNativeLaminasFilter($filterData)
     {

@@ -46,7 +46,7 @@ class ActionListTest extends TestCase
     private $serializerMock;
 
     /**
-     * @var MockObject|ReflectionClass
+     * @var MockObject|\ReflectionClass
      */
     private $reflectionClass;
 
@@ -61,7 +61,7 @@ class ActionListTest extends TestCase
         $this->cacheMock = $this->getMockForAbstractClass(CacheInterface::class);
         $this->readerMock = $this->createMock(Reader::class);
         $this->serializerMock = $this->getMockForAbstractClass(SerializerInterface::class);
-        $this->reflectionClass = $this->createStub(ReflectionClass::class);
+        $this->reflectionClass = $this->createStub(\ReflectionClass::class);
         $this->reflectionClassFactory = $this->getMockBuilder(ReflectionClassFactory::class)
             ->disableOriginalConstructor()
             ->getMock();

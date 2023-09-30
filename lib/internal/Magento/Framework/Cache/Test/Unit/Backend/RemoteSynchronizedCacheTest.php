@@ -12,6 +12,7 @@ use Magento\Framework\Cache\Backend\RemoteSynchronizedCache;
 use Magento\Framework\DB\Adapter\Pdo\Mysql;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use function hash;
 
 class RemoteSynchronizedCacheTest extends TestCase
 {
@@ -146,7 +147,7 @@ class RemoteSynchronizedCacheTest extends TestCase
 
         $this->remoteCacheMockExample
             ->method('load')
-            ->willReturnOnConsecutiveCalls(\hash('sha256', (string)$remoteData), $remoteData);
+            ->willReturnOnConsecutiveCalls(hash('sha256', (string)$remoteData), $remoteData);
 
         $this->localCacheMockExample
             ->expects($this->atLeastOnce())
@@ -221,7 +222,7 @@ class RemoteSynchronizedCacheTest extends TestCase
 
         $this->remoteCacheMockExample
             ->method('load')
-            ->willReturn(\hash('sha256', (string)$remoteData));
+            ->willReturn(hash('sha256', (string)$remoteData));
 
         $this->assertEquals($localData, $this->remoteSyncCacheInstance->load(1));
     }
@@ -337,7 +338,7 @@ class RemoteSynchronizedCacheTest extends TestCase
 
         $this->remoteCacheMockExample
             ->method('load')
-            ->willReturnOnConsecutiveCalls(\hash('sha256', (string)$remoteData), $remoteData);
+            ->willReturnOnConsecutiveCalls(hash('sha256', (string)$remoteData), $remoteData);
 
         $this->localCacheMockExample
             ->expects($this->once())
@@ -362,14 +363,14 @@ class RemoteSynchronizedCacheTest extends TestCase
 
         $this->remoteCacheMockExample
             ->method('load')
-            ->willReturnOnConsecutiveCalls(\hash('sha256', $dataToSave), $remoteData);
+            ->willReturnOnConsecutiveCalls(hash('sha256', $dataToSave), $remoteData);
 
         $this->remoteCacheMockExample
             ->expects($this->exactly(2))
             ->method('save')
             ->withConsecutive(
                 [$dataToSave, $cacheKey, $tags],
-                [\hash('sha256', $dataToSave), $cacheKey . ':hash', $tags]
+                [hash('sha256', $dataToSave), $cacheKey . ':hash', $tags]
             )->willReturn(true);
         $this->localCacheMockExample
             ->expects($this->once())
@@ -389,7 +390,7 @@ class RemoteSynchronizedCacheTest extends TestCase
 
         $this->remoteCacheMockExample
             ->method('load')
-            ->willReturn(\hash('sha256', $remoteData));
+            ->willReturn(hash('sha256', $remoteData));
 
         $this->remoteCacheMockExample->expects($this->exactly(2))->method('save');
         $this->localCacheMockExample->expects($this->once())->method('save');

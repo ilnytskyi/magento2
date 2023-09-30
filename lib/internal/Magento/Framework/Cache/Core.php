@@ -126,20 +126,20 @@ class Core extends \Zend_Cache_Core
      * Throw an exception if a problem is found
      *
      * @param  string $string Cache id or tag
-     * @throws Zend_Cache_Exception
+     * @throws \Zend_Cache_Exception
      * @return void
      */
     protected function _validateIdOrTag($string)
     {
         if ($this->_backend instanceof Redis) {
             if (!is_string($string)) {
-                Zend_Cache::throwException('Invalid id or tag : must be a string');
+                \Zend_Cache::throwException('Invalid id or tag : must be a string');
             }
             if (substr($string, 0, 9) == 'internal-') {
-                Zend_Cache::throwException('"internal-*" ids or tags are reserved');
+                \Zend_Cache::throwException('"internal-*" ids or tags are reserved');
             }
             if (!preg_match('~^[a-zA-Z0-9_{}]+$~D', $string)) {
-                Zend_Cache::throwException("Invalid id or tag '$string' : must use only [a-zA-Z0-9_{}]");
+                \Zend_Cache::throwException("Invalid id or tag '$string' : must use only [a-zA-Z0-9_{}]");
             }
 
             return;

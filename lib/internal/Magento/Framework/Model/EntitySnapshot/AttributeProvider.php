@@ -9,6 +9,8 @@ namespace Magento\Framework\Model\EntitySnapshot;
 
 use Magento\Framework\EntityManager\MetadataPool;
 use Magento\Framework\ObjectManagerInterface as ObjectManager;
+use function array_keys;
+use function array_merge;
 
 /**
  * Class EntitySnapshot
@@ -66,7 +68,7 @@ class AttributeProvider implements AttributeProviderInterface
                 unset($entityDescription[$metadata->getLinkField()]);
             }
             $attributes = [];
-            $attributes[] = \array_keys($entityDescription);
+            $attributes[] = array_keys($entityDescription);
 
             $providers = $this->providers[$entityType] ?? $this->providers['default'] ?? [];
             foreach ($providers as $providerClass) {
@@ -74,7 +76,7 @@ class AttributeProvider implements AttributeProviderInterface
                 $attributes[] = $provider->getAttributes($entityType);
             }
 
-            $this->registry[$entityType] = \array_merge([], ...$attributes);
+            $this->registry[$entityType] = array_merge([], ...$attributes);
         }
 
         return $this->registry[$entityType];

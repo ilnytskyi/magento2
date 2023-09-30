@@ -12,6 +12,7 @@ use Magento\Framework\Lock\LockManagerInterface;
 use Magento\Framework\TestFramework\Unit\Helper\ObjectManager as ObjectManagerHelper;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use function uniqid;
 
 class LockGuardedCacheLoaderTest extends TestCase
 {
@@ -49,7 +50,7 @@ class LockGuardedCacheLoaderTest extends TestCase
      */
     public function testOptimisticDataRead(): void
     {
-        $lockName = \uniqid('lock_name_1_', true);
+        $lockName = uniqid('lock_name_1_', true);
 
         $dataLoader = function () {
             return 'loaded_data';
@@ -79,7 +80,7 @@ class LockGuardedCacheLoaderTest extends TestCase
      */
     public function testDataCollectedAfterDeadlineReached(): void
     {
-        $lockName = \uniqid('lock_name_1_', true);
+        $lockName = uniqid('lock_name_1_', true);
 
         $dataLoader = function () {
             return false;
@@ -113,7 +114,7 @@ class LockGuardedCacheLoaderTest extends TestCase
      */
     public function testDataWrite(): void
     {
-        $lockName = \uniqid('lock_name_1_', true);
+        $lockName = uniqid('lock_name_1_', true);
 
         $dataLoader = function () {
             return false;
@@ -147,7 +148,7 @@ class LockGuardedCacheLoaderTest extends TestCase
      */
     public function testDataCollectedWithParallelGeneration(): void
     {
-        $lockName = \uniqid('lock_name_1_', true);
+        $lockName = uniqid('lock_name_1_', true);
 
         $dataLoader = function () {
             return false;

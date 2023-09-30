@@ -69,7 +69,7 @@ class ImageFactoryTest extends TestCase
         unlink($imagePath);
         $this->assertEquals(69, $result->getPixelHeight());
         $this->assertEquals(36, $result->getPixelWidth());
-        $this->assertInstanceOf(Zend_Pdf_Resource_Image_Jpeg::class, $result);
+        $this->assertInstanceOf(\Zend_Pdf_Resource_Image_Jpeg::class, $result);
     }
 
     /**
@@ -108,7 +108,7 @@ class ImageFactoryTest extends TestCase
         $imagePath = preg_replace('|/{2,}|', '/', $imagePath);
         $memory = fopen('php://memory', 'r+');
         if (!imagejpeg($image, $memory)) {
-            throw new Exception('Could not create picture ' . $imagePath);
+            throw new \Exception('Could not create picture ' . $imagePath);
         }
         file_put_contents($imagePath, stream_get_contents($memory, -1, 0));
         fclose($memory);
@@ -144,6 +144,6 @@ class ImageFactoryTest extends TestCase
         $result = $this->factory->factory(self::REMOTE_IMAGE_PATH);
         $this->assertEquals(35, $result->getPixelHeight());
         $this->assertEquals(59, $result->getPixelWidth());
-        $this->assertInstanceOf(Zend_Pdf_Resource_Image_Png::class, $result);
+        $this->assertInstanceOf(\Zend_Pdf_Resource_Image_Png::class, $result);
     }
 }

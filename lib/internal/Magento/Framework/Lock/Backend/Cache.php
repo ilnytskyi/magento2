@@ -8,6 +8,12 @@ declare(strict_types=1);
 namespace Magento\Framework\Lock\Backend;
 
 use Magento\Framework\Cache\FrontendInterface;
+use function getmypid;
+use function crc32;
+use function gethostname;
+use function bin2hex;
+use function random_bytes;
+use function uniqid;
 
 /**
  * Implementation of the lock manager on the basis of the caching system.
@@ -144,14 +150,14 @@ class Cache implements \Magento\Framework\Lock\LockManagerInterface
         $sign = implode(
             '-',
             [
-                \getmypid(), \crc32(\gethostname())
+                getmypid(), crc32(gethostname())
             ]
         );
 
         try {
-            $sign .= '-' . \bin2hex(\random_bytes(4));
+            $sign .= '-' . bin2hex(random_bytes(4));
         } catch (\Exception $e) {
-            $sign .= '-' . \uniqid('-uniqid-');
+            $sign .= '-' . uniqid('-uniqid-');
         }
 
         return $sign;

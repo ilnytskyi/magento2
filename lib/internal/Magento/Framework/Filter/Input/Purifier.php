@@ -16,19 +16,19 @@ class Purifier implements PurifierInterface
     public const CACHE_DEFINITION = 'Cache.DefinitionImpl';
 
     /**
-     * @var HTMLPurifier $purifier
+     * @var \HTMLPurifier $purifier
      */
-    private HTMLPurifier $purifier;
+    private \HTMLPurifier $purifier;
 
     /**
      * Purifier Constructor Call
      */
     public function __construct()
     {
-        $config = HTMLPurifier_Config::createDefault();
+        $config = \HTMLPurifier_Config::createDefault();
         $config->set(self::CACHE_DEFINITION, null);
 
-        $this->purifier = ObjectManager::getInstance()->create(HTMLPurifier::class, ['config' => $config]);
+        $this->purifier = ObjectManager::getInstance()->create(\HTMLPurifier::class, ['config' => $config]);
     }
 
     /**

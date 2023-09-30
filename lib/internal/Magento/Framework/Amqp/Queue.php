@@ -84,7 +84,7 @@ class Queue implements QueueInterface
         /** @var AMQPMessage $message */
         try {
             $message = $channel->basic_get($this->queueName);
-        } catch (Exception $exception) {
+        } catch (\Exception $exception) {
             throw new ConnectionLostException(
                 $exception->getMessage(),
                 $exception->getCode(),
@@ -118,7 +118,7 @@ class Queue implements QueueInterface
         // @codingStandardsIgnoreStart
         try {
             $channel->basic_ack($properties['delivery_tag']);
-        } catch (Exception $exception) {
+        } catch (\Exception $exception) {
             throw new ConnectionLostException(
                 $exception->getMessage(),
                 $exception->getCode(),
@@ -146,7 +146,7 @@ class Queue implements QueueInterface
             // @codingStandardsIgnoreEnd
             $envelope = $this->envelopeFactory->create(['body' => $message->body, 'properties' => $properties]);
 
-            if ($callback instanceof Closure) {
+            if ($callback instanceof \Closure) {
                 $callback($envelope);
             } else {
                 call_user_func($callback, $envelope);
