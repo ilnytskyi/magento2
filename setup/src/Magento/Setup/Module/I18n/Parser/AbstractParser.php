@@ -103,7 +103,7 @@ abstract class AbstractParser implements I18n\ParserInterface
                     sprintf('Adapter is not set for type "%s".', $parserOptions['type'])
                 );
             }
-            if (!isset($parserOptions['paths']) || !is_array($parserOptions['paths'])) {
+            if (!isset($parserOptions['paths']) || !\is_array($parserOptions['paths'])) {
                 throw new \InvalidArgumentException('"paths" in parser options must be array.');
             }
         }

@@ -83,7 +83,7 @@ class Config implements ConfigInterface
         $cachedRoutes = $this->_cache->load($cacheId);
         if ($cachedRoutes) {
             $cachedRoutes = $this->getSerializer()->unserialize($cachedRoutes);
-            if (is_array($cachedRoutes)) {
+            if (\is_array($cachedRoutes)) {
                 $this->_routes[$scope] = $cachedRoutes;
                 return $cachedRoutes;
             }

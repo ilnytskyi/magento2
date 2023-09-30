@@ -439,18 +439,18 @@ abstract class AbstractBlock extends \Magento\Framework\DataObject implements Bl
      */
     public function unsetCallChild($alias, $callback, $result, $params)
     {
-        $args = func_get_args();
+        $args = \func_get_args();
         $child = $this->getChildBlock($alias);
         if ($child) {
             $alias = array_shift($args);
             $callback = array_shift($args);
             $result = (string)array_shift($args);
-            if (!is_array($params)) {
+            if (!\is_array($params)) {
                 $params = $args;
             }
 
             // @codingStandardsIgnoreStart
-            if ($result == call_user_func_array([&$child, $callback], $params)) {
+            if ($result == \call_user_func_array([&$child, $callback], $params)) {
                 $this->unsetChild($alias);
             }
             // @codingStandardsIgnoreEnd
@@ -858,7 +858,7 @@ abstract class AbstractBlock extends \Magento\Framework\DataObject implements Bl
     public function getModuleName()
     {
         if (!$this->_getData('module_name')) {
-            $this->setData('module_name', self::extractModuleName(get_class($this)));
+            $this->setData('module_name', self::extractModuleName(\get_class($this)));
         }
         return $this->_getData('module_name');
     }

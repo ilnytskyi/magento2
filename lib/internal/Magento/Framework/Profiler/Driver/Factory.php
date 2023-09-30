@@ -64,7 +64,7 @@ class Factory
             throw new \InvalidArgumentException(
                 sprintf(
                     "Driver class \"%s\" must implement \Magento\Framework\Profiler\DriverInterface.",
-                    get_class($driver)
+                    \get_class($driver)
                 )
             );
         }

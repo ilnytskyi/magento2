@@ -65,7 +65,7 @@ class EntityArrayValidator implements ServiceInputValidatorInterface
         $maxLimit = $this->inputArraySizeLimitValue->get()
             ?? ($this->configProvider->getComplexArrayItemLimit() ?? $this->complexArrayItemLimit);
 
-        if (count($items) > $maxLimit) {
+        if (\count($items) > $maxLimit) {
             throw new InvalidArgumentException(
                 __(
                     'Maximum items of type "%type" is %max',

@@ -54,7 +54,7 @@ class InterceptionCache implements OperationInterface
 
         $definitions = [];
         foreach ($this->data as $paths) {
-            if (!is_array($paths)) {
+            if (!\is_array($paths)) {
                 $paths = (array)$paths;
             }
             foreach ($paths as $path) {

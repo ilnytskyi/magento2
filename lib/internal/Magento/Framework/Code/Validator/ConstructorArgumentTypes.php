@@ -49,7 +49,7 @@ class ConstructorArgumentTypes implements ValidatorInterface
         }, $expectedArguments);
 
         foreach ($actualArguments as $argument) {
-            if (!in_array($argument, $expectedArguments)) {
+            if (!\in_array($argument, $expectedArguments)) {
                 throw new \Magento\Framework\Exception\ValidatorException(
                     new \Magento\Framework\Phrase(
                         'Invalid constructor argument(s) in %1',

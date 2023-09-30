@@ -25,7 +25,7 @@ class Batch
                 $batch = [];
             }
         }
-        if (count($batch) > 0) {
+        if (\count($batch) > 0) {
             yield $batch;
         }
     }

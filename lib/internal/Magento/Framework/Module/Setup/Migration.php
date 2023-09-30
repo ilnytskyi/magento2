@@ -312,7 +312,7 @@ class Migration
      */
     protected function _updateRowsData($tableName, $fieldName, array $fieldReplacements)
     {
-        if (count($fieldReplacements) > 0) {
+        if (\count($fieldReplacements) > 0) {
             $connection = $this->setup->getConnection();
 
             foreach ($fieldReplacements as $fieldReplacement) {
@@ -469,7 +469,7 @@ class Migration
      */
     protected function _getPatternReplacement($data, $contentType, $entityType = '')
     {
-        if (!array_key_exists($contentType, $this->_replacePatterns)) {
+        if (!\array_key_exists($contentType, $this->_replacePatterns)) {
             return null;
         }
 
@@ -554,7 +554,7 @@ class Migration
      */
     protected function _getCompositeModuleName($moduleAlias)
     {
-        if (array_key_exists($moduleAlias, $this->_compositeModules)) {
+        if (\array_key_exists($moduleAlias, $this->_compositeModules)) {
             return $this->_compositeModules[$moduleAlias];
         }
         return null;
@@ -655,12 +655,12 @@ class Migration
     protected function _getAliasInSerializedStringReplacement($data, $entityType = '')
     {
         $matches = $this->_parseSerializedString($data);
-        if (isset($matches['alias']) && count($matches['alias']) > 0) {
+        if (isset($matches['alias']) && \count($matches['alias']) > 0) {
             foreach ($matches['alias'] as $key => $alias) {
                 $className = $this->_getCorrespondingClassName($alias, $entityType);
 
                 if (!empty($className)) {
-                    $replaceString = sprintf(self::SERIALIZED_REPLACE_PATTERN, strlen($className), $className);
+                    $replaceString = sprintf(self::SERIALIZED_REPLACE_PATTERN, \strlen($className), $className);
                     $data = str_replace($matches['string'][$key], $replaceString, $data);
                 }
             }

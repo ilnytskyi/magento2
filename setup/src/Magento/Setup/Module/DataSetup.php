@@ -149,7 +149,7 @@ class DataSetup extends \Magento\Framework\Module\Setup implements ModuleDataSet
     public function updateTableRow($table, $idField, $rowId, $field, $value = null, $parentField = null, $parentId = 0)
     {
         $table = $this->getTable($table);
-        if (is_array($field)) {
+        if (\is_array($field)) {
             $data = $field;
         } else {
             $data = [$field => $value];
@@ -159,7 +159,7 @@ class DataSetup extends \Magento\Framework\Module\Setup implements ModuleDataSet
         $where = [$connection->quoteIdentifier($idField) . '=?' => $rowId];
         $connection->update($table, $data, $where);
 
-        if (is_array($field)) {
+        if (\is_array($field)) {
             $oldRow = $this->setupCache->has($table, $parentId, $rowId) ?
                 $this->setupCache->get($table, $parentId, $rowId) :
                 [];

@@ -59,7 +59,7 @@ class Csv implements \Magento\Framework\Setup\Declaration\Schema\DataSavior\Dump
     public function save($file, array $data)
     {
         $file = $this->prepareFile($file);
-        if (!count($data) || !$file) {
+        if (!\count($data) || !$file) {
             return $this;
         }
 

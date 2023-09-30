@@ -108,7 +108,7 @@ class ProxyDeferredGenerator extends EntityAbstract
                     $method->isStatic() ||
                     $method->isDestructor()
                 )
-                && !in_array(
+                && !\in_array(
                     $method->getName(),
                     ['__sleep', '__wakeup', '__clone']
                 )
@@ -205,7 +205,7 @@ class ProxyDeferredGenerator extends EntityAbstract
         array $parameters = [],
         bool $withoutReturn = false
     ) {
-        if (count($parameters) == 0) {
+        if (\count($parameters) == 0) {
             $methodCall = sprintf('%s()', $name);
         } else {
             $methodCall = sprintf('%s(%s)', $name, implode(', ', $parameters));

@@ -216,11 +216,11 @@ class Filesystem extends AbstractBackup
      */
     public function addIgnorePaths($paths)
     {
-        if (is_string($paths)) {
-            if (!in_array($paths, $this->_ignorePaths)) {
+        if (\is_string($paths)) {
+            if (!\in_array($paths, $this->_ignorePaths)) {
                 $this->_ignorePaths[] = $paths;
             }
-        } elseif (is_array($paths)) {
+        } elseif (\is_array($paths)) {
             foreach ($paths as $path) {
                 $this->addIgnorePaths($path);
             }

@@ -443,7 +443,7 @@ class QuoteGenerator
      */
     private function getProductStubIndex($entityId)
     {
-        $storeCount = count($this->productStubData);
+        $storeCount = \count($this->productStubData);
         $qty = intdiv($this->config->getRequiredQuoteQuantity(), $storeCount);
         return intdiv($entityId, $qty) % $storeCount;
     }

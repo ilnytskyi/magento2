@@ -88,7 +88,7 @@ abstract class AbstractAdapter implements AdapterInterface
      */
     protected function _stripFirstAndLastChar($phrase)
     {
-        return substr($phrase, 1, strlen($phrase) - 2);
+        return substr($phrase, 1, \strlen($phrase) - 2);
     }
 
     /**
@@ -100,7 +100,7 @@ abstract class AbstractAdapter implements AdapterInterface
     protected function _isFirstAndLastCharIsQuote($phrase)
     {
         $firstCharacter = $phrase[0];
-        $lastCharacter = $phrase[strlen($phrase) - 1];
+        $lastCharacter = $phrase[\strlen($phrase) - 1];
         return $this->isQuote($firstCharacter) && $firstCharacter == $lastCharacter;
     }
 
@@ -135,6 +135,6 @@ abstract class AbstractAdapter implements AdapterInterface
      */
     protected function isQuote($char)
     {
-        return in_array($char, [Phrase::QUOTE_DOUBLE, Phrase::QUOTE_SINGLE]);
+        return \in_array($char, [Phrase::QUOTE_DOUBLE, Phrase::QUOTE_SINGLE]);
     }
 }

@@ -76,7 +76,7 @@ class MaliciousCode implements FilterInterface
      */
     public function addExpression(string $expression) :self
     {
-        if (!in_array($expression, $this->_expressions)) {
+        if (!\in_array($expression, $this->_expressions)) {
             $this->_expressions[] = $expression;
         }
         return $this;

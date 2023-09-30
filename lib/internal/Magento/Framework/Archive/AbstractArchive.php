@@ -61,7 +61,7 @@ class AbstractArchive
      */
     public function getFilename($source, $withExtension = false)
     {
-        $file = $source !== null ? str_replace(dirname($source) . '/', '', $source) : '';
+        $file = $source !== null ? str_replace(\dirname($source) . '/', '', $source) : '';
         if (!$withExtension) {
             $file = substr($file, 0, strrpos($file, '.'));
         }

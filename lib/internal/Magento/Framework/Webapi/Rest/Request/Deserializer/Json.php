@@ -55,9 +55,9 @@ class Json implements \Magento\Framework\Webapi\Rest\Request\DeserializerInterfa
      */
     public function deserialize($encodedBody)
     {
-        if (!is_string($encodedBody)) {
+        if (!\is_string($encodedBody)) {
             throw new \InvalidArgumentException(
-                sprintf('"%s" data type is invalid. String is expected.', gettype($encodedBody))
+                sprintf('"%s" data type is invalid. String is expected.', \gettype($encodedBody))
             );
         }
         try {

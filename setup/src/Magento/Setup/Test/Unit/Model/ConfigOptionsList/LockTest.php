@@ -326,7 +326,7 @@ class LockTest extends TestCase
                     LockConfigOptionsList::INPUT_KEY_LOCK_ZOOKEEPER_HOST => '',
                     LockConfigOptionsList::INPUT_KEY_LOCK_ZOOKEEPER_PATH => '',
                 ],
-                'expectedResult' => extension_loaded('zookeeper')
+                'expectedResult' => \extension_loaded('zookeeper')
                     ? [
                         'Zookeeper path needs to be a non-empty string.',
                         'Zookeeper host is should be set.',

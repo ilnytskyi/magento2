@@ -34,7 +34,7 @@ class UrlKey
      */
     public function isValid(?string $urlKey): bool
     {
-        if (in_array($urlKey, $this->restrictedValues)) {
+        if (\in_array($urlKey, $this->restrictedValues)) {
             return false;
         }
 

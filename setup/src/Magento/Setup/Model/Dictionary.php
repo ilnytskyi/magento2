@@ -42,7 +42,7 @@ class Dictionary
 
         // mt_rand() here is not for cryptographic use.
         // phpcs:ignore Magento2.Security.InsecureFunction
-        $randIndex = mt_rand(0, count($this->dictionary) - 1);
+        $randIndex = mt_rand(0, \count($this->dictionary) - 1);
         return trim($this->dictionary[$randIndex]);
     }
 

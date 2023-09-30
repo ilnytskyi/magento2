@@ -154,7 +154,7 @@ class Config implements \Magento\Framework\Interception\ConfigInterface
                 }
             } else {
                 $parts = explode('\\', $type);
-                if (!in_array(end($parts), $this->_serviceClassTypes) && $this->_relations->has($type)) {
+                if (!\in_array(end($parts), $this->_serviceClassTypes) && $this->_relations->has($type)) {
                     $relations = $this->_relations->getParents($type);
                     foreach ($relations as $relation) {
                         if ($relation && $this->_inheritInterception($relation)) {

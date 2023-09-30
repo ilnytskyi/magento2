@@ -336,7 +336,7 @@ class Table
      */
     public function addColumn($name, $type, $size = null, $options = [], $comment = null)
     {
-        $position = count($this->_columns);
+        $position = \count($this->_columns);
         $default = false;
         $nullable = true;
         $length = null;
@@ -373,8 +373,8 @@ class Table
                 $scale = 0;
                 $precision = 10;
                 // parse size value
-                if (is_array($size)) {
-                    if (count($size) == 2) {
+                if (\is_array($size)) {
+                    if (\count($size) == 2) {
                         $size = array_values($size);
                         $precision = $size[0];
                         $scale = $size[1];
@@ -409,10 +409,10 @@ class Table
                 throw new \Zend_Db_Exception('Invalid column data type "' . $type . '"');
         }
 
-        if (array_key_exists('default', $options)) {
+        if (\array_key_exists('default', $options)) {
             $default = $options['default'];
         }
-        if (array_key_exists('nullable', $options)) {
+        if (\array_key_exists('nullable', $options)) {
             $nullable = (bool)$options['nullable'];
         }
         if (!empty($options['primary'])) {
@@ -514,16 +514,16 @@ class Table
         $idxType = AdapterInterface::INDEX_TYPE_INDEX;
         $position = 0;
         $columns = [];
-        if (!is_array($fields)) {
+        if (!\is_array($fields)) {
             $fields = [$fields];
         }
 
         foreach ($fields as $columnData) {
             $columnSize = null;
             $columnPos = $position;
-            if (is_string($columnData)) {
+            if (\is_string($columnData)) {
                 $columnName = $columnData;
-            } elseif (is_array($columnData)) {
+            } elseif (\is_array($columnData)) {
                 if (!isset($columnData['name'])) {
                     throw new \Zend_Db_Exception('Invalid index column data');
                 }

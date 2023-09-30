@@ -67,10 +67,10 @@ class Curl implements AdapterInterface
     {
         // apply config options
         foreach ($this->_config as $k => $v) {
-            if (is_string($k) && array_key_exists($k, $this->_allowedParams)) {
+            if (\is_string($k) && \array_key_exists($k, $this->_allowedParams)) {
                 $k = $this->_allowedParams[$k];
             }
-            if (is_int($k)) {
+            if (\is_int($k)) {
                 curl_setopt($this->_getResource(), $k, $v);
             }
         }
@@ -87,7 +87,7 @@ class Curl implements AdapterInterface
     {
         $config = [];
         foreach (array_keys($this->_config) as $param) {
-            if (array_key_exists($param, $this->_allowedParams)) {
+            if (\array_key_exists($param, $this->_allowedParams)) {
                 $config[$this->_allowedParams[$param]] = $this->_config[$param];
             }
         }
@@ -189,7 +189,7 @@ class Curl implements AdapterInterface
             curl_setopt($this->_getResource(), CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_0);
         }
 
-        if (is_array($headers)) {
+        if (\is_array($headers)) {
             curl_setopt($this->_getResource(), CURLOPT_HTTPHEADER, $headers);
         }
 

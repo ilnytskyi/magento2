@@ -96,13 +96,13 @@ class ModuleStatusCommand extends AbstractSetupCommand
     private function showSpecificModule(string $moduleName, OutputInterface $output): int
     {
         $allModules = $this->getAllModules();
-        if (!in_array($moduleName, $allModules->getNames(), true)) {
+        if (!\in_array($moduleName, $allModules->getNames(), true)) {
             $output->writeln($moduleName . ' : <error>Module does not exist</error>');
             return Cli::RETURN_FAILURE;
         }
 
         $enabledModules = $this->getEnabledModules();
-        if (in_array($moduleName, $enabledModules->getNames(), true)) {
+        if (\in_array($moduleName, $enabledModules->getNames(), true)) {
             $output->writeln($moduleName . ' : <info>Module is enabled</info>');
             return Cli::RETURN_FAILURE;
         }
@@ -121,7 +121,7 @@ class ModuleStatusCommand extends AbstractSetupCommand
     {
         $enabledModules = $this->getEnabledModules();
         $enabledModuleNames = $enabledModules->getNames();
-        if (count($enabledModuleNames) === 0) {
+        if (\count($enabledModuleNames) === 0) {
             $output->writeln('None');
             return Cli::RETURN_FAILURE;
         }
@@ -140,7 +140,7 @@ class ModuleStatusCommand extends AbstractSetupCommand
     private function showDisabledModules(OutputInterface $output): int
     {
         $disabledModuleNames = $this->getDisabledModuleNames();
-        if (count($disabledModuleNames) === 0) {
+        if (\count($disabledModuleNames) === 0) {
             $output->writeln('None');
             return Cli::RETURN_FAILURE;
         }

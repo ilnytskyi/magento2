@@ -158,7 +158,7 @@ class ShellTest extends TestCase
     {
         try {
             /* Force command to return non-zero exit code */
-            $commandArgs[count($commandArgs) - 1] .= ' exit(42);';
+            $commandArgs[\count($commandArgs) - 1] .= ' exit(42);';
             $this->testExecute($command, $commandArgs, ''); // no result is expected in a case of a command failure
         } catch (LocalizedException $e) {
             $this->assertInstanceOf('Exception', $e->getPrevious());

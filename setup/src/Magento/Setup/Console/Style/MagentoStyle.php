@@ -102,7 +102,7 @@ class MagentoStyle extends OutputStyle implements MagentoStyleInterface
         string $prefix = ' ',
         bool $padding = false
     ) {
-        $messages = is_array($messages) ? array_values($messages) : [$messages];
+        $messages = \is_array($messages) ? array_values($messages) : [$messages];
         $this->autoPrependBlock();
         $this->writeln($this->createBlock($messages, $type, $style, $prefix, $padding));
         $this->newLine();
@@ -163,7 +163,7 @@ class MagentoStyle extends OutputStyle implements MagentoStyleInterface
     public function text($message)
     {
         $this->autoPrependText();
-        $messages = is_array($message) ? array_values($message) : [$message];
+        $messages = \is_array($message) ? array_values($message) : [$message];
         foreach ($messages as $singleMessage) {
             $this->writeln(sprintf(' %s', $singleMessage));
         }
@@ -382,7 +382,7 @@ class MagentoStyle extends OutputStyle implements MagentoStyleInterface
                 $this->input->setArgument($argument, $this->ask($question, $default, $validator, $maxAttempts));
             }
             $argumentValue = $this->input->getArgument($argument);
-            $validated = (is_callable($validator) ? $validator($argumentValue) : $argumentValue);
+            $validated = (\is_callable($validator) ? $validator($argumentValue) : $argumentValue);
             if ((bool)($comment ?? $this->isDebug())) {
                 $this->comment(sprintf($commentFormat, $argument, $validated));
             }
@@ -426,7 +426,7 @@ class MagentoStyle extends OutputStyle implements MagentoStyleInterface
                 $this->input->setOption($option, $this->ask($question, $default, $validator, $maxAttempts));
             }
             $optionValue = $this->input->getOption($option);
-            $validated = (is_callable($validator) ? $validator($optionValue) : $optionValue);
+            $validated = (\is_callable($validator) ? $validator($optionValue) : $optionValue);
             if ((bool)($comment ?? $this->isDebug())) {
                 $this->comment(sprintf($commentFormat, $option, $validated));
             }
@@ -568,7 +568,7 @@ class MagentoStyle extends OutputStyle implements MagentoStyleInterface
         $lineIndentation = '';
         if (null !== $type) {
             $type = sprintf('[%s] ', $type);
-            $indentLength = strlen($type);
+            $indentLength = \strlen($type);
             $lineIndentation = str_repeat(' ', $indentLength);
         }
         $lines = $this->getBlockLines($messages, $prefixLength, $indentLength);
@@ -611,7 +611,7 @@ class MagentoStyle extends OutputStyle implements MagentoStyleInterface
             $message = OutputFormatter::escape($message);
             $wordwrap = wordwrap($message, $this->lineLength - $prefixLength - $indentLength, PHP_EOL, true);
             $lines[] = explode(PHP_EOL, $wordwrap);
-            if (count($messages) > 1 && $key < count($messages) - 1) {
+            if (\count($messages) > 1 && $key < \count($messages) - 1) {
                 $lines[][] = '';
             }
         }

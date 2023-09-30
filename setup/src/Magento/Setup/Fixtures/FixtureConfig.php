@@ -47,7 +47,7 @@ class FixtureConfig
         $this->parser->getDom()->load($filename);
         $this->parser->getDom()->xinclude();
         $this->config = $this->parser->xmlToArray();
-        $this->config['config']['profile']['di'] = dirname($filename) . '/'
+        $this->config['config']['profile']['di'] = \dirname($filename) . '/'
             . (isset($this->config['config']['profile']['di'])
                 ? $this->config['config']['profile']['di']
                 : '../../config/di.xml'

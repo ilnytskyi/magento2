@@ -141,7 +141,7 @@ class Options implements OptionInterface
         }
 
         return array_filter($locales, function ($localeData) use ($availableLocales) {
-            return in_array($localeData['value'], $availableLocales);
+            return \in_array($localeData['value'], $availableLocales);
         });
     }
 }

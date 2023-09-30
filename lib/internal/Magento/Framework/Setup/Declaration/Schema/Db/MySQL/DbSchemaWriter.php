@@ -297,7 +297,7 @@ class DbSchemaWriter implements DbSchemaWriterInterface
                 );
                 //Do post update, like SQL DML operations or etc...
                 foreach ($statement->getTriggers() as $trigger) {
-                    call_user_func($trigger);
+                    \call_user_func($trigger);
                 }
             }
         }

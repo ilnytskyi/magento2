@@ -25,7 +25,7 @@ class MethodCollector extends PhraseCollector
             if ($phraseStartToken && $this->_isTranslateFunction($phraseStartToken)) {
                 $arguments = $this->_tokenizer->getFunctionArgumentsTokens();
                 $phrase = $this->_collectPhrase(array_shift($arguments));
-                $this->_addPhrase($phrase, count($arguments), $this->_file, $phraseStartToken->getLine());
+                $this->_addPhrase($phrase, \count($arguments), $this->_file, $phraseStartToken->getLine());
             }
         }
     }

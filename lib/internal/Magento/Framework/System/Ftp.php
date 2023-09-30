@@ -57,7 +57,7 @@ class Ftp
         $dir = explode("/", (string)$path);
         $path = "";
         $ret = true;
-        for ($i = 0, $count = count($dir); $i < $count; $i++) {
+        for ($i = 0, $count = \count($dir); $i < $count; $i++) {
             $path .= "/" . $dir[$i];
             if (!@ftp_chdir($this->_conn, $path)) {
                 @ftp_chdir($this->_conn, "/");
@@ -247,7 +247,7 @@ class Ftp
         }
 
         $globalPathMode = substr((string)$remote, 0, 1) == "/";
-        $dirname = dirname($remote);
+        $dirname = \dirname($remote);
         $cwd = $this->getcwd();
         if (false === $cwd) {
             // phpcs:ignore Magento2.Exceptions.DirectThrow
@@ -425,7 +425,7 @@ class Ftp
         $globalPathMode = substr($path, 0, 1) == "/";
 
         $file = basename($path);
-        $dir = $globalPathMode ? dirname($path) : $this->getcwd() . "/" . $path;
+        $dir = $globalPathMode ? \dirname($path) : $this->getcwd() . "/" . $path;
         $data = $this->ls($dir);
         foreach ($data as $row) {
             if ($file == $row['name']) {
@@ -454,7 +454,7 @@ class Ftp
         $arraypointer = & $structure;
         foreach ($rawfiles as $rawfile) {
             if ($rawfile[0] == '/') {
-                $paths = array_slice(explode('/', str_replace(':', '', $rawfile)), 1);
+                $paths = \array_slice(explode('/', str_replace(':', '', $rawfile)), 1);
                 $arraypointer = & $structure;
                 foreach ($paths as $path) {
                     foreach ($arraypointer as $i => $file) {

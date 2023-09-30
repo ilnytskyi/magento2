@@ -84,10 +84,10 @@ class Memcached extends \Zend_Cache_Backend_Memcached implements \Zend_Cache_Bac
      */
     public function save($data, $id, $tags = [], $specificLifetime = false)
     {
-        if (is_string($data) && strlen($data) > $this->_options['slab_size']) {
+        if (\is_string($data) && \strlen($data) > $this->_options['slab_size']) {
             $dataChunks = str_split($data, $this->_options['slab_size']);
 
-            for ($i = 0, $count = count($dataChunks); $i < $count; $i++) {
+            for ($i = 0, $count = \count($dataChunks); $i < $count; $i++) {
                 $chunkId = $this->_getChunkId($id, $i);
 
                 if (!parent::save($dataChunks[$i], $chunkId, $tags, $specificLifetime)) {
@@ -113,7 +113,7 @@ class Memcached extends \Zend_Cache_Backend_Memcached implements \Zend_Cache_Bac
     {
         $data = parent::load($id, $doNotTestCacheValidity);
 
-        if (is_string($data) && substr($data, 0, strlen(self::CODE_WORD)) == self::CODE_WORD) {
+        if (\is_string($data) && substr($data, 0, \strlen(self::CODE_WORD)) == self::CODE_WORD) {
             // Seems we've got chunked data
 
             $arr = explode('|', $data);

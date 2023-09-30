@@ -196,7 +196,7 @@ class Stat
     protected function _getOrderedTimerIds()
     {
         $timerIds = array_keys($this->_timers);
-        if (count($timerIds) <= 2) {
+        if (\count($timerIds) <= 2) {
             /* No sorting needed */
             return $timerIds;
         }
@@ -207,7 +207,7 @@ class Stat
 
         $prevTimerId = $timerIds[0];
         $result = [$prevTimerId];
-        $numberTimerIds = count($timerIds);
+        $numberTimerIds = \count($timerIds);
         for ($i = 1; $i < $numberTimerIds; $i++) {
             $timerId = $timerIds[$i];
             /* Skip already added timer */

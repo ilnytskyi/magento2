@@ -53,7 +53,7 @@ class LayoutFactory
     {
         $layout = $this->_objectManager->create($this->_instanceName, $data);
         if (!$layout instanceof LayoutInterface) {
-            throw new \InvalidArgumentException(get_class($layout) . ' must be an instance of LayoutInterface.');
+            throw new \InvalidArgumentException(\get_class($layout) . ' must be an instance of LayoutInterface.');
         }
         return $layout;
     }

@@ -56,7 +56,7 @@ class InterceptorSubstitution implements ModificationInterface
 
         foreach (array_keys($arguments) as $instanceName) {
             if (substr($instanceName, -12) === '\Interceptor') {
-                $originalName = substr($instanceName, 0, strlen($instanceName) - 12);
+                $originalName = substr($instanceName, 0, \strlen($instanceName) - 12);
                 $interceptors[$originalName] = $instanceName;
             }
         }

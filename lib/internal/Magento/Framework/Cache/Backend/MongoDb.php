@@ -46,7 +46,7 @@ class MongoDb extends \Zend_Cache_Backend implements \Zend_Cache_Backend_Extende
      */
     public function __construct(array $options = [])
     {
-        if (!extension_loaded('mongo') || !version_compare(\Mongo::VERSION, '1.2.11', '>=')) {
+        if (!\extension_loaded('mongo') || !version_compare(\Mongo::VERSION, '1.2.11', '>=')) {
             \Zend_Cache::throwException(
                 "At least 1.2.11 version of 'mongo' extension is required for using MongoDb cache backend"
             );

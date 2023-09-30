@@ -149,7 +149,7 @@ script
         $optionId = 'optId' .$this->random->getRandomString(8);
         $html = '<option value="' . $this->_escape($option['value']) . '" id="' . $optionId . '" ';
         $html .= isset($option['title']) ? 'title="' . $this->_escape($option['title']) . '"' : '';
-        if (in_array((string)$option['value'], $selected)) {
+        if (\in_array((string)$option['value'], $selected)) {
             $html .= ' selected="selected"';
         }
 

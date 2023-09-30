@@ -26,7 +26,7 @@ class PhpFormatter implements FormatterInterface
      */
     public function format($data, array $comments = [])
     {
-        if (!empty($comments) && is_array($data)) {
+        if (!empty($comments) && \is_array($data)) {
             return "<?php\nreturn [\n" . $this->formatData($data, $comments) . "\n];\n";
         }
         return "<?php\nreturn " . $this->varExportShort($data, true) . ";\n";
@@ -44,7 +44,7 @@ class PhpFormatter implements FormatterInterface
     {
         $elements = [];
 
-        if (is_array($data)) {
+        if (\is_array($data)) {
             foreach ($data as $key => $value) {
                 if (!empty($comments[$key])) {
                     $elements[] = $prefix . '/**';
@@ -57,7 +57,7 @@ class PhpFormatter implements FormatterInterface
                     $elements[] = $prefix . " */";
                 }
 
-                if (is_array($value)) {
+                if (\is_array($value)) {
                     $elements[] = $prefix . $this->varExportShort($key) . ' => [';
                     $elements[] = $this->formatData($value, [], '    ' . $prefix);
                     $elements[] = $prefix . '],';
@@ -85,11 +85,11 @@ class PhpFormatter implements FormatterInterface
     {
         if (null === $var) {
             return 'null';
-        } elseif (!is_array($var)) {
+        } elseif (!\is_array($var)) {
             return var_export($var, true);
         }
 
-        $indexed = array_keys($var) === range(0, count($var) - 1);
+        $indexed = array_keys($var) === range(0, \count($var) - 1);
         $expanded = [];
         foreach ($var as $key => $value) {
             $expanded[] = str_repeat(self::INDENT, $depth)

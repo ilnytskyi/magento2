@@ -134,7 +134,7 @@ class MigrationTest extends TestCase
         if (!empty($condition) && false === strpos(
             $condition,
             ' IS NOT NULL'
-        ) && !in_array(
+        ) && !\in_array(
             $condition,
             $this->_actualWhere
         )
@@ -206,7 +206,7 @@ class MigrationTest extends TestCase
         $this->markTestSkipped('Requires refactoring of class that is tested, covers to many methods');
 
         $this->_actualUpdateResult = [];
-        $tableRowsCount = count($tableData);
+        $tableRowsCount = \count($tableData);
 
         $setupMock = $this->getMockForAbstractClass(ModuleDataSetupInterface::class);
         $filesystemMock = $this->createMock(Filesystem::class);
@@ -222,7 +222,7 @@ class MigrationTest extends TestCase
         );
 
         foreach ($replaceRules as $replaceRule) {
-            call_user_func_array([$setupModel, 'appendClassAliasReplace'], $replaceRule);
+            \call_user_func_array([$setupModel, 'appendClassAliasReplace'], $replaceRule);
         }
 
         $setupModel->doUpdateClassAliases();

@@ -50,8 +50,8 @@ class Shell implements ShellInterface
         $command = $this->commandRenderer->render($command, $arguments);
         $this->log($command);
 
-        $disabled = explode(',', str_replace(' ', ',', ini_get('disable_functions')));
-        if (in_array('exec', $disabled)) {
+        $disabled = explode(',', str_replace(' ', ',', \ini_get('disable_functions')));
+        if (\in_array('exec', $disabled)) {
             throw new Exception\LocalizedException(new \Magento\Framework\Phrase('The exec function is disabled.'));
         }
 

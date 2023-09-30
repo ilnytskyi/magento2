@@ -80,7 +80,7 @@ class EmailMessage extends Message implements EmailMessageInterface
         if ($sender) {
             $this->zendMessage->setSender($sender->getEmail(), $sender->getName());
         }
-        if (count($to) < 1) {
+        if (\count($to) < 1) {
             throw new InvalidArgumentException('Email message must have at list one addressee');
         }
         if ($to) {

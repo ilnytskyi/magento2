@@ -137,7 +137,7 @@ class ArrayManager
      */
     public function merge($path, array $data, array $value, $delimiter = self::DEFAULT_PATH_DELIMITER)
     {
-        if ($this->find($path, $data, $delimiter) && is_array($this->parentNode[$this->nodeIndex])) {
+        if ($this->find($path, $data, $delimiter) && \is_array($this->parentNode[$this->nodeIndex])) {
             $this->parentNode[$this->nodeIndex] = array_replace_recursive(
                 $this->parentNode[$this->nodeIndex],
                 $value
@@ -193,7 +193,7 @@ class ArrayManager
      */
     protected function find($path, array &$data, $delimiter, $populate = false)
     {
-        if (is_array($path)) {
+        if (\is_array($path)) {
             $path = implode($delimiter, $path);
         }
 
@@ -205,11 +205,11 @@ class ArrayManager
         $path = explode($delimiter, $path);
 
         foreach ($path as $index) {
-            if (!is_array($currentNode)) {
+            if (!\is_array($currentNode)) {
                 return false;
             }
 
-            if (!array_key_exists($index, $currentNode)) {
+            if (!\array_key_exists($index, $currentNode)) {
                 if (!$populate) {
                     return false;
                 }
@@ -248,8 +248,8 @@ class ArrayManager
         $delimiter = self::DEFAULT_PATH_DELIMITER
     ) {
         $indexes = (array)$indexes;
-        $startPath = is_array($startPath) ? implode($delimiter, $startPath) : $startPath;
-        $internalPath = is_array($internalPath) ? implode($delimiter, $internalPath) : $internalPath;
+        $startPath = \is_array($startPath) ? implode($delimiter, $startPath) : $startPath;
+        $internalPath = \is_array($internalPath) ? implode($delimiter, $internalPath) : $internalPath;
         $data = $startPath !== null ? $this->get($startPath, $data, [], $delimiter) : $data;
         $checkList = [$startPath => ['start' => $startPath === null, 'children' => $data]];
         $paths = [];
@@ -261,19 +261,19 @@ class ArrayManager
                 foreach ($config['children'] as $childIndex => $childData) {
                     $childPath = $path . (!$config['start'] ? $delimiter : '') . $childIndex;
 
-                    if (in_array($childIndex, $indexes, true)) {
+                    if (\in_array($childIndex, $indexes, true)) {
                         $paths[] = $childPath;
 
-                        if ($maxResults !== null && count($paths) >= $maxResults) {
+                        if ($maxResults !== null && \count($paths) >= $maxResults) {
                             return $paths;
                         }
                     }
 
-                    $searchData = $internalPath !== null && is_array($childData)
+                    $searchData = $internalPath !== null && \is_array($childData)
                         ? $this->get($internalPath, $childData, null, $delimiter)
                         : $childData;
 
-                    if (!empty($searchData) && is_array($searchData)) {
+                    if (!empty($searchData) && \is_array($searchData)) {
                         $searchPath = $childPath . ($internalPath !== null ? $delimiter . $internalPath : '');
                         $nextCheckList[$searchPath] = ['start' => false, 'children' => $searchData];
                     }
@@ -321,6 +321,6 @@ class ArrayManager
      */
     public function slicePath($path, $offset, $length = null, $delimiter = self::DEFAULT_PATH_DELIMITER)
     {
-        return $path ? implode($delimiter, array_slice(explode($delimiter, $path), $offset, $length)) : '';
+        return $path ? implode($delimiter, \array_slice(explode($delimiter, $path), $offset, $length)) : '';
     }
 }

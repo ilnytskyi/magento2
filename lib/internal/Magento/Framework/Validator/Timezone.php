@@ -41,7 +41,7 @@ class Timezone
         $isValid = true;
         $allowedTimezoneCodes = array_keys($this->lists->getTimezoneList());
 
-        if (!$timezoneCode || !in_array($timezoneCode, $allowedTimezoneCodes)) {
+        if (!$timezoneCode || !\in_array($timezoneCode, $allowedTimezoneCodes)) {
             $isValid = false;
         }
 

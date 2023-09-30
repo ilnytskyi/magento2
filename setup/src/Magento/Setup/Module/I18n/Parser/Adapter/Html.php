@@ -67,7 +67,7 @@ class Html extends AbstractAdapter
     {
         $results = [];
         preg_match_all(Filter::CONSTRUCTION_PATTERN, $data, $results, PREG_SET_ORDER);
-        for ($i = 0, $count = count($results); $i < $count; $i++) {
+        for ($i = 0, $count = \count($results); $i < $count; $i++) {
             if ($results[$i][1] === Filter::TRANS_DIRECTIVE_NAME) {
                 $directive = [];
                 if (preg_match(Filter::TRANS_DIRECTIVE_REGEX, $results[$i][2], $directive) !== 1) {
@@ -76,7 +76,7 @@ class Html extends AbstractAdapter
 
                 $quote = $directive[1];
                 $this->_addPhrase($quote . $directive[2] . $quote);
-            } elseif (in_array($results[$i][1], ['depend', 'if'], true) && isset($results[$i][3])) {
+            } elseif (\in_array($results[$i][1], ['depend', 'if'], true) && isset($results[$i][3])) {
                 // make sure to process trans directives nested inside depend / if directives
                 $this->extractPhrasesFromTransDirective($results[$i][3]);
             }
@@ -95,8 +95,8 @@ class Html extends AbstractAdapter
     {
         preg_match_all($regex, $data, $results, PREG_SET_ORDER);
 
-        for ($i = 0, $count = count($results); $i < $count; $i++) {
-            if (count($results[$i]) === $expectedGroupsCount && !empty($results[$i][$valueGroupIndex])) {
+        for ($i = 0, $count = \count($results); $i < $count; $i++) {
+            if (\count($results[$i]) === $expectedGroupsCount && !empty($results[$i][$valueGroupIndex])) {
                 $this->_addPhrase($results[$i][$valueGroupIndex]);
             }
         }

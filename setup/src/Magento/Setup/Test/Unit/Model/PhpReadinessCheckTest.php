@@ -459,7 +459,7 @@ class PhpReadinessCheckTest extends TestCase
      */
     protected function isPhp7OrHhvm(): bool
     {
-        return version_compare(PHP_VERSION, '7.0.0-beta') >= 0 || defined('HHVM_VERSION');
+        return version_compare(PHP_VERSION, '7.0.0-beta') >= 0 || \defined('HHVM_VERSION');
     }
 }
 

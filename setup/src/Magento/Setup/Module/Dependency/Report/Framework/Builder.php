@@ -68,7 +68,7 @@ class Builder extends AbstractBuilder
         foreach ($modulesData as $moduleData) {
             $dependencies = [];
             foreach ($moduleData['dependencies'] as $dependencyData) {
-                if (!in_array($dependencyData['lib'], $allowedModules)) {
+                if (!\in_array($dependencyData['lib'], $allowedModules)) {
                     $dependencies[] = new Data\Dependency($dependencyData['lib'], $dependencyData['count']);
                 }
             }

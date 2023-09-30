@@ -74,7 +74,7 @@ class ImageContentValidator implements ImageContentValidatorInterface
      */
     protected function isMimeTypeValid($mimeType)
     {
-        return in_array($mimeType, $this->allowedMimeTypes);
+        return \in_array($mimeType, $this->allowedMimeTypes);
     }
 
     /**

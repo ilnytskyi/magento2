@@ -147,7 +147,7 @@ class Collection implements \ArrayAccess, \IteratorAggregate, \Countable
     #[\ReturnTypeWillChange]
     public function count()
     {
-        return count($this->_nodes);
+        return \count($this->_nodes);
     }
 
     /**

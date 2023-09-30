@@ -68,7 +68,7 @@ class Db extends AbstractBackup
     protected function _isLineLastInCommand($line)
     {
         $cleanLine = trim($line);
-        $lineLength = strlen($cleanLine);
+        $lineLength = \strlen($cleanLine);
 
         $returnResult = false;
         if ($lineLength > 0) {

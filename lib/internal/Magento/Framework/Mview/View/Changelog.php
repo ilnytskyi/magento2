@@ -245,7 +245,7 @@ class Changelog implements ChangelogInterface
         if (!$row) {
             return 0;
         } else {
-            if (is_array($row) && array_key_exists('version_id', $row)) {
+            if (\is_array($row) && \array_key_exists('version_id', $row)) {
                 return (int)$row['version_id'];
             } else {
                 throw new RuntimeException(
@@ -265,7 +265,7 @@ class Changelog implements ChangelogInterface
      */
     public function getName()
     {
-        if (!$this->viewId || strlen($this->viewId) == 0) {
+        if (!$this->viewId || \strlen($this->viewId) == 0) {
             throw new \DomainException(
                 new Phrase("View's identifier is not set")
             );

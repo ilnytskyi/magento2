@@ -161,7 +161,7 @@ abstract class AbstractMeasure
         if (!empty($this->type)) {
             $value = $this->value;
 
-            if (is_array($this->units[$this->getType()][0])) {
+            if (\is_array($this->units[$this->getType()][0])) {
                 foreach ($this->units[$this->getType()][0] as $key => $found) {
                     switch ($key) {
                         case "/":
@@ -183,7 +183,7 @@ abstract class AbstractMeasure
             } else {
                 $value = $this->mul($value, $this->units[$this->getType()][0], 25);
             }
-            if (is_array($this->units[$type][0])) {
+            if (\is_array($this->units[$type][0])) {
                 foreach (array_reverse($this->units[$type][0]) as $key => $found) {
                     switch ($key) {
                         case "/":
@@ -205,7 +205,7 @@ abstract class AbstractMeasure
             } else {
                 $value = $this->div($value, $this->units[$type][0], 25);
             }
-            $valueLength = strlen($value);
+            $valueLength = \strlen($value);
 
             for ($i = 1; $i <= $valueLength; ++$i) {
                 if ($value[$valueLength - $i] != '0') {
@@ -330,15 +330,15 @@ abstract class AbstractMeasure
      */
     private function exponent(string $value, int $scale = null): string
     {
-        if (!extension_loaded('bcmath')) {
+        if (!\extension_loaded('bcmath')) {
             return $value;
         }
         $split = explode('e', $value);
 
-        if (count($split) === 1) {
+        if (\count($split) === 1) {
             $split = explode('E', $value);
         }
-        if (count($split) > 1) {
+        if (\count($split) > 1) {
             $value = bcmul($split[0], bcpow('10', $split[1], $scale), $scale);
         }
 

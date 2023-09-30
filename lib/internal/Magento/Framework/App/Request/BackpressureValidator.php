@@ -61,7 +61,7 @@ class BackpressureValidator implements ValidatorInterface
     public function validate(RequestInterface $request, ActionInterface $action): void
     {
         if ($request instanceof HttpRequest
-            && in_array($this->getAreaCode(), [Area::AREA_FRONTEND, Area::AREA_ADMINHTML], true)
+            && \in_array($this->getAreaCode(), [Area::AREA_FRONTEND, Area::AREA_ADMINHTML], true)
         ) {
             $context = $this->contextFactory->create($action);
             if ($context) {

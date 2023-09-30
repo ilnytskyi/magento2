@@ -337,7 +337,7 @@ class Write extends Read implements WriteInterface
     public function openFile($path, $mode = 'w')
     {
         $this->validatePath($path);
-        $folder = dirname($path);
+        $folder = \dirname($path);
         $this->create($folder);
         $this->assertWritable($this->isExist($path) ? $path : $folder);
         $absolutePath = $this->driver->getAbsolutePath($this->path, $path);

@@ -361,7 +361,7 @@ class Block implements Layout\ReaderInterface
                 continue;
             }
             $result = $this->argumentInterpreter->evaluate($argumentData);
-            if (is_array($result)) {
+            if (\is_array($result)) {
                 $data['arguments'][$argumentName] = isset($data['arguments'][$argumentName])
                     ? array_replace_recursive($data['arguments'][$argumentName], $result)
                     : $result;

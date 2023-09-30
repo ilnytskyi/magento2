@@ -53,8 +53,8 @@ class SplitWords implements FilterInterface
                 $result[] = $word;
             }
         }
-        if ($this->wordsQty && count($result) > $this->wordsQty) {
-            $result = array_slice($result, 0, $this->wordsQty);
+        if ($this->wordsQty && \count($result) > $this->wordsQty) {
+            $result = \array_slice($result, 0, $this->wordsQty);
         }
         return $result;
     }

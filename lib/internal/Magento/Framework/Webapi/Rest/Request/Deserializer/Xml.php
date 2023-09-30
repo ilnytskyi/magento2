@@ -51,9 +51,9 @@ class Xml implements \Magento\Framework\Webapi\Rest\Request\DeserializerInterfac
      */
     public function deserialize($xmlRequestBody)
     {
-        if (!is_string($xmlRequestBody)) {
+        if (!\is_string($xmlRequestBody)) {
             throw new \InvalidArgumentException(
-                sprintf('"%s" data type is invalid. String is expected.', gettype($xmlRequestBody))
+                sprintf('"%s" data type is invalid. String is expected.', \gettype($xmlRequestBody))
             );
         }
         /** Disable external entity loading to prevent possible vulnerability */

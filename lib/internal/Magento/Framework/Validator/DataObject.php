@@ -40,7 +40,7 @@ class DataObject implements ValidatorInterface
      */
     public function addRule(ValidatorInterface $validator, $fieldName = '')
     {
-        if (!array_key_exists($fieldName, $this->_rules)) {
+        if (!\array_key_exists($fieldName, $this->_rules)) {
             $this->_rules[$fieldName] = $validator;
         } else {
             $existingValidator = $this->_rules[$fieldName];

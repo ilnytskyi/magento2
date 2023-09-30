@@ -360,7 +360,7 @@ class Http extends Request implements
     {
         $result = '';
         if (isset($server['SCRIPT_NAME'])) {
-            $envPath = str_replace('\\', '/', dirname(str_replace('\\', '/', $server['SCRIPT_NAME'])));
+            $envPath = str_replace('\\', '/', \dirname(str_replace('\\', '/', $server['SCRIPT_NAME'])));
             if ($envPath !== '.' && $envPath !== '/') {
                 $result = $envPath;
             }
@@ -421,7 +421,7 @@ class Http extends Request implements
     public function isSafeMethod()
     {
         if ($this->isSafeMethod === null) {
-            if (isset($_SERVER['REQUEST_METHOD']) && (in_array($_SERVER['REQUEST_METHOD'], $this->safeRequestTypes))) {
+            if (isset($_SERVER['REQUEST_METHOD']) && (\in_array($_SERVER['REQUEST_METHOD'], $this->safeRequestTypes))) {
                 $this->isSafeMethod = true;
             } else {
                 $this->isSafeMethod = false;

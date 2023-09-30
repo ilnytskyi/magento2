@@ -476,7 +476,7 @@ class EncryptorTest extends TestCase
         //The hash will become sort of downgraded but that's important for the latest Argon algo.
         for ($version = $this->encryptor->getLatestHashVersion(); $version >= 0; $version--) {
             $info = explode(Encryptor::DELIMITER, $hash, 3);
-            if (count($info) !== 3) {
+            if (\count($info) !== 3) {
                 $salt = true;
                 $hashStr = $hash;
                 $versionInfo = '';

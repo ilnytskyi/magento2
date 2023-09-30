@@ -41,7 +41,7 @@ class ExecuteCommitCallbacks
             $callbacks = CallbackPool::get(spl_object_hash($subject));
             foreach ($callbacks as $callback) {
                 try {
-                    call_user_func($callback);
+                    \call_user_func($callback);
                 } catch (\Throwable $e) {
                     $this->logger->critical($e);
                 }

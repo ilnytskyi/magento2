@@ -284,28 +284,28 @@ class OrdersFixture extends Fixture
         }
 
         $productStoreId = function ($index) use ($result) {
-            return $result[$index % count($result)][0];
+            return $result[$index % \count($result)][0];
         };
         $productStoreName = function ($index) use ($result) {
-            return $result[$index % count($result)][1];
+            return $result[$index % \count($result)][1];
         };
         $productId = function ($entityId, $index, $type) use ($result) {
-            return $result[$entityId % count($result)][2][$type][$index]['id'];
+            return $result[$entityId % \count($result)][2][$type][$index]['id'];
         };
         $productSku = function ($entityId, $index, $type) use ($result) {
-            return $result[$entityId % count($result)][2][$type][$index]['sku'];
+            return $result[$entityId % \count($result)][2][$type][$index]['sku'];
         };
         $productName = function ($entityId, $index, $type) use ($result) {
-            return $result[$entityId % count($result)][2][$type][$index]['name'];
+            return $result[$entityId % \count($result)][2][$type][$index]['name'];
         };
         $productBuyRequest = function ($entityId, $index, $type) use ($result) {
-            return $result[$entityId % count($result)][2][$type][$index]['buyRequest'];
+            return $result[$entityId % \count($result)][2][$type][$index]['buyRequest'];
         };
         $productChildBuyRequest = function ($entityId, $index, $type) use ($result) {
-            return $result[$entityId % count($result)][2][$type][$index]['childBuyRequest'];
+            return $result[$entityId % \count($result)][2][$type][$index]['childBuyRequest'];
         };
         $productChildId = function ($entityId, $index, $type) use ($result) {
-            return $result[$entityId % count($result)][2][$type][$index]['childId'];
+            return $result[$entityId % \count($result)][2][$type][$index]['childId'];
         };
 
         $address = [
@@ -597,7 +597,7 @@ class OrdersFixture extends Fixture
             $productCollection->getSelect()->where(" sku NOT LIKE 'Big%' ");
         }
         $ids = $productCollection->getAllIds($limit);
-        if ($limit && count($ids) < $limit) {
+        if ($limit && \count($ids) < $limit) {
             throw new \RuntimeException('Not enough products of type: ' . $typeId);
         }
         return $ids;

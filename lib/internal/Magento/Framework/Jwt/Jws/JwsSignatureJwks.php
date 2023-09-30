@@ -44,7 +44,7 @@ class JwsSignatureJwks implements JwsSignatureSettingsInterface
      */
     public function getAlgorithmName(): string
     {
-        if (count($this->jwkSet->getKeys()) > 1) {
+        if (\count($this->jwkSet->getKeys()) > 1) {
             return 'jws-json-serialization';
         } else {
             return $this->jwkSet->getKeys()[0]->getAlgorithm();

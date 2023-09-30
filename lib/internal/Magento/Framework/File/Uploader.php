@@ -320,7 +320,7 @@ class Uploader
      */
     private function validateDestination(string $destinationFolder): void
     {
-        if (strlen($this->getFileDriver()->getRealPathSafety($destinationFolder)) > 4096) {
+        if (\strlen($this->getFileDriver()->getRealPathSafety($destinationFolder)) > 4096) {
             throw new \InvalidArgumentException(
                 'Destination folder path is too long; must be 255 characters or less'
             );
@@ -440,9 +440,9 @@ class Uploader
         }
         //run validate callbacks
         foreach ($this->_validateCallbacks as $params) {
-            if (is_object($params['object'])
+            if (\is_object($params['object'])
                 && method_exists($params['object'], $params['method'])
-                && is_callable([$params['object'], $params['method']])
+                && \is_callable([$params['object'], $params['method']])
             ) {
                 $params['object']->{$params['method']}($this->_file['tmp_name']);
             }
@@ -503,7 +503,7 @@ class Uploader
         $fileInfo = pathinfo($fileName);
         $fileInfo['extension'] = $fileInfo['extension'] ?? '';
 
-        if (strlen($fileInfo['basename'] ?? '') > self::MAX_FILE_NAME_LENGTH) {
+        if (\strlen($fileInfo['basename'] ?? '') > self::MAX_FILE_NAME_LENGTH) {
             throw new \LengthException(
                 __('Filename is too long; must be %1 characters or less', self::MAX_FILE_NAME_LENGTH)
             );
@@ -553,8 +553,8 @@ class Uploader
      */
     public function checkMimeType($validTypes = [])
     {
-        if (count($validTypes) > 0) {
-            if (!in_array($this->_getMimeType(), $validTypes)) {
+        if (\count($validTypes) > 0) {
+            if (!\in_array($this->_getMimeType(), $validTypes)) {
                 return false;
             }
         }
@@ -650,11 +650,11 @@ class Uploader
             return false;
         }
 
-        if (!is_array($this->_allowedExtensions) || empty($this->_allowedExtensions)) {
+        if (!\is_array($this->_allowedExtensions) || empty($this->_allowedExtensions)) {
             return true;
         }
 
-        return $extension && in_array(strtolower($extension), $this->_allowedExtensions);
+        return $extension && \in_array(strtolower($extension), $this->_allowedExtensions);
     }
 
     /**
@@ -678,7 +678,7 @@ class Uploader
      */
     private function _setUploadFileId($fileId)
     {
-        if (is_array($fileId)) {
+        if (\is_array($fileId)) {
             $this->validateFileId($fileId);
             $this->_uploadType = self::MULTIPLE_STYLE;
             $this->_file = $fileId;
@@ -690,7 +690,7 @@ class Uploader
             $fileId = $fileId !== null ? $fileId : '';
             preg_match("/^(.*?)\[(.*?)\]$/", $fileId, $file);
 
-            if (is_array($file) && count($file) > 0 && !empty($file[0]) && !empty($file[1])) {
+            if (\is_array($file) && \count($file) > 0 && !empty($file[0]) && !empty($file[1])) {
                 array_shift($file);
                 $this->_uploadType = self::MULTIPLE_STYLE;
 
@@ -848,7 +848,7 @@ class Uploader
     {
         $char = 0;
         $dispersionPath = '';
-        while ($char < 2 && ($fileName && $char < strlen($fileName))) {
+        while ($char < 2 && ($fileName && $char < \strlen($fileName))) {
             if (empty($dispersionPath)) {
                 $dispersionPath = '/' . ('.' == $fileName[$char] ? '_' : $fileName[$char]);
             } else {

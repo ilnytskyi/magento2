@@ -41,7 +41,7 @@ class ReadFactory
      */
     public function create($path, $driver)
     {
-        if (is_string($driver)) {
+        if (\is_string($driver)) {
             return new Read($path, $this->driverPool->getDriver($driver));
         }
         return new Read($path, $driver);

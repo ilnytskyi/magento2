@@ -55,10 +55,10 @@ class BooleanUtils
          * Built-in function filter_var() is not used, because such values as on/off are irrelevant in some contexts
          * @link http://www.php.net/manual/en/filter.filters.validate.php
          */
-        if (in_array($value, $this->trueValues, true)) {
+        if (\in_array($value, $this->trueValues, true)) {
             return true;
         }
-        if (in_array($value, $this->falseValues, true)) {
+        if (\in_array($value, $this->falseValues, true)) {
             return false;
         }
         $allowedValues = array_merge($this->trueValues, $this->falseValues);
@@ -76,9 +76,9 @@ class BooleanUtils
      */
     public function convert($value)
     {
-        if (in_array($value, $this->trueValues, true)) {
+        if (\in_array($value, $this->trueValues, true)) {
             return true;
-        } elseif (in_array($value, $this->falseValues, true)) {
+        } elseif (\in_array($value, $this->falseValues, true)) {
             return false;
         } else {
             return $value;

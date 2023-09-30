@@ -257,7 +257,7 @@ class Lock implements ConfigOptionsListInterface
     {
         $errors = [];
 
-        if (!extension_loaded(LockBackendFactory::LOCK_ZOOKEEPER)) {
+        if (!\extension_loaded(LockBackendFactory::LOCK_ZOOKEEPER)) {
             $errors[] = 'php extension Zookeeper is not installed.';
         }
 

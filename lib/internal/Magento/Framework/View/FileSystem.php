@@ -176,7 +176,7 @@ class FileSystem
 
         foreach ($parts as $part) {
             if ('..' === $part) {
-                if (!count($result) || ($result[count($result) - 1] == '..')) {
+                if (!\count($result) || ($result[\count($result) - 1] == '..')) {
                     $result[] = $part;
                 } else {
                     array_pop($result);
@@ -211,13 +211,13 @@ class FileSystem
         $relatedPath = self::normalizePath($relatedPath);
         $path = self::normalizePath($path);
         list($relatedPath, $path) = self::ltrimSamePart($relatedPath, $path);
-        $toDir = ltrim(dirname($path), '/');
+        $toDir = ltrim(\dirname($path), '/');
         if ($toDir == '.') {
             $offset = '';
         } else {
-            $offset = str_repeat('../', count(explode('/', $toDir)));
+            $offset = str_repeat('../', \count(explode('/', $toDir)));
         }
-        return rtrim($offset . dirname($relatedPath), '/');
+        return rtrim($offset . \dirname($relatedPath), '/');
     }
 
     /**
@@ -229,7 +229,7 @@ class FileSystem
      */
     public static function getRelatedPath($relativeTo, $path)
     {
-        return self::normalizePath(dirname($relativeTo) . '/' . $path);
+        return self::normalizePath(\dirname($relativeTo) . '/' . $path);
     }
 
     /**

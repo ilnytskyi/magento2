@@ -67,7 +67,7 @@ class NormalizedToLocalized implements FilterInterface
      */
     public function filter($value)
     {
-        if (is_array($value)) {
+        if (\is_array($value)) {
             $formatter = new IntlDateFormatter(
                 $this->_options['locale'],
                 IntlDateFormatter::SHORT,

@@ -66,7 +66,7 @@ class MixinFactory
             throw new \InvalidArgumentException(
                 sprintf(
                     'Class "%s" must implement \Magento\Setup\Model\Description\Mixin\DescriptionMixinInterface.',
-                    get_class($mixin)
+                    \get_class($mixin)
                 )
             );
         }

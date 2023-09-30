@@ -202,7 +202,7 @@ class FrontControllerTest extends TestCase
             ->method('validate')->with($this->request, $controllerInstance)->willThrowException($exception);
         $this->logger->expects($this->once())->method('debug')->with(
             'Request validation failed for action "'
-            . get_class($controllerInstance) . '"',
+            . \get_class($controllerInstance) . '"',
             ["exception" => $exception]
         );
 

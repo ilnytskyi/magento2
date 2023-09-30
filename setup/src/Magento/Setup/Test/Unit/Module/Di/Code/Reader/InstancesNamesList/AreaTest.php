@@ -66,7 +66,7 @@ class AreaTest extends TestCase
             ['NameSpace1\ClassName2', ['arg1' => 'NameSpace1\class5']]
         ];
 
-        $this->classReaderDecoratorMock->expects($this->exactly(count($classes)))
+        $this->classReaderDecoratorMock->expects($this->exactly(\count($classes)))
             ->method('getConstructor')
             ->willReturnMap($constructors);
 

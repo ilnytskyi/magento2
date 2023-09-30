@@ -114,13 +114,13 @@ class ExtensionAttributesProcessor
 
             $returnType = $this->methodsMapProcessor->getMethodReturnType($dataObjectType, $methodName);
 
-            if (is_object($value) && !($value instanceof Phrase)) {
+            if (\is_object($value) && !($value instanceof Phrase)) {
                 $value = $this->dataObjectProcessor->buildOutputDataArray($value, $returnType);
-            } elseif (is_array($value)) {
+            } elseif (\is_array($value)) {
                 $valueResult = [];
                 $arrayElementType = $returnType !== null ? substr($returnType, 0, -2) : '';
                 foreach ($value as $singleValue) {
-                    if (is_object($singleValue) && !($singleValue instanceof Phrase)) {
+                    if (\is_object($singleValue) && !($singleValue instanceof Phrase)) {
                         $singleValue = $this->dataObjectProcessor->buildOutputDataArray(
                             $singleValue,
                             $arrayElementType

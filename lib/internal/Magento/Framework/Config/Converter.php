@@ -100,7 +100,7 @@ class Converter implements \Magento\Framework\Config\ConverterInterface
                 $result[$varName] = $this->parseVarElement($varNode);
             }
         }
-        if (!count($result)) {
+        if (!\count($result)) {
             $result = (
                 $node->nodeValue !== null
                 && strtolower($node->nodeValue) !== 'true'

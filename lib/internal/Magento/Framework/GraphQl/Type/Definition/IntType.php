@@ -27,7 +27,7 @@ class IntType extends \GraphQL\Type\Definition\IntType
      */
     public function parseValue($value): int
     {
-        if ($value !== '' && (is_numeric($value) || is_bool($value))) {
+        if ($value !== '' && (is_numeric($value) || \is_bool($value))) {
             $value = (float)$value;
         }
         return parent::parseValue($value);

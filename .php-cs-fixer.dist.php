@@ -43,5 +43,12 @@ $config->setFinder($finder)
         'ordered_imports' => true,
         'standardize_not_equals' => true,
         'ternary_operator_spaces' => true,
+        'native_function_invocation' => [
+            'include' => [
+                '@compiler_optimized',
+            ],
+            'scope' => 'namespaced',
+            'strict' => false,
+        ],
     ]);
 return $config;

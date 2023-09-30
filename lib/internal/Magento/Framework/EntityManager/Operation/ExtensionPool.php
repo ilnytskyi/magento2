@@ -50,7 +50,7 @@ class ExtensionPool
         foreach ($this->actions[$entityType][$actionName] as $actionClassName) {
             $action = $this->objectManager->get($actionClassName);
             if (!($action instanceof ExtensionInterface)) {
-                throw new \LogicException(get_class($action) . ' must implement ' . ExtensionInterface::class);
+                throw new \LogicException(\get_class($action) . ' must implement ' . ExtensionInterface::class);
             }
             $actions[] = $action;
         }

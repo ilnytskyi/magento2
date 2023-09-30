@@ -83,7 +83,7 @@ class Zip
         /*
          * calculate zip-patterns
          */
-        if (min(array_slice($to, $diffPosition)) == 9 && max(array_slice($from, $diffPosition)) == 0) {
+        if (min(\array_slice($to, $diffPosition)) == 9 && max(\array_slice($from, $diffPosition)) == 0) {
             // particular case like 11000-11999 -> 11*
             return [$startZip . '*'];
         } else {

@@ -41,7 +41,7 @@ class Generator extends AbstractSource
     public function __construct(array $rowPattern, $limit)
     {
         foreach ($rowPattern as $key => $value) {
-            if (is_callable($value) || is_string($value) && (false !== strpos($value, '%s'))) {
+            if (\is_callable($value) || \is_string($value) && (false !== strpos($value, '%s'))) {
                 $this->_dynamicColumns[$key] = $value;
             }
         }
@@ -72,8 +72,8 @@ class Generator extends AbstractSource
         $row = $this->_pattern;
         foreach ($this->_dynamicColumns as $key => $dynamicValue) {
             $index = $this->_key + 1;
-            if (is_callable($dynamicValue)) {
-                $row[$key] = call_user_func($dynamicValue, $index);
+            if (\is_callable($dynamicValue)) {
+                $row[$key] = \call_user_func($dynamicValue, $index);
             } else {
                 $row[$key] = str_replace('%s', $index, $dynamicValue);
             }

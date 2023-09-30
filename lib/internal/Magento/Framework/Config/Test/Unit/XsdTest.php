@@ -20,7 +20,7 @@ class XsdTest extends TestCase
      */
     public function testInvalidXmlFile($xsdFile, $invalidXmlFile, $expectedErrorsQty)
     {
-        if (!function_exists('libxml_set_external_entity_loader')) {
+        if (!\function_exists('libxml_set_external_entity_loader')) {
             $this->markTestSkipped('Skipped on HHVM. Will be fixed in MAGETWO-45033');
         }
         $dom = new \DOMDocument();
@@ -29,7 +29,7 @@ class XsdTest extends TestCase
 
         libxml_use_internal_errors(true);
         $result = Dom::validateDomDocument($dom, $schema);
-        $errorsQty = count($result);
+        $errorsQty = \count($result);
         libxml_use_internal_errors(false);
 
         if ($expectedErrorsQty > 0) {

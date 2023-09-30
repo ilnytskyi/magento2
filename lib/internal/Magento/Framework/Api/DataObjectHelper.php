@@ -80,7 +80,7 @@ class DataObjectHelper
     public function populateWithArray($dataObject, array $data, $interfaceName)
     {
         if ($dataObject instanceof ExtensibleDataInterface) {
-            $data = $this->joinProcessor->extractExtensionAttributes(get_class($dataObject), $data);
+            $data = $this->joinProcessor->extractExtensionAttributes(\get_class($dataObject), $data);
         }
         $this->_setDataValues($dataObject, $data, $interfaceName);
         return $this;
@@ -112,7 +112,7 @@ class DataObjectHelper
         );
         if ($dataObject instanceof \Magento\Framework\Model\AbstractModel) {
             $simpleData = array_filter($data, static function ($e) {
-                return is_scalar($e) || is_null($e);
+                return \is_scalar($e) || \is_null($e);
             });
             if (isset($simpleData['id'])) {
                 $dataObject->setId($simpleData['id']);
@@ -128,7 +128,7 @@ class DataObjectHelper
         foreach (array_intersect_key($data, $setMethods) as $key => $value) {
             $methodName = SimpleDataObjectConverter::snakeCaseToUpperCamelCase($key);
 
-            if (!is_array($value)) {
+            if (!\is_array($value)) {
                 if ($methodName !== 'ExtensionAttributes' || $value !== null) {
                     if (method_exists($dataObject, 'set' . $methodName)) {
                         $dataObject->{'set' . $methodName}($value);
@@ -170,7 +170,7 @@ class DataObjectHelper
         $interfaceName
     ) {
         if ($interfaceName == null) {
-            $interfaceName = get_class($dataObject);
+            $interfaceName = \get_class($dataObject);
         }
         $returnType = $this->methodsMapProcessor->getMethodReturnType($interfaceName, $getterMethodName);
         if ($this->typeProcessor->isTypeSimple($returnType)) {
@@ -227,7 +227,7 @@ class DataObjectHelper
                     }
                 }
             }
-            $object = $this->extensionFactory->create(get_class($dataObject), ['data' => $value]);
+            $object = $this->extensionFactory->create(\get_class($dataObject), ['data' => $value]);
         } else {
             $object = $this->objectFactory->create($returnType, $value);
         }
@@ -289,7 +289,7 @@ class DataObjectHelper
      */
     private function getSetters(object $dataObject): array
     {
-        $class = get_class($dataObject);
+        $class = \get_class($dataObject);
         if (!isset($this->settersCache[$class])) {
             $dataObjectMethods = get_class_methods($class);
             // use regexp to manipulate with method list as it use jit starting with PHP 7.3

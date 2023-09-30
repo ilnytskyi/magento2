@@ -31,8 +31,8 @@ class JsTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->_testFile = str_replace('\\', '/', realpath(dirname(__FILE__))) . '/_files/file.js';
-        $this->_stringsCount = count(file($this->_testFile));
+        $this->_testFile = str_replace('\\', '/', realpath(\dirname(__FILE__))) . '/_files/file.js';
+        $this->_stringsCount = \count(file($this->_testFile));
 
         $this->_adapter = (new ObjectManager($this))->getObject(Js::class);
     }

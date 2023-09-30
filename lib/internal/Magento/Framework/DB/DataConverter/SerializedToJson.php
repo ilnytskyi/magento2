@@ -60,7 +60,7 @@ class SerializedToJson implements DataConverterInterface
      */
     protected function isValidJsonValue($value)
     {
-        if (in_array($value, ['null', 'false', '0', '""', '[]'])
+        if (\in_array($value, ['null', 'false', '0', '""', '[]'])
             || (json_decode($value) !== null && json_last_error() === JSON_ERROR_NONE)
         ) {
             return true;
@@ -111,8 +111,8 @@ class SerializedToJson implements DataConverterInterface
      */
     protected function encodeJson($value)
     {
-        $storedPrecision = ini_get('precision');
-        $storedSerializePrecision = ini_get('serialize_precision');
+        $storedPrecision = \ini_get('precision');
+        $storedSerializePrecision = \ini_get('serialize_precision');
 
         if (PHP_VERSION_ID < 70100) {
             // In PHP version < 7.1.0 json_encode() uses EG(precision).

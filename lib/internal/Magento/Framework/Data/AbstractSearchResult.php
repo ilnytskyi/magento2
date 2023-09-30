@@ -232,7 +232,7 @@ abstract class AbstractSearchResult extends AbstractDataObject implements Search
             $this->beforeLoad();
             $data = $this->query->fetchAll();
             $this->data['items'] = [];
-            if (is_array($data)) {
+            if (\is_array($data)) {
                 foreach ($data as $row) {
                     $item = $this->createDataObject(['data' => $row]);
                     $this->addItem($item);
@@ -267,7 +267,7 @@ abstract class AbstractSearchResult extends AbstractDataObject implements Search
         if ($itemId !== null) {
             if (isset($this->data['items'][$itemId])) {
                 throw new \Exception(
-                    'Item (' . get_class($item) . ') with the same ID "' . $item->getId() . '" already exists.'
+                    'Item (' . \get_class($item) . ') with the same ID "' . $item->getId() . '" already exists.'
                 );
             }
             $this->data['items'][$itemId] = $item;
@@ -310,7 +310,7 @@ abstract class AbstractSearchResult extends AbstractDataObject implements Search
      */
     protected function setDataInterfaceName($dataInterface)
     {
-        if (is_string($dataInterface)) {
+        if (\is_string($dataInterface)) {
             $this->dataInterface = $dataInterface;
         }
     }

@@ -52,7 +52,7 @@ class DataGenerator
     protected function readData()
     {
         $f = fopen($this->dictionaryFile, 'r');
-        while (!feof($f) && is_array($line = fgetcsv($f))) {
+        while (!feof($f) && \is_array($line = fgetcsv($f))) {
             $this->dictionaryData[] = $line[0];
         }
     }
@@ -72,11 +72,11 @@ class DataGenerator
         $numberOfWords = mt_rand($minAmountOfWords, $maxAmountOfWords);
         $result = '';
 
-        if ($key === null || !array_key_exists($key, $this->generatedValues)) {
+        if ($key === null || !\array_key_exists($key, $this->generatedValues)) {
             for ($i = 0; $i < $numberOfWords; $i++) {
                 // mt_rand() here is not for cryptographic use.
                 // phpcs:ignore Magento2.Security.InsecureFunction
-                $result .= ' ' . $this->dictionaryData[mt_rand(0, count($this->dictionaryData) - 1)];
+                $result .= ' ' . $this->dictionaryData[mt_rand(0, \count($this->dictionaryData) - 1)];
             }
             $result = trim($result);
 

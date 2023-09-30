@@ -329,7 +329,7 @@ class ErrorProcessorTest extends TestCase
         $this->assertInstanceOf(
             $expectedType,
             $maskedException,
-            "Masked exception type is invalid: expected '{$expectedType}', given '" . get_class(
+            "Masked exception type is invalid: expected '{$expectedType}', given '" . \get_class(
                 $maskedException
             ) . "'."
         );

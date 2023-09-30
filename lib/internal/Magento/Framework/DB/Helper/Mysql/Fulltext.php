@@ -74,7 +74,7 @@ class Fulltext
      */
     public function getMatchQuery($columns, $expression, $mode = self::FULLTEXT_MODE_NATURAL)
     {
-        if (is_array($columns)) {
+        if (\is_array($columns)) {
             $columns = implode(', ', $columns);
         }
 

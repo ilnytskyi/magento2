@@ -117,7 +117,7 @@ class FileClassScanner
         // phpcs:ignore
         $this->tokens = token_get_all($this->getFileContents());
         foreach ($this->tokens as $index => $token) {
-            $tokenIsArray = is_array($token);
+            $tokenIsArray = \is_array($token);
             // Is either a literal brace or an interpolated brace with a variable
             if ($token === '{' || ($tokenIsArray && isset(self::ALLOWED_OPEN_BRACES_TOKENS[$token[0]]))) {
                 $braceLevel++;
@@ -186,9 +186,9 @@ class FileClassScanner
      */
     private function isBracedNamespace($index)
     {
-        $len = count($this->tokens);
+        $len = \count($this->tokens);
         while ($index++ < $len) {
-            if (!is_array($this->tokens[$index])) {
+            if (!\is_array($this->tokens[$index])) {
                 if ($this->tokens[$index] === ';') {
                     return false;
                 } elseif ($this->tokens[$index] === '{') {

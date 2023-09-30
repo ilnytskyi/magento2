@@ -31,7 +31,7 @@ class ConnectionTypeResolver implements ConnectionTypeResolverInterface
     public function __construct(DeploymentConfig $deploymentConfig)
     {
         $queueConfig = $deploymentConfig->getConfigData(Config::QUEUE_CONFIG);
-        if (isset($queueConfig['connections']) && is_array($queueConfig['connections'])) {
+        if (isset($queueConfig['connections']) && \is_array($queueConfig['connections'])) {
             $this->amqpConnectionName = array_keys($queueConfig['connections']);
         }
         if (isset($queueConfig[Config::AMQP_CONFIG])) {
@@ -45,6 +45,6 @@ class ConnectionTypeResolver implements ConnectionTypeResolverInterface
      */
     public function getConnectionType($connectionName)
     {
-        return in_array($connectionName, $this->amqpConnectionName, true) ? 'amqp' : null;
+        return \in_array($connectionName, $this->amqpConnectionName, true) ? 'amqp' : null;
     }
 }

@@ -28,7 +28,7 @@ class InjectTemplateListener extends LaminasInjectTemplateListener
 
         // Retrieve the first two elemenents representing the vendor and module name.
         $nsArray = explode('\\', $controller);
-        $subNsArray = array_slice($nsArray, 0, 2);
+        $subNsArray = \array_slice($nsArray, 0, 2);
         return implode('/', $subNsArray);
     }
 
@@ -46,7 +46,7 @@ class InjectTemplateListener extends LaminasInjectTemplateListener
         $nsArray = explode('\\', $namespace);
 
         // Remove the first three elements representing the vendor, module name and controller directory.
-        $subNsArray = array_slice($nsArray, 3);
+        $subNsArray = \array_slice($nsArray, 3);
         if (empty($subNsArray)) {
             return '';
         }

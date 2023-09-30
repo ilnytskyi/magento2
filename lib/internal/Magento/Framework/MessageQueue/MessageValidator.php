@@ -68,7 +68,7 @@ class MessageValidator
         } else {
             /** Validate message according to the method signature associated with the message topic */
             $message = (array)$message;
-            $isIndexedArray = array_keys($message) === range(0, count($message) - 1);
+            $isIndexedArray = array_keys($message) === range(0, \count($message) - 1);
             foreach ($topicSchema['schema_value'] as $methodParameterMeta) {
                 $paramName = $methodParameterMeta[CommunicationConfig::SCHEMA_METHOD_PARAM_NAME];
                 $paramType = $methodParameterMeta[CommunicationConfig::SCHEMA_METHOD_PARAM_TYPE];
@@ -117,7 +117,7 @@ class MessageValidator
     {
         $compareType = $messageType;
         $realType = $this->getRealType($message);
-        if ($realType == 'array' && count($message) == 0) {
+        if ($realType == 'array' && \count($message) == 0) {
             return;
         } elseif ($realType == 'array' && isset($message[0])) {
             $realType = $this->getRealType($message[0]);
@@ -151,7 +151,7 @@ class MessageValidator
         $origMessage = $message;
         $compareType = $messageType;
         $realType = $this->getRealType($message);
-        if ($realType == 'array' && count($message) == 0) {
+        if ($realType == 'array' && \count($message) == 0) {
             return;
         } elseif ($realType == 'array' && isset($message[0])) {
             $message = $message[0];
@@ -180,7 +180,7 @@ class MessageValidator
      */
     private function getRealType($message)
     {
-        $type = is_object($message) ? get_class($message) : gettype($message);
+        $type = \is_object($message) ? \get_class($message) : \gettype($message);
         $type = $type == 'boolean' ? 'bool' : $type;
         $type = $type == 'double' ? 'float' : $type;
         return $type == "integer" ? "int" : $type;

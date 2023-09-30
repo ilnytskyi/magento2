@@ -182,21 +182,21 @@ abstract class AbstractDb extends AbstractResource
      */
     protected function _setResource($connections, $tables = null)
     {
-        if (is_array($connections)) {
+        if (\is_array($connections)) {
             foreach ($connections as $key => $value) {
                 $this->_connections[$key] = $this->_resources->getConnection($value);
             }
-        } elseif (is_string($connections)) {
+        } elseif (\is_string($connections)) {
             $this->connectionName = $connections;
         }
 
-        if ($tables === null && is_string($connections)) {
+        if ($tables === null && \is_string($connections)) {
             $this->_resourceModel = $this->connectionName;
-        } elseif (is_array($tables)) {
+        } elseif (\is_array($tables)) {
             foreach ($tables as $key => $value) {
                 $this->_tables[$key] = $this->_resources->getTableName($value);
             }
-        } elseif (is_string($tables)) {
+        } elseif (\is_string($tables)) {
             $this->_resourceModel = $tables;
         }
         return $this;
@@ -262,7 +262,7 @@ abstract class AbstractDb extends AbstractResource
      */
     public function getTable($tableName)
     {
-        if (is_array($tableName)) {
+        if (\is_array($tableName)) {
             $cacheName = join('@', $tableName);
             list($tableName, $entitySuffix) = $tableName;
         } else {
@@ -458,7 +458,7 @@ abstract class AbstractDb extends AbstractResource
         if ($this->_uniqueFields === null) {
             $this->_initUniqueFields();
         }
-        if (is_array($this->_uniqueFields)) {
+        if (\is_array($this->_uniqueFields)) {
             $this->_uniqueFields[] = $field;
         }
         return $this;
@@ -575,7 +575,7 @@ abstract class AbstractDb extends AbstractResource
         $existent = [];
         $fields = $this->getUniqueFields();
         if (!empty($fields)) {
-            if (!is_array($fields)) {
+            if (!\is_array($fields)) {
                 $fields = $this->_uniqueFields = [['field' => $fields, 'title' => $fields]];
             }
 
@@ -605,7 +605,7 @@ abstract class AbstractDb extends AbstractResource
         }
 
         if (!empty($existent)) {
-            if (count($existent) == 1) {
+            if (\count($existent) == 1) {
                 $error = new \Magento\Framework\Phrase('%1 already exists.', [$existent[0]]);
             } else {
                 $error = new \Magento\Framework\Phrase('%1 already exist.', [implode(', ', $existent)]);
@@ -702,7 +702,7 @@ abstract class AbstractDb extends AbstractResource
             return false;
         }
         $checksum = $this->getConnection()->getTablesChecksum($table);
-        if (count($checksum) == 1) {
+        if (\count($checksum) == 1) {
             return $checksum[$table];
         }
         return $checksum;
@@ -719,7 +719,7 @@ abstract class AbstractDb extends AbstractResource
     {
         $data = $object->getData();
         foreach ($object->getStoredData() as $key => $value) {
-            if (array_key_exists($key, $data) && $data[$key] === $value) {
+            if (\array_key_exists($key, $data) && $data[$key] === $value) {
                 unset($data[$key]);
             }
         }
@@ -779,7 +779,7 @@ abstract class AbstractDb extends AbstractResource
     {
         $result = true;
         if (!empty($columnDescription['DATA_TYPE'])
-            && in_array($columnDescription['DATA_TYPE'], ['tinyint', 'smallint', 'mediumint', 'int', 'bigint'])) {
+            && \in_array($columnDescription['DATA_TYPE'], ['tinyint', 'smallint', 'mediumint', 'int', 'bigint'])) {
             $result = false;
         }
         return $result;

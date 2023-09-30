@@ -46,7 +46,7 @@ class TypeCaster
          * Function `class_exists()` is called to do not break code which return an array instead
          * interface implementation.
          */
-        if (is_array($value) && !interface_exists($type) && !class_exists($type)) {
+        if (\is_array($value) && !interface_exists($type) && !class_exists($type)) {
             return $this->serializer->serialize($value);
         }
 

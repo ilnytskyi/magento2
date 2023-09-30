@@ -220,7 +220,7 @@ class StoresFixture extends Fixture
      */
     private function generateWebsites()
     {
-        $existedWebsitesCount = count($this->websiteIds) + self::DEFAULT_WEBSITE_COUNT;
+        $existedWebsitesCount = \count($this->websiteIds) + self::DEFAULT_WEBSITE_COUNT;
         while ($existedWebsitesCount <= $this->websitesCount) {
             $website = clone $this->defaultWebsite;
             $websiteCode = sprintf('website_%d', $existedWebsitesCount);
@@ -247,8 +247,8 @@ class StoresFixture extends Fixture
      */
     private function generateStoreGroups()
     {
-        $existedStoreGroupCount = count($this->storeGroupsIds);
-        $existedWebsitesCount = count($this->websiteIds);
+        $existedStoreGroupCount = \count($this->storeGroupsIds);
+        $existedWebsitesCount = \count($this->websiteIds);
         while ($existedStoreGroupCount < $this->storeGroupsCount) {
             $websiteId = $this->websiteIds[$existedStoreGroupCount % $existedWebsitesCount];
             $storeGroupName = sprintf('Store Group %d - website_id_%d', ++$existedStoreGroupCount, $websiteId);
@@ -277,9 +277,9 @@ class StoresFixture extends Fixture
     private function generateStoreViews()
     {
         $localesList = $this->localeConfig->getAllowedLocales();
-        $localesListCount = count($localesList);
-        $existedStoreViewsCount = count($this->storeViewIds);
-        $existedStoreGroupCount = count($this->storeGroupsIds);
+        $localesListCount = \count($localesList);
+        $existedStoreViewsCount = \count($this->storeViewIds);
+        $existedStoreGroupCount = \count($this->storeGroupsIds);
         while ($existedStoreViewsCount < $this->storesCount) {
             $groupId = $this->storeGroupsIds[$existedStoreViewsCount % $existedStoreGroupCount];
             $websiteId = $this->storeGroupsToWebsites[$groupId];

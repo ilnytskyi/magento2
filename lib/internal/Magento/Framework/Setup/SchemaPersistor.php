@@ -129,7 +129,7 @@ class SchemaPersistor
     ) {
         $attributeValue = $elementData[$attributeName] ?? $defaultValue;
         if ($attributeValue !== null) {
-            if (is_bool($attributeValue)) {
+            if (\is_bool($attributeValue)) {
                 $attributeValue = $this->castBooleanToString($attributeValue);
             }
 
@@ -229,7 +229,7 @@ class SchemaPersistor
                 if (!$domIndex) {
                     $domIndex = $table->addChild('index');
                     $domIndex->addAttribute('referenceId', $indexName);
-                } elseif (is_array($domIndex)) {
+                } elseif (\is_array($domIndex)) {
                     $domIndex = reset($domIndex);
                 }
 

@@ -117,7 +117,7 @@ class Head implements Layout\GeneratorInterface
     protected function processAssets(Structure $pageStructure)
     {
         foreach ($pageStructure->getAssets() as $name => $data) {
-            if (isset($data['src_type']) && in_array($data['src_type'], $this->remoteAssetTypes)) {
+            if (isset($data['src_type']) && \in_array($data['src_type'], $this->remoteAssetTypes)) {
                 if ($data['src_type'] === self::SRC_TYPE_CONTROLLER) {
                     $data['src'] = $this->url->getUrl($data['src']);
                 }
@@ -146,9 +146,9 @@ class Head implements Layout\GeneratorInterface
         $properties = [];
         $attributes = [];
         foreach ($data as $name => $value) {
-            if (in_array($name, $this->assetProperties)) {
+            if (\in_array($name, $this->assetProperties)) {
                 $properties[$name] = $value;
-            } elseif (!in_array($name, $this->serviceAssetProperties)) {
+            } elseif (!\in_array($name, $this->serviceAssetProperties)) {
                 $attributes[$name] = $value;
             }
         }

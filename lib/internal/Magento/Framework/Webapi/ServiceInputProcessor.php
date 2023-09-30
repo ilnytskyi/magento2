@@ -274,13 +274,13 @@ class ServiceInputProcessor implements ServicePayloadConverterInterface, ResetAf
      */
     protected function _createFromArray($className, $data)
     {
-        $data = is_array($data) ? $data : [];
+        $data = \is_array($data) ? $data : [];
         // convert to string directly to avoid situations when $className is object
         // which implements __toString method like \ReflectionObject
         $className = (string) $className;
         $class = new ClassReflection($className);
         if (is_subclass_of($className, self::EXTENSION_ATTRIBUTES_TYPE)) {
-            $className = substr($className, 0, -strlen('Interface'));
+            $className = substr($className, 0, -\strlen('Interface'));
         }
 
         // Primary method: assign to constructor parameters
@@ -357,7 +357,7 @@ class ServiceInputProcessor implements ServicePayloadConverterInterface, ResetAf
 
         foreach ($customAttributesValueArray as $key => $customAttribute) {
             $this->runCustomAttributePreprocessors($key, $customAttribute);
-            if (!is_array($customAttribute)) {
+            if (!\is_array($customAttribute)) {
                 $customAttribute = [AttributeValue::ATTRIBUTE_CODE => $key, AttributeValue::VALUE => $customAttribute];
             }
             list($customAttributeCode, $customAttributeValue) = $this->processCustomAttribute($customAttribute);
@@ -372,7 +372,7 @@ class ServiceInputProcessor implements ServicePayloadConverterInterface, ResetAf
             }
 
             if ($this->typeProcessor->isTypeAny($type) || $this->typeProcessor->isTypeSimple($type)
-                || !is_array($customAttributeValue)
+                || !\is_array($customAttributeValue)
             ) {
                 try {
                     $attributeValue = $this->convertValue($customAttributeValue, $type);
@@ -424,7 +424,7 @@ class ServiceInputProcessor implements ServicePayloadConverterInterface, ResetAf
     private function runCustomAttributePreprocessors($key, &$customAttribute)
     {
         $preprocessorsMap = $this->getAttributesPreprocessorsMap();
-        if ($key && is_array($customAttribute) && array_key_exists($key, $preprocessorsMap)) {
+        if ($key && \is_array($customAttribute) && \array_key_exists($key, $preprocessorsMap)) {
             $preprocessorsList = $preprocessorsMap[$key];
             foreach ($preprocessorsList as $attributePreprocessor) {
                 if ($attributePreprocessor->shouldBeProcessed($key, $customAttribute)) {
@@ -465,7 +465,7 @@ class ServiceInputProcessor implements ServicePayloadConverterInterface, ResetAf
                     'A custom attribute is specified with a missing attribute code. Verify the code and try again.'
                 )
             );
-        } elseif (!array_key_exists(AttributeValue::VALUE, $customAttribute)) {
+        } elseif (!\array_key_exists(AttributeValue::VALUE, $customAttribute)) {
             throw new SerializationException(
                 new Phrase(
                     'The "' . $customAttributeCode .
@@ -541,10 +541,10 @@ class ServiceInputProcessor implements ServicePayloadConverterInterface, ResetAf
             return $this->_createFromArray($type, $data);
         }
 
-        $result = is_array($data) ? [] : null;
+        $result = \is_array($data) ? [] : null;
         $itemType = $this->typeProcessor->getArrayItemType($type);
 
-        if (is_array($data)) {
+        if (\is_array($data)) {
             $this->serviceInputValidator->validateComplexArrayType($itemType, $data);
             foreach ($data as $key => $item) {
                 $result[$key] = $this->_createFromArray($itemType, $item);
@@ -564,7 +564,7 @@ class ServiceInputProcessor implements ServicePayloadConverterInterface, ResetAf
     protected function _removeSoapItemNode($value)
     {
         if (isset($value['item'])) {
-            if (is_array($value['item'])) {
+            if (\is_array($value['item'])) {
                 $value = $value['item'];
             } else {
                 return [$value['item']];
@@ -577,7 +577,7 @@ class ServiceInputProcessor implements ServicePayloadConverterInterface, ResetAf
          * within item node. If several Data object values are passed, they will be wrapped into
          * an indexed array within item node.
          */
-        $isAssociative = array_keys($value) !== range(0, count($value) - 1);
+        $isAssociative = array_keys($value) !== range(0, \count($value) - 1);
         return $isAssociative ? [$value] : $value;
     }
 

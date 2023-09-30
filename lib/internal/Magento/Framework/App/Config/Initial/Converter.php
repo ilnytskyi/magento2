@@ -77,13 +77,13 @@ class Converter implements \Magento\Framework\Config\ConverterInterface
                 if ($childrenData == null) {
                     continue;
                 }
-                if (is_array($childrenData)) {
+                if (\is_array($childrenData)) {
                     $nodeData = array_merge($nodeData, $childrenData);
                 } else {
                     $nodeData = $childrenData;
                 }
             }
-            if (is_array($nodeData) && empty($nodeData)) {
+            if (\is_array($nodeData) && empty($nodeData)) {
                 $nodeData = null;
             }
             $output[$node->nodeName] = $nodeData;

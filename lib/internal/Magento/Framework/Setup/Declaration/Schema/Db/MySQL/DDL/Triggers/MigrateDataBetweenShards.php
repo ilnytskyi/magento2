@@ -76,7 +76,7 @@ class MigrateDataBetweenShards implements DDLTriggerInterface
             $select = $firstConnection->select()->from($oldTable->getName());
 
             foreach ($this->selectGenerator->generator($select, $oldTable->getResource()) as $data) {
-                if (count($data)) {
+                if (\count($data)) {
                     $columns = array_keys($data[0]);
                     $secondConnection->insertArray($newTable->getName(), $columns, $data);
                 }

@@ -68,7 +68,7 @@ class FixtureManager
 
         foreach ($parts as $part) {
             if ('..' === $part) {
-                if (!count($result) || ($result[count($result) - 1] == '..')) {
+                if (!\count($result) || ($result[\count($result) - 1] == '..')) {
                     $result[] = $part;
                 } else {
                     array_pop($result);

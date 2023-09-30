@@ -94,18 +94,18 @@ class GenericMapper extends AbstractMapper
         $columns = $this->getSelect()->getPart(\Magento\Framework\DB\Select::COLUMNS);
         $selectedUniqueNames = [];
         foreach ($fields as $fieldInfo) {
-            if (is_string($fieldInfo)) {
+            if (\is_string($fieldInfo)) {
                 $fieldInfo = isset($this->map[$fieldInfo]) ? $this->map[$fieldInfo] : $fieldInfo;
             }
             list($correlationName, $field, $alias) = $fieldInfo;
-            if (!is_string($alias)) {
+            if (!\is_string($alias)) {
                 $alias = null;
             }
             if ($field instanceof \Zend_Db_Expr) {
                 $field = $field->__toString();
             }
             $selectedUniqueName = $alias ?: $field;
-            if (in_array($selectedUniqueName, $selectedUniqueNames)) {
+            if (\in_array($selectedUniqueName, $selectedUniqueNames)) {
                 // ignore field since the alias is already used by another field
                 continue;
             }

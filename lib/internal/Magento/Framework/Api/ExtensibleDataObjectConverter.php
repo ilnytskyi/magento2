@@ -41,7 +41,7 @@ class ExtensibleDataObjectConverter
         $dataObjectType = null
     ) {
         if ($dataObjectType == null) {
-            $dataObjectType = get_class($dataObject);
+            $dataObjectType = \get_class($dataObject);
         }
         $dataObjectArray = $this->dataObjectProcessor->buildOutputDataArray($dataObject, $dataObjectType);
         //process custom attributes if present
@@ -52,7 +52,7 @@ class ExtensibleDataObjectConverter
             $extensionAttributes = $dataObjectArray[ExtensibleDataInterface::EXTENSION_ATTRIBUTES_KEY];
             unset($dataObjectArray[ExtensibleDataInterface::EXTENSION_ATTRIBUTES_KEY]);
             foreach ($extensionAttributes as $attributeKey => $attributeValue) {
-                if (!in_array($attributeKey, $skipAttributes)) {
+                if (!\in_array($attributeKey, $skipAttributes)) {
                     $dataObjectArray[$attributeKey] = $attributeValue;
                 }
             }
@@ -74,14 +74,14 @@ class ExtensibleDataObjectConverter
             $customAttributes = $dataObjectArray[AbstractExtensibleObject::CUSTOM_ATTRIBUTES_KEY];
             unset($dataObjectArray[AbstractExtensibleObject::CUSTOM_ATTRIBUTES_KEY]);
             foreach ($customAttributes as $attributeValue) {
-                if (!in_array($attributeValue[AttributeValue::ATTRIBUTE_CODE], $skipAttributes)) {
+                if (!\in_array($attributeValue[AttributeValue::ATTRIBUTE_CODE], $skipAttributes)) {
                     $dataObjectArray[$attributeValue[AttributeValue::ATTRIBUTE_CODE]]
                         = $attributeValue[AttributeValue::VALUE];
                 }
             }
         }
         foreach ($dataObjectArray as $key => $value) {
-            if (is_array($value)) {
+            if (\is_array($value)) {
                 $dataObjectArray[$key] = $this->processCustomAttributes($value, $skipAttributes);
             }
         }

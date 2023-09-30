@@ -40,7 +40,7 @@ class FieldsTypes implements ValidatorInterface
             'connection' => 'string'
         ];
         foreach ($fields as $fieldName => $expectedType) {
-            $actualType = gettype($consumerConfig[$fieldName]);
+            $actualType = \gettype($consumerConfig[$fieldName]);
             if ($actualType !== $expectedType) {
                 throw new \LogicException(
                     sprintf(
@@ -63,21 +63,21 @@ class FieldsTypes implements ValidatorInterface
                         . "Given '%s', '%s' was expected.",
                         $fieldName,
                         $consumerName,
-                        gettype($consumerConfig[$fieldName]),
+                        \gettype($consumerConfig[$fieldName]),
                         'int|null'
                     )
                 );
             }
         }
         if (null !== $consumerConfig['onlySpawnWhenMessageAvailable']
-            && !is_bool($consumerConfig['onlySpawnWhenMessageAvailable'])
+            && !\is_bool($consumerConfig['onlySpawnWhenMessageAvailable'])
         ) {
             throw new \LogicException(
                 sprintf(
                     "Type of 'onlySpawnWhenMessageAvailable' field specified in configuration of '%s' "
                     . "consumer is invalid. Given '%s', '%s' was expected.",
                     $consumerName,
-                    gettype($consumerConfig['onlySpawnWhenMessageAvailable']),
+                    \gettype($consumerConfig['onlySpawnWhenMessageAvailable']),
                     'boolean|null'
                 )
             );

@@ -45,7 +45,7 @@ class RemoveAction
         $isAllowed = true;
         if ($this->registry->registry('isSecureArea')) {
             $isAllowed = true;
-        } elseif (in_array($this->getBaseClassName($model), $this->protectedModels)) {
+        } elseif (\in_array($this->getBaseClassName($model), $this->protectedModels)) {
             $isAllowed = false;
         }
 
@@ -60,7 +60,7 @@ class RemoveAction
      */
     protected function getBaseClassName($object)
     {
-        $className = ltrim(get_class($object), "\\");
+        $className = ltrim(\get_class($object), "\\");
         $className = str_replace(['\Interceptor', '\Proxy'], [''], $className);
 
         return $className;

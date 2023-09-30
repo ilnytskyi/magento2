@@ -25,13 +25,13 @@ class MessageConfigurationsPool
             $configurationsMap,
             function (array &$configuration) {
                 if (!isset($configuration['renderer'])
-                    || !is_string($configuration['renderer'])
+                    || !\is_string($configuration['renderer'])
                 ) {
                     throw new \InvalidArgumentException('Renderer should be defined.');
                 }
 
                 if (isset($configuration['data'])
-                    && !is_array($configuration['data'])
+                    && !\is_array($configuration['data'])
                 ) {
                     throw new \InvalidArgumentException('Data should be of array type.');
                 }

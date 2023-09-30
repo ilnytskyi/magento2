@@ -76,7 +76,7 @@ class BuilderFactory
 
         $builderInstance = $this->objectManager->create($this->typeMap[$type], $arguments);
         if (!$builderInstance instanceof BuilderInterface) {
-            throw new \InvalidArgumentException(get_class($builderInstance) . ' isn\'t instance of BuilderInterface');
+            throw new \InvalidArgumentException(\get_class($builderInstance) . ' isn\'t instance of BuilderInterface');
         }
         return $builderInstance;
     }

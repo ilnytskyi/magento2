@@ -102,7 +102,7 @@ class LockBackendFactory
             throw new RuntimeException(new Phrase('Unknown locks provider: %1', [$provider]));
         }
 
-        if (self::LOCK_ZOOKEEPER === $provider && !extension_loaded(self::LOCK_ZOOKEEPER)) {
+        if (self::LOCK_ZOOKEEPER === $provider && !\extension_loaded(self::LOCK_ZOOKEEPER)) {
             throw new RuntimeException(new Phrase('php extension Zookeeper is not installed.'));
         }
 

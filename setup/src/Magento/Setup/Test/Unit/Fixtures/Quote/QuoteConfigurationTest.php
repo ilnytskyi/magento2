@@ -54,7 +54,7 @@ class QuoteConfigurationTest extends TestCase
      */
     public function testLoad()
     {
-        $dir = str_replace('Test/Unit/', '', dirname(__DIR__));
+        $dir = str_replace('Test/Unit/', '', \dirname(__DIR__));
         $expectedResult = [
             'simple_count_to' => 1,
             'simple_count_from' => 1,

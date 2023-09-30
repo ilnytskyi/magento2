@@ -64,6 +64,6 @@ class CustomConditionProvider implements CustomConditionProviderInterface
      */
     public function hasProcessorForField(string $fieldName): bool
     {
-        return array_key_exists($fieldName, $this->customConditionProcessors);
+        return \array_key_exists($fieldName, $this->customConditionProcessors);
     }
 }

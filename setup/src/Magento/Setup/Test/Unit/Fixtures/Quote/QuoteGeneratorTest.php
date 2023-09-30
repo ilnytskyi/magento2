@@ -160,7 +160,7 @@ class QuoteGeneratorTest extends TestCase
         $simpleProductIds = [1, 2];
         $configurableProductId = [3];
         $bigConfigurableProductId = [4];
-        $dir = str_replace('Test/Unit/', '', dirname(__DIR__));
+        $dir = str_replace('Test/Unit/', '', \dirname(__DIR__));
         $store = $this->getMockBuilder(StoreInterface::class)
             ->disableOriginalConstructor()
             ->getMockForAbstractClass();

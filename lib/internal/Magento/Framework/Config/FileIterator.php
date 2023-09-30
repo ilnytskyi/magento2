@@ -122,6 +122,6 @@ class FileIterator implements \Iterator, \Countable
     #[\ReturnTypeWillChange]
     public function count()
     {
-        return count($this->paths);
+        return \count($this->paths);
     }
 }

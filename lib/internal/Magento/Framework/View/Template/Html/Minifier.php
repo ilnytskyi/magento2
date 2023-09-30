@@ -113,7 +113,7 @@ class Minifier implements MinifierInterface
      */
     public function minify($file)
     {
-        $dir = dirname($file);
+        $dir = \dirname($file);
         $fileName = basename($file);
         $content = $this->readFactory->create($dir)->readFile($fileName);
         //Storing Heredocs
@@ -123,7 +123,7 @@ class Minifier implements MinifierInterface
             function ($match) use (&$heredocs) {
                 $heredocs[] = $match[0];
 
-                return '__MINIFIED_HEREDOC__' .(count($heredocs) - 1);
+                return '__MINIFIED_HEREDOC__' .(\count($heredocs) - 1);
             },
             // phpstan:ignore
             ($content ?? '')

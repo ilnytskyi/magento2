@@ -69,7 +69,7 @@ class Log
      */
     public function add($type, $key, $message = '')
     {
-        if (array_key_exists($type, $this->_successEntries)) {
+        if (\array_key_exists($type, $this->_successEntries)) {
             $this->_successEntries[$type][$key][] = $message;
         } else {
             $this->_errorEntries[$type][$key][] = $message;
@@ -88,7 +88,7 @@ class Log
         $this->_errorWriter->write($this->_errorEntries);
         //do not take into account empty items since they are initialized in constructor.
         $errors = array_filter($this->_errorEntries);
-        if (count($errors) > 0) {
+        if (\count($errors) > 0) {
             throw new \Magento\Framework\Validator\Exception(__('Error during compilation'));
         }
     }
@@ -101,7 +101,7 @@ class Log
     public function hasError()
     {
         foreach ($this->_errorEntries as $data) {
-            if (count($data)) {
+            if (\count($data)) {
                 return true;
             }
         }

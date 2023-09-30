@@ -25,7 +25,7 @@ class Sanitizer
     {
         /** @var array|bool $config */
         $config = [];
-        if (array_key_exists('__disableTmpl', $data)) {
+        if (\array_key_exists('__disableTmpl', $data)) {
             //UI data provider has explicitly provided rendering config.
             $config = $data['__disableTmpl'];
             unset($data['__disableTmpl']);
@@ -47,13 +47,13 @@ class Sanitizer
         array_walk(
             $data,
             function ($datum, string $key) use (&$config, &$toProcess) : void {
-                if (is_array($datum)) {
+                if (\is_array($datum)) {
                     //Each array must have it's own __disableTmpl property
                     $toProcess[$key] = $datum;
                 } elseif ((
-                        !is_bool($config) && !array_key_exists($key, $config)
+                        !\is_bool($config) && !\array_key_exists($key, $config)
                     )
-                    && (is_string($datum) || $datum instanceof Phrase)
+                    && (\is_string($datum) || $datum instanceof Phrase)
                     && preg_match('/\$\{.+\}/', (string)$datum)
                 ) {
                     //Templating is not disabled for all properties or for this property specifically
@@ -84,16 +84,16 @@ class Sanitizer
      */
     public function sanitizeComponentMetadata(array $meta): array
     {
-        if (array_key_exists('arguments', $meta)
-            && is_array($meta['arguments'])
-            && array_key_exists('data', $meta['arguments'])
-            && is_array($meta['arguments']['data'])
-            && array_key_exists('config', $meta['arguments']['data'])
-            && is_array($meta['arguments']['data']['config'])
+        if (\array_key_exists('arguments', $meta)
+            && \is_array($meta['arguments'])
+            && \array_key_exists('data', $meta['arguments'])
+            && \is_array($meta['arguments']['data'])
+            && \array_key_exists('config', $meta['arguments']['data'])
+            && \is_array($meta['arguments']['data']['config'])
         ) {
             $meta['arguments']['data']['config'] = $this->sanitize($meta['arguments']['data']['config']);
         }
-        if (array_key_exists('children', $meta) && is_array($meta['children'])) {
+        if (\array_key_exists('children', $meta) && \is_array($meta['children'])) {
             $meta['children'] = array_map([$this, 'sanitizeComponentMetadata'], $meta['children']);
         }
 

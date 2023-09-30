@@ -63,6 +63,6 @@ class Module
      */
     public function getChainsCount()
     {
-        return count($this->chains);
+        return \count($this->chains);
     }
 }

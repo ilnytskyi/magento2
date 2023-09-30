@@ -308,7 +308,7 @@ class Renderer implements RendererInterface
      */
     protected function processMerge($groupAssets, $group)
     {
-        if ($group->getProperty(GroupedCollection::PROPERTY_CAN_MERGE) && count($groupAssets) > 1) {
+        if ($group->getProperty(GroupedCollection::PROPERTY_CAN_MERGE) && \count($groupAssets) > 1) {
             $groupAssets = $this->assetMergeService->getMergedAssets(
                 $groupAssets,
                 $group->getProperty(GroupedCollection::PROPERTY_CONTENT_TYPE)
@@ -327,7 +327,7 @@ class Renderer implements RendererInterface
     {
         $attributes = $group->getProperty('attributes');
         if (!empty($attributes)) {
-            if (is_array($attributes)) {
+            if (\is_array($attributes)) {
                 $attributesString = '';
                 foreach ($attributes as $name => $value) {
                     $attributesString .= ' ' . $name . '="' . $this->escaper->escapeHtml($value) . '"';
@@ -439,7 +439,7 @@ class Renderer implements RendererInterface
      */
     private function canTypeBeFont(string $type): bool
     {
-        return in_array($type, self::FONTS_TYPE, true);
+        return \in_array($type, self::FONTS_TYPE, true);
     }
 
     /**

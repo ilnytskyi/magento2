@@ -75,7 +75,7 @@ class Factory
      */
     public function create($elementType, array $config = [])
     {
-        if (in_array($elementType, $this->_standardTypes)) {
+        if (\in_array($elementType, $this->_standardTypes)) {
             $className = 'Magento\Framework\Data\Form\Element\\' . ucfirst($elementType);
         } else {
             $className = $elementType;

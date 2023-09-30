@@ -47,7 +47,7 @@ abstract class AbstractOutput implements OutputInterface
         if (!empty($config['filterPattern'])) {
             $this->setFilterPattern($config['filterPattern']);
         }
-        if (!empty($config['thresholds']) && is_array($config['thresholds'])) {
+        if (!empty($config['thresholds']) && \is_array($config['thresholds'])) {
             foreach ($config['thresholds'] as $fetchKey => $minAllowedValue) {
                 $this->setThreshold($fetchKey, (int)$minAllowedValue);
             }

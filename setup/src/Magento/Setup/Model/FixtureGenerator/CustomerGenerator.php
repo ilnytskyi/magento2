@@ -73,7 +73,7 @@ class CustomerGenerator
                 $this->customerTemplateGenerator,
                 $customers,
                 function ($customerId) use ($fixtureMap) {
-                    $fixtureMap['customer_data'] = call_user_func($fixtureMap['customer_data'], $customerId);
+                    $fixtureMap['customer_data'] = \call_user_func($fixtureMap['customer_data'], $customerId);
                     return $fixtureMap;
                 }
             );
@@ -94,7 +94,7 @@ class CustomerGenerator
             return array_map(
                 'array_merge',
                 $binds,
-                array_fill(0, count($binds), $fixtureMap['customer_data']['customer'])
+                array_fill(0, \count($binds), $fixtureMap['customer_data']['customer'])
             );
         };
     }
@@ -111,7 +111,7 @@ class CustomerGenerator
         return function ($entityId, $entityNumber, $fixtureMap, $binds) {
             return array_map(
                 'array_merge',
-                array_fill(0, count($fixtureMap['customer_data']['addresses']), reset($binds)),
+                array_fill(0, \count($fixtureMap['customer_data']['addresses']), reset($binds)),
                 $fixtureMap['customer_data']['addresses']
             );
         };

@@ -121,7 +121,7 @@ class CsrfValidator implements ValidatorInterface
             $areaCode = null;
         }
         if ($request instanceof HttpRequest
-            && in_array(
+            && \in_array(
                 $areaCode,
                 [Area::AREA_FRONTEND, Area::AREA_ADMINHTML],
                 true

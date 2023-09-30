@@ -43,7 +43,7 @@ class CompositeValidator implements ValidatorInterface
                     sprintf(
                         'Validator [%s] does not implements %s',
                         ValidatorInterface::class,
-                        get_class($validator)
+                        \get_class($validator)
                     )
                 );
             }

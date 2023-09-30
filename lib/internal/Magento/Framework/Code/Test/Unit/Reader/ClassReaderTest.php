@@ -75,7 +75,7 @@ class ClassReaderTest extends TestCase
             }
         };
 
-        $className = get_class($testClass);
+        $className = \get_class($testClass);
         $this->expectException(\ReflectionException::class);
         $this->expectExceptionMessage($className);
         $this->model->getConstructor($className);

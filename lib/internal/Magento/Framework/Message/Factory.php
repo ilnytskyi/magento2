@@ -53,7 +53,7 @@ class Factory
      */
     public function create($type, $text = null)
     {
-        if (!in_array($type, $this->types)) {
+        if (!\in_array($type, $this->types)) {
             throw new \InvalidArgumentException('Wrong message type');
         }
 

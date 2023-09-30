@@ -30,10 +30,10 @@ class Debug
     public static function getRootPath()
     {
         if (self::$_filePath === null) {
-            if (defined('BP')) {
+            if (\defined('BP')) {
                 self::$_filePath = BP;
             } else {
-                self::$_filePath = dirname(__DIR__);
+                self::$_filePath = \dirname(__DIR__);
             }
         }
         return self::$_filePath;
@@ -87,8 +87,8 @@ class Debug
 
             // prepare method's name
             if (isset($data['class']) && isset($data['function'])) {
-                if (isset($data['object']) && get_class($data['object']) != $data['class']) {
-                    $className = get_class($data['object']) . '[' . $data['class'] . ']';
+                if (isset($data['object']) && \get_class($data['object']) != $data['class']) {
+                    $className = \get_class($data['object']) . '[' . $data['class'] . ']';
                 } else {
                     $className = $data['class'];
                 }
@@ -110,7 +110,7 @@ class Debug
             if (isset($data['file'])) {
                 $pos = strpos($data['file'], self::getRootPath());
                 if ($pos !== false) {
-                    $data['file'] = substr($data['file'], strlen(self::getRootPath()) + 1);
+                    $data['file'] = substr($data['file'], \strlen(self::getRootPath()) + 1);
                 }
                 $fileName = sprintf('%s:%d', $data['file'], $data['line']);
             } else {
@@ -148,11 +148,11 @@ class Debug
     protected static function _formatCalledArgument($arg)
     {
         $out = '';
-        if (is_object($arg)) {
-            $out .= sprintf("&%s#%s#", get_class($arg), spl_object_hash($arg));
-        } elseif (is_resource($arg)) {
+        if (\is_object($arg)) {
+            $out .= sprintf("&%s#%s#", \get_class($arg), spl_object_hash($arg));
+        } elseif (\is_resource($arg)) {
             $out .= '#[' . get_resource_type($arg) . ']';
-        } elseif (is_array($arg)) {
+        } elseif (\is_array($arg)) {
             $isAssociative = false;
             $args = [];
             foreach ($arg as $k => $v) {
@@ -172,15 +172,15 @@ class Debug
             }
         } elseif ($arg === null) {
             $out .= 'NULL';
-        } elseif (is_numeric($arg) || is_float($arg)) {
+        } elseif (is_numeric($arg) || \is_float($arg)) {
             $out .= $arg;
-        } elseif (is_string($arg)) {
-            if (strlen($arg) > self::$argLength) {
+        } elseif (\is_string($arg)) {
+            if (\strlen($arg) > self::$argLength) {
                 $arg = substr($arg, 0, self::$argLength) . "...";
             }
             $arg = strtr($arg, ["\t" => '\t', "\r" => '\r', "\n" => '\n', "'" => '\\\'']);
             $out .= "'" . $arg . "'";
-        } elseif (is_bool($arg)) {
+        } elseif (\is_bool($arg)) {
             $out .= $arg === true ? 'true' : 'false';
         }
 

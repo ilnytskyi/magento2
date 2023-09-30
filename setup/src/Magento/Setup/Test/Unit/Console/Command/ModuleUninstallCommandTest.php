@@ -235,10 +235,10 @@ class ModuleUninstallCommandTest extends TestCase
         array $expect
     ) {
         $this->deploymentConfig->expects($this->once())->method('isAvailable')->willReturn(true);
-        $this->packageInfo->expects($this->exactly(count($input['module'])))
+        $this->packageInfo->expects($this->exactly(\count($input['module'])))
             ->method('getPackageName')
             ->willReturnMap($packageInfoMap);
-        $this->fullModuleList->expects($this->exactly(count($input['module'])))
+        $this->fullModuleList->expects($this->exactly(\count($input['module'])))
             ->method('has')
             ->willReturnMap($fullModuleListMap);
         $this->tester->execute($input);

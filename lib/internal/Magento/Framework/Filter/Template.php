@@ -181,7 +181,7 @@ class Template implements FilterInterface
      */
     public function getTemplateProcessor()
     {
-        return is_callable($this->templateProcessor) ? $this->templateProcessor : null;
+        return \is_callable($this->templateProcessor) ? $this->templateProcessor : null;
     }
 
     /**
@@ -194,10 +194,10 @@ class Template implements FilterInterface
      */
     public function filter($value)
     {
-        if (!is_string($value)) {
+        if (!\is_string($value)) {
             throw new InvalidArgumentException(__(
                 'Argument \'value\' must be type of string, %1 given.',
-                gettype($value)
+                \gettype($value)
             )->render());
         }
 
@@ -279,7 +279,7 @@ class Template implements FilterInterface
                         'output' => $replacedValue
                     ];
 
-                    if (count($this->afterFilterCallbacks) > 0) {
+                    if (\count($this->afterFilterCallbacks) > 0) {
                         $result['callbacks'] = $this->afterFilterCallbacks;
 
                         $this->resetAfterFilterCallbacks();
@@ -350,7 +350,7 @@ class Template implements FilterInterface
 
         $closingDelimiter = $openingDelimiter = substr(trim($pattern), 0, 1);
 
-        if (array_key_exists($openingDelimiter, $closingDelimiters)) {
+        if (\array_key_exists($openingDelimiter, $closingDelimiters)) {
             $closingDelimiter = $closingDelimiters[$openingDelimiter];
         }
 
@@ -369,7 +369,7 @@ class Template implements FilterInterface
     protected function afterFilter($value)
     {
         foreach ($this->afterFilterCallbacks as $callback) {
-            $value = call_user_func($callback, $value);
+            $value = \call_user_func($callback, $value);
         }
         // Since a single instance of this class can be used to filter content multiple times, reset callbacks to
         // prevent callbacks running for unrelated content (e.g., email subject and email body)
@@ -388,7 +388,7 @@ class Template implements FilterInterface
     public function addAfterFilterCallback(callable $afterFilterCallback)
     {
         // Only add callback if it doesn't already exist
-        if (in_array($afterFilterCallback, $this->afterFilterCallbacks)) {
+        if (\in_array($afterFilterCallback, $this->afterFilterCallbacks)) {
             return $this;
         }
 
@@ -550,7 +550,7 @@ class Template implements FilterInterface
     protected function getStackArgs($stack)
     {
         foreach ($stack as $i => $value) {
-            if (is_array($value)) {
+            if (\is_array($value)) {
                 $stack[$i] = $this->getStackArgs($value);
             } elseif ($value !== null && substr($value, 0, 1) === '$') {
                 $stack[$i] = $this->getVariable(substr($value, 1), null);

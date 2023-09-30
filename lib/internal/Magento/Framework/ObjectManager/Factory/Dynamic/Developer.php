@@ -23,8 +23,8 @@ class Developer extends \Magento\Framework\ObjectManager\Factory\AbstractFactory
     {
         // Get default arguments from config, merge with supplied arguments
         $defaultArguments = $this->config->getArguments($requestedType);
-        if (is_array($defaultArguments)) {
-            if (count($arguments)) {
+        if (\is_array($defaultArguments)) {
+            if (\count($arguments)) {
                 $arguments = array_replace($defaultArguments, $arguments);
             } else {
                 $arguments = $defaultArguments;

@@ -17,7 +17,7 @@ class Dummy implements StrategyInterface
      */
     public function getTags($object)
     {
-        if (!is_object($object)) {
+        if (!\is_object($object)) {
             throw new \InvalidArgumentException('Provided argument is not an object');
         }
 

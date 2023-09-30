@@ -82,7 +82,7 @@ class Factory
      */
     public function create($type)
     {
-        if (!in_array($type, $this->_allowedTypes)) {
+        if (!\in_array($type, $this->_allowedTypes)) {
             throw new LocalizedException(
                 new Phrase(
                     'Current implementation not supported this type (%1) of backup.',

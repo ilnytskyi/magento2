@@ -25,7 +25,7 @@ class Composite implements RendererInterface
         foreach ($renderers as $renderer) {
             if (!$renderer instanceof RendererInterface) {
                 throw new \InvalidArgumentException(
-                    sprintf('Instance of the phrase renderer is expected, got %s instead.', get_class($renderer))
+                    sprintf('Instance of the phrase renderer is expected, got %s instead.', \get_class($renderer))
                 );
             }
         }

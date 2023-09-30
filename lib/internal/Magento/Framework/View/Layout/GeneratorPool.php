@@ -258,7 +258,7 @@ class GeneratorPool
     protected function visibilityConditionsExistsIn(array $data)
     {
         return isset($data['attributes']) &&
-            array_key_exists('visibilityConditions', $data['attributes']) &&
+            \array_key_exists('visibilityConditions', $data['attributes']) &&
             !empty($data['attributes']['visibilityConditions']);
     }
 }

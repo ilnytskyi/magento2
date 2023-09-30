@@ -49,7 +49,7 @@ class Tokenizer
     {
         // phpcs:ignore Magento2.Functions.DiscouragedFunction
         $this->_tokens = token_get_all(file_get_contents($filePath));
-        $this->_tokensCount = count($this->_tokens);
+        $this->_tokensCount = \count($this->_tokens);
     }
 
     /**
@@ -87,7 +87,7 @@ class Tokenizer
                 return false;
             }
         }
-        if ($state == 4 && $className == substr($classString, -strlen($className))) {
+        if ($state == 4 && $className == substr($classString, -\strlen($className))) {
             return true;
         }
         return false;
@@ -212,7 +212,7 @@ class Tokenizer
      */
     private function _createToken($tokenData)
     {
-        if (is_array($tokenData)) {
+        if (\is_array($tokenData)) {
             return new Tokenizer\Token($tokenData[0], $tokenData[1], $tokenData[2]);
         } else {
             return new Tokenizer\Token($tokenData, $tokenData);

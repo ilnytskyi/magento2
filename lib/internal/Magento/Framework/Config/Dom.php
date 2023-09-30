@@ -127,7 +127,7 @@ class Dom
     {
         $errors = [];
         $validationErrors = libxml_get_errors();
-        if (count($validationErrors)) {
+        if (\count($validationErrors)) {
             foreach ($validationErrors as $error) {
                 $errors[] = self::_renderErrorMessage($error, $errorFormat, $dom);
             }
@@ -308,7 +308,7 @@ class Dom
         $prefix = $this->rootNamespace === null ? '' : self::ROOT_NAMESPACE_PREFIX . ':';
         $path = $parentPath . '/' . $prefix . $node->tagName;
         $idAttribute = $this->nodeMergingConfig->getIdAttribute($path);
-        if (is_array($idAttribute)) {
+        if (\is_array($idAttribute)) {
             $constraints = [];
             foreach ($idAttribute as $attribute) {
                 $value = $node->getAttribute($attribute);
@@ -364,7 +364,7 @@ class Dom
         $schema,
         $errorFormat = self::ERROR_FORMAT_DEFAULT
     ) {
-        if (!function_exists('libxml_set_external_entity_loader')) {
+        if (!\function_exists('libxml_set_external_entity_loader')) {
             return [];
         }
 
@@ -432,7 +432,7 @@ class Dom
         }
         if ($dom) {
             $xml = explode(PHP_EOL, $dom->saveXml());
-            $lines = array_slice($xml, max(0, $errorInfo->line - 5), 10, true);
+            $lines = \array_slice($xml, max(0, $errorInfo->line - 5), 10, true);
             $result .= 'The xml was: ' . PHP_EOL;
             foreach ($lines as $lineNumber => $line) {
                 $result .= $lineNumber . ':' . $line . PHP_EOL;
@@ -471,7 +471,7 @@ class Dom
         libxml_use_internal_errors($useErrors);
         if ($this->validationState->isValidationRequired() && $this->schema) {
             $errors = $this->validateDomDocument($dom, $this->schema, $this->errorFormat);
-            if (count($errors)) {
+            if (\count($errors)) {
                 throw new \Magento\Framework\Config\Dom\ValidationException(implode("\n", $errors));
             }
         }
@@ -489,7 +489,7 @@ class Dom
     {
         if ($this->validationState->isValidationRequired()) {
             $errors = $this->validateDomDocument($this->dom, $schemaFileName, $this->errorFormat);
-            return !count($errors);
+            return !\count($errors);
         }
         return true;
     }

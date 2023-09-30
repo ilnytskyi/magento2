@@ -86,7 +86,7 @@ class Validator extends ConfigValidator
      */
     private function validateTopicName($configDataItem, $topicName)
     {
-        if (!is_string($topicName)) {
+        if (!\is_string($topicName)) {
             throw new \LogicException(sprintf('Topic "%s" must contain a name', $topicName));
         }
         if (isset($configDataItem[ConfigInterface::TOPIC_NAME])) {
@@ -120,7 +120,7 @@ class Validator extends ConfigValidator
             ConfigInterface::TOPIC_HANDLERS
         ];
 
-        if (!is_array($configDataItem)) {
+        if (!\is_array($configDataItem)) {
             throw new \LogicException(
                 sprintf('Topic "%s" must contain data', $topicName)
             );
@@ -170,7 +170,7 @@ class Validator extends ConfigValidator
     private function validateTopicResponseHandler($configDataItem)
     {
         $topicName = $configDataItem[ConfigInterface::TOPIC_NAME];
-        if (!is_array($configDataItem[ConfigInterface::TOPIC_HANDLERS])) {
+        if (!\is_array($configDataItem[ConfigInterface::TOPIC_HANDLERS])) {
             throw new \LogicException(
                 sprintf(
                     'Handlers in the topic "%s" must be an array',
@@ -179,7 +179,7 @@ class Validator extends ConfigValidator
             );
         }
         if ($this->booleanUtils->toBoolean($configDataItem[ConfigInterface::TOPIC_IS_SYNCHRONOUS]) &&
-            count($configDataItem[ConfigInterface::TOPIC_HANDLERS]) != 1
+            \count($configDataItem[ConfigInterface::TOPIC_HANDLERS]) != 1
         ) {
             throw new \LogicException(
                 sprintf(
@@ -217,7 +217,7 @@ class Validator extends ConfigValidator
      */
     protected function validateRequestTypeValue($requestType, $topicName, $requestSchema)
     {
-        if (!in_array(
+        if (!\in_array(
             $requestType,
             [ConfigInterface::TOPIC_REQUEST_TYPE_CLASS, ConfigInterface::TOPIC_REQUEST_TYPE_METHOD]
         )

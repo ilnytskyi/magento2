@@ -35,6 +35,6 @@ function setcookie($name, $value, $options)
         );
     } else {
         // phpcs:ignore
-        return call_user_func_array(__FUNCTION__, func_get_args());
+        return \call_user_func_array(__FUNCTION__, \func_get_args());
     }
 }

@@ -66,7 +66,7 @@ class DeveloperTest extends TestCase
      */
     public function testGetInstanceTypeWithPluginOnVirtualTypeParent() : void
     {
-        $reflectionClass = new \ReflectionClass(get_class($this->model));
+        $reflectionClass = new \ReflectionClass(\get_class($this->model));
         $reflectionProperty = $reflectionClass->getProperty('_virtualTypes');
         $reflectionProperty->setAccessible(true);
         $reflectionProperty->setValue($this->model, ['SomeVirtualClass' => 'SomeClass']);

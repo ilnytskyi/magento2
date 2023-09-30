@@ -87,7 +87,7 @@ class Zend implements \Magento\Framework\Cache\FrontendInterface
     public function clean($mode = \Zend_Cache::CLEANING_MODE_ALL, array $tags = [])
     {
         // Cleaning modes 'old' and 'notMatchingTag' are prohibited as a trade off for decoration reliability
-        if (!in_array(
+        if (!\in_array(
             $mode,
             [
                 \Zend_Cache::CLEANING_MODE_ALL,

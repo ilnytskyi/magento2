@@ -180,7 +180,7 @@ class ValueTest extends TestCase
             ->method('getValue')
             ->willReturn($oldValue);
         $this->model->setValue('some_value');
-        $this->assertInstanceOf(get_class($this->model), $this->model->afterSave());
+        $this->assertInstanceOf(\get_class($this->model), $this->model->afterSave());
     }
 
     /**
@@ -200,6 +200,6 @@ class ValueTest extends TestCase
     public function testAfterDelete(): void
     {
         $this->cacheTypeListMock->expects($this->once())->method('invalidate');
-        $this->assertInstanceOf(get_class($this->model), $this->model->afterDelete());
+        $this->assertInstanceOf(\get_class($this->model), $this->model->afterDelete());
     }
 }

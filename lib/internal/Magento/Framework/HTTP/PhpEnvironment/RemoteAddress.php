@@ -99,7 +99,7 @@ class RemoteAddress
             $ipList = array_filter(
                 $ipList,
                 function (string $ip) {
-                    return !in_array(trim($ip), $this->trustedProxies, true);
+                    return !\in_array(trim($ip), $this->trustedProxies, true);
                 }
             );
             $remoteAddress = empty($ipList) ? '' : trim(array_pop($ipList));

@@ -57,7 +57,7 @@ class Zip extends AbstractArchive implements ArchiveInterface
             $filename = $this->getFilenameFromZip($zip, $baseName);
 
             if ($filename) {
-                $zip->extractTo(dirname($destination), $filename);
+                $zip->extractTo(\dirname($destination), $filename);
             } else {
                 $destination = '';
             }

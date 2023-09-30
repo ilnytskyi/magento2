@@ -21,7 +21,7 @@ class CookieDomainValidator extends AbstractValidator
     {
         $this->_clearMessages();
 
-        if (!is_string($value)) {
+        if (!\is_string($value)) {
             $this->_addMessages(['must be a string']);
 
             return false;

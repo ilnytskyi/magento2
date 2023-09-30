@@ -114,9 +114,9 @@ class ClassGenerator extends \Laminas\Code\Generator\ClassGenerator implements
 
             if (isset(
                 $methodOptions['parameters']
-            ) && is_array(
+            ) && \is_array(
                 $methodOptions['parameters']
-            ) && count(
+            ) && \count(
                 $methodOptions['parameters']
             ) > 0
             ) {
@@ -131,7 +131,7 @@ class ClassGenerator extends \Laminas\Code\Generator\ClassGenerator implements
                 $methodObject->setParameters($parametersArray);
             }
 
-            if (isset($methodOptions['docblock']) && is_array($methodOptions['docblock'])) {
+            if (isset($methodOptions['docblock']) && \is_array($methodOptions['docblock'])) {
                 $docBlockObject = new \Laminas\Code\Generator\DocBlockGenerator();
                 $docBlockObject->setWordWrap(false);
                 $this->_setDataToObject($docBlockObject, $methodOptions['docblock'], $this->_docBlockOptions);
@@ -157,7 +157,7 @@ class ClassGenerator extends \Laminas\Code\Generator\ClassGenerator implements
      */
     public function addMethodFromGenerator(MethodGenerator $method)
     {
-        if (empty($method->getName()) || !is_string($method->getName())) {
+        if (empty($method->getName()) || !\is_string($method->getName())) {
             throw new InvalidArgumentException('addMethodFromGenerator() expects non-empty string for name');
         }
 
@@ -179,7 +179,7 @@ class ClassGenerator extends \Laminas\Code\Generator\ClassGenerator implements
 
             if (isset($propertyOptions['docblock'])) {
                 $docBlock = $propertyOptions['docblock'];
-                if (is_array($docBlock)) {
+                if (\is_array($docBlock)) {
                     $docBlockObject = new \Laminas\Code\Generator\DocBlockGenerator();
                     $docBlockObject->setWordWrap(false);
                     $this->_setDataToObject($docBlockObject, $docBlock, $this->_docBlockOptions);
@@ -202,7 +202,7 @@ class ClassGenerator extends \Laminas\Code\Generator\ClassGenerator implements
      */
     public function addPropertyFromGenerator(PropertyGenerator $property)
     {
-        if (empty($property->getName()) || !is_string($property->getName())) {
+        if (empty($property->getName()) || !\is_string($property->getName())) {
             throw new InvalidArgumentException('addPropertyFromGenerator() expects non-empty string for name');
         }
 

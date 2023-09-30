@@ -74,7 +74,7 @@ class Converter implements \Magento\Framework\Config\ConverterInterface
             } elseif (isset($moduleData['after'])) {
                 $position = array_search($moduleData['after'], $sortedModulesList);
                 if ($position === false) {
-                    $position = count($modulesList);
+                    $position = \count($modulesList);
                 }
                 array_splice($sortedModulesList, $position + 1, 0, $moduleData['name']);
             } else {

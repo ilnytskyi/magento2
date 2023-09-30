@@ -70,7 +70,7 @@ class Converter implements \Magento\Framework\Config\ConverterInterface
                     'disabled' => $this->booleanUtils->toBoolean($isDisabled),
                 ];
             }
-            if (count($connections) === 0) {
+            if (\count($connections) === 0) {
                 $connections[$this->defaultValueProvider->getConnection()] = [
                     'name' => $this->defaultValueProvider->getConnection(),
                     'exchange' => $this->defaultValueProvider->getExchange(),

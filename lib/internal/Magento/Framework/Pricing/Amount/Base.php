@@ -61,7 +61,7 @@ class Base implements AmountInterface
         if ($exclude === null) {
             return $this->amount;
         } else {
-            if (!is_array($exclude)) {
+            if (!\is_array($exclude)) {
                 $exclude = [(string)$exclude];
             }
             $amount = $this->amount;
@@ -139,7 +139,7 @@ class Base implements AmountInterface
      */
     public function hasAdjustment($adjustmentCode)
     {
-        return array_key_exists($adjustmentCode, $this->adjustmentAmounts);
+        return \array_key_exists($adjustmentCode, $this->adjustmentAmounts);
     }
 
     /**

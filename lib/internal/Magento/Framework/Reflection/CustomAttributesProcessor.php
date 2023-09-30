@@ -67,17 +67,17 @@ class CustomAttributesProcessor
         $data = [];
         $data[AttributeValue::ATTRIBUTE_CODE] = $customAttribute->getAttributeCode();
         $value = $customAttribute->getValue();
-        if (is_object($value)) {
+        if (\is_object($value)) {
             $type = $this->attributeTypeResolver->resolveObjectType(
                 $customAttribute->getAttributeCode(),
                 $value,
                 $dataObjectType
             );
             $value = $this->dataObjectProcessor->buildOutputDataArray($value, $type);
-        } elseif (is_array($value)) {
+        } elseif (\is_array($value)) {
             $valueResult = [];
             foreach ($value as $singleValue) {
-                if (is_object($singleValue)) {
+                if (\is_object($singleValue)) {
                     $type = $this->attributeTypeResolver->resolveObjectType(
                         $customAttribute->getAttributeCode(),
                         $singleValue,

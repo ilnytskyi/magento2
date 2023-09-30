@@ -130,12 +130,12 @@ class TaxRulesFixture extends Fixture
         $taxMode = $this->fixtureModel->getValue('tax_mode', null);
         $taxRules = $this->fixtureModel->getValue('tax_rules', 0);
 
-        if ($taxMode && in_array($taxMode, array_keys($this->configs))) {
+        if ($taxMode && \in_array($taxMode, array_keys($this->configs))) {
             $this->setTaxMode($taxMode);
         }
 
         $taxRateIds = $this->taxRateCollectionFactory->create()->getAllIds();
-        $taxRatesCount = count($taxRateIds);
+        $taxRatesCount = \count($taxRateIds);
 
         while ($taxRules) {
             /** @var $taxRuleDataObject TaxRuleInterface */
@@ -195,7 +195,7 @@ class TaxRulesFixture extends Fixture
      */
     private function setConfigByTaxMode($mode = self::DEFAULT_TAX_MODE)
     {
-        if (isset($this->configs[$mode]) && is_array($this->configs[$mode])) {
+        if (isset($this->configs[$mode]) && \is_array($this->configs[$mode])) {
             foreach ($this->configs[$mode] as $configPath => $value) {
                 $this->configWriter->save(
                     $configPath,

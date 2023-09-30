@@ -102,7 +102,7 @@ class LookupExpression extends Expression
     protected function processSortOrder(Select $select)
     {
         foreach ($this->sortOrder as $direction => $column) {
-            if (!in_array($direction, [Select::SQL_ASC, Select::SQL_DESC])) {
+            if (!\in_array($direction, [Select::SQL_ASC, Select::SQL_DESC])) {
                 $direction = '';
             }
             $expr = new \Zend_Db_Expr(

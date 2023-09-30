@@ -198,7 +198,7 @@ class PageCache implements ConfigOptionsListInterface
         }
 
         if (isset($options[self::INPUT_KEY_PAGE_CACHE_BACKEND])
-            && !in_array($options[self::INPUT_KEY_PAGE_CACHE_BACKEND], $this->validPageCacheOptions)
+            && !\in_array($options[self::INPUT_KEY_PAGE_CACHE_BACKEND], $this->validPageCacheOptions)
         ) {
             $errors[] = "Invalid cache handler '{$options[self::INPUT_KEY_PAGE_CACHE_BACKEND]}'";
         }
@@ -287,6 +287,6 @@ class PageCache implements ConfigOptionsListInterface
     private function generateCachePrefix(): string
     {
         // phpcs:ignore Magento2.Functions.DiscouragedFunction
-        return substr(\hash('sha256', dirname(__DIR__, 6)), 0, 3) . '_';
+        return substr(\hash('sha256', \dirname(__DIR__, 6)), 0, 3) . '_';
     }
 }

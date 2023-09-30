@@ -595,7 +595,7 @@ class Url extends \Magento\Framework\DataObject implements \Magento\Framework\Ur
             $routePath = $this->_getActionPath();
             if ($this->_getRouteParams()) {
                 foreach ($this->_getRouteParams() as $key => $value) {
-                    if ($value === null || false === $value || '' === $value || !is_scalar($value)) {
+                    if ($value === null || false === $value || '' === $value || !\is_scalar($value)) {
                         continue;
                     }
                     $routePath .= $key . '/' . $value . '/';
@@ -749,14 +749,14 @@ class Url extends \Magento\Framework\DataObject implements \Magento\Framework\Ur
         $this->getRouteParamsResolver()->unsetData('route_params');
 
         if (isset($routeParams['_direct'])) {
-            if (is_array($routeParams)) {
+            if (\is_array($routeParams)) {
                 $this->_setRouteParams($routeParams, false);
             }
             return $this->getBaseUrl() . $routeParams['_direct'];
         }
 
         $this->_setRoutePath($routePath);
-        if (is_array($routeParams)) {
+        if (\is_array($routeParams)) {
             $this->_setRouteParams($routeParams, false);
         }
 
@@ -849,13 +849,13 @@ class Url extends \Magento\Framework\DataObject implements \Magento\Framework\Ur
             ->execute($this->_scopeResolver->getAreaCode(), $routePath, $routeParams);
 
         $isCached = true;
-        $isArray = is_array($routeParams);
+        $isArray = \is_array($routeParams);
 
         if ($isArray) {
             array_walk_recursive(
                 $routeParams,
                 function ($item) use (&$isCached) {
-                    if (is_object($item)) {
+                    if (\is_object($item)) {
                         $isCached = false;
                     }
                 }
@@ -934,9 +934,9 @@ class Url extends \Magento\Framework\DataObject implements \Magento\Framework\Ur
          * Apply query params, need call after getRouteUrl for rewrite _current values
          */
         if ($query !== null) {
-            if (is_string($query)) {
+            if (\is_string($query)) {
                 $this->_setQuery($query);
-            } elseif (is_array($query)) {
+            } elseif (\is_array($query)) {
                 $this->addQueryParams($query);
             }
             if ($query === false) {
@@ -1136,7 +1136,7 @@ class Url extends \Magento\Framework\DataObject implements \Magento\Framework\Ur
                 \Magento\Framework\App\Request\Http::DEFAULT_HTTP_PORT,
                 \Magento\Framework\App\Request\Http::DEFAULT_HTTPS_PORT,
             ];
-            if (!in_array($httpHostWithPort[1], $defaultPorts)) {
+            if (!\in_array($httpHostWithPort[1], $defaultPorts)) {
                 /** Custom port */
                 $port = ':' . $httpHostWithPort[1];
             }

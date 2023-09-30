@@ -39,7 +39,7 @@ class Symlink implements StrategyInterface
     public function isSupported(Asset\LocalInterface $asset)
     {
         $sourceParts = explode('/', $asset->getSourceFile() ?? '');
-        if (in_array(DirectoryList::TMP_MATERIALIZATION_DIR, $sourceParts)) {
+        if (\in_array(DirectoryList::TMP_MATERIALIZATION_DIR, $sourceParts)) {
             return false;
         }
 

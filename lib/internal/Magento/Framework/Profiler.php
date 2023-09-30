@@ -113,11 +113,11 @@ class Profiler
     private static function _checkTags(array $tags = null)
     {
         if (self::$_hasTagFilters) {
-            if (is_array($tags)) {
+            if (\is_array($tags)) {
                 $keysToCheck = array_intersect(array_keys(self::$_tagFilters), array_keys($tags));
                 if ($keysToCheck) {
                     foreach ($keysToCheck as $keyToCheck) {
-                        if (in_array($tags[$keyToCheck], self::$_tagFilters[$keyToCheck])) {
+                        if (\in_array($tags[$keyToCheck], self::$_tagFilters[$keyToCheck])) {
                             return true;
                         }
                     }
@@ -356,7 +356,7 @@ class Profiler
     {
         $config = ['baseDir' => $baseDir, 'tagFilters' => []];
 
-        if (is_scalar($profilerConfig)) {
+        if (\is_scalar($profilerConfig)) {
             $config['drivers'] = [
                 ['output' => is_numeric($profilerConfig) ? 'html' : $profilerConfig],
             ];
@@ -412,9 +412,9 @@ class Profiler
     protected static function _parseDriverConfig($driverConfig)
     {
         $result = false;
-        if (is_array($driverConfig)) {
+        if (\is_array($driverConfig)) {
             $result = $driverConfig;
-        } elseif (is_scalar($driverConfig) && $driverConfig) {
+        } elseif (\is_scalar($driverConfig) && $driverConfig) {
             if (is_numeric($driverConfig)) {
                 $result = [];
             } else {

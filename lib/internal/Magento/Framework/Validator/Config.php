@@ -269,7 +269,7 @@ class Config extends \Magento\Framework\Config\AbstractXml
                 continue;
             }
             $nodeName = strtolower($node->nodeName);
-            if (!array_key_exists($nodeName, $children)) {
+            if (!\array_key_exists($nodeName, $children)) {
                 $children[$nodeName] = [];
             }
             $children[$nodeName][] = $node;
@@ -285,7 +285,7 @@ class Config extends \Magento\Framework\Config\AbstractXml
      */
     protected function _readArguments($children)
     {
-        if (array_key_exists('argument', $children)) {
+        if (\array_key_exists('argument', $children)) {
             $arguments = [];
             /** @var $node \DOMElement */
             foreach ($children['argument'] as $node) {
@@ -314,7 +314,7 @@ class Config extends \Magento\Framework\Config\AbstractXml
      */
     protected function _readCallback($children)
     {
-        if (array_key_exists('callback', $children)) {
+        if (\array_key_exists('callback', $children)) {
             $callbacks = [];
             /** @var $callbackData \DOMElement */
             foreach ($children['callback'] as $callbackData) {
@@ -337,7 +337,7 @@ class Config extends \Magento\Framework\Config\AbstractXml
      */
     protected function _readOptions($children)
     {
-        if (array_key_exists('option', $children)) {
+        if (\array_key_exists('option', $children)) {
             $data = [];
             /** @var $option \DOMElement */
             foreach ($children['option'] as $option) {
@@ -375,7 +375,7 @@ class Config extends \Magento\Framework\Config\AbstractXml
      */
     protected function _readMethods($children)
     {
-        if (array_key_exists('method', $children)) {
+        if (\array_key_exists('method', $children)) {
             $methods = [];
             /** @var $method \DOMElement */
             foreach ($children['method'] as $method) {

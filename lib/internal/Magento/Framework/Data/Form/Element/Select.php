@@ -78,15 +78,15 @@ class Select extends AbstractElement
         ) . $this->_getUiId() . '>' . "\n";
 
         $value = $this->getValue();
-        if (!is_array($value)) {
+        if (!\is_array($value)) {
             $value = [$value];
         }
 
         if ($values = $this->getValues()) {
             foreach ($values as $key => $option) {
-                if (!is_array($option)) {
+                if (!\is_array($option)) {
                     $html .= $this->_optionToHtml(['value' => $key, 'label' => $option], $value);
-                } elseif (is_array($option['value'])) {
+                } elseif (\is_array($option['value'])) {
                     $html .= '<optgroup label="' . $option['label'] . '">' . "\n";
                     foreach ($option['value'] as $groupItem) {
                         $html .= $this->_optionToHtml($groupItem, $value);
@@ -119,7 +119,7 @@ class Select extends AbstractElement
      */
     protected function _optionToHtml($option, $selected)
     {
-        if (is_array($option['value'])) {
+        if (\is_array($option['value'])) {
             $html = '<optgroup label="' . $option['label'] . '">' . "\n";
             foreach ($option['value'] as $groupItem) {
                 $html .= $this->_optionToHtml($groupItem, $selected);
@@ -129,7 +129,7 @@ class Select extends AbstractElement
             $optionId = 'optId' .$this->random->getRandomString(8);
             $html = '<option value="' . $this->_escape($option['value']) . '" id="' .$optionId .'" ';
             $html .= isset($option['title']) ? 'title="' . $this->_escape($option['title']) . '"' : '';
-            if (in_array($option['value'], $selected)) {
+            if (\in_array($option['value'], $selected)) {
                 $html .= ' selected="selected"';
             }
             $html .= '>' . $this->_escape($option['label']) . '</option>' . "\n";
@@ -150,12 +150,12 @@ class Select extends AbstractElement
         $values = $this->getValues();
         if (empty($values)) {
             $options = $this->getOptions();
-            if (is_array($options)) {
+            if (\is_array($options)) {
                 $values = [];
                 foreach ($options as $value => $label) {
                     $values[] = ['value' => $value, 'label' => $label];
                 }
-            } elseif (is_string($options)) {
+            } elseif (\is_string($options)) {
                 $values = [['value' => $options, 'label' => $options]];
             }
             $this->setValues($values);

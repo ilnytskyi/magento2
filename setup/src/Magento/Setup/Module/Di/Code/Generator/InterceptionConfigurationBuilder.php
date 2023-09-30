@@ -159,7 +159,7 @@ class InterceptionConfigurationBuilder
 
             $pluginInstances = [];
             foreach ($plugins as $plugin) {
-                if (in_array($plugin['instance'], $pluginInstances)) {
+                if (\in_array($plugin['instance'], $pluginInstances)) {
                     continue;
                 }
                 $pluginInstances[] = $plugin['instance'];

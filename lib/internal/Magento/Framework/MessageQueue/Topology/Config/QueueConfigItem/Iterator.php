@@ -110,7 +110,7 @@ class Iterator implements \Iterator, \ArrayAccess
     #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
-        return array_key_exists($offset, $this->data);
+        return \array_key_exists($offset, $this->data);
     }
 
     /**

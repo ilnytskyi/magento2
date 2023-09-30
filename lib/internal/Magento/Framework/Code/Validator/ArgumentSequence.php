@@ -218,7 +218,7 @@ class ArgumentSequence implements ValidatorInterface
      */
     protected function _isContextOnly(array $arguments)
     {
-        if (count($arguments) !== 1) {
+        if (\count($arguments) !== 1) {
             return false;
         }
         $argument = current($arguments);

@@ -247,7 +247,7 @@ class Dictionary
             foreach ($foundCsvFiles as $foundCsvFile) {
                 $file = $directoryRead->openFile($foundCsvFile);
                 while (($row = $file->readCsv()) !== false) {
-                    if (is_array($row) && count($row) > 1) {
+                    if (\is_array($row) && \count($row) > 1) {
                         $result[$row[0]] = $row[1];
                     }
                 }

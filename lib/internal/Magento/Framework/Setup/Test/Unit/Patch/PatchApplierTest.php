@@ -193,8 +193,8 @@ class PatchApplierTest extends TestCase
         $this->connectionMock->expects($this->exactly(2))->method('commit');
         $this->patchHistoryMock->expects($this->any())->method('fixPatch')->willReturnMap(
             [
-                [get_class($patch1)],
-                [get_class($patch2)],
+                [\get_class($patch1)],
+                [\get_class($patch2)],
             ]
         );
         $this->patchApllier->applyDataPatch($moduleName);
@@ -222,7 +222,7 @@ class PatchApplierTest extends TestCase
 
         $patch1 = $this->getMockForAbstractClass(DataPatchInterface::class);
         $patch1->expects($this->once())->method('getAliases')->willReturn(['PatchAlias']);
-        $patchClass = get_class($patch1);
+        $patchClass = \get_class($patch1);
 
         $patchRegistryMock = $this->createAggregateIteratorMock(PatchRegistry::class, [$patchClass], ['registerPatch']);
         $patchRegistryMock->expects($this->any())
@@ -457,7 +457,7 @@ class PatchApplierTest extends TestCase
         $this->connectionMock->expects($this->never())->method('beginTransaction');
         $this->connectionMock->expects($this->never())->method('commit');
         $this->connectionMock->expects($this->never())->method('rollback');
-        $this->patchHistoryMock->expects($this->once())->method('fixPatch')->with(get_class($patch1));
+        $this->patchHistoryMock->expects($this->once())->method('fixPatch')->with(\get_class($patch1));
         $this->objectManagerMock->expects($this->any())->method('create')->willReturnMap(
             [
                 [
@@ -549,7 +549,7 @@ class PatchApplierTest extends TestCase
 
         $patch1 = $this->getMockForAbstractClass(PatchInterface::class);
         $patch1->expects($this->once())->method('getAliases')->willReturn(['PatchAlias']);
-        $patchClass = get_class($patch1);
+        $patchClass = \get_class($patch1);
 
         $patchRegistryMock = $this->createAggregateIteratorMock(PatchRegistry::class, [$patchClass], ['registerPatch']);
         $patchRegistryMock->expects($this->any())
@@ -591,7 +591,7 @@ class PatchApplierTest extends TestCase
         $this->connectionMock->expects($this->once())->method('beginTransaction');
         $this->connectionMock->expects($this->once())->method('commit');
         $this->connectionMock->expects($this->never())->method('rollback');
-        $this->patchHistoryMock->expects($this->once())->method('revertPatchFromHistory')->with(get_class($patch1));
+        $this->patchHistoryMock->expects($this->once())->method('revertPatchFromHistory')->with(\get_class($patch1));
         $this->objectManagerMock->expects($this->any())->method('create')->willReturnMap(
             [
                 [
@@ -634,7 +634,7 @@ class PatchApplierTest extends TestCase
      */
     private function createAggregateIteratorMock($className, array $items = [], array $methods = [])
     {
-        if (!in_array(ltrim(\IteratorAggregate::class, '\\'), class_implements($className))) {
+        if (!\in_array(ltrim(\IteratorAggregate::class, '\\'), class_implements($className))) {
             throw new \Exception('Mock possible only for classes that implement IteratorAggregate interface.');
         }
         /**

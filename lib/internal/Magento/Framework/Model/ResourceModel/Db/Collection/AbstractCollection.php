@@ -249,7 +249,7 @@ abstract class AbstractCollection extends AbstractDb implements SourceProviderIn
         if ($this->_fieldsToSelect !== null) {
             $insertIndex = 0;
             foreach ($this->_fieldsToSelect as $alias => $field) {
-                if (!is_string($alias)) {
+                if (!\is_string($alias)) {
                     $alias = null;
                 }
 
@@ -259,7 +259,7 @@ abstract class AbstractCollection extends AbstractDb implements SourceProviderIn
                     $column = $field;
                 }
 
-                if ($alias !== null && in_array($alias, $columnsToSelect)) {
+                if ($alias !== null && \in_array($alias, $columnsToSelect)) {
                     continue;
                 }
 
@@ -322,13 +322,13 @@ abstract class AbstractCollection extends AbstractDb implements SourceProviderIn
             return $this;
         }
 
-        if (is_array($field)) {
+        if (\is_array($field)) {
             if ($this->_fieldsToSelect === null) {
                 $this->_fieldsToSelect = $this->_getInitialFieldsToSelect();
             }
 
             foreach ($field as $key => $value) {
-                $this->addFieldToSelect($value, is_string($key) ? $key : null);
+                $this->addFieldToSelect($value, \is_string($key) ? $key : null);
             }
 
             $this->_fieldsToSelectChanged = true;
@@ -359,7 +359,7 @@ abstract class AbstractCollection extends AbstractDb implements SourceProviderIn
     public function addExpressionFieldToSelect($alias, $expression, $fields)
     {
         // validate alias
-        if (!is_array($fields)) {
+        if (!\is_array($fields)) {
             $fields = [$fields => $fields];
         }
 
@@ -435,7 +435,7 @@ abstract class AbstractCollection extends AbstractDb implements SourceProviderIn
      */
     public function setModel($model)
     {
-        if (is_string($model)) {
+        if (\is_string($model)) {
             $this->_model = $model;
             $this->setItemObjectClass($model);
         }
@@ -526,7 +526,7 @@ abstract class AbstractCollection extends AbstractDb implements SourceProviderIn
     public function join($table, $cond, $cols = '*')
     {
         $alias = $table;
-        if (is_array($table)) {
+        if (\is_array($table)) {
             foreach ($table as $k => $v) {
                 $alias = $k;
                 $table = $v;

@@ -58,7 +58,7 @@ class Theme implements RuleInterface
      */
     public function getPatternDirs(array $params)
     {
-        if (!array_key_exists('theme', $params) || !$params['theme'] instanceof ThemeInterface) {
+        if (!\array_key_exists('theme', $params) || !$params['theme'] instanceof ThemeInterface) {
             throw new \InvalidArgumentException(
                 'Parameter "theme" should be specified and should implement the theme interface.'
             );

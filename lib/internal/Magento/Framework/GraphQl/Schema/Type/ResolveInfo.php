@@ -21,6 +21,6 @@ class ResolveInfo extends \GraphQL\Type\Definition\ResolveInfo
      */
     public function isTopResolver(): bool
     {
-        return in_array($this->parentType->name, ['Query', 'Mutation']);
+        return \in_array($this->parentType->name, ['Query', 'Mutation']);
     }
 }

@@ -150,17 +150,17 @@ class PatchApplier
             );
             if (!$dataPatch instanceof DataPatchInterface) {
                 throw new SetupException(
-                    new Phrase("Patch %1 should implement DataPatchInterface", [get_class($dataPatch)])
+                    new Phrase("Patch %1 should implement DataPatchInterface", [\get_class($dataPatch)])
                 );
             }
             if ($dataPatch instanceof NonTransactionableInterface) {
                 $dataPatch->apply();
-                $this->patchHistory->fixPatch(get_class($dataPatch));
+                $this->patchHistory->fixPatch(\get_class($dataPatch));
             } else {
                 try {
                     $this->moduleDataSetup->getConnection()->beginTransaction();
                     $dataPatch->apply();
-                    $this->patchHistory->fixPatch(get_class($dataPatch));
+                    $this->patchHistory->fixPatch(\get_class($dataPatch));
                     foreach ($dataPatch->getAliases() as $patchAlias) {
                         if (!$this->patchHistory->isApplied($patchAlias)) {
                             $this->patchHistory->fixPatch($patchAlias);
@@ -173,7 +173,7 @@ class PatchApplier
                         new Phrase(
                             'Unable to apply data patch %1 for module %2. Original exception message: %3',
                             [
-                                get_class($dataPatch),
+                                \get_class($dataPatch),
                                 $moduleName,
                                 $e->getMessage()
                             ]
@@ -241,7 +241,7 @@ class PatchApplier
                  */
                 $schemaPatch = $this->patchFactory->create($schemaPatch, ['schemaSetup' => $this->schemaSetup]);
                 $schemaPatch->apply();
-                $this->patchHistory->fixPatch(get_class($schemaPatch));
+                $this->patchHistory->fixPatch(\get_class($schemaPatch));
                 foreach ($schemaPatch->getAliases() as $patchAlias) {
                     if (!$this->patchHistory->isApplied($patchAlias)) {
                         $this->patchHistory->fixPatch($patchAlias);
@@ -252,7 +252,7 @@ class PatchApplier
                     new Phrase(
                         'Unable to apply patch %1 for module %2. Original exception message: %3',
                         [
-                            get_class($schemaPatch),
+                            \get_class($schemaPatch),
                             $moduleName,
                             $e->getMessage()
                         ]
@@ -285,7 +285,7 @@ class PatchApplier
                     $adapter->beginTransaction();
                     /** @var PatchRevertableInterface|DataPatchInterface $dataPatch */
                     $dataPatch->revert();
-                    $this->patchHistory->revertPatchFromHistory(get_class($dataPatch));
+                    $this->patchHistory->revertPatchFromHistory(\get_class($dataPatch));
                     $adapter->commit();
                 } catch (\Exception $e) {
                     $adapter->rollBack();

@@ -97,7 +97,7 @@ class Circular
             $searchResult = array_search($dependency, $path);
 
             if (false !== $searchResult) {
-                $this->buildCircular(array_slice($path, $searchResult));
+                $this->buildCircular(\array_slice($path, $searchResult));
                 break;
             } else {
                 $this->expandDependencies($dependency, $path);

@@ -56,7 +56,7 @@ class Mcrypt implements EncryptionAdapterInterface
         try {
             // @codingStandardsIgnoreLine
             $maxKeySize = @mcrypt_enc_get_key_size($this->handle);
-            if (strlen($key) > $maxKeySize) {
+            if (\strlen($key) > $maxKeySize) {
                 throw new \Magento\Framework\Exception\LocalizedException(
                     new \Magento\Framework\Phrase('Key must not exceed %1 bytes.', [$maxKeySize])
                 );
@@ -66,7 +66,7 @@ class Mcrypt implements EncryptionAdapterInterface
             if (null === $initVector) {
                 /* Set vector to zero bytes to not use it */
                 $initVector = str_repeat("\0", $initVectorSize);
-            } elseif (!is_string($initVector) || strlen($initVector) != $initVectorSize) {
+            } elseif (!\is_string($initVector) || \strlen($initVector) != $initVectorSize) {
                 throw new \Magento\Framework\Exception\LocalizedException(
                     new \Magento\Framework\Phrase(
                         'Init vector must be a string of %1 bytes.',
@@ -144,7 +144,7 @@ class Mcrypt implements EncryptionAdapterInterface
      */
     public function encrypt(string $data): string
     {
-        if (strlen($data) == 0) {
+        if (\strlen($data) == 0) {
             return $data;
         }
         // @codingStandardsIgnoreLine
@@ -159,7 +159,7 @@ class Mcrypt implements EncryptionAdapterInterface
      */
     public function decrypt(string $data): string
     {
-        if (strlen($data) == 0) {
+        if (\strlen($data) == 0) {
             return $data;
         }
         // @codingStandardsIgnoreLine

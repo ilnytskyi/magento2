@@ -114,7 +114,7 @@ abstract class AbstractHelper
     protected function _getModuleName()
     {
         if (!$this->_moduleName) {
-            $class = get_class($this);
+            $class = \get_class($this);
             $this->_moduleName = substr($class, 0, strpos($class, '\\Helper'));
         }
         return str_replace('\\', '_', $this->_moduleName);

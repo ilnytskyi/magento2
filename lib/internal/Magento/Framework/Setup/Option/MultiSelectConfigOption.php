@@ -80,9 +80,9 @@ class MultiSelectConfigOption extends AbstractConfigOption
      */
     public function validate($data)
     {
-        if (is_array($data)) {
+        if (\is_array($data)) {
             foreach ($data as $value) {
-                if (!in_array($value, $this->getSelectOptions())) {
+                if (!\in_array($value, $this->getSelectOptions())) {
                     throw new \InvalidArgumentException(
                         "Value specified for '{$this->getName()}' is not supported: '{$value}'"
                     );

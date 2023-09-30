@@ -177,7 +177,7 @@ class SetupInfoTest extends TestCase
             ],
             'root within doc root, existent sub-directory' => [
                 [
-                    'DOCUMENT_ROOT' => dirname(__DIR__),
+                    'DOCUMENT_ROOT' => \dirname(__DIR__),
                     'SCRIPT_FILENAME' => __FILE__,
                     SetupInfo::PARAM_NOT_INSTALLED_URL_PATH => '_files'
                 ],
@@ -186,14 +186,14 @@ class SetupInfoTest extends TestCase
             'root outside of doc root, existent sub-directory' => [
                 [
                     'DOCUMENT_ROOT' => __DIR__,
-                    'SCRIPT_FILENAME' => dirname(dirname(__DIR__)) . '/foo.php',
+                    'SCRIPT_FILENAME' => \dirname(\dirname(__DIR__)) . '/foo.php',
                     SetupInfo::PARAM_NOT_INSTALLED_URL_PATH => basename(__DIR__)
                 ],
                 false
             ],
             'root within doc root, existent sub-directory, trailing slash' => [
                 [
-                    'DOCUMENT_ROOT' => dirname(__DIR__) . DIRECTORY_SEPARATOR,
+                    'DOCUMENT_ROOT' => \dirname(__DIR__) . DIRECTORY_SEPARATOR,
                     'SCRIPT_FILENAME' => __FILE__,
                     SetupInfo::PARAM_NOT_INSTALLED_URL_PATH => '_files'
                 ],

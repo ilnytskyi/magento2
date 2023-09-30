@@ -118,7 +118,7 @@ class BlockTest extends TestCase
             ->onlyMethods(['setNameInLayout', 'addData', 'setLayout'])
             ->disableOriginalConstructor()
             ->getMockForAbstractClass();
-        $blockInstance->expects($this->once())->method('setType')->with(get_class($blockInstance));
+        $blockInstance->expects($this->once())->method('setType')->with(\get_class($blockInstance));
         $blockInstance->expects($this->once())->method('setNameInLayout')->with($elementName);
         $blockInstance->expects($this->once())->method('addData')->with($argumentData);
         $blockInstance->expects($setTemplateCount)->method('setTemplate')->with($testTemplate);

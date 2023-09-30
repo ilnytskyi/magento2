@@ -85,9 +85,9 @@ class Standard implements DriverInterface
     protected function _parseOutputConfig($outputConfig)
     {
         $result = false;
-        if (is_array($outputConfig)) {
+        if (\is_array($outputConfig)) {
             $result = $outputConfig;
-        } elseif (is_scalar($outputConfig) && $outputConfig) {
+        } elseif (\is_scalar($outputConfig) && $outputConfig) {
             if (is_numeric($outputConfig)) {
                 $result = [];
             } else {

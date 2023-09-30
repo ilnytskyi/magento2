@@ -546,7 +546,7 @@ namespace Magento\Framework\Stdlib\Test\Unit\Cookie
 
             $cookieManager = $this->cookieManager;
             // Set $cookieManager::MAX_NUM_COOKIES number of cookies in superglobal $_COOKIE.
-            for ($i = count($_COOKIE); $i < $cookieManager::MAX_NUM_COOKIES; $i++) {
+            for ($i = \count($_COOKIE); $i < $cookieManager::MAX_NUM_COOKIES; $i++) {
                 $_COOKIE['test_cookie_' . $i] = self::COOKIE_VALUE . '_' . $i;
             }
 
@@ -590,7 +590,7 @@ namespace Magento\Framework\Stdlib\Test\Unit\Cookie
                 return false;
             } elseif (isset(self::$functionTestAssertionMapping[$name])) {
                 // phpcs:ignore
-                call_user_func_array(self::$functionTestAssertionMapping[$name], func_get_args());
+                \call_user_func_array(self::$functionTestAssertionMapping[$name], \func_get_args());
             } else {
                 self::fail('Non-tested case in mock setcookie()');
             }

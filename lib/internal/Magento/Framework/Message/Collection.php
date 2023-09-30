@@ -160,7 +160,7 @@ class Collection
     {
         $result = 0;
         if (isset($this->messages[$type])) {
-            $result = count($this->messages[$type]);
+            $result = \count($this->messages[$type]);
         }
         return $result;
     }
@@ -174,7 +174,7 @@ class Collection
     {
         $result = 0;
         foreach ($this->messages as $messages) {
-            $result += count($messages);
+            $result += \count($messages);
         }
         return $result;
     }

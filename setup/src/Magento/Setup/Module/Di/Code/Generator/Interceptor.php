@@ -27,7 +27,7 @@ class Interceptor extends FrameworkInterceptor
      */
     protected function isInterceptedMethod(\ReflectionMethod $method)
     {
-        return parent::isInterceptedMethod($method) && in_array($method->getName(), $this->interceptedMethods);
+        return parent::isInterceptedMethod($method) && \in_array($method->getName(), $this->interceptedMethods);
     }
 
     /**

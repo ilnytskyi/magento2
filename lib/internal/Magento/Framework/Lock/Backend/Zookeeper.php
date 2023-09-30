@@ -206,7 +206,7 @@ class Zookeeper implements LockManagerInterface
      */
     private function checkAndCreateParentNode(string $path): bool
     {
-        $path = dirname($path);
+        $path = \dirname($path);
         if ($this->getProvider()->exists($path)) {
             return true;
         }
@@ -234,7 +234,7 @@ class Zookeeper implements LockManagerInterface
             return null;
         }
 
-        return intval($matches[1]);
+        return \intval($matches[1]);
     }
 
     /**
@@ -251,7 +251,7 @@ class Zookeeper implements LockManagerInterface
      */
     private function isAnyLock(string $fullKey, int $indexKey = null): bool
     {
-        $parent = dirname($fullKey);
+        $parent = \dirname($fullKey);
 
         if (!$this->getProvider()->exists($parent)) {
             return false;

@@ -139,9 +139,9 @@ class Variable extends \Magento\Framework\Filter\Template\Tokenizer\AbstractToke
         }
 
         if ($quoteStart) {
-            $this->back(strlen($value) + 1);
+            $this->back(\strlen($value) + 1);
         } else {
-            $this->back(strlen($value) - 1);
+            $this->back(\strlen($value) - 1);
         }
         return false;
     }

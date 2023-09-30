@@ -103,7 +103,7 @@ class Manager
         $flushedBackend = [];
         foreach ($types as $type) {
             $backend = $this->pool->get($type)->getBackend();
-            if (in_array($backend, $flushedBackend, true)) { // it was already flushed from another frontend
+            if (\in_array($backend, $flushedBackend, true)) { // it was already flushed from another frontend
                 continue;
             }
             $backend->clean();

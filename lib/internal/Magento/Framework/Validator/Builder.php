@@ -45,7 +45,7 @@ class Builder
         array $constraints
     ) {
         foreach ($constraints as $constraint) {
-            if (isset($constraint['options']) && is_array($constraint['options'])) {
+            if (isset($constraint['options']) && \is_array($constraint['options'])) {
                 $this->_checkConfigurationArguments($constraint['options'], true);
                 $this->_checkConfigurationCallback($constraint['options'], true);
             }
@@ -73,17 +73,17 @@ class Builder
         }
         // Check method arguments
         if ($argumentsIsArray) {
-            if (array_key_exists('methods', $configuration)) {
+            if (\array_key_exists('methods', $configuration)) {
                 foreach ($configuration['methods'] as $method) {
                     $this->_checkMethodArguments($method);
                 }
             }
-        } elseif (array_key_exists('method', $configuration)) {
+        } elseif (\array_key_exists('method', $configuration)) {
             $this->_checkMethodArguments($configuration);
         }
 
         // Check constructor arguments
-        if (array_key_exists('arguments', $configuration) && !is_array($configuration['arguments'])) {
+        if (\array_key_exists('arguments', $configuration) && !\is_array($configuration['arguments'])) {
             throw new \InvalidArgumentException('Arguments must be an array');
         }
     }
@@ -97,10 +97,10 @@ class Builder
      */
     protected function _checkMethodArguments(array $configuration)
     {
-        if (!is_string($configuration['method'])) {
+        if (!\is_string($configuration['method'])) {
             throw new \InvalidArgumentException('Method has to be passed as string');
         }
-        if (array_key_exists('arguments', $configuration) && !is_array($configuration['arguments'])) {
+        if (\array_key_exists('arguments', $configuration) && !\is_array($configuration['arguments'])) {
             throw new \InvalidArgumentException('Method arguments must be an array');
         }
     }
@@ -115,7 +115,7 @@ class Builder
      */
     protected function _checkConfigurationCallback(array $configuration, $callbackIsArray)
     {
-        if (array_key_exists('callback', $configuration)) {
+        if (\array_key_exists('callback', $configuration)) {
             if ($callbackIsArray) {
                 $callbacks = $configuration['callback'];
             } else {
@@ -173,13 +173,13 @@ class Builder
             if ($constraint['alias'] != $alias) {
                 continue;
             }
-            if (!array_key_exists('options', $constraint) || !is_array($constraint['options'])) {
+            if (!\array_key_exists('options', $constraint) || !\is_array($constraint['options'])) {
                 $constraint['options'] = [];
             }
-            if (!array_key_exists('method', $configuration)) {
-                if (array_key_exists('arguments', $configuration)) {
+            if (!\array_key_exists('method', $configuration)) {
+                if (\array_key_exists('arguments', $configuration)) {
                     $constraint['options']['arguments'] = $configuration['arguments'];
-                } elseif (array_key_exists('callback', $configuration)) {
+                } elseif (\array_key_exists('callback', $configuration)) {
                     $constraint = $this->_addConstraintCallback($constraint, $configuration['callback']);
                 }
             } else {
@@ -201,7 +201,7 @@ class Builder
         array $constraint,
         \Magento\Framework\Validator\Constraint\Option\Callback $callback
     ) {
-        if (!array_key_exists('callback', $constraint['options'])) {
+        if (!\array_key_exists('callback', $constraint['options'])) {
             $constraint['options']['callback'] = [];
         }
         $constraint['options']['callback'][] = $callback;
@@ -217,7 +217,7 @@ class Builder
      */
     protected function _addConstraintMethod(array $constraint, array $configuration)
     {
-        if (!array_key_exists('methods', $constraint['options'])) {
+        if (!\array_key_exists('methods', $constraint['options'])) {
             $constraint['options']['methods'] = [];
         }
         $constraint['options']['methods'][] = $configuration;
@@ -250,7 +250,7 @@ class Builder
     {
         // Create validator instance
         $validator = $this->_createConstraintValidator($data);
-        if (isset($data['options']) && is_array($data['options'])) {
+        if (isset($data['options']) && \is_array($data['options'])) {
             $this->_configureConstraintValidator($validator, $data['options']);
         }
 
@@ -314,11 +314,11 @@ class Builder
             foreach ($options['methods'] as $methodData) {
                 $methodName = $methodData['method'];
                 if (method_exists($validator, $methodName)) {
-                    if (array_key_exists('arguments', $methodData)) {
+                    if (\array_key_exists('arguments', $methodData)) {
                         $arguments = $this->_applyArgumentsCallback($methodData['arguments']);
-                        call_user_func_array([$validator, $methodName], $arguments);
+                        \call_user_func_array([$validator, $methodName], $arguments);
                     } else {
-                        call_user_func([$validator, $methodName]);
+                        \call_user_func([$validator, $methodName]);
                     }
                 }
             }
@@ -343,7 +343,7 @@ class Builder
     protected function _applyArgumentsCallback(array $arguments)
     {
         foreach ($arguments as &$argument) {
-            if (is_array($argument)) {
+            if (\is_array($argument)) {
                 $argument = $this->_applyArgumentsCallback($argument);
             } elseif ($argument instanceof OptionInterface) {
                 $argument = $argument->getValue();

@@ -100,7 +100,7 @@ class Value extends \Magento\Framework\Model\AbstractModel implements \Magento\F
             $this->getScopeCode()
         );
 
-        if (is_array($oldValue)) {
+        if (\is_array($oldValue)) {
             return json_encode($oldValue);
         }
         return (string)$oldValue;
@@ -115,7 +115,7 @@ class Value extends \Magento\Framework\Model\AbstractModel implements \Magento\F
     public function getFieldsetDataValue($key)
     {
         $data = $this->_getData('fieldset_data');
-        return is_array($data) && isset($data[$key]) ? $data[$key] : null;
+        return \is_array($data) && isset($data[$key]) ? $data[$key] : null;
     }
 
     /**

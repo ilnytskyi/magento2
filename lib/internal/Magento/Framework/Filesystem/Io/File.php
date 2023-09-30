@@ -195,10 +195,10 @@ class File extends AbstractIo
          * @var $value string|Phrase
          */
         foreach ($row as $key => $value) {
-            if (!is_string($value)) {
+            if (!\is_string($value)) {
                 $value = (string)$value;
             }
-            if (isset($value[0]) && in_array($value[0], ['=', '+', '-'])) {
+            if (isset($value[0]) && \in_array($value[0], ['=', '+', '-'])) {
                 $row[$key] = ' ' . $value;
             }
         }
@@ -367,7 +367,7 @@ class File extends AbstractIo
      */
     protected static function _recursiveCallback($dir, array $fileCallback, array $dirCallback = [])
     {
-        if (empty($fileCallback) || !is_array($fileCallback) || !is_array($dirCallback)) {
+        if (empty($fileCallback) || !\is_array($fileCallback) || !\is_array($dirCallback)) {
             throw new \InvalidArgumentException("file/dir callback is not specified");
         }
         if (empty($dirCallback)) {
@@ -381,19 +381,19 @@ class File extends AbstractIo
                 self::_recursiveCallback($dir . '/' . $item, $fileCallback, $dirCallback);
             }
             $callback = $dirCallback[0];
-            if (!is_callable($callback)) {
+            if (!\is_callable($callback)) {
                 throw new \InvalidArgumentException("'dirCallback' parameter is not callable");
             }
             $parameters = isset($dirCallback[1]) ? $dirCallback[1] : [];
         } else {
             $callback = $fileCallback[0];
-            if (!is_callable($callback)) {
+            if (!\is_callable($callback)) {
                 throw new \InvalidArgumentException("'fileCallback' parameter is not callable");
             }
             $parameters = isset($fileCallback[1]) ? $fileCallback[1] : [];
         }
         array_unshift($parameters, $dir);
-        $result = @call_user_func_array($callback, $parameters);
+        $result = @\call_user_func_array($callback, $parameters);
 
         return $result;
     }
@@ -447,10 +447,10 @@ class File extends AbstractIo
         $filename = (string)$filename;
         if ($dest === null) {
             $result = @file_get_contents($filename);
-        } elseif (is_resource($dest)) {
+        } elseif (\is_resource($dest)) {
             $result = @file_get_contents($filename);
             fwrite($dest, $result);
-        } elseif (is_string($dest)) {
+        } elseif (\is_string($dest)) {
             $result = @copy($filename, $dest);
         }
         $this->_iwd();
@@ -469,10 +469,10 @@ class File extends AbstractIo
      */
     public function write($filename, $src, $mode = null)
     {
-        if (is_string($src) && @is_readable($src)) {
+        if (\is_string($src) && @is_readable($src)) {
             $src = realpath($src);
             $srcIsFile = true;
-        } elseif (is_string($src) || is_resource($src)) {
+        } elseif (\is_string($src) || \is_resource($src)) {
             $srcIsFile = false;
         } else {
             return false;
@@ -485,8 +485,8 @@ class File extends AbstractIo
                 return false;
             }
         } else {
-            if (!is_writable(dirname($filename))) {
-                printf('The directory %s is not writable', dirname($filename));
+            if (!is_writable(\dirname($filename))) {
+                printf('The directory %s is not writable', \dirname($filename));
                 return false;
             }
         }
@@ -579,8 +579,8 @@ class File extends AbstractIo
         if (is_dir($folder)) {
             return true;
         }
-        if (!is_dir(dirname($folder))) {
-            $this->checkAndCreateFolder(dirname($folder), $mode);
+        if (!is_dir(\dirname($folder))) {
+            $this->checkAndCreateFolder(\dirname($folder), $mode);
         }
         if (!is_dir($folder) && !$this->mkdir($folder, $mode)) {
             throw new LocalizedException(
@@ -724,7 +724,7 @@ class File extends AbstractIo
                     continue;
                 } elseif ($grep == self::GREP_FILES && !is_file($fullPath)) {
                     continue;
-                } elseif (in_array($entry, $ignoredDirectories)) {
+                } elseif (\in_array($entry, $ignoredDirectories)) {
                     continue;
                 }
 
@@ -739,7 +739,7 @@ class File extends AbstractIo
                     $listItem['leaf'] = true;
                     if (isset(
                         $pathInfo['extension']
-                    ) && in_array(
+                    ) && \in_array(
                         strtolower($pathInfo['extension']),
                         ['jpg', 'jpeg', 'gif', 'bmp', 'png']
                     ) && $listItem['size'] > 0
@@ -863,7 +863,7 @@ class File extends AbstractIo
      */
     protected function _getFileOwner($filename)
     {
-        if (!function_exists('posix_getpwuid')) {
+        if (!\function_exists('posix_getpwuid')) {
             return 'n/a';
         }
 
@@ -891,7 +891,7 @@ class File extends AbstractIo
      */
     public function dirname($file)
     {
-        return $this->getCleanPath(dirname($file));
+        return $this->getCleanPath(\dirname($file));
     }
 
     /**

@@ -63,12 +63,12 @@ class PhpScanner implements ScannerInterface
         /** @var $parameter \ReflectionParameter */
         foreach ($parameters as $parameter) {
             preg_match('/\[\s\<\w+?>\s\??([\w\\\\]+)/s', $parameter->__toString(), $matches);
-            if (isset($matches[1]) && substr($matches[1], -strlen($entityType)) == $entityType) {
+            if (isset($matches[1]) && substr($matches[1], -\strlen($entityType)) == $entityType) {
                 $missingClassName = $matches[1];
                 if ($this->shouldGenerateClass($missingClassName, $entityType, $file)) {
 
-                    if (substr($missingClassName, -strlen($factorySuffix)) == $factorySuffix) {
-                        $entityName = rtrim(substr($missingClassName, 0, -strlen($factorySuffix)), '\\');
+                    if (substr($missingClassName, -\strlen($factorySuffix)) == $factorySuffix) {
+                        $entityName = rtrim(substr($missingClassName, 0, -\strlen($factorySuffix)), '\\');
                         $this->_log->add(
                             Log::CONFIGURATION_ERROR,
                             $missingClassName,
@@ -92,7 +92,7 @@ class PhpScanner implements ScannerInterface
      */
     protected function getSourceClassName($missingClassName, $entityType)
     {
-        $sourceClassName = rtrim(substr($missingClassName, 0, -strlen($entityType)), '\\');
+        $sourceClassName = rtrim(substr($missingClassName, 0, -\strlen($entityType)), '\\');
         $entityType = lcfirst($entityType);
         if ($entityType == ExtensionAttributesInterfaceGenerator::ENTITY_TYPE
             || $entityType == ExtensionAttributesGenerator::ENTITY_TYPE
@@ -101,12 +101,12 @@ class PhpScanner implements ScannerInterface
             return $sourceClassName . 'Interface';
         } elseif ($entityType == FactoryGenerator::ENTITY_TYPE) {
             $extensionAttributesSuffix = ucfirst(ExtensionAttributesGenerator::ENTITY_TYPE);
-            if (substr($sourceClassName, -strlen($extensionAttributesSuffix)) == $extensionAttributesSuffix) {
+            if (substr($sourceClassName, -\strlen($extensionAttributesSuffix)) == $extensionAttributesSuffix) {
                 /** Process special case for extension factories */
                 $extensionAttributesClass = substr(
                     $sourceClassName,
                     0,
-                    -strlen(ExtensionAttributesGenerator::ENTITY_TYPE)
+                    -\strlen(ExtensionAttributesGenerator::ENTITY_TYPE)
                 );
                 $sourceClassName = $extensionAttributesClass . 'Interface';
             }
@@ -152,7 +152,7 @@ class PhpScanner implements ScannerInterface
             if ($this->shouldGenerateClass($missingClassName, $entityType, $file)) {
                 $missingExtensionInterfaces[] = $missingClassName;
 
-                $extension = rtrim(substr($missingClassName, 0, -strlen('Interface')), '\\');
+                $extension = rtrim(substr($missingClassName, 0, -\strlen('Interface')), '\\');
                 if (!class_exists($extension)) {
                     $missingExtensionInterfaces[] = $extension;
                 }
@@ -224,7 +224,7 @@ class PhpScanner implements ScannerInterface
     private function fetchClass($namespace, $tokenIterator, $count, $tokens):? string
     {
         // anonymous classes should be omitted
-        if (is_array($tokens[$tokenIterator - 2]) && $tokens[$tokenIterator - 2][0] === T_NEW) {
+        if (\is_array($tokens[$tokenIterator - 2]) && $tokens[$tokenIterator - 2][0] === T_NEW) {
             return null;
         }
 
@@ -251,7 +251,7 @@ class PhpScanner implements ScannerInterface
         $namespaceParts = [];
         // phpcs:ignore
         $tokens = token_get_all(file_get_contents($file));
-        $count = count($tokens);
+        $count = \count($tokens);
 
         for ($tokenIterator = 0; $tokenIterator < $count; $tokenIterator++) {
             if ($tokens[$tokenIterator][0] == T_NAMESPACE) {
@@ -262,7 +262,7 @@ class PhpScanner implements ScannerInterface
                 && $tokens[$tokenIterator - 1][0] != T_DOUBLE_COLON
             ) {
                 $class = $this->fetchClass(join('', $namespaceParts), $tokenIterator, $count, $tokens);
-                if ($class !== null && !in_array($class, $classes)) {
+                if ($class !== null && !\in_array($class, $classes)) {
                     $classes[] = $class;
                 }
             }

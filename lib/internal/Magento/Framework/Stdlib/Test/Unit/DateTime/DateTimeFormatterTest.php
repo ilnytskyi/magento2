@@ -27,7 +27,7 @@ class DateTimeFormatterTest extends TestCase
 
     protected function setUp(): void
     {
-        if (defined('HHVM_VERSION')) {
+        if (\defined('HHVM_VERSION')) {
             $this->markTestSkipped('Skip this test for hhvm due to problem with \IntlDateFormatter::formatObject');
         }
         $this->objectManager = new ObjectManager($this);
@@ -55,7 +55,7 @@ class DateTimeFormatterTest extends TestCase
             ]
         );
 
-        $reflection = new \ReflectionClass(get_class($dateTimeFormatter));
+        $reflection = new \ReflectionClass(\get_class($dateTimeFormatter));
         $reflectionProperty = $reflection->getProperty('localeResolver');
         $reflectionProperty->setAccessible(true);
         $reflectionProperty->setValue($dateTimeFormatter, $this->localeResolverMock);
@@ -133,7 +133,7 @@ class DateTimeFormatterTest extends TestCase
             ]
         );
 
-        $reflection = new \ReflectionClass(get_class($dateTimeFormatter));
+        $reflection = new \ReflectionClass(\get_class($dateTimeFormatter));
         $reflectionProperty = $reflection->getProperty('localeResolver');
         $reflectionProperty->setAccessible(true);
         $reflectionProperty->setValue($dateTimeFormatter, $this->localeResolverMock);
@@ -153,7 +153,7 @@ class DateTimeFormatterTest extends TestCase
             ]
         );
 
-        $reflection = new \ReflectionClass(get_class($dateTimeFormatter));
+        $reflection = new \ReflectionClass(\get_class($dateTimeFormatter));
         $reflectionProperty = $reflection->getProperty('localeResolver');
         $reflectionProperty->setAccessible(true);
         $reflectionProperty->setValue($dateTimeFormatter, $this->localeResolverMock);

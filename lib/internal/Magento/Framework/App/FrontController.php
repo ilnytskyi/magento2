@@ -193,7 +193,7 @@ class FrontController implements FrontControllerInterface
             } catch (InvalidRequestException $exception) {
                 //Validation failed - processing validation results.
                 $this->logger->debug(
-                    sprintf('Request validation failed for action "%s"', get_class($actionInstance)),
+                    sprintf('Request validation failed for action "%s"', \get_class($actionInstance)),
                     ["exception" => $exception]
                 );
                 $result = $exception->getReplaceResult();

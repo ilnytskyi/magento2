@@ -109,7 +109,7 @@ class PhraseCollector
                 $arguments = $this->_tokenizer->getFunctionArgumentsTokens();
                 $phrase = $this->_collectPhrase(array_shift($arguments));
                 if (null !== $phrase) {
-                    $this->_addPhrase($phrase, count($arguments), $this->_file, $firstToken->getLine());
+                    $this->_addPhrase($phrase, \count($arguments), $this->_file, $firstToken->getLine());
                     return true;
                 }
             }
@@ -127,7 +127,7 @@ class PhraseCollector
             $arguments = $this->_tokenizer->getFunctionArgumentsTokens();
             $phrase = $this->_collectPhrase(array_shift($arguments));
             if (null !== $phrase) {
-                $this->_addPhrase($phrase, count($arguments), $this->_file, $firstToken->getLine());
+                $this->_addPhrase($phrase, \count($arguments), $this->_file, $firstToken->getLine());
                 return true;
             }
         }

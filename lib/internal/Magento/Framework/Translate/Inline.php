@@ -177,11 +177,11 @@ class Inline implements InlineInterface
 
         $this->getParser()->setIsJson($isJson);
 
-        if (is_array($body)) {
+        if (\is_array($body)) {
             foreach ($body as &$part) {
                 $this->processResponseBody($part, $isJson);
             }
-        } elseif (is_string($body)) {
+        } elseif (\is_string($body)) {
             $this->getParser()->processResponseBodyString($body);
             $this->addInlineScript();
             $body = $this->getParser()->getContent();
@@ -266,11 +266,11 @@ class Inline implements InlineInterface
      */
     protected function stripInlineTranslations(&$body)
     {
-        if (is_array($body)) {
+        if (\is_array($body)) {
             foreach ($body as &$part) {
                 $this->stripInlineTranslations($part);
             }
-        } elseif (is_string($body)) {
+        } elseif (\is_string($body)) {
             $body = preg_replace('#' . ParserInterface::REGEXP_TOKEN . '#', '$1', $body);
         }
 
@@ -285,7 +285,7 @@ class Inline implements InlineInterface
     private function isAreaAllowed(): bool
     {
         try {
-            return in_array($this->appState->getAreaCode(), $this->allowedAreas, true);
+            return \in_array($this->appState->getAreaCode(), $this->allowedAreas, true);
         } catch (LocalizedException $e) {
             return false;
         }

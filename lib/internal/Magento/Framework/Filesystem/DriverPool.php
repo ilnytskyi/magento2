@@ -44,8 +44,8 @@ class DriverPool
     public function __construct($extraTypes = [])
     {
         foreach ($extraTypes as $code => $typeOrObject) {
-            if (is_object($typeOrObject)) {
-                $type = get_class($typeOrObject);
+            if (\is_object($typeOrObject)) {
+                $type = \get_class($typeOrObject);
                 $object = $typeOrObject;
             } else {
                 $type = $typeOrObject;

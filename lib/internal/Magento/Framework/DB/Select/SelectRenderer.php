@@ -39,7 +39,7 @@ class SelectRenderer implements RendererInterface
      */
     protected function sort($renders)
     {
-        $length = count($renders);
+        $length = \count($renders);
         if ($length <= 1) {
             return $renders;
         } else {

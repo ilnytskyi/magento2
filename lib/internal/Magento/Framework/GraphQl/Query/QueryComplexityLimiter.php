@@ -115,7 +115,7 @@ class QueryComplexityLimiter
     {
         if (!empty($query)) {
             $totalFieldCount = 0;
-            if (is_string($query)) {
+            if (\is_string($query)) {
                 $query = $this->queryParser->parse($query);
             }
 

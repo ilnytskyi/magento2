@@ -103,13 +103,13 @@ class ExpressionConverter
      */
     public static function shortenEntityName($entityName, $prefix)
     {
-        if ($entityName !== null && strlen($entityName) > self::MYSQL_IDENTIFIER_LEN) {
+        if ($entityName !== null && \strlen($entityName) > self::MYSQL_IDENTIFIER_LEN) {
             $shortName = ExpressionConverter::shortName($entityName);
-            if (strlen($shortName) > self::MYSQL_IDENTIFIER_LEN) {
+            if (\strlen($shortName) > self::MYSQL_IDENTIFIER_LEN) {
                 // md5() here is not for cryptographic use.
                 // phpcs:ignore Magento2.Security.InsecureFunction
                 $hash = md5($entityName);
-                if (strlen($prefix . $hash) > self::MYSQL_IDENTIFIER_LEN) {
+                if (\strlen($prefix . $hash) > self::MYSQL_IDENTIFIER_LEN) {
                     $entityName = self::trimHash($hash, $prefix, self::MYSQL_IDENTIFIER_LEN);
                 } else {
                     $entityName = $prefix . $hash;
@@ -134,7 +134,7 @@ class ExpressionConverter
         string $prefix,
         int $maxCharacters
     ): string {
-        $diff = strlen($hash) + strlen($prefix) - $maxCharacters;
+        $diff = \strlen($hash) + \strlen($prefix) - $maxCharacters;
         $superfluous = intdiv($diff, 2);
         $odd = $diff % 2;
         return substr($hash, $superfluous, - ($superfluous + $odd));

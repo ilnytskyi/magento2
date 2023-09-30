@@ -75,7 +75,7 @@ class EntityManager
         $entityType = $this->typeResolver->resolve($entity);
         $operation = $this->operationPool->getOperation($entityType, 'read');
         if (!($operation instanceof ReadInterface)) {
-            throw new \LogicException(get_class($operation) . ' must implement ' . ReadInterface::class);
+            throw new \LogicException(\get_class($operation) . ' must implement ' . ReadInterface::class);
         }
         $entity = $operation->execute($entity, $identifier, $arguments);
         return $entity;
@@ -94,12 +94,12 @@ class EntityManager
         if ($this->has($entity)) {
             $operation = $this->operationPool->getOperation($entityType, 'update');
             if (!($operation instanceof UpdateInterface)) {
-                throw new \LogicException(get_class($operation) . ' must implement ' . UpdateInterface::class);
+                throw new \LogicException(\get_class($operation) . ' must implement ' . UpdateInterface::class);
             }
         } else {
             $operation = $this->operationPool->getOperation($entityType, 'create');
             if (!($operation instanceof CreateInterface)) {
-                throw new \LogicException(get_class($operation) . ' must implement ' . CreateInterface::class);
+                throw new \LogicException(\get_class($operation) . ' must implement ' . CreateInterface::class);
             }
         }
         try {
@@ -122,7 +122,7 @@ class EntityManager
         $entityType = $this->typeResolver->resolve($entity);
         $operation = $this->operationPool->getOperation($entityType, 'checkIfExists');
         if (!($operation instanceof CheckIfExistsInterface)) {
-            throw new \LogicException(get_class($operation) . ' must implement ' . CheckIfExistsInterface::class);
+            throw new \LogicException(\get_class($operation) . ' must implement ' . CheckIfExistsInterface::class);
         }
         return $operation->execute($entity);
     }
@@ -139,7 +139,7 @@ class EntityManager
         $entityType = $this->typeResolver->resolve($entity);
         $operation = $this->operationPool->getOperation($entityType, 'delete');
         if (!($operation instanceof DeleteInterface)) {
-            throw new \LogicException(get_class($operation) . ' must implement ' . DeleteInterface::class);
+            throw new \LogicException(\get_class($operation) . ' must implement ' . DeleteInterface::class);
         }
         try {
             $operation->execute($entity, $arguments);

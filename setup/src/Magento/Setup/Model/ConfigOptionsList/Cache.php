@@ -205,7 +205,7 @@ class Cache implements ConfigOptionsListInterface
         }
 
         if (isset($options[self::INPUT_KEY_CACHE_BACKEND])
-            && !in_array($options[self::INPUT_KEY_CACHE_BACKEND], $this->validBackendCacheOptions)
+            && !\in_array($options[self::INPUT_KEY_CACHE_BACKEND], $this->validBackendCacheOptions)
         ) {
             $errors[] = "Invalid cache handler '{$options[self::INPUT_KEY_CACHE_BACKEND]}'";
         }
@@ -294,6 +294,6 @@ class Cache implements ConfigOptionsListInterface
     private function generateCachePrefix(): string
     {
         // phpcs:ignore Magento2.Functions.DiscouragedFunction
-        return substr(\hash('sha256', dirname(__DIR__, 6)), 0, 3) . '_';
+        return substr(\hash('sha256', \dirname(__DIR__, 6)), 0, 3) . '_';
     }
 }

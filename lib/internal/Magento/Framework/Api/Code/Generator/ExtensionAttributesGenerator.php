@@ -205,7 +205,7 @@ class ExtensionAttributesGenerator extends \Magento\Framework\Code\Generator\Ent
         $sourceClassName = $this->getSourceClassName() ?? '';
         $resultClassName = $this->_getResultClassName();
         $interfaceSuffix = 'Interface';
-        $expectedResultClassName = substr($sourceClassName, 0, -strlen($interfaceSuffix)) . self::EXTENSION_SUFFIX;
+        $expectedResultClassName = substr($sourceClassName, 0, -\strlen($interfaceSuffix)) . self::EXTENSION_SUFFIX;
         if ($resultClassName !== $expectedResultClassName) {
             $this->_addError(
                 'Invalid extension name [' . $resultClassName . ']. Use ' . $expectedResultClassName

@@ -175,7 +175,7 @@ class ResourceConnection implements ResetAfterRequestInterface
     public function getTableName($modelEntity, $connectionName = self::DEFAULT_CONNECTION)
     {
         $tableSuffix = null;
-        if (is_array($modelEntity)) {
+        if (\is_array($modelEntity)) {
             list($modelEntity, $tableSuffix) = $modelEntity;
         }
 

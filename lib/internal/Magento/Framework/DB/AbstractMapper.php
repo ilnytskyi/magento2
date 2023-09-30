@@ -123,11 +123,11 @@ abstract class AbstractMapper implements MapperInterface
             $camelCaseKey = \Magento\Framework\Api\SimpleDataObjectConverter::snakeCaseToUpperCamelCase($key);
             $mapperMethod = 'map' . $camelCaseKey;
             if (method_exists($this, $mapperMethod)) {
-                if (!is_array($value)) {
+                if (!\is_array($value)) {
                     throw new \InvalidArgumentException('Wrong type of argument, expecting array for '. $mapperMethod);
                 }
                 // The `array_values` is a workaround to ensure the same behavior in PHP 7 and 8.
-                call_user_func_array([$this, $mapperMethod], array_values($value));
+                \call_user_func_array([$this, $mapperMethod], array_values($value));
             }
         }
         return $this->select;
@@ -147,7 +147,7 @@ abstract class AbstractMapper implements MapperInterface
     public function addExpressionFieldToSelect($alias, $expression, $fields)
     {
         // validate alias
-        if (!is_array($fields)) {
+        if (!\is_array($fields)) {
             $fields = [$fields => $fields];
         }
         $fullExpression = $expression;
@@ -164,7 +164,7 @@ abstract class AbstractMapper implements MapperInterface
      */
     public function addFieldToFilter($field, $condition = null)
     {
-        if (is_array($field)) {
+        if (\is_array($field)) {
             $conditions = [];
             foreach ($field as $key => $value) {
                 $conditions[] = $this->translateCondition($value, isset($condition[$key]) ? $condition[$key] : null);
@@ -257,7 +257,7 @@ abstract class AbstractMapper implements MapperInterface
      */
     protected function join($table, $condition, $cols = '*')
     {
-        if (is_array($table)) {
+        if (\is_array($table)) {
             foreach ($table as $k => $v) {
                 $alias = $k;
                 $table = $v;

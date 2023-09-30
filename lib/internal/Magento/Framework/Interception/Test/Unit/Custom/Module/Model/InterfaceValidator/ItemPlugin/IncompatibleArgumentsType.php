@@ -22,6 +22,6 @@ class IncompatibleArgumentsType
         ItemWithArguments $subject,
         array $names
     ) {
-        return count($names);
+        return \count($names);
     }
 }

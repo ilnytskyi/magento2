@@ -84,7 +84,7 @@ class Cleaner
     {
         if (!isset($this->requestData['queries'][$queryName])) {
             throw new \Exception('Query ' . $queryName . ' does not exist');
-        } elseif (in_array($queryName, $this->mappedQueries)) {
+        } elseif (\in_array($queryName, $this->mappedQueries)) {
             throw new StateException(
                 new Phrase('A cycle was found. The "%1" query is already used in the request hierarchy.', [$queryName])
             );
@@ -101,7 +101,7 @@ class Cleaner
                 }
                 break;
             case QueryInterface::TYPE_MATCH:
-                if (!array_key_exists('is_bind', $query)) {
+                if (!\array_key_exists('is_bind', $query)) {
                     unset($this->requestData['queries'][$queryName]);
                 }
                 break;
@@ -137,12 +137,12 @@ class Cleaner
         if (!$this->aggregationStatus->isEnabled()) {
             $this->requestData['aggregations'] = [];
         } else {
-            if (array_key_exists('aggregations', $this->requestData) && is_array($this->requestData['aggregations'])) {
+            if (\array_key_exists('aggregations', $this->requestData) && \is_array($this->requestData['aggregations'])) {
                 foreach ($this->requestData['aggregations'] as $aggregationName => $aggregationValue) {
                     switch ($aggregationValue['type']) {
                         case BucketInterface::TYPE_TERM:
                             foreach ($aggregationValue['parameter'] ?? [] as $key => $parameter) {
-                                if (is_string($parameter['value'])
+                                if (\is_string($parameter['value'])
                                     && preg_match('/^\$(.+)\$$/si', $parameter['value'])
                                 ) {
                                     unset($this->requestData['aggregations'][$aggregationName]['parameter'][$key]);
@@ -150,7 +150,7 @@ class Cleaner
                             }
                             break;
                         case BucketInterface::TYPE_DYNAMIC:
-                            if (is_string($aggregationValue['method'])
+                            if (\is_string($aggregationValue['method'])
                                 && preg_match('/^\$(.+)\$$/si', $aggregationValue['method'])
                             ) {
                                 unset($this->requestData['aggregations'][$aggregationName]);
@@ -174,7 +174,7 @@ class Cleaner
     {
         if (!isset($this->requestData['filters'][$filterName])) {
             throw new \Exception('Filter ' . $filterName . ' does not exist');
-        } elseif (in_array($filterName, $this->mappedFilters)) {
+        } elseif (\in_array($filterName, $this->mappedFilters)) {
             throw new StateException(
                 new Phrase(
                     'A cycle was found. The "%1" filter is already used in the request hierarchy.',
@@ -187,7 +187,7 @@ class Cleaner
         switch ($filter['type']) {
             case FilterInterface::TYPE_WILDCARD:
             case FilterInterface::TYPE_TERM:
-                if (!array_key_exists('is_bind', $filter)) {
+                if (!\array_key_exists('is_bind', $filter)) {
                     unset($this->requestData['filters'][$filterName]);
                 }
                 break;
@@ -199,7 +199,7 @@ class Cleaner
                     }
                 }
                 $filterKeys = array_keys($this->requestData['filters'][$filterName]);
-                if (count(array_diff($keys, $filterKeys)) == count($keys)) {
+                if (\count(array_diff($keys, $filterKeys)) == \count($keys)) {
                     unset($this->requestData['filters'][$filterName]);
                 }
                 break;

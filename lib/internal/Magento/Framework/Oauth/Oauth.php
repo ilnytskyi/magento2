@@ -182,7 +182,7 @@ class Oauth implements OauthInterface
      */
     protected function _validateSignature($params, $consumerSecret, $httpMethod, $requestUrl, $tokenSecret = null)
     {
-        if (!in_array($params['oauth_signature_method'], self::getSupportedSignatureMethods())) {
+        if (!\in_array($params['oauth_signature_method'], self::getSupportedSignatureMethods())) {
             throw new OauthInputException(
                 new Phrase(
                     'Signature method %1 is not supported',
@@ -256,7 +256,7 @@ class Oauth implements OauthInterface
         }
 
         // Validate signature method.
-        if (!in_array($protocolParams['oauth_signature_method'], self::getSupportedSignatureMethods())) {
+        if (!\in_array($protocolParams['oauth_signature_method'], self::getSupportedSignatureMethods())) {
             throw new OauthInputException(
                 new Phrase(
                     'Signature method %1 is not supported',

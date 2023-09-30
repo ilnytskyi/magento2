@@ -41,7 +41,7 @@ class Currency
         $isValid = true;
         $allowedCurrencyCodes = array_keys($this->lists->getCurrencyList());
 
-        if (!$currencyCode || !in_array($currencyCode, $allowedCurrencyCodes)) {
+        if (!$currencyCode || !\in_array($currencyCode, $allowedCurrencyCodes)) {
             $isValid = false;
         }
 

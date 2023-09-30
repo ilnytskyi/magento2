@@ -431,7 +431,7 @@ abstract class AbstractDb extends \Magento\Framework\Data\Collection
         $countSelect->reset(\Magento\Framework\DB\Select::COLUMNS);
 
         $part = $this->getSelect()->getPart(\Magento\Framework\DB\Select::GROUP);
-        if (!is_array($part) || !count($part)) {
+        if (!\is_array($part) || !\count($part)) {
             $countSelect->columns(new \Zend_Db_Expr('COUNT(*)'));
             return $countSelect;
         }
@@ -588,7 +588,7 @@ abstract class AbstractDb extends \Magento\Framework\Data\Collection
      */
     public function addFieldToFilter($field, $condition = null)
     {
-        if (is_array($field)) {
+        if (\is_array($field)) {
             $conditions = [];
             foreach ($field as $key => $value) {
                 $conditions[] = $this->_translateCondition($value, isset($condition[$key]) ? $condition[$key] : null);
@@ -792,7 +792,7 @@ abstract class AbstractDb extends \Magento\Framework\Data\Collection
         $this->printLogQuery($printQuery, $logQuery);
         $data = $this->getData();
         $this->resetData();
-        if (is_array($data)) {
+        if (\is_array($data)) {
             foreach ($data as $row) {
                 $item = $this->getNewEmptyItem();
                 if ($this->getIdFieldName()) {
@@ -838,7 +838,7 @@ abstract class AbstractDb extends \Magento\Framework\Data\Collection
         }
 
         $data = $this->_fetchStmt->fetch();
-        if (!empty($data) && is_array($data)) {
+        if (!empty($data) && \is_array($data)) {
             $item = $this->getNewEmptyItem();
             if ($this->getIdFieldName()) {
                 $item->setIdFieldName($this->getIdFieldName());
@@ -1050,7 +1050,7 @@ abstract class AbstractDb extends \Magento\Framework\Data\Collection
      */
     public function __clone()
     {
-        if (is_object($this->_select)) {
+        if (\is_object($this->_select)) {
             $this->_select = clone $this->_select;
         }
     }

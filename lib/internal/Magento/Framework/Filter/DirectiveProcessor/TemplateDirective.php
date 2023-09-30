@@ -62,7 +62,7 @@ class TemplateDirective implements DirectiveProcessorInterface
             $configPath = $templateParameters['config_path'];
             unset($templateParameters['config_path']);
             $templateParameters = array_merge_recursive($templateParameters, $templateVariables);
-            $replacedValue = call_user_func($filter->getTemplateProcessor(), $configPath, $templateParameters);
+            $replacedValue = \call_user_func($filter->getTemplateProcessor(), $configPath, $templateParameters);
         }
 
         return $replacedValue;

@@ -32,7 +32,7 @@ class Alternative extends Simple
         array $alternativeExtensions = []
     ) {
         foreach ($alternativeExtensions as $extension => $newExtensions) {
-            if (!is_string($extension) || !is_array($newExtensions)) {
+            if (!\is_string($extension) || !\is_array($newExtensions)) {
                 throw new \InvalidArgumentException(
                     "\$alternativeExtensions must be an array with format: "
                     . "array('ext1' => array('ext1', 'ext2'), 'ext3' => array(...)]"
@@ -52,7 +52,7 @@ class Alternative extends Simple
         if (!$path) {
             $extension = pathinfo($file, PATHINFO_EXTENSION);
             if (isset($this->alternativeExtensions[$extension])) {
-                $file =  $file !== null ? substr($file, 0, strlen($file) - strlen($extension)) : '';
+                $file =  $file !== null ? substr($file, 0, \strlen($file) - \strlen($extension)) : '';
 
                 foreach ($this->alternativeExtensions[$extension] as $newExtension) {
                     $newFile = $file . $newExtension;

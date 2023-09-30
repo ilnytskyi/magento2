@@ -237,7 +237,7 @@ class Request extends \Laminas\Http\PhpEnvironment\Request
             }
 
             $baseUrl = $this->getBaseUrl();
-            $pathInfo = substr($requestUri, strlen($baseUrl));
+            $pathInfo = substr($requestUri, \strlen($baseUrl));
             if (!empty($baseUrl) && '/' === $pathInfo) {
                 $pathInfo = '';
             } elseif (null === $baseUrl) {
@@ -544,7 +544,7 @@ class Request extends \Laminas\Http\PhpEnvironment\Request
      */
     public function setQueryValue($name, $value = null)
     {
-        if (is_array($name)) {
+        if (\is_array($name)) {
             foreach ($name as $key => $value) {
                 $this->getQuery()->set($key, $value);
             }
@@ -579,7 +579,7 @@ class Request extends \Laminas\Http\PhpEnvironment\Request
      */
     public function setPostValue($name, $value = null)
     {
-        if (is_array($name)) {
+        if (\is_array($name)) {
             $this->setPost(new Parameters($name));
             return $this;
         }
@@ -773,7 +773,7 @@ class Request extends \Laminas\Http\PhpEnvironment\Request
     {
         if ($requestUri === null) {
             $requestUri = $this->detectRequestUri();
-        } elseif (!is_string($requestUri)) {
+        } elseif (!\is_string($requestUri)) {
             return $this;
         } else {
             if (false !== ($pos = strpos($requestUri, '?'))) {

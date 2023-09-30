@@ -94,14 +94,14 @@ class Multiselect extends AbstractElement
         ) . $this->_getUiId() . ' multiple="multiple">' . "\n";
 
         $value = $this->getValue();
-        if (!is_array($value)) {
+        if (!\is_array($value)) {
             $value = explode(',', $value ?? '');
         }
 
         $values = $this->getValues();
         if ($values) {
             foreach ($values as $option) {
-                if (is_array($option['value'])) {
+                if (\is_array($option['value'])) {
                     $html .= '<optgroup label="' . $option['label'] . '">' . "\n";
                     foreach ($option['value'] as $groupItem) {
                         $html .= $this->_optionToHtml($groupItem, $value);
@@ -222,7 +222,7 @@ class Multiselect extends AbstractElement
         $optionId = 'optId' .$this->random->getRandomString(8);
         $html = '<option value="' . $this->_escape($option['value']) . '" id="' . $optionId . '" ';
         $html .= isset($option['title']) ? 'title="' . $this->_escape($option['title']) . '"' : '';
-        if (in_array((string)$option['value'], $selected)) {
+        if (\in_array((string)$option['value'], $selected)) {
             $html .= ' selected="selected"';
         }
         $html .= '>' . $this->_escape($option['label']) . '</option>' . "\n";

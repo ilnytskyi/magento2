@@ -113,11 +113,11 @@ class AttributeSetFixture
         $this->attributeGroupRepository->save($attributeGroup);
         $attributeGroupId = $attributeGroup->getAttributeGroupId();
 
-        $attributesData = array_key_exists(0, $attributeSetData['attributes']['attribute'])
+        $attributesData = \array_key_exists(0, $attributeSetData['attributes']['attribute'])
             ? $attributeSetData['attributes']['attribute'] : [$attributeSetData['attributes']['attribute']];
         foreach ($attributesData as $attributeData) {
             //Create Attribute
-            $optionsData = array_key_exists(0, $attributeData['options']['option'])
+            $optionsData = \array_key_exists(0, $attributeData['options']['option'])
                 ? $attributeData['options']['option'] : [$attributeData['options']['option']];
             $options = [];
             foreach ($optionsData as $optionData) {
@@ -148,11 +148,11 @@ class AttributeSetFixture
      */
     private function getFormattedAttributeSetData($attributeSetData)
     {
-        $attributesData = array_key_exists(0, $attributeSetData['attributes']['attribute'])
+        $attributesData = \array_key_exists(0, $attributeSetData['attributes']['attribute'])
             ? $attributeSetData['attributes']['attribute'] : [$attributeSetData['attributes']['attribute']];
         $attributes = [];
         foreach ($attributesData as $attributeData) {
-            $optionsData = array_key_exists(0, $attributeData['options']['option'])
+            $optionsData = \array_key_exists(0, $attributeData['options']['option'])
                 ? $attributeData['options']['option'] : [$attributeData['options']['option']];
             $optionsData = array_map(function ($option) {
                 return $option['label'];

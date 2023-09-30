@@ -38,7 +38,7 @@ class AutoIncrementColumnValidation implements ValidationInterface
                 if ($column instanceof ColumnIdentityAwareInterface && $column->isIdentity()) {
                     foreach ($table->getConstraints() as $constraint) {
                         if ($constraint instanceof Internal &&
-                            in_array($column->getName(), $constraint->getColumnNames())
+                            \in_array($column->getName(), $constraint->getColumnNames())
                         ) {
                             //If we find that for auto increment column we have index or key
                             continue 3;
@@ -46,7 +46,7 @@ class AutoIncrementColumnValidation implements ValidationInterface
                     }
 
                     foreach ($table->getIndexes() as $index) {
-                        if (in_array($column->getName(), $index->getColumnNames())) {
+                        if (\in_array($column->getName(), $index->getColumnNames())) {
                             //If we find that for auto increment column we have index or key
                             continue 3;
                         }

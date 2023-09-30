@@ -78,7 +78,7 @@ class GraphQlReader implements ReaderInterface
         $results = [];
         $scope = $scope ?: $this->defaultScope;
         $schemaFiles = $this->fileResolver->get($this->fileName, $scope);
-        if (!count($schemaFiles)) {
+        if (!\count($schemaFiles)) {
             return $results;
         }
 
@@ -158,7 +158,7 @@ class GraphQlReader implements ReaderInterface
      */
     private function getTypesToUse($typesToRedoBatch, $types): array
     {
-        $totalKnownSymbolsCount = count($typesToRedoBatch) + count($types);
+        $totalKnownSymbolsCount = \count($typesToRedoBatch) + \count($types);
 
         $typesToUse = $typesToRedoBatch;
         for ($i=0; $i < $totalKnownSymbolsCount; $i++) {

@@ -69,7 +69,7 @@ class Base extends StreamHandler
     {
         $parts = explode('/', $fileName);
         $parts = array_filter($parts, function ($value) {
-            return !in_array($value, ['', '.', '..']);
+            return !\in_array($value, ['', '.', '..']);
         });
 
         return implode('/', $parts);

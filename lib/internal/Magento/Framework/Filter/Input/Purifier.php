@@ -39,6 +39,6 @@ class Purifier implements PurifierInterface
      */
     public function purify($content)
     {
-        return is_array($content) ? $this->purifier->purifyArray($content) : $this->purifier->purify($content);
+        return \is_array($content) ? $this->purifier->purifyArray($content) : $this->purifier->purify($content);
     }
 }

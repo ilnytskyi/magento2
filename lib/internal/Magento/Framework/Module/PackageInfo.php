@@ -247,7 +247,7 @@ class PackageInfo
         $this->load();
         $requiredBy = [];
         foreach ($this->requireMap as $moduleName => $moduleRequireList) {
-            if (in_array($requiredModuleName, $moduleRequireList)) {
+            if (\in_array($requiredModuleName, $moduleRequireList)) {
                 $requiredBy[] = $moduleName;
             }
         }

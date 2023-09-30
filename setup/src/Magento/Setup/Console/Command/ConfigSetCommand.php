@@ -120,13 +120,13 @@ class ConfigSetCommand extends AbstractSetupCommand
             [ConfigOptionsListConstants::INPUT_KEY_SKIP_DB_VALIDATION]
         );
 
-        if (count($optionsWithDefaultValues) > 0) {
+        if (\count($optionsWithDefaultValues) > 0) {
             $defaultValuesMessage = implode(', ', $optionsWithDefaultValues);
             $output->writeln(
                 '<info>We saved default values for these options: ' . $defaultValuesMessage . '.</info>'
             );
         } else {
-            if (count($optionsToChange) > 0) {
+            if (\count($optionsToChange) > 0) {
                 $output->writeln('<info>You saved the new configuration.</info>');
             } else {
                 $output->writeln('<info>You made no changes to the configuration.</info>');

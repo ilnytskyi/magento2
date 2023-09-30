@@ -25,12 +25,12 @@ abstract class AbstractDataObject
     {
         $data = $this->data;
         $hasToArray = function ($model) {
-            return is_object($model) && method_exists($model, 'toArray') && is_callable([$model, 'toArray']);
+            return \is_object($model) && method_exists($model, 'toArray') && \is_callable([$model, 'toArray']);
         };
         foreach ($data as $key => $value) {
             if ($hasToArray($value)) {
                 $data[$key] = $value->toArray();
-            } elseif (is_array($value)) {
+            } elseif (\is_array($value)) {
                 foreach ($value as $nestedKey => $nestedValue) {
                     if ($hasToArray($nestedValue)) {
                         $value[$nestedKey] = $nestedValue->toArray();

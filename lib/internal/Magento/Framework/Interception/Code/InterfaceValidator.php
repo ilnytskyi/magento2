@@ -86,7 +86,7 @@ class InterfaceValidator
             $originMethodParameters = $this->getMethodParameters($originMethod);
             $methodType = $this->getMethodType($pluginMethod->getName());
 
-            if (self::METHOD_AFTER === $methodType && count($pluginMethodParameters) > 1) {
+            if (self::METHOD_AFTER === $methodType && \count($pluginMethodParameters) > 1) {
                 // remove result
                 array_shift($pluginMethodParameters);
                 $matchedParameters = array_intersect_key($originMethodParameters, $pluginMethodParameters);
@@ -143,7 +143,7 @@ class InterfaceValidator
      */
     protected function validateMethodsParameters(array $pluginParameters, array $originParameters, $class, $method)
     {
-        if (count($pluginParameters) != count($originParameters)) {
+        if (\count($pluginParameters) != \count($originParameters)) {
             throw new ValidatorException(
                 new Phrase(
                     'Invalid method signature. Invalid method parameters count in %1::%2',

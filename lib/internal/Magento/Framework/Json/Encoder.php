@@ -44,7 +44,7 @@ class Encoder implements EncoderInterface
      */
     public function encode($valueToEncode)
     {
-        if (is_object($valueToEncode)) {
+        if (\is_object($valueToEncode)) {
             if (method_exists($valueToEncode, 'toJson')) {
                 return $valueToEncode->toJson();
             }

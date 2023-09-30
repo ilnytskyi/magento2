@@ -210,10 +210,10 @@ class Ftp extends AbstractIo
      */
     public function read($filename, $dest = null)
     {
-        if (is_string($dest)) {
+        if (\is_string($dest)) {
             $result = ftp_get($this->_conn, $dest, $filename, $this->_config['file_mode']);
         } else {
-            if (is_resource($dest)) {
+            if (\is_resource($dest)) {
                 $stream = $dest;
             } elseif ($dest === null) {
                 $stream = tmpfile();
@@ -246,14 +246,14 @@ class Ftp extends AbstractIo
      */
     public function write($filename, $src, $mode = null)
     {
-        if (is_string($src) && is_readable($src)) {
+        if (\is_string($src) && is_readable($src)) {
             return @ftp_put($this->_conn, $filename, $src, $this->_config['file_mode']);
         } else {
-            if (is_string($src)) {
+            if (\is_string($src)) {
                 $stream = tmpfile();
                 fputs($stream, $src);
                 fseek($stream, 0);
-            } elseif (is_resource($src)) {
+            } elseif (\is_resource($src)) {
                 $stream = $src;
             } else {
                 $this->_error = self::ERROR_INVALID_SOURCE;
@@ -261,7 +261,7 @@ class Ftp extends AbstractIo
             }
 
             $result = ftp_fput($this->_conn, $filename, $stream, $this->_config['file_mode']);
-            if (is_string($src)) {
+            if (\is_string($src)) {
                 fclose($stream);
             }
             return $result;

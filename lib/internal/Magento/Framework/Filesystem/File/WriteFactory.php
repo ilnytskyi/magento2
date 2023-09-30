@@ -43,7 +43,7 @@ class WriteFactory extends ReadFactory
      */
     public function create($path, $driver, $mode = 'r')
     {
-        if (is_string($driver)) {
+        if (\is_string($driver)) {
             return new Write($path, $this->driverPool->getDriver($driver), $mode);
         }
         return new Write($path, $driver, $mode);

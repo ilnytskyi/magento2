@@ -53,7 +53,7 @@ class SearchResponseBuilder
         $searchResult->setAggregations($response->getAggregations());
         $count = method_exists($response, 'getTotal')
             ? $response->getTotal()
-            : count($documents);
+            : \count($documents);
         $searchResult->setTotalCount($count);
 
         return $searchResult;

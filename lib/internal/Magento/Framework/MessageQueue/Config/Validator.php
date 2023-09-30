@@ -98,12 +98,12 @@ class Validator
     {
         $isDefined = false;
         if (strpos($topicName, '#') === false && strpos($topicName, '*') === false) {
-            if (in_array($topicName, $topics)) {
+            if (\in_array($topicName, $topics)) {
                 $isDefined = true;
             }
         } else {
             $pattern = $this->buildWildcardPattern($topicName);
-            if (count(preg_grep($pattern, $topics))) {
+            if (\count(preg_grep($pattern, $topics))) {
                 $isDefined = true;
             }
         }
@@ -125,7 +125,7 @@ class Validator
         $pattern = '/^' . str_replace('.', '\.', $wildcardKey);
         $pattern = str_replace('#', '.+', $pattern);
         $pattern = str_replace('*', '[^\.]+', $pattern);
-        if (strpos($wildcardKey, '#') === strlen($wildcardKey)) {
+        if (strpos($wildcardKey, '#') === \strlen($wildcardKey)) {
             $pattern .= '/';
         } else {
             $pattern .= '$/';
@@ -145,7 +145,7 @@ class Validator
      */
     public function validateTopicPublisher($publishers, $publisherName, $topicName)
     {
-        if (!in_array($publisherName, $publishers)) {
+        if (!\in_array($publisherName, $publishers)) {
             throw new \LogicException(
                 sprintf(
                     'Publisher "%s", specified in env.php for topic "%s" is not declared.',

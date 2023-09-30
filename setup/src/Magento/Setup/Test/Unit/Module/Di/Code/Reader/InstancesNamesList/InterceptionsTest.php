@@ -96,7 +96,7 @@ class InterceptionsTest extends TestCase
 
         $this->logMock->expects($this->once())->method('report');
 
-        $this->validatorMock->expects($this->exactly(count($classes)))
+        $this->validatorMock->expects($this->exactly(\count($classes)))
             ->method('validate');
 
         $result = $this->model->getList($path);
@@ -148,7 +148,7 @@ class InterceptionsTest extends TestCase
             ->method('add')
             ->with(Log::COMPILATION_ERROR, $classes[0], $exception->getMessage());
 
-        $this->validatorMock->expects($this->exactly(count($classes)))
+        $this->validatorMock->expects($this->exactly(\count($classes)))
             ->method('validate')
             ->willThrowException(
                 $exception

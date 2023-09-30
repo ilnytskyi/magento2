@@ -40,7 +40,7 @@ class UrnResolverTest extends TestCase
     public function testGetRealPathWithFrameworkUrn()
     {
         $xsdUrn = 'urn:magento:framework:Config/Test/Unit/_files/sample.xsd';
-        $xsdPath = str_replace('\\', '/', realpath(dirname(__DIR__)) . '/_files/sample.xsd');
+        $xsdPath = str_replace('\\', '/', realpath(\dirname(__DIR__)) . '/_files/sample.xsd');
         $result = $this->urnResolver->getRealPath($xsdUrn);
         $this->assertSame($xsdPath, $result, 'XSD paths does not match.');
     }

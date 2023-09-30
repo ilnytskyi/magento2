@@ -85,7 +85,7 @@ class StringBinary implements DbDefinitionProcessorInterface
     {
         preg_match($this->getStringBinaryPattern(), $data['definition'] ?? '', $matches);
 
-        if (array_key_exists('padding', $matches) && !empty($matches['padding'])) {
+        if (\array_key_exists('padding', $matches) && !empty($matches['padding'])) {
             $data['length'] = $matches['padding'];
         }
 
@@ -124,6 +124,6 @@ class StringBinary implements DbDefinitionProcessorInterface
      */
     private function isBinaryHex($type, bool $isHex): bool
     {
-        return in_array($type, self::BINARY_TYPES) && $isHex;
+        return \in_array($type, self::BINARY_TYPES) && $isHex;
     }
 }

@@ -53,7 +53,7 @@ class CSSmin implements AdapterInterface
      */
     public function minify($content)
     {
-        $pcreRecursionLimit = ini_get('pcre.recursion_limit');
+        $pcreRecursionLimit = \ini_get('pcre.recursion_limit');
         ini_set('pcre.recursion_limit', self::PCRE_RECURSION_LIMIT);
         $result = $this->getCssMin()->run($content);
         ini_set('pcre.recursion_limit', $pcreRecursionLimit);

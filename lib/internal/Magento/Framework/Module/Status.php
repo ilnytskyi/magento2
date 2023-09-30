@@ -145,7 +145,7 @@ class Status
         $result = [];
         foreach ($this->getAllModules($modules) as $name) {
             $currentStatus = $this->list->has($name);
-            if (in_array($name, $modules)) {
+            if (\in_array($name, $modules)) {
                 $result[$name] = (int)$isEnabled;
             } else {
                 $result[$name] = (int)$currentStatus;
@@ -166,7 +166,7 @@ class Status
         $changed = [];
         foreach ($this->getAllModules($modules) as $name) {
             $currentStatus = $this->list->has($name);
-            if (in_array($name, $modules)) {
+            if (\in_array($name, $modules)) {
                 if ($isEnabled != $currentStatus) {
                     $changed[] = $name;
                 }

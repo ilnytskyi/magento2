@@ -294,11 +294,11 @@ class Config implements \Magento\Framework\Locale\ConfigInterface
      */
     public function __construct(array $data = [])
     {
-        if (isset($data['allowedLocales']) && is_array($data['allowedLocales'])) {
+        if (isset($data['allowedLocales']) && \is_array($data['allowedLocales'])) {
             $this->_allowedLocales = array_merge($this->_allowedLocales, $data['allowedLocales']);
         }
 
-        if (isset($data['allowedCurrencies']) && is_array($data['allowedCurrencies'])) {
+        if (isset($data['allowedCurrencies']) && \is_array($data['allowedCurrencies'])) {
             $this->_allowedCurrencies = array_merge($this->_allowedCurrencies, $data['allowedCurrencies']);
         }
     }

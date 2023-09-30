@@ -49,7 +49,7 @@ class MysqlFactory
         LoggerInterface $logger = null,
         SelectFactory $selectFactory = null
     ) {
-        if (!in_array(Mysql::class, class_parents($className, true) + [$className => $className])) {
+        if (!\in_array(Mysql::class, class_parents($className, true) + [$className => $className])) {
             throw new \InvalidArgumentException('Invalid class, ' . $className . ' must extend ' . Mysql::class . '.');
         }
         $arguments = [

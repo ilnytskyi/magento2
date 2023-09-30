@@ -138,7 +138,7 @@ class PatchRegistry implements \IteratorAggregate
     private function getDependencies(string $patch)
     {
         $depInstances = [];
-        $deps = call_user_func([$patch, 'getDependencies']);
+        $deps = \call_user_func([$patch, 'getDependencies']);
         $this->cyclomaticStack[$patch] = true;
 
         foreach ($deps as $dep) {

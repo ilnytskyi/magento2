@@ -91,13 +91,13 @@ class ConsumerConfiguration implements ConsumerConfigurationInterface
     public function getType()
     {
         $topics = $this->getData(self::TOPICS);
-        if (count($topics) > 1) {
+        if (\count($topics) > 1) {
             throw new \LogicException(
                 'Current method is deprecated and does not support more than 1 topic declarations for consumer. '
                 . 'Use \Magento\Framework\MessageQueue\ConsumerConfiguration::getConsumerType instead. '
                 . "Multiple topics declared for consumer '{$this->getConsumerName()}'"
             );
-        } elseif (count($topics) < 1) {
+        } elseif (\count($topics) < 1) {
             throw new \LogicException(
                 "There must be at least one topic declared for consumer '{$this->getConsumerName()}'."
             );
@@ -121,7 +121,7 @@ class ConsumerConfiguration implements ConsumerConfigurationInterface
     public function getTopicNames()
     {
         $topics = $this->getData(self::TOPICS);
-        return is_array($topics) && count($topics) ? array_keys($topics) : [];
+        return \is_array($topics) && \count($topics) ? array_keys($topics) : [];
     }
 
     /**

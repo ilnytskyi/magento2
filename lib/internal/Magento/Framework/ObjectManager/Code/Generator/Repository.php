@@ -713,7 +713,7 @@ class Repository extends \Magento\Framework\Code\Generator\EntityAbstract
         ];
         $interfaceName = $this->getInterfaceName();
         $methods = $this->getClassMethods($interfaceName);
-        if (!in_array($methodName, $methods)) {
+        if (!\in_array($methodName, $methods)) {
             return $result;
         }
 

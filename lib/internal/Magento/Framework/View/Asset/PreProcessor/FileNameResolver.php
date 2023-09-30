@@ -42,7 +42,7 @@ class FileNameResolver
         $extension = pathinfo($fileName, PATHINFO_EXTENSION);
         foreach ($this->alternativeSources as $name => $alternative) {
             if ($alternative->isExtensionSupported($extension) && !str_starts_with(basename($fileName), '_')) {
-                $compiledFile = substr($fileName, 0, strlen($fileName) - strlen($extension) - 1);
+                $compiledFile = substr($fileName, 0, \strlen($fileName) - \strlen($extension) - 1);
                 $compiledFile = sprintf('%s.%s', $compiledFile, $name);
             }
         }

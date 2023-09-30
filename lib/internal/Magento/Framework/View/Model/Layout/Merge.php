@@ -238,7 +238,7 @@ class Merge implements \Magento\Framework\View\Layout\ProcessorInterface
      */
     public function addUpdate($update)
     {
-        if (!in_array($update, $this->updates)) {
+        if (!\in_array($update, $this->updates)) {
             $this->updates[] = $update;
         }
         return $this;
@@ -272,7 +272,7 @@ class Merge implements \Magento\Framework\View\Layout\ProcessorInterface
      */
     public function addHandle($handleName)
     {
-        if (is_array($handleName)) {
+        if (\is_array($handleName)) {
             foreach ($handleName as $name) {
                 $this->handles[$name] = 1;
             }
@@ -468,9 +468,9 @@ class Merge implements \Magento\Framework\View\Layout\ProcessorInterface
      */
     public function load($handles = [])
     {
-        if (is_string($handles)) {
+        if (\is_string($handles)) {
             $handles = [$handles];
-        } elseif (!is_array($handles)) {
+        } elseif (!\is_array($handles)) {
             throw new \Magento\Framework\Exception\LocalizedException(
                 new \Magento\Framework\Phrase('Invalid layout update handle')
             );
@@ -844,7 +844,7 @@ class Merge implements \Magento\Framework\View\Layout\ProcessorInterface
     private function getXmlErrors($libXmlErrors)
     {
         $errors = [];
-        if (count($libXmlErrors)) {
+        if (\count($libXmlErrors)) {
             foreach ($libXmlErrors as $error) {
                 $errors[] = "{$error->message} Line: {$error->line}";
             }
@@ -991,7 +991,7 @@ class Merge implements \Magento\Framework\View\Layout\ProcessorInterface
             $updateXml = null;
 
             try {
-                $updateXml = is_string($update) ? $this->_loadXmlString($update) : false;
+                $updateXml = \is_string($update) ? $this->_loadXmlString($update) : false;
                 // phpcs:ignore Magento2.CodeAnalysis.EmptyBlock
             } catch (\Exception $exception) {
                 // ignore invalid

@@ -129,7 +129,7 @@ class GeneratorPoolTest extends TestCase
             $reorderMap[] = [$destination, $elementName, $sibling, $isAfter];
         }
         $invocation = $this->structureMock->expects($this->any())->method('reorderChildElement');
-        call_user_func_array([$invocation, 'withConsecutive'], $reorderMap);
+        \call_user_func_array([$invocation, 'withConsecutive'], $reorderMap);
 
         foreach ($schedule['remove'] as $remove) {
             $this->scheduledStructure->setElementToRemoveList($remove);

@@ -151,7 +151,7 @@ class DomTest extends TestCase
      */
     public function testValidate($xml, array $expectedErrors)
     {
-        if (!function_exists('libxml_set_external_entity_loader')) {
+        if (!\function_exists('libxml_set_external_entity_loader')) {
             $this->markTestSkipped('Skipped on HHVM. Will be fixed in MAGETWO-45033');
         }
         $actualErrors = [];
@@ -205,7 +205,7 @@ class DomTest extends TestCase
 
     public function testValidateUnknownError()
     {
-        if (!function_exists('libxml_set_external_entity_loader')) {
+        if (!\function_exists('libxml_set_external_entity_loader')) {
             $this->markTestSkipped('Skipped on HHVM. Will be fixed in MAGETWO-45033');
         }
         $xml = '<root><node id="id1"/><node id="id2"/></root>';
@@ -225,7 +225,7 @@ class DomTest extends TestCase
     public function testValidateDomDocumentThrowsException()
     {
         $this->expectException('Magento\Framework\Config\Dom\ValidationSchemaException');
-        if (!function_exists('libxml_set_external_entity_loader')) {
+        if (!\function_exists('libxml_set_external_entity_loader')) {
             $this->markTestSkipped('Skipped on HHVM. Will be fixed in MAGETWO-45033');
         }
         $xml = '<root><node id="id1"/><node id="id2"/></root>';

@@ -264,7 +264,7 @@ class Filesystem extends \Magento\Framework\Data\Collection
     protected function _collectRecursive($dir)
     {
         $collectedResult = [];
-        if (!is_array($dir)) {
+        if (!\is_array($dir)) {
             $dir = [$dir];
         }
         foreach ($dir as $folder) {
@@ -336,7 +336,7 @@ class Filesystem extends \Magento\Framework\Data\Collection
         }
 
         // calculate totals
-        $this->_totalRecords = count($this->_collectedFiles);
+        $this->_totalRecords = \count($this->_collectedFiles);
         $this->_setIsLoaded();
 
         // paginate and add items
@@ -509,10 +509,10 @@ class Filesystem extends \Magento\Framework\Data\Collection
     protected function _invokeFilter($callback, $callbackParams)
     {
         list($field, $value, $row) = $callbackParams;
-        if (!array_key_exists($field, $row)) {
+        if (!\array_key_exists($field, $row)) {
             return false;
         }
-        return call_user_func_array($callback, $callbackParams);
+        return \call_user_func_array($callback, $callbackParams);
     }
 
     /**
@@ -532,7 +532,7 @@ class Filesystem extends \Magento\Framework\Data\Collection
         $inverted = true;
 
         // simply check whether equals
-        if (!is_array($cond)) {
+        if (!\is_array($cond)) {
             return $this->addCallbackFilter($field, $cond, $type, [$this, 'filterCallbackEq']);
         }
 
@@ -761,7 +761,7 @@ class Filesystem extends \Magento\Framework\Data\Collection
      */
     public function filterCallbackInArray($field, $filterValue, $row)
     {
-        return in_array($row[$field], $filterValue);
+        return \in_array($row[$field], $filterValue);
     }
 
     /**

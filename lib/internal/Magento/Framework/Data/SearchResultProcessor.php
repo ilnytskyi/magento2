@@ -140,7 +140,7 @@ class SearchResultProcessor extends AbstractDataObject implements SearchResultPr
     public function walk($callback, array $args = [])
     {
         $results = [];
-        $useItemCallback = is_string($callback) && strpos($callback, '::') === false;
+        $useItemCallback = \is_string($callback) && strpos($callback, '::') === false;
         foreach ($this->searchResult->getItems() as $id => $item) {
             if ($useItemCallback) {
                 $cb = [$item, $callback];
@@ -148,7 +148,7 @@ class SearchResultProcessor extends AbstractDataObject implements SearchResultPr
                 $cb = $callback;
                 array_unshift($args, $item);
             }
-            $results[$id] = call_user_func_array($cb, $args);
+            $results[$id] = \call_user_func_array($cb, $args);
         }
         return $results;
     }

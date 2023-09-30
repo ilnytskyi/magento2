@@ -62,7 +62,7 @@ class ApplicationCodeGenerator implements OperationInterface
         }
 
         foreach ($this->data['paths'] as $paths) {
-            if (!is_array($paths)) {
+            if (!\is_array($paths)) {
                 $paths = (array)$paths;
             }
 

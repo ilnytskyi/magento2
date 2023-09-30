@@ -134,7 +134,7 @@ class Setup implements SetupInterface
      */
     private function _getTableCacheName($tableName)
     {
-        if (is_array($tableName)) {
+        if (\is_array($tableName)) {
             return join('_', $tableName);
         }
         return $tableName;

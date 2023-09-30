@@ -157,7 +157,7 @@ class Writer
                         new Phrase('The "%1" deployment config file isn\'t writable.', [$paths[$fileKey]])
                     );
                 }
-                if (function_exists('opcache_invalidate')) {
+                if (\function_exists('opcache_invalidate')) {
                     opcache_invalidate(
                         $this->filesystem->getDirectoryRead(DirectoryList::CONFIG)->getAbsolutePath($paths[$fileKey])
                     );

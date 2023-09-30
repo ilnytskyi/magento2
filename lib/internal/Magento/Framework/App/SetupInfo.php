@@ -79,7 +79,7 @@ class SetupInfo
         if (empty($this->server['SCRIPT_FILENAME'])) {
             throw new \InvalidArgumentException('Project root cannot be automatically detected.');
         }
-        $haystack = str_replace('\\', '/', dirname($this->server['SCRIPT_FILENAME']));
+        $haystack = str_replace('\\', '/', \dirname($this->server['SCRIPT_FILENAME']));
         $needle = '/' . $this->getPath();
         $isSetupApp = preg_match('/^(.+?)' . preg_quote($needle, '/') . '$/', $haystack, $matches);
         if ($isSetupApp) {
@@ -114,7 +114,7 @@ class SetupInfo
         } elseif (!$isProjectInDocRoot) {
             return 'http://' . $this->server['HTTP_HOST'] . '/';
         }
-        return 'http://' . $this->server['HTTP_HOST'] . substr($this->projectRoot . '/', strlen($this->docRoot));
+        return 'http://' . $this->server['HTTP_HOST'] . substr($this->projectRoot . '/', \strlen($this->docRoot));
     }
 
     /**
@@ -152,7 +152,7 @@ class SetupInfo
         $lastOccurrence = strrpos($setupDir, '/pub/setup');
 
         if (false !== $lastOccurrence) {
-            $setupDir = substr_replace($setupDir, '/setup', $lastOccurrence, strlen('/pub/setup'));
+            $setupDir = substr_replace($setupDir, '/setup', $lastOccurrence, \strlen('/pub/setup'));
         }
 
         return $isSubDir && realpath($setupDir);

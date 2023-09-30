@@ -68,7 +68,7 @@ class TypeRegistry implements ResetAfterRequestInterface
         if (!isset($this->types[$typeName])) {
             $configElement = $this->config->getConfigElement($typeName);
 
-            $configElementClass = get_class($configElement);
+            $configElementClass = \get_class($configElement);
             if (!isset($this->configToTypeMap[$configElementClass])) {
                 throw new GraphQlInputException(
                     new Phrase(

@@ -220,7 +220,7 @@ class ComposerInformation
         $packages = [];
         /** @var CompletePackageInterface $package */
         foreach ($this->getLocker()->getLockedRepository()->getPackages() as $package) {
-            if ((in_array($package->getType(), self::$packageTypes))
+            if ((\in_array($package->getType(), self::$packageTypes))
                 && (!$this->isSystemPackage($package->getPrettyName()))) {
                 $packages[$package->getName()] = [
                     'name' => $package->getName(),
@@ -297,8 +297,8 @@ class ComposerInformation
      */
     public function isPackageInComposerJson($packageName)
     {
-        return (in_array($packageName, array_keys($this->getComposer()->getPackage()->getRequires()))
-            || in_array($packageName, array_keys($this->getComposer()->getPackage()->getDevRequires()))
+        return (\in_array($packageName, array_keys($this->getComposer()->getPackage()->getRequires()))
+            || \in_array($packageName, array_keys($this->getComposer()->getPackage()->getDevRequires()))
         );
     }
 

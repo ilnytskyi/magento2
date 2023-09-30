@@ -78,7 +78,7 @@ class TMap implements \IteratorAggregate, \Countable, \ArrayAccess
         );
 
         $this->array = $array;
-        $this->counter = count($array);
+        $this->counter = \count($array);
         $this->objectCreationStrategy = $objectCreationStrategy;
     }
 
@@ -96,7 +96,7 @@ class TMap implements \IteratorAggregate, \Countable, \ArrayAccess
             $this->configInterface->getPreference($instanceName)
         );
 
-        if (!in_array(
+        if (!\in_array(
             $this->type,
             array_unique(array_merge(class_parents($realType), class_implements($realType))),
             true
@@ -161,7 +161,7 @@ class TMap implements \IteratorAggregate, \Countable, \ArrayAccess
     #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
-        return array_key_exists($offset, $this->array);
+        return \array_key_exists($offset, $this->array);
     }
 
     /**

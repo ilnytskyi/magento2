@@ -40,7 +40,7 @@ class Xml implements ParserInterface
     {
         if (!isset(
             $options['files_for_parse']
-        ) || !is_array(
+        ) || !\is_array(
             $options['files_for_parse']
         ) || !$options['files_for_parse']
         ) {

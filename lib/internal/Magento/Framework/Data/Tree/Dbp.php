@@ -177,9 +177,9 @@ class Dbp extends \Magento\Framework\Data\Tree
                 $startLevel = $parent[$this->_levelField];
                 $parentPath = $parent[$this->_pathField];
                 $parentNode = null;
-            } elseif (is_string($parentNode)) {
+            } elseif (\is_string($parentNode)) {
                 $parentPath = $parentNode;
-                $startLevel = count(explode(',', $parentPath)) - 1;
+                $startLevel = \count(explode(',', $parentPath)) - 1;
                 $parentNode = null;
             }
 
@@ -320,7 +320,7 @@ class Dbp extends \Magento\Framework\Data\Tree
         $newPath = $newParent->getData($this->_pathField);
 
         $newPath = $newPath . '/' . $node->getId();
-        $oldPathLength = $oldPath !== null ? strlen($oldPath) : 0;
+        $oldPathLength = $oldPath !== null ? \strlen($oldPath) : 0;
 
         $newLevel = $newParent->getLevel() + 1;
         $levelDisposition = $newLevel - $node->getLevel();

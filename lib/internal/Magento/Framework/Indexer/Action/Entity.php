@@ -22,7 +22,7 @@ class Entity extends Base
      */
     protected function prepareDataSource(array $ids = [])
     {
-        return !count($ids)
+        return !\count($ids)
             ? $this->createResultCollection()
             : $this->createResultCollection()->addFieldToFilter($this->getPrimaryResource()->getIdFieldName(), $ids);
     }

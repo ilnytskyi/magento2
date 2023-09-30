@@ -51,8 +51,8 @@ class Config
         }
         if ($sourceData instanceof Element) {
             $this->setXml($sourceData);
-        } elseif (is_string($sourceData) && !empty($sourceData)) {
-            if (strlen($sourceData) < 1000 && is_readable($sourceData)) {
+        } elseif (\is_string($sourceData) && !empty($sourceData)) {
+            if (\strlen($sourceData) < 1000 && is_readable($sourceData)) {
                 $this->loadFile($sourceData);
             } else {
                 $this->loadString($sourceData);

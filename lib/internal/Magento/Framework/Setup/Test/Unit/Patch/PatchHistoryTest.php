@@ -58,8 +58,8 @@ class PatchHistoryTest extends TestCase
             ->method('getTableName')
             ->willReturn(PatchHistory::TABLE_NAME);
         $adapterMock->expects($this->once())->method('insert')
-            ->with(PatchHistory::TABLE_NAME, [PatchHistory::CLASS_NAME => get_class($patch1)]);
-        $this->patchHistory->fixPatch(get_class($patch1));
+            ->with(PatchHistory::TABLE_NAME, [PatchHistory::CLASS_NAME => \get_class($patch1)]);
+        $this->patchHistory->fixPatch(\get_class($patch1));
     }
 
     public function testFixAppliedPatch()
@@ -74,12 +74,12 @@ class PatchHistoryTest extends TestCase
         $selectMock = $this->createMock(Select::class);
         $selectMock->expects($this->once())->method('from');
         $adapterMock->expects($this->any())->method('select')->willReturn($selectMock);
-        $adapterMock->expects($this->once())->method('fetchCol')->willReturn([get_class($patch1)]);
+        $adapterMock->expects($this->once())->method('fetchCol')->willReturn([\get_class($patch1)]);
         $this->resourceConnectionMock->expects($this->any())
             ->method('getTableName')
             ->willReturn(PatchHistory::TABLE_NAME);
         $adapterMock->expects($this->never())->method('insert');
-        $this->patchHistory->fixPatch(get_class($patch1));
+        $this->patchHistory->fixPatch(\get_class($patch1));
     }
 
     public function testFixPatchTwice()
@@ -100,7 +100,7 @@ class PatchHistoryTest extends TestCase
         $adapterMock->expects($this->once())->method('fetchCol')->willReturn([]);
         $adapterMock->expects($this->once())->method('insert');
 
-        $this->patchHistory->fixPatch(get_class($patch));
-        $this->patchHistory->fixPatch(get_class($patch));
+        $this->patchHistory->fixPatch(\get_class($patch));
+        $this->patchHistory->fixPatch(\get_class($patch));
     }
 }

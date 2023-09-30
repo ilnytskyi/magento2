@@ -39,7 +39,7 @@ class OrderRenderer implements RendererInterface
         if ($select->getPart(Select::ORDER)) {
             $order = [];
             foreach ($select->getPart(Select::ORDER) as $term) {
-                if (is_array($term)) {
+                if (\is_array($term)) {
                     if (is_numeric($term[0]) && (string)(int)$term[0] == $term[0]) {
                         $order[] = (int)trim($term[0]) . ' ' . $term[1];
                     } else {

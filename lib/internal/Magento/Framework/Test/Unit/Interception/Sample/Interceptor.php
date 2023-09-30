@@ -40,7 +40,7 @@ class Interceptor extends Entity implements InterceptorInterface
         if (!$pluginInfo) {
             return parent::doSomething();
         } else {
-            return $this->___callPlugins('doSomething', func_get_args(), $pluginInfo);
+            return $this->___callPlugins('doSomething', \func_get_args(), $pluginInfo);
         }
     }
 

@@ -82,7 +82,7 @@ abstract class AbstractFile implements WriterInterface
         $this->_mode = $mode;
 
         foreach ($this->_buildPackFilesData($dictionary) as $file => $phrases) {
-            $this->_createDirectoryIfNotExist(dirname($file));
+            $this->_createDirectoryIfNotExist(\dirname($file));
             $this->_writeFile($file, $phrases);
         }
     }

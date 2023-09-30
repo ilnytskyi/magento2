@@ -95,7 +95,7 @@ class DataObjectProcessor
         $excludedMethodsForDataObjectType = $this->excludedMethodsClassMap[$dataObjectType] ?? [];
 
         foreach (array_keys($methods) as $methodName) {
-            if (in_array($methodName, $excludedMethodsForDataObjectType)) {
+            if (\in_array($methodName, $excludedMethodsForDataObjectType)) {
                 continue;
             }
 
@@ -126,13 +126,13 @@ class DataObjectProcessor
                     continue;
                 }
             } else {
-                if (is_object($value) && !($value instanceof Phrase)) {
+                if (\is_object($value) && !($value instanceof Phrase)) {
                     $value = $this->buildOutputDataArray($value, $returnType);
-                } elseif (is_array($value)) {
+                } elseif (\is_array($value)) {
                     $valueResult = [];
                     $arrayElementType = $returnType !== null ? substr($returnType, 0, -2) : '';
                     foreach ($value as $singleValue) {
-                        if (is_object($singleValue) && !($singleValue instanceof Phrase)) {
+                        if (\is_object($singleValue) && !($singleValue instanceof Phrase)) {
                             $singleValue = $this->buildOutputDataArray($singleValue, $arrayElementType);
                         }
                         $valueResult[] = $this->typeCaster->castValueToType($singleValue, $arrayElementType);

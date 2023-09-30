@@ -125,7 +125,7 @@ class Filesystem implements \Magento\Framework\Config\ReaderInterface
     {
         $scope = $scope ?: $this->_defaultScope;
         $fileList = $this->_fileResolver->get($this->_fileName, $scope);
-        if (!count($fileList)) {
+        if (!\count($fileList)) {
             return [];
         }
         $output = $this->_readFiles($fileList);

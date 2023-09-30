@@ -225,7 +225,7 @@ class StaticResource implements \Magento\Framework\AppInterface
         $path = $path !== null ? ltrim($path, '/') : '';
         $safePath = $this->driver->getRealPathSafety($path);
         $parts = explode('/', $safePath, 6);
-        if (count($parts) < 5) {
+        if (\count($parts) < 5) {
             //Checking that path contains all required parts and is not above static folder.
             throw new \InvalidArgumentException("Requested path '$path' is wrong.");
         }
@@ -234,7 +234,7 @@ class StaticResource implements \Magento\Framework\AppInterface
         $result['area'] = $parts[0];
         $result['theme'] = $parts[1] . '/' . $parts[2];
         $result['locale'] = $parts[3];
-        if (count($parts) >= 6 && $this->moduleList->has($parts[4])) {
+        if (\count($parts) >= 6 && $this->moduleList->has($parts[4])) {
             $result['module'] = $parts[4];
         } else {
             $result['module'] = '';
@@ -285,6 +285,6 @@ class StaticResource implements \Magento\Framework\AppInterface
      */
     private function isThemeAllowed(string $theme): bool
     {
-        return in_array($theme, array_keys($this->themePackageList->getThemes()));
+        return \in_array($theme, array_keys($this->themePackageList->getThemes()));
     }
 }

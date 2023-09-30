@@ -92,7 +92,7 @@ class Tree
             $connection = $config['db'];
 
             // use an object from the registry?
-            if (is_string($connection)) {
+            if (\is_string($connection)) {
                 /** @phpstan-ignore-next-line */
                 $connection = \Zend::registry($connection);
             }

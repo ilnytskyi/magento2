@@ -140,7 +140,7 @@ class ArgumentsResolver
     private function getConfiguredArrayAttribute($array)
     {
         foreach ($array as $key => $value) {
-            if (!is_array($value)) {
+            if (!\is_array($value)) {
                 continue;
             }
 
@@ -234,7 +234,7 @@ class ArgumentsResolver
         }
 
         $argument = $this->valuePattern;
-        if (is_array($value)) {
+        if (\is_array($value)) {
             if ($this->isConfiguredArray($value)) {
                 $value = $this->getConfiguredArrayAttribute($value);
                 $argument = $this->configuredArrayValuePattern;
@@ -256,11 +256,11 @@ class ArgumentsResolver
     private function isConfiguredArray($value)
     {
         foreach ($value as $configuredValue) {
-            if (!is_array($configuredValue)) {
+            if (!\is_array($configuredValue)) {
                 continue;
             }
 
-            if (array_key_exists('instance', $configuredValue) || array_key_exists('argument', $configuredValue)) {
+            if (\array_key_exists('instance', $configuredValue) || \array_key_exists('argument', $configuredValue)) {
                 return true;
             }
 

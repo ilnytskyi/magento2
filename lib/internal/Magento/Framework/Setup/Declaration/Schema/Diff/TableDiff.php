@@ -181,7 +181,7 @@ class TableDiff
                 $declaredElements = $this->excludeAutoIndexes($declaredTable, $declaredElements);
             }
 
-            if (in_array($elementType, [self::CONSTRAINT_DIFF_TYPE, self::INDEX_DIFF_TYPE], true)) {
+            if (\in_array($elementType, [self::CONSTRAINT_DIFF_TYPE, self::INDEX_DIFF_TYPE], true)) {
                 $generatedElements = $this->getElementsListByNameWithoutPrefix($generatedElements);
                 $declaredElements = $this->getElementsListByNameWithoutPrefix($declaredElements);
             }

@@ -129,7 +129,7 @@ class Cache
     public function save($object, $idx = null, $tags = null)
     {
         //\Magento\Framework\Profiler::start('OBJECT_SAVE');
-        if (!is_object($object)) {
+        if (!\is_object($object)) {
             return false;
         }
 
@@ -153,7 +153,7 @@ class Cache
             throw new \Magento\Framework\Exception\LocalizedException(
                 new \Magento\Framework\Phrase(
                     'Object already exists in registry (%1). Old object class: %2, new object class: %3',
-                    [$idx, get_class($this->_objects[$idx]), get_class($object)]
+                    [$idx, \get_class($this->_objects[$idx]), \get_class($object)]
                 )
             );
         }
@@ -163,10 +163,10 @@ class Cache
         $this->_hashes[$hash] = $idx;
         $this->_objectHashes[$idx] = $hash;
 
-        if (is_string($tags)) {
+        if (\is_string($tags)) {
             $this->_tags[$tags][$idx] = true;
             $this->_objectTags[$idx][$tags] = true;
-        } elseif (is_array($tags)) {
+        } elseif (\is_array($tags)) {
             foreach ($tags as $t) {
                 $this->_tags[$t][$idx] = true;
                 $this->_objectTags[$idx][$t] = true;
@@ -187,7 +187,7 @@ class Cache
      */
     public function reference($refName, $idx)
     {
-        if (is_array($refName)) {
+        if (\is_array($refName)) {
             foreach ($refName as $ref) {
                 $this->reference($ref, $idx);
             }
@@ -217,7 +217,7 @@ class Cache
     public function delete($idx)
     {
         //\Magento\Framework\Profiler::start("OBJECT_DELETE");
-        if (is_object($idx)) {
+        if (\is_object($idx)) {
             $idx = $this->find($idx);
             if (false === $idx) {
                 //\Magento\Framework\Profiler::stop("OBJECT_DELETE");
@@ -277,7 +277,7 @@ class Cache
      */
     public function deleteByTags($tags)
     {
-        if (is_string($tags)) {
+        if (\is_string($tags)) {
             $tags = [$tags];
         }
         foreach ($tags as $t) {
@@ -325,7 +325,7 @@ class Cache
     {
         $objects = [];
         foreach ($this->_objects as $idx => $obj) {
-            if (in_array($idx, $ids)) {
+            if (\in_array($idx, $ids)) {
                 $objects[$idx] = $obj;
             }
         }
@@ -352,7 +352,7 @@ class Cache
      */
     public function findByTags($tags)
     {
-        if (is_string($tags)) {
+        if (\is_string($tags)) {
             $tags = [$tags];
         }
         $objects = [];
@@ -414,7 +414,7 @@ class Cache
      */
     public function debugByIds($ids)
     {
-        if (is_string($ids)) {
+        if (\is_string($ids)) {
             $ids = [$ids];
         }
         $debug = [];

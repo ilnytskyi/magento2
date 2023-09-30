@@ -310,7 +310,7 @@ class Socket implements \Magento\Framework\HTTP\ClientInterface
         $out = [];
         foreach ($this->_responseHeaders['Set-Cookie'] as $row) {
             $values = explode("; ", $row ?? '');
-            $c = count($values);
+            $c = \count($values);
             if (!$c) {
                 continue;
             }
@@ -337,7 +337,7 @@ class Socket implements \Magento\Framework\HTTP\ClientInterface
         $out = [];
         foreach ($this->_responseHeaders['Set-Cookie'] as $row) {
             $values = explode("; ", $row ?? '');
-            $c = count($values);
+            $c = \count($values);
             if (!$c) {
                 continue;
             }
@@ -375,7 +375,7 @@ class Socket implements \Magento\Framework\HTTP\ClientInterface
             }
             $name = $value = '';
             $out = explode(": ", trim($line), 2);
-            if (count($out) == 2) {
+            if (\count($out) == 2) {
                 $name = $out[0];
                 $value = $out[1];
             }
@@ -418,7 +418,7 @@ class Socket implements \Magento\Framework\HTTP\ClientInterface
         $responseLine = trim(fgets($this->_sock, 1024));
 
         $line = explode(" ", $responseLine, 3);
-        if (count($line) != 3) {
+        if (\count($line) != 3) {
             // phpstan:ignore "Result of method Magento\Framework\HTTP\Client\Socket::doError() (void) is used."
             return $this->doError("Invalid response line returned from server: " . $responseLine);
         }
@@ -476,9 +476,9 @@ class Socket implements \Magento\Framework\HTTP\ClientInterface
         $appendHeaders = [];
         $paramsStr = false;
         if ($isPost && $params) {
-            $paramsStr = is_array($params) ? http_build_query($params) : $params;
+            $paramsStr = \is_array($params) ? http_build_query($params) : $params;
             $appendHeaders['Content-type'] = 'application/x-www-form-urlencoded';
-            $appendHeaders['Content-length'] = strlen($paramsStr);
+            $appendHeaders['Content-length'] = \strlen($paramsStr);
         }
 
         $out = "{$method} {$uri} HTTP/1.1{$crlf}";

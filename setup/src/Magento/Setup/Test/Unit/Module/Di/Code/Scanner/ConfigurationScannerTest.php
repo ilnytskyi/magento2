@@ -61,7 +61,7 @@ class ConfigurationScannerTest extends TestCase
         $this->areaListMock->expects($this->once())
             ->method('getCodes')
             ->willReturn($codes);
-        $counts = count($codes) + 2;
+        $counts = \count($codes) + 2;
         $this->fileResolverMock->expects($this->exactly($counts))
             ->method('get')
             ->willReturn($iteratorMock);

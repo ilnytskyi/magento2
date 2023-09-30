@@ -72,7 +72,7 @@ class Generator
         $dictionary = $this->dictionaryLoader->load($dictionaryPath);
 
         $phrases = $dictionary->getPhrases();
-        if (!is_array($phrases) || !count($phrases)) {
+        if (!\is_array($phrases) || !\count($phrases)) {
             throw new \UnexpectedValueException('No phrases have been found by the specified path.');
         }
 
@@ -101,7 +101,7 @@ class Generator
             $error .= sprintf(
                 "The phrase \"%s\" is translated in %d places.\n",
                 $phrase->getPhrase(),
-                count($phrases)
+                \count($phrases)
             );
         }
         return $error;

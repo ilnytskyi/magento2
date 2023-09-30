@@ -99,7 +99,7 @@ class DirectoryTest extends TestCase
 
         $this->classReaderMock->expects(
             $this->exactly(
-                count($classes)
+                \count($classes)
             )
         )
             ->method('getParents')
@@ -110,7 +110,7 @@ class DirectoryTest extends TestCase
         $this->logMock->expects($this->never())
             ->method('add');
 
-        $this->validatorMock->expects($this->exactly(count($classes)))
+        $this->validatorMock->expects($this->exactly(\count($classes)))
             ->method('validate');
 
         $this->model->getList($path);
@@ -140,7 +140,7 @@ class DirectoryTest extends TestCase
             ['NameSpace1\ClassName2', ['Parent_Class_Name', 'Interface_1', 'Interface_2']]
         ];
 
-        $this->classReaderMock->expects($this->exactly(count($classes)))
+        $this->classReaderMock->expects($this->exactly(\count($classes)))
             ->method('getParents')
             ->willReturnMap(
                 $parents
@@ -183,7 +183,7 @@ class DirectoryTest extends TestCase
             ->method('add')
             ->with(Log::COMPILATION_ERROR, $classes[0], $exception->getMessage());
 
-        $this->validatorMock->expects($this->exactly(count($classes)))
+        $this->validatorMock->expects($this->exactly(\count($classes)))
             ->method('validate')
             ->willThrowException(
                 $exception

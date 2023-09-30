@@ -114,7 +114,7 @@ class Sftp extends AbstractIo
                 throw new Exception("chdir(): {$dir}: Not a directory");
             }
             $list = $this->_connection->nlist();
-            if (!count($list)) {
+            if (!\count($list)) {
                 // Go back
                 $this->_connection->chdir($currentWorkingDir);
                 return $this->rmdir($dir, false);

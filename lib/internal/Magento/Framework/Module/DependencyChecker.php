@@ -97,9 +97,9 @@ class DependencyChecker
             $paths = $graph->findPathsToReachableNodes($moduleName, $graphMode);
             foreach ($modules as $module) {
                 if (isset($paths[$module])) {
-                    if ($isEnable && !in_array($module, $enabledModules)) {
+                    if ($isEnable && !\in_array($module, $enabledModules)) {
                         $dependenciesMissing[$module] = $paths[$module];
-                    } elseif (!$isEnable && in_array($module, $enabledModules)) {
+                    } elseif (!$isEnable && \in_array($module, $enabledModules)) {
                         $dependenciesMissing[$module] = array_reverse($paths[$module]);
                     }
                 }

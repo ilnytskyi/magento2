@@ -377,7 +377,7 @@ class ModuleUninstallCommand extends AbstractModuleCommand
         }
         $unknownPackages = array_diff($unknownPackages, $unknownModules);
         if (!empty($unknownPackages)) {
-            $text = count($unknownPackages) > 1 ?
+            $text = \count($unknownPackages) > 1 ?
                 ' are not installed composer packages' : ' is not an installed composer package';
             $messages[] = '<error>' . implode(', ', $unknownPackages) . $text . '</error>';
         }

@@ -55,8 +55,8 @@ abstract class Fixture
     {
         foreach ($this->introduceParamLabels() as $configName => $label) {
             $configValue = $this->fixtureModel->getValue($configName);
-            $generationCount = is_array($configValue) === true
-                ? count($configValue[array_keys($configValue)[0]])
+            $generationCount = \is_array($configValue) === true
+                ? \count($configValue[array_keys($configValue)[0]])
                 : $configValue;
 
             if (!empty($generationCount)) {

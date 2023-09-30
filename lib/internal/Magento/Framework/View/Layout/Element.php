@@ -104,7 +104,7 @@ class Element extends \Magento\Framework\Simplexml\Element
     public function getBlockName()
     {
         $tagName = (string)$this->getName();
-        $isThisBlock = empty($this['name']) || !in_array(
+        $isThisBlock = empty($this['name']) || !\in_array(
             $tagName,
             [self::TYPE_BLOCK, self::TYPE_REFERENCE_BLOCK]
         );
@@ -125,7 +125,7 @@ class Element extends \Magento\Framework\Simplexml\Element
     public function getElementName()
     {
         $tagName = $this->getName();
-        $isThisContainer = !in_array(
+        $isThisContainer = !\in_array(
             $tagName,
             [self::TYPE_BLOCK, self::TYPE_REFERENCE_BLOCK, self::TYPE_CONTAINER, self::TYPE_REFERENCE_CONTAINER]
         );
@@ -208,6 +208,6 @@ class Element extends \Magento\Framework\Simplexml\Element
      */
     public function isCacheable()
     {
-        return !(bool)count($this->xpath('//' . self::TYPE_BLOCK . '[@cacheable="false"]'));
+        return !(bool)\count($this->xpath('//' . self::TYPE_BLOCK . '[@cacheable="false"]'));
     }
 }

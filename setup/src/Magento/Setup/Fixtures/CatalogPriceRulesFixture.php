@@ -61,7 +61,7 @@ class CatalogPriceRulesFixture extends Fixture
                 foreach ($resultsCategories as $resultsCategory) {
                     $category->load($resultsCategory);
                     $structure = explode('/', $category->getPath());
-                    if (count($structure) > 2) {
+                    if (\count($structure) > 2) {
                         $categoriesArray[] = [$category->getId(), $website->getId()];
                     }
                 }
@@ -80,7 +80,7 @@ class CatalogPriceRulesFixture extends Fixture
                 'name'                  => $ruleName,
                 'description'           => '',
                 'is_active'             => '1',
-                'website_ids'           => $categoriesArray[$i % count($categoriesArray)][1],
+                'website_ids'           => $categoriesArray[$i % \count($categoriesArray)][1],
                 'customer_group_ids'    => [
                     0 => '0',
                     1 => '1',
@@ -102,7 +102,7 @@ class CatalogPriceRulesFixture extends Fixture
                             'type' => \Magento\CatalogRule\Model\Rule\Condition\Product::class,
                             'attribute' => 'category_ids',
                             'operator' => '==',
-                            'value' => $categoriesArray[$i % count($categoriesArray)][0],
+                            'value' => $categoriesArray[$i % \count($categoriesArray)][0],
                         ],
                     ],
                 ],

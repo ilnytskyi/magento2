@@ -22,13 +22,13 @@ class Production extends \Magento\Framework\ObjectManager\Factory\AbstractFactor
     protected function _resolveArguments($requestedType, array $parameters, array $arguments = [])
     {
         $resolvedArguments = [];
-        $arguments = count($arguments)
+        $arguments = \count($arguments)
             ? array_replace($this->config->getArguments($requestedType), $arguments)
             : $this->config->getArguments($requestedType);
         foreach ($parameters as $parameter) {
             list($paramName, $paramType, $paramRequired, $paramDefault) = $parameter;
             $argument = null;
-            if (!empty($arguments) && (isset($arguments[$paramName]) || array_key_exists($paramName, $arguments))) {
+            if (!empty($arguments) && (isset($arguments[$paramName]) || \array_key_exists($paramName, $arguments))) {
                 $argument = $arguments[$paramName];
             } elseif ($paramRequired) {
                 $argument = ['instance' => $paramType];

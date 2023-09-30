@@ -179,12 +179,12 @@ class Base implements \Magento\Framework\App\RouterInterface
 
         $path = trim($request->getPathInfo(), '/');
 
-        $params = explode('/', strlen($path) ? $path : $this->pathConfig->getDefaultPath());
+        $params = explode('/', \strlen($path) ? $path : $this->pathConfig->getDefaultPath());
         foreach ($this->_requiredParams as $paramName) {
             $output[$paramName] = array_shift($params);
         }
 
-        for ($i = 0, $l = count($params); $i < $l; $i += 2) {
+        for ($i = 0, $l = \count($params); $i < $l; $i += 2) {
             $output['variables'][$params[$i]] = isset($params[$i + 1]) ? urldecode($params[$i + 1]) : '';
         }
         return $output;
@@ -202,7 +202,7 @@ class Base implements \Magento\Framework\App\RouterInterface
         // get module name
         if ($request->getModuleName()) {
             $moduleFrontName = $request->getModuleName();
-        } elseif (strlen((string) $param)) {
+        } elseif (\strlen((string) $param)) {
             $moduleFrontName = $param;
         } else {
             $moduleFrontName = $this->_defaultPath->getPart('module');
@@ -271,7 +271,7 @@ class Base implements \Magento\Framework\App\RouterInterface
     protected function matchAction(\Magento\Framework\App\RequestInterface $request, array $params)
     {
         $moduleFrontName = $this->matchModuleFrontName($request, $params['moduleFrontName']);
-        if (!strlen((string) $moduleFrontName)) {
+        if (!\strlen((string) $moduleFrontName)) {
             return null;
         }
 

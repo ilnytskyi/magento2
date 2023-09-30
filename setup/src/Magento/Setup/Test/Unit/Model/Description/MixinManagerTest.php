@@ -61,7 +61,7 @@ class MixinManagerTest extends TestCase
             ->willReturn($description . 'xyz');
 
         $this->mixinFactoryMock
-            ->expects($this->exactly(count($mixinList)))
+            ->expects($this->exactly(\count($mixinList)))
             ->method('create')
             ->withConsecutive(
                 [$mixinList[0]],

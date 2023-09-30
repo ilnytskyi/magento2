@@ -36,8 +36,8 @@ class Driver
      */
     public function execute($command, $arguments)
     {
-        $disabled = explode(',', str_replace(' ', ',', ini_get('disable_functions')));
-        if (in_array('exec', $disabled)) {
+        $disabled = explode(',', str_replace(' ', ',', \ini_get('disable_functions')));
+        if (\in_array('exec', $disabled)) {
             throw new LocalizedException(new \Magento\Framework\Phrase('The exec function is disabled.'));
         }
 

@@ -532,7 +532,7 @@ class MysqlTest extends TestCase
             )
         );
 
-        $this->expectException(get_class($exception));
+        $this->expectException(\get_class($exception));
         $this->expectExceptionMessage($exception->getMessage());
 
         $adapter = $this->getMysqlPdoAdapterMock([
@@ -588,7 +588,7 @@ class MysqlTest extends TestCase
             )
             ->willThrowException($exception);
         $adapter
-            ->expects($this->exactly((int)in_array(strtolower($indexType), ['primary', 'unique'])))
+            ->expects($this->exactly((int)\in_array(strtolower($indexType), ['primary', 'unique'])))
             ->method('_removeDuplicateEntry')
             ->with($tableName, $fields, $ids)
             ->willThrowException($exception);
@@ -771,7 +771,7 @@ class MysqlTest extends TestCase
 
         /** add profiler Mock */
         $resourceProperty = new \ReflectionProperty(
-            get_class($adapterMock),
+            \get_class($adapterMock),
             '_profiler'
         );
         $resourceProperty->setAccessible(true);
@@ -787,7 +787,7 @@ class MysqlTest extends TestCase
     private function addConnectionMock(MockObject $pdoAdapterMock): void
     {
         $resourceProperty = new \ReflectionProperty(
-            get_class($pdoAdapterMock),
+            \get_class($pdoAdapterMock),
             '_connection'
         );
         $resourceProperty->setAccessible(true);

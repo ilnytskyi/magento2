@@ -33,7 +33,7 @@ class Dom implements \Magento\Framework\Config\ConverterInterface
                 }
                 $childrenData = $this->convert($node);
 
-                if (is_array($childrenData)) {
+                if (\is_array($childrenData)) {
                     $nodeData = array_merge($nodeData, $childrenData);
                 } else {
                     $nodeData[self::CONTENT] = $childrenData;

@@ -197,12 +197,12 @@ class SimpleProductsFixture extends Fixture
         $attributeSet = function ($index) use ($defaultAttributeSets, $additionalAttributeSetIds) {
             // phpcs:ignore
             mt_srand($index);
-            $attributeSetCount = count(array_keys($defaultAttributeSets));
+            $attributeSetCount = \count(array_keys($defaultAttributeSets));
             if ($attributeSetCount > (($index - 1) % (int)$this->fixtureModel->getValue('categories', 30))) {
                 // phpcs:ignore Magento2.Security.InsecureFunction
-                return array_keys($defaultAttributeSets)[mt_rand(0, count(array_keys($defaultAttributeSets)) - 1)];
+                return array_keys($defaultAttributeSets)[mt_rand(0, \count(array_keys($defaultAttributeSets)) - 1)];
             } else {
-                $customSetsAmount = count($additionalAttributeSetIds);
+                $customSetsAmount = \count($additionalAttributeSetIds);
                 return $customSetsAmount
                     ? $additionalAttributeSetIds[$index % $customSetsAmount]
                     : $this->getDefaultAttributeSetId();
@@ -225,7 +225,7 @@ class SimpleProductsFixture extends Fixture
             if (!empty($attributeValuesByAttributeSet)) {
                 foreach ($attributeValuesByAttributeSet as $attributeCode => $values) {
                     // phpcs:ignore Magento2.Security.InsecureFunction
-                    $attributeValues[$attributeCode] = $values[mt_rand(0, count($values) - 1)];
+                    $attributeValues[$attributeCode] = $values[mt_rand(0, \count($values) - 1)];
                 }
             }
 
@@ -301,9 +301,9 @@ class SimpleProductsFixture extends Fixture
         $attributeSets = $this->fixtureModel->getValue('attribute_sets', null);
         $attributes = [];
 
-        if ($attributeSets !== null && array_key_exists('attribute_set', $attributeSets)) {
+        if ($attributeSets !== null && \array_key_exists('attribute_set', $attributeSets)) {
             foreach ($attributeSets['attribute_set'] as $attributeSet) {
-                $attributesData = array_key_exists(0, $attributeSet['attributes']['attribute'])
+                $attributesData = \array_key_exists(0, $attributeSet['attributes']['attribute'])
                     ? $attributeSet['attributes']['attribute'] : [$attributeSet['attributes']['attribute']];
 
                 $attributeCollection = $this->attributeCollectionFactory->create();
@@ -330,7 +330,7 @@ class SimpleProductsFixture extends Fixture
     {
         $searchTerms = $this->fixtureModel->getValue('search_terms', []);
         if (!empty($searchTerms)) {
-            $searchTerms = array_key_exists(0, $searchTerms['search_term'])
+            $searchTerms = \array_key_exists(0, $searchTerms['search_term'])
                 ? $searchTerms['search_term'] : [$searchTerms['search_term']];
         }
 

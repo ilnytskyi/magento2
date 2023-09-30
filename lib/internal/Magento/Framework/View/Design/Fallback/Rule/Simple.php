@@ -53,7 +53,7 @@ class Simple implements RuleInterface
         if (preg_match_all('/<([a-zA-Z\_]+)>/', $pattern, $matches)) {
             foreach ($matches[1] as $placeholder) {
                 if (empty($params[$placeholder])) {
-                    if (in_array($placeholder, $this->optionalParams)) {
+                    if (\in_array($placeholder, $this->optionalParams)) {
                         return [];
                     } else {
                         throw new InvalidArgumentException("Required parameter '{$placeholder}' was not passed");

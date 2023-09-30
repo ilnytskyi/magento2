@@ -79,7 +79,7 @@ class QueryProcessor
         array $variableValues = null,
         string $operationName = null
     ): array {
-        if (is_string($source)) {
+        if (\is_string($source)) {
             $source = $this->queryParser->parse($source);
         }
         if (!$this->exceptionFormatter->shouldShowDetail()) {

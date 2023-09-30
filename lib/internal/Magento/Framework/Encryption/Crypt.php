@@ -70,7 +70,7 @@ class Crypt
             $allowedCharacters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
             $initVector = '';
             for ($i = 0; $i < $initVectorSize; $i++) {
-                $initVector .= $allowedCharacters[random_int(0, strlen($allowedCharacters) - 1)];
+                $initVector .= $allowedCharacters[random_int(0, \strlen($allowedCharacters) - 1)];
             }
             //phpcs:disable
             @mcrypt_generic_deinit($handle);
@@ -124,7 +124,7 @@ class Crypt
      */
     public function encrypt($data)
     {
-        if (!$data || strlen($data) == 0) {
+        if (!$data || \strlen($data) == 0) {
             return $data;
         }
         // @codingStandardsIgnoreLine

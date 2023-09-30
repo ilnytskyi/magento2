@@ -99,7 +99,7 @@ class Condition
                 continue;
             }
             $result = $this->argumentInterpreter->evaluate($argumentData);
-            if (is_array($result)) {
+            if (\is_array($result)) {
                 $argumentsData[$argumentName] = isset($argumentsData[$argumentName])
                     ? array_replace_recursive($argumentsData[$argumentName], $result)
                     : $result;

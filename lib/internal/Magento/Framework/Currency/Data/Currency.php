@@ -100,18 +100,18 @@ class Currency
     {
         $callOptions = $options;
 
-        if (is_array($options) && isset($options['display'])) {
+        if (\is_array($options) && isset($options['display'])) {
             $this->options['display'] = $options['display'];
         }
         $this->setLocale($locale);
 
-        if (!isset($this->options['currency']) || !is_array($options)) {
+        if (!isset($this->options['currency']) || !\is_array($options)) {
             $this->options['currency'] = $this->getShortName($options, $this->options['locale']);
         }
-        if (!isset($this->options['name']) || !is_array($options)) {
+        if (!isset($this->options['name']) || !\is_array($options)) {
             $this->options['name'] = $this->getName($options, $this->options['locale']);
         }
-        if (!isset($this->options['symbol']) || !is_array($options)) {
+        if (!isset($this->options['symbol']) || !\is_array($options)) {
             $this->options['symbol'] = $this->getSymbol($options, $this->options['locale']);
         }
         if ($this->options['currency'] === null && $this->options['name'] === null) {
@@ -120,8 +120,8 @@ class Currency
                 $options
             ));
         }
-        if ((is_array($callOptions) && !isset($callOptions['display']))
-            || (!is_array($callOptions) && $this->options['display'] == self::NO_SYMBOL)) {
+        if ((\is_array($callOptions) && !isset($callOptions['display']))
+            || (!\is_array($callOptions) && $this->options['display'] == self::NO_SYMBOL)) {
             if (!empty($this->options['symbol'])) {
                 $this->options['display'] = self::USE_SYMBOL;
             } elseif (!empty($this->options['currency'])) {
@@ -145,7 +145,7 @@ class Currency
         if ($value === null) {
             $value = $options['value'] ?? $this->options['value'];
         }
-        if (is_array($value)) {
+        if (\is_array($value)) {
             $options += $value;
             if (isset($options['value'])) {
                 $value = $options['value'];
@@ -238,7 +238,7 @@ class Currency
             $locale = $currency;
             $currency = null;
         }
-        if (strlen($locale) > 4) {
+        if (\strlen($locale) > 4) {
             $country = substr($locale, (strpos($locale, '_') + 1));
         } else {
             throw new CurrencyException(__(
@@ -370,7 +370,7 @@ class Currency
     public function getCurrencyList($region = null): array
     {
         if (empty($region)) {
-            if (strlen($this->options['locale']) > 4) {
+            if (\strlen($this->options['locale']) > 4) {
                 $region = substr($this->options['locale'], (strpos($this->options['locale'], '_') + 1));
             }
         }
@@ -471,7 +471,7 @@ class Currency
     {
         $locale = $locale ?? Locale::getDefault();
 
-        if (strlen($locale) > 4) {
+        if (\strlen($locale) > 4) {
             $this->options['locale'] = $locale;
         } else {
             throw new CurrencyException(__(
@@ -716,7 +716,7 @@ class Currency
      */
     protected function checkOptions($options = []): array
     {
-        if (count($options) === 0) {
+        if (\count($options) === 0) {
             return $this->options;
         }
 
@@ -724,14 +724,14 @@ class Currency
             $name = strtolower($name);
 
             if ($name !== 'format') {
-                if (gettype($value) === 'string') {
+                if (\gettype($value) === 'string') {
                     $value = strtolower($value);
                 }
             }
 
             switch ($name) {
                 case 'position':
-                    if (!in_array($value, [self::STANDARD, self::RIGHT, self::LEFT], true)) {
+                    if (!\in_array($value, [self::STANDARD, self::RIGHT, self::LEFT], true)) {
                         throw new CurrencyException(
                             __('Unknown position "%1"', $value)
                         );
@@ -739,7 +739,7 @@ class Currency
                     break;
                 case 'display':
                     if (is_numeric($value)
-                        && !in_array(
+                        && !\in_array(
                             $value,
                             [self::NO_SYMBOL, self::USE_SYMBOL, self::USE_SHORTNAME, self::USE_NAME],
                             true

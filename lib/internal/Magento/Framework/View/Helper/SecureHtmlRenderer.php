@@ -148,14 +148,14 @@ class SecureHtmlRenderer
         $stylesAssignments = '';
         foreach ($stylePairs as $stylePair) {
             $exploded = array_map('trim', explode(':', $stylePair));
-            if (count($exploded) < 2) {
+            if (\count($exploded) < 2) {
                 throw new \InvalidArgumentException('Invalid CSS given');
             }
             //Converting to camelCase
             $styleAttribute = lcfirst(str_replace(' ', '', ucwords(str_replace('-', ' ', $exploded[0]))));
-            if (count($exploded) > 2) {
+            if (\count($exploded) > 2) {
                 //For cases when ":" is encountered in the style's value.
-                $exploded[1] = join('', array_slice($exploded, 1));
+                $exploded[1] = join('', \array_slice($exploded, 1));
             }
             $styleValue = str_replace('\'', '\\\'', trim($exploded[1]));
             $stylesAssignments .= "element.style.$styleAttribute = '$styleValue';\n";

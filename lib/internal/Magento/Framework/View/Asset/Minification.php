@@ -89,7 +89,7 @@ class Minification implements ResetAfterRequestInterface
             !$this->isExcluded($filename) &&
             !$this->isMinifiedFilename($filename)
         ) {
-            $filename = $filename !== null ? substr($filename, 0, -strlen($extension)) : '';
+            $filename = $filename !== null ? substr($filename, 0, -\strlen($extension)) : '';
             $filename = $filename . 'min.' . $extension;
         }
         return $filename;
@@ -109,7 +109,7 @@ class Minification implements ResetAfterRequestInterface
             !$this->isExcluded($filename) &&
             $this->isMinifiedFilename($filename)
         ) {
-            $filename = $filename !== null ? substr($filename, 0, -strlen($extension) - 4) : '';
+            $filename = $filename !== null ? substr($filename, 0, -\strlen($extension) - 4) : '';
             $filename = $filename . $extension;
         }
         return $filename;
@@ -173,7 +173,7 @@ class Minification implements ResetAfterRequestInterface
     {
         $configValues = $this->scopeConfig->getValue($key, $this->scope) ?? [];
         //value used to be a string separated by 'newline' separator so we need to convert it to array
-        if (!is_array($configValues)) {
+        if (!\is_array($configValues)) {
             $configValuesFromString = [];
             foreach (explode("\n", $configValues) as $exclude) {
                 if ($exclude && trim($exclude) != '') {

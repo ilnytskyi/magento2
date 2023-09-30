@@ -79,7 +79,7 @@ class StringUtils
     {
         $result = [];
         $strLen = $this->strlen($value);
-        if (!$strLen || !is_int($length) || $length <= 0) {
+        if (!$strLen || !\is_int($length) || $length <= 0) {
             return $result;
         }
         $value = $value !== null ? $value : '';
@@ -132,7 +132,7 @@ class StringUtils
             }
         }
         // remove last element, if empty
-        $count = count($result);
+        $count = \count($result);
         if ($count) {
             if ($result[$count - 1] === '') {
                 unset($result[$count - 1]);

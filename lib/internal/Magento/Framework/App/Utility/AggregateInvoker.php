@@ -54,12 +54,12 @@ class AggregateInvoker
         $passed = 0;
         foreach ($dataSource as $dataSetName => $dataSet) {
             try {
-                call_user_func_array($callback, $dataSet);
+                \call_user_func_array($callback, $dataSet);
                 $passed++;
             } catch (\PHPUnit\Framework\IncompleteTestError $exception) {
-                $results[get_class($exception)][] = $this->prepareMessage($exception, $dataSetName, $dataSet);
+                $results[\get_class($exception)][] = $this->prepareMessage($exception, $dataSetName, $dataSet);
             } catch (\PHPUnit\Framework\SkippedTestError $exception) {
-                $results[get_class($exception)][] = $this->prepareMessage($exception, $dataSetName, $dataSet);
+                $results[\get_class($exception)][] = $this->prepareMessage($exception, $dataSetName, $dataSet);
             } catch (\PHPUnit\Framework\AssertionFailedError $exception) {
                 $results[\PHPUnit\Framework\AssertionFailedError::class][] = $this->prepareMessage(
                     $exception,
@@ -81,7 +81,7 @@ class AggregateInvoker
      */
     protected function prepareMessage(\Exception $exception, $dataSetName, $dataSet)
     {
-        if (!is_string($dataSetName)) {
+        if (!\is_string($dataSetName)) {
             $dataSetName = var_export($dataSet, true);
         }
         if ($exception instanceof \PHPUnit\Framework\AssertionFailedError
@@ -108,9 +108,9 @@ class AggregateInvoker
         $totalCountsMessage = sprintf(
             'Passed: %d, Failed: %d, Incomplete: %d, Skipped: %d.',
             $passed,
-            count($results[\PHPUnit\Framework\AssertionFailedError::class]),
-            count($results[\PHPUnit\Framework\IncompleteTestError::class]),
-            count($results[\PHPUnit\Framework\SkippedTestError::class])
+            \count($results[\PHPUnit\Framework\AssertionFailedError::class]),
+            \count($results[\PHPUnit\Framework\IncompleteTestError::class]),
+            \count($results[\PHPUnit\Framework\SkippedTestError::class])
         );
         if ($results[\PHPUnit\Framework\AssertionFailedError::class]) {
             $this->_testCase->fail(

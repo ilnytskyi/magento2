@@ -16,7 +16,7 @@ class Dirs
      */
     public static function rm($dirname)
     {
-        if (is_array($dirname)) {
+        if (\is_array($dirname)) {
             $dirname = $dirname[1];
         }
         // Sanity check

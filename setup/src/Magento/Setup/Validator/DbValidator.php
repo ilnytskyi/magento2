@@ -56,7 +56,7 @@ class DbValidator
             );
         }
 
-        if (strlen($prefix) > self::DB_PREFIX_LENGTH) {
+        if (\strlen($prefix) > self::DB_PREFIX_LENGTH) {
             throw new \InvalidArgumentException(
                 'Table prefix length can\'t be more than ' . self::DB_PREFIX_LENGTH . ' characters.'
             );

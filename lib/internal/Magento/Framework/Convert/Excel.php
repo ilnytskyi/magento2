@@ -143,14 +143,14 @@ class Excel
     protected function _getXmlRow($row, $useCallback)
     {
         if ($useCallback && $this->_rowCallback) {
-            $row = call_user_func($this->_rowCallback, $row);
+            $row = \call_user_func($this->_rowCallback, $row);
         }
         $xmlData = [];
         $xmlData[] = '<Row>';
 
         foreach ($row as $value) {
             $value = $this->escaper->escapeHtml($value);
-            $dataType = is_numeric($value) && (is_string($value) && ctype_space($value[0]) === false) &&
+            $dataType = is_numeric($value) && (\is_string($value) && ctype_space($value[0]) === false) &&
                 $value[0] !== '+' && $value[0] !== '0' ? 'Number' : 'String';
 
             /**
@@ -159,10 +159,10 @@ class Excel
              *
              * @var $value string|\Magento\Framework\Phrase
              */
-            if (!is_string($value)) {
+            if (!\is_string($value)) {
                 $value = (string)$value;
             }
-            if (isset($value[0]) && in_array($value[0], ['=', '+', '-'])) {
+            if (isset($value[0]) && \in_array($value[0], ['=', '+', '-'])) {
                 $value = ' ' . $value;
                 $dataType = 'String';
             }

@@ -346,7 +346,7 @@ class Bootstrap
      */
     private function getIsExpected($key, $default)
     {
-        if (array_key_exists($key, $this->server)) {
+        if (\array_key_exists($key, $this->server)) {
             if (isset($this->server[$key])) {
                 return (bool) (int) $this->server[$key];
             }

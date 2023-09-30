@@ -92,7 +92,7 @@ class ObjectTest extends TestCase
         $this->assertFalse($isValid, 'Validation is expected to fail.');
 
         $actualMessages = $this->_model->getMessages();
-        $this->assertCount(count($expectedErrors), $actualMessages, 'Number of messages does not meet expectations.');
+        $this->assertCount(\count($expectedErrors), $actualMessages, 'Number of messages does not meet expectations.');
         foreach ($expectedErrors as $errorIndex => $expectedErrorMessage) {
             /** @var $actualMessage \Magento\Framework\Message\AbstractMessage */
             $actualMessage = $actualMessages[$errorIndex];

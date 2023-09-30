@@ -46,7 +46,7 @@ abstract class AbstractJws implements JwtInterface
         $this->payload = $payload;
         if (!$unprotectedHeaders) {
             $unprotectedHeaders = null;
-        } elseif (count($protectedHeaders) !== count($unprotectedHeaders)) {
+        } elseif (\count($protectedHeaders) !== \count($unprotectedHeaders)) {
             throw new \InvalidArgumentException('There has to be equal amount of protected and unprotected headers');
         } else {
             $unprotectedHeaders = array_values($unprotectedHeaders);

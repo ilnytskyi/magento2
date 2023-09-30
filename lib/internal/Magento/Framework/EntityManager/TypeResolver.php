@@ -45,7 +45,7 @@ class TypeResolver
     public function resolve($type)
     {
         // @todo remove after MAGETWO-52608 resolved
-        $className = get_class($type);
+        $className = \get_class($type);
         if (isset($this->typeMapping[$className])) {
             return $this->typeMapping[$className];
         }
@@ -59,7 +59,7 @@ class TypeResolver
             }
         }
 
-        if (count($dataInterfaces) == 0) {
+        if (\count($dataInterfaces) == 0) {
             return $className;
         }
 

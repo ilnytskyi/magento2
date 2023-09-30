@@ -30,7 +30,7 @@ class AllowedProtocols extends AbstractValidator
      */
     public function __construct($listOfProtocols = [])
     {
-        if (count($listOfProtocols)) {
+        if (\count($listOfProtocols)) {
             $this->listOfProtocols = $listOfProtocols;
         }
     }
@@ -44,7 +44,7 @@ class AllowedProtocols extends AbstractValidator
     public function isValid($value)
     {
         $uri = new Uri($value);
-        $isValid = in_array(
+        $isValid = \in_array(
             strtolower($uri->getScheme() ?? ''),
             $this->listOfProtocols
         );

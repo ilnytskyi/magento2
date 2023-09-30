@@ -41,22 +41,22 @@ class Link extends \Magento\Framework\View\Element\Text
         $this->setText('<li');
 
         $params = $this->getLiParams();
-        if (!empty($params) && is_array($params)) {
+        if (!empty($params) && \is_array($params)) {
             foreach ($params as $key => $value) {
                 $this->addText(' ' . $key . '="' . addslashes($value) . '"');
             }
-        } elseif (is_string($params)) {
+        } elseif (\is_string($params)) {
             $this->addText(' ' . $params);
         }
 
         $this->addText('><a');
 
         $params = $this->getAParams();
-        if (!empty($params) && is_array($params)) {
+        if (!empty($params) && \is_array($params)) {
             foreach ($params as $key => $value) {
                 $this->addText(' ' . $key . '="' . addslashes($value) . '"');
             }
-        } elseif (is_string($params)) {
+        } elseif (\is_string($params)) {
             $this->addText(' ' . $params);
         }
 

@@ -159,7 +159,7 @@ class Input implements FilterInterface
                 continue;
             }
 
-            if (!$isFilterListSimple && is_array($value) && isset($filters[$key]['children_filters'])) {
+            if (!$isFilterListSimple && \is_array($value) && isset($filters[$key]['children_filters'])) {
                 $isChildrenFilterListSimple = is_numeric(implode('', array_keys($filters[$key]['children_filters'])));
                 $value = $this->_filter($value, $filters[$key]['children_filters'], $isChildrenFilterListSimple);
             } else {
@@ -198,7 +198,7 @@ class Input implements FilterInterface
         }
         $filterData['args'] = [-100 => $value] + $filterData['args'];
         // apply filter
-        return call_user_func_array([$helper, $filterData['method']], $filterData['args']);
+        return \call_user_func_array([$helper, $filterData['method']], $filterData['args']);
     }
 
     /**
@@ -213,7 +213,7 @@ class Input implements FilterInterface
         $helper = false;
         if (isset($filterData['helper'])) {
             $helper = $filterData['helper'];
-            if (is_string($helper)) {
+            if (\is_string($helper)) {
                 $helper = $this->_objectManager->get($helper);
             } elseif (!$helper instanceof AbstractHelper) {
                 throw new FilterException("Filter '{$helper}' not found");
@@ -257,7 +257,7 @@ class Input implements FilterInterface
             //use only first element because object manager cannot get more
             $filterData['args'] = $filterData['args'][0];
         }
-        if (is_string($filter)) {
+        if (\is_string($filter)) {
             $filter = $this->_objectManager->create($filter, $filterData['args']);
         }
         if (!$filter instanceof FilterInterface) {
@@ -276,7 +276,7 @@ class Input implements FilterInterface
     protected function _createNativeLaminasFilter($filterData)
     {
         $filter = $filterData['laminas'];
-        if (is_string($filter)) {
+        if (\is_string($filter)) {
             $filterClassName = '\\Laminas\\Filter\\' . ucfirst($filter);
             if (!is_a($filterClassName, FilterInterface::class, true)) {
                 throw new FilterException('Filter is not instance of FilterInterface');

@@ -30,7 +30,7 @@ class RequiredFields implements ValidatorInterface
                 'onlySpawnWhenMessageAvailable'
             ];
             foreach ($requiredFields as $fieldName) {
-                if (!array_key_exists($fieldName, $consumerConfig)) {
+                if (!\array_key_exists($fieldName, $consumerConfig)) {
                     throw new \LogicException(
                         sprintf("'%s' field must be specified for consumer '%s'", $fieldName, $consumerName)
                     );

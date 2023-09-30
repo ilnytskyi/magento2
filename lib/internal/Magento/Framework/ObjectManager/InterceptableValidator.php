@@ -53,7 +53,7 @@ class InterceptableValidator
     private function endsWith($haystack, $needle)
     {
         // Search forward starting from end minus needle length characters
-        $temp = strlen($haystack) - strlen($needle);
+        $temp = \strlen($haystack) - \strlen($needle);
         return $needle === '' || ($temp >= 0 && strpos($haystack, $needle, $temp) !== false);
     }
 }

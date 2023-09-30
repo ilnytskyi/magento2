@@ -64,7 +64,7 @@ class ArrayUtils
     public function decorateArray($array, $prefix = 'decorated_', $forceSetAll = false)
     {
         // check if array or an object to be iterated given
-        if (!(is_array($array) || is_object($array))) {
+        if (!(\is_array($array) || \is_object($array))) {
             return $array;
         }
 
@@ -73,12 +73,12 @@ class ArrayUtils
         $keyIsEven = "{$prefix}is_even";
         $keyIsLast = "{$prefix}is_last";
 
-        $count = count($array);
+        $count = \count($array);
         // this will force Iterator to load
         $index = 0;
         $isEven = false;
         foreach ($array as $key => $element) {
-            if (is_object($element)) {
+            if (\is_object($element)) {
                 $this->_decorateArrayObject($element, $keyIsFirst, 0 === $index, $forceSetAll || 0 === $index);
                 $this->_decorateArrayObject($element, $keyIsOdd, !$isEven, $forceSetAll || !$isEven);
                 $this->_decorateArrayObject($element, $keyIsEven, $isEven, $forceSetAll || $isEven);
@@ -90,7 +90,7 @@ class ArrayUtils
                     $index === $count,
                     $forceSetAll || $index === $count
                 );
-            } elseif (is_array($element)) {
+            } elseif (\is_array($element)) {
                 if ($forceSetAll || 0 === $index) {
                     $array[$key][$keyIsFirst] = 0 === $index;
                 }
@@ -161,7 +161,7 @@ class ArrayUtils
         foreach ($data as $key => $value) {
             $fullPath = $path . $key;
 
-            if (!is_array($value)) {
+            if (!\is_array($value)) {
                 $result[$fullPath] = $value;
 
                 continue;
@@ -189,10 +189,10 @@ class ArrayUtils
         $diff = [];
 
         foreach ($originalArray as $key => $value) {
-            if (array_key_exists($key, $newArray)) {
-                if (is_array($value)) {
+            if (\array_key_exists($key, $newArray)) {
+                if (\is_array($value)) {
                     $valueDiff = $this->recursiveDiff($value, $newArray[$key]);
-                    if (count($valueDiff)) {
+                    if (\count($valueDiff)) {
                         $diff[$key] = $valueDiff;
                     }
                 } else {

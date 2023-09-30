@@ -151,7 +151,7 @@ class FixtureModel
      */
     private function loadFixture(Fixture $fixture)
     {
-        $fixtureClassName = get_class($fixture);
+        $fixtureClassName = \get_class($fixture);
         if (isset($this->fixtures[$fixture->getPriority()])) {
             throw new \InvalidArgumentException(
                 sprintf('Duplicate priority %d in fixture %s', $fixture->getPriority(), $fixtureClassName)
@@ -193,7 +193,7 @@ class FixtureModel
      */
     public function getFixtureByName($name)
     {
-        if (!array_key_exists($name, $this->fixturesByNames)) {
+        if (!\array_key_exists($name, $this->fixturesByNames)) {
             throw new Exception('Wrong fixture name');
         }
 

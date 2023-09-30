@@ -46,7 +46,7 @@ class Callback implements \Magento\Framework\Validator\Constraint\OptionInterfac
      */
     public function setArguments($arguments = null)
     {
-        if (is_array($arguments)) {
+        if (\is_array($arguments)) {
             $this->_arguments = $arguments;
         } elseif (null !== $arguments) {
             $this->_arguments = [$arguments];
@@ -65,7 +65,7 @@ class Callback implements \Magento\Framework\Validator\Constraint\OptionInterfac
     {
         $callable = $this->_callable;
 
-        if (is_array($callable) && isset($callable[0]) && is_string($callable[0])) {
+        if (\is_array($callable) && isset($callable[0]) && \is_string($callable[0])) {
             if (!class_exists($callable[0])) {
                 throw new \InvalidArgumentException(sprintf('Class "%s" was not found', $callable[0]));
             }
@@ -76,14 +76,14 @@ class Callback implements \Magento\Framework\Validator\Constraint\OptionInterfac
             throw new \InvalidArgumentException('Callable expected to be an array with class name as first element');
         }
 
-        if (!is_callable($callable)) {
+        if (!\is_callable($callable)) {
             throw new \InvalidArgumentException('Callback does not callable');
         }
 
         if ($this->_arguments) {
-            return call_user_func_array($callable, $this->_arguments);
+            return \call_user_func_array($callable, $this->_arguments);
         } else {
-            return call_user_func($callable);
+            return \call_user_func($callable);
         }
     }
 }

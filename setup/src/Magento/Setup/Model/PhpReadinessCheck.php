@@ -191,7 +191,7 @@ class PhpReadinessCheck
         $minimumRequiredMemoryLimit = '756M';
         $recommendedForUpgradeMemoryLimit = '2G';
 
-        $currentMemoryLimit = ini_get('memory_limit');
+        $currentMemoryLimit = \ini_get('memory_limit');
 
         $currentMemoryInteger = (int)$currentMemoryLimit;
 
@@ -245,8 +245,8 @@ class PhpReadinessCheck
         $error = false;
 
         $currentExtensions = $this->phpInformation->getCurrent();
-        if (in_array('xdebug', $currentExtensions)) {
-            $currentXDebugNestingLevel = (int)ini_get('xdebug.max_nesting_level');
+        if (\in_array('xdebug', $currentExtensions)) {
+            $currentXDebugNestingLevel = (int)\ini_get('xdebug.max_nesting_level');
             $minimumRequiredXDebugNestedLevel = $this->phpInformation->getRequiredMinimumXDebugNestedLevel();
 
             if ($minimumRequiredXDebugNestedLevel > $currentXDebugNestingLevel) {
@@ -282,13 +282,13 @@ class PhpReadinessCheck
     private function checkPopulateRawPostSetting()
     {
         // HHVM and PHP 7does not support 'always_populate_raw_post_data' to be set to -1
-        if (version_compare(PHP_VERSION, '7.0.0-beta') >= 0 || defined('HHVM_VERSION')) {
+        if (version_compare(PHP_VERSION, '7.0.0-beta') >= 0 || \defined('HHVM_VERSION')) {
             return [];
         }
 
         $data = [];
         $error = false;
-        $iniSetting = (int)ini_get('always_populate_raw_post_data');
+        $iniSetting = (int)\ini_get('always_populate_raw_post_data');
 
         $checkVersionConstraint = $this->versionParser->parseConstraints('~5.6.0');
         $normalizedPhpVersion = $this->getNormalizedCurrentPhpVersion(PHP_VERSION);
@@ -304,7 +304,7 @@ class PhpReadinessCheck
 	        Please open your php.ini file and set always_populate_raw_post_data to -1.
  	        If you need more help please call your hosting provider.',
             PHP_VERSION,
-            (int)ini_get('always_populate_raw_post_data')
+            (int)\ini_get('always_populate_raw_post_data')
         );
 
         $data['always_populate_raw_post_data'] = [
@@ -336,7 +336,7 @@ class PhpReadinessCheck
             $data['missed_function_' . $function['name']] = [
                 'message' => $function['message'],
                 'helpUrl' => $function['helpUrl'],
-                'error' => !function_exists($function['name']),
+                'error' => !\function_exists($function['name']),
             ];
         }
 

@@ -146,7 +146,7 @@ class Encryptor implements EncryptorInterface
 
         // load all possible keys
         $this->keys = preg_split('/\s+/s', trim((string)$deploymentConfig->get(self::PARAM_CRYPT_KEY)));
-        $this->keyVersion = count($this->keys) - 1;
+        $this->keyVersion = \count($this->keys) - 1;
         $this->keyValidator = $keyValidator ?: ObjectManager::getInstance()->get(KeyValidator::class);
     }
 
@@ -179,7 +179,7 @@ class Encryptor implements EncryptorInterface
         ];
 
         $version = (int)$version;
-        if (!in_array($version, $types, true)) {
+        if (!\in_array($version, $types, true)) {
             // phpcs:ignore Magento2.Exceptions.DirectThrow
             throw new \Exception((string)new \Magento\Framework\Phrase('Not supported cipher version'));
         }
@@ -210,7 +210,7 @@ class Encryptor implements EncryptorInterface
             //Generate random default length salt
             $salt = self::DEFAULT_SALT_LENGTH;
         }
-        if (is_integer($salt)) {
+        if (\is_integer($salt)) {
             //Generate salt of given length.
             $salt = $this->random->getRandomString($salt);
         }
@@ -247,7 +247,7 @@ class Encryptor implements EncryptorInterface
      */
     private function generateSimpleHash(string $data, int $version): string
     {
-        if (!array_key_exists($version, $this->hashVersionMap)) {
+        if (!\array_key_exists($version, $this->hashVersionMap)) {
             throw new \InvalidArgumentException('Unknown hashing algorithm');
         }
 
@@ -262,7 +262,7 @@ class Encryptor implements EncryptorInterface
         if (empty($this->keys[$this->keyVersion])) {
             throw new \RuntimeException('No key available');
         }
-        if (!array_key_exists($version, $this->hashVersionMap)) {
+        if (!\array_key_exists($version, $this->hashVersionMap)) {
             throw new \InvalidArgumentException('Unknown hashing algorithm');
         }
 
@@ -295,7 +295,7 @@ class Encryptor implements EncryptorInterface
             //Upgraded hashes would have been hashed with multiple algorithms.
             //Hashing the test string with every algorithm the original string has been hashed with.
             foreach ($hashVersions as $hashVersion) {
-                if (is_string($hashVersion) && preg_match($agnosticArgonRegEx, $hashVersion, $argonParams)) {
+                if (\is_string($hashVersion) && preg_match($agnosticArgonRegEx, $hashVersion, $argonParams)) {
                     $recreated = $this->getArgonHash(
                         $recreated,
                         (int)$argonParams['seed'],
@@ -347,7 +347,7 @@ class Encryptor implements EncryptorInterface
             $validVersion = end($hashVersions) === $this->getLatestHashVersion();
         }
 
-        return $validVersion && (!$validateCount || count($hashVersions) === 1);
+        return $validVersion && (!$validateCount || \count($hashVersions) === 1);
     }
 
     /**
@@ -360,7 +360,7 @@ class Encryptor implements EncryptorInterface
     private function explodePasswordHash($hash)
     {
         $explodedPassword = $hash !== null ? explode(self::DELIMITER, $hash, 3) : [];
-        if (count($explodedPassword) !== 3) {
+        if (\count($explodedPassword) !== 3) {
             throw new \RuntimeException('Hash is not a password hash');
         }
 
@@ -420,7 +420,7 @@ class Encryptor implements EncryptorInterface
     {
         if ($data) {
             $parts = explode(':', $data, 4);
-            $partsCount = count($parts);
+            $partsCount = \count($parts);
 
             $initVector = null;
             // specified key, specified crypt, specified iv
@@ -585,9 +585,9 @@ class Encryptor implements EncryptorInterface
         int $memLimit,
         string $salt
     ): string {
-        if (strlen($salt) < SODIUM_CRYPTO_PWHASH_SALTBYTES) {
+        if (\strlen($salt) < SODIUM_CRYPTO_PWHASH_SALTBYTES) {
             $salt = str_pad($salt, SODIUM_CRYPTO_PWHASH_SALTBYTES, $salt);
-        } elseif (strlen($salt) > SODIUM_CRYPTO_PWHASH_SALTBYTES) {
+        } elseif (\strlen($salt) > SODIUM_CRYPTO_PWHASH_SALTBYTES) {
             $salt = substr($salt, 0, SODIUM_CRYPTO_PWHASH_SALTBYTES);
         }
 
@@ -612,7 +612,7 @@ class Encryptor implements EncryptorInterface
     private function decodeKey(string $key) : string|bool
     {
         return (str_starts_with($key, ConfigOptionsListConstants::STORE_KEY_ENCODED_RANDOM_STRING_PREFIX)) ?
-            base64_decode(substr($key, strlen(ConfigOptionsListConstants::STORE_KEY_ENCODED_RANDOM_STRING_PREFIX))) :
+            base64_decode(substr($key, \strlen(ConfigOptionsListConstants::STORE_KEY_ENCODED_RANDOM_STRING_PREFIX))) :
             $key;
     }
 }

@@ -75,7 +75,7 @@ class ObjectManager
     {
         $object = null;
         $interfaces = class_implements($className);
-        if (in_array(\Magento\Framework\ObjectManager\ContextInterface::class, $interfaces)) {
+        if (\in_array(\Magento\Framework\ObjectManager\ContextInterface::class, $interfaces)) {
             $object = $this->getObject($className, $arguments);
         } elseif (isset($this->_specialCases[$className])) {
             $method = $this->_specialCases[$className];
@@ -120,7 +120,7 @@ class ObjectManager
     {
         $translator = $this->_testObject->getMockBuilder($className)->disableOriginalConstructor()->getMock();
         $translateCallback = function ($arguments) {
-            return is_array($arguments) ? vsprintf(array_shift($arguments), $arguments) : '';
+            return \is_array($arguments) ? vsprintf(array_shift($arguments), $arguments) : '';
         };
         $translator->expects(
             $this->_testObject->any()
@@ -261,7 +261,7 @@ class ObjectManager
             $argClassName = null;
             $defaultValue = null;
 
-            if (array_key_exists($parameterName, $arguments)) {
+            if (\array_key_exists($parameterName, $arguments)) {
                 $constructArguments[$parameterName] = $arguments[$parameterName];
                 continue;
             }
@@ -358,7 +358,7 @@ class ObjectManager
      */
     public function setBackwardCompatibleProperty($object, $propertyName, $propertyValue, $className = '')
     {
-        $reflection = new \ReflectionClass($className ? $className : get_class($object));
+        $reflection = new \ReflectionClass($className ? $className : \get_class($object));
         $reflectionProperty = $reflection->getProperty($propertyName);
         $reflectionProperty->setAccessible(true);
         $reflectionProperty->setValue($object, $propertyValue);

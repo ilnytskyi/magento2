@@ -52,7 +52,7 @@ class CallbackHandler
             $callbacks = CallbackPool::get($hash);
             try {
                 foreach ($callbacks as $callback) {
-                    call_user_func($callback);
+                    \call_user_func($callback);
                 }
             } catch (\Exception $e) {
                 $this->logger->error($e->getMessage(), $e->getTrace());

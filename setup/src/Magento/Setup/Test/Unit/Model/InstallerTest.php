@@ -476,9 +476,9 @@ namespace Magento\Setup\Test\Unit\Model {
             $this->indexerRegistryMock->expects($this->exactly(2))->method('get')->willReturn(
                 $this->indexerInterfaceMock
             );
-            call_user_func_array(
+            \call_user_func_array(
                 [
-                    $this->logger->expects($this->exactly(count($logMessages)))->method('log'),
+                    $this->logger->expects($this->exactly(\count($logMessages)))->method('log'),
                     'withConsecutive'
                 ],
                 $logMessages
@@ -760,9 +760,9 @@ namespace Magento\Setup\Test\Unit\Model {
             $this->filePermissions->expects($this->once())
                 ->method('getMissingWritableDirectoriesForDbUpgrade')
                 ->willReturn([]);
-            call_user_func_array(
+            \call_user_func_array(
                 [
-                    $this->logger->expects($this->exactly(count($logMessages)))->method('log'),
+                    $this->logger->expects($this->exactly(\count($logMessages)))->method('log'),
                     'withConsecutive'
                 ],
                 $logMessages
@@ -1002,9 +1002,9 @@ namespace Magento\Setup\Test\Unit\Model {
                 ->method('getMissingWritablePathsForInstallation')
                 ->willReturn([]);
 
-            call_user_func_array(
+            \call_user_func_array(
                 [
-                    $this->logger->expects(static::exactly(count($logMessages)))->method('log'),
+                    $this->logger->expects(static::exactly(\count($logMessages)))->method('log'),
                     'withConsecutive'
                 ],
                 $logMessages
@@ -1203,9 +1203,9 @@ namespace Magento\Setup\Test\Unit\Model {
             $this->filePermissions->expects(static::once())
                 ->method('getMissingWritableDirectoriesForDbUpgrade')
                 ->willReturn([]);
-            call_user_func_array(
+            \call_user_func_array(
                 [
-                    $this->logger->expects(static::exactly(count($logMessages)))->method('log'),
+                    $this->logger->expects(static::exactly(\count($logMessages)))->method('log'),
                     'withConsecutive'
                 ],
                 $logMessages
@@ -1261,7 +1261,7 @@ namespace Magento\Setup\Test\Unit\Model {
                 ->method('installSchema')
                 ->willThrowException($exception);
 
-            $this->expectException(get_class($exception));
+            $this->expectException(\get_class($exception));
 
             $this->moduleLoader->expects(static::exactly(2))->method('load')->willReturn($allModules);
             $setup = $this->createMock(Setup::class);
@@ -1338,9 +1338,9 @@ namespace Magento\Setup\Test\Unit\Model {
                 ->method('getMissingWritablePathsForInstallation')
                 ->willReturn([]);
 
-            call_user_func_array(
+            \call_user_func_array(
                 [
-                    $this->logger->expects(static::exactly(count($logMessages)))->method('log'),
+                    $this->logger->expects(static::exactly(\count($logMessages)))->method('log'),
                     'withConsecutive'
                 ],
                 $logMessages

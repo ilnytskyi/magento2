@@ -23,7 +23,7 @@ class Collator implements CollateInterface
     {
         foreach ($files as $file) {
             $identifier = $file->getFileIdentifier();
-            if (!array_key_exists($identifier, $filesOrigin)) {
+            if (!\array_key_exists($identifier, $filesOrigin)) {
                 throw new \LogicException(
                     "Overriding view file '{$file->getFilename()}' does not match to any of the files."
                 );

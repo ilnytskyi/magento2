@@ -22,10 +22,10 @@ class Constant implements InterpreterInterface
         if (!isset($data['value'])) {
             throw new \InvalidArgumentException('Constant name is expected.');
         }
-        if (!defined($data['value'])) {
+        if (!\defined($data['value'])) {
             throw new \InvalidArgumentException('Constant "' . $data['value'] . '" is not defined.');
         }
 
-        return constant($data['value']);
+        return \constant($data['value']);
     }
 }

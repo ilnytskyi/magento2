@@ -124,7 +124,7 @@ class SaveHandler implements SaveHandlerInterface
     {
         $sessionData = $this->callSafely('read', $sessionId);
         $sessionMaxSize = $this->sessionMaxSizeConfig->getSessionMaxSize();
-        $sessionSize = $sessionData !== null ? strlen($sessionData) : 0;
+        $sessionSize = $sessionData !== null ? \strlen($sessionData) : 0;
 
         if ($sessionMaxSize !== null && $sessionMaxSize < $sessionSize) {
             $sessionData = '';
@@ -150,7 +150,7 @@ class SaveHandler implements SaveHandlerInterface
     public function write($sessionId, $data)
     {
         $sessionMaxSize = $this->sessionMaxSizeConfig->getSessionMaxSize();
-        $sessionSize = strlen($data);
+        $sessionSize = \strlen($data);
 
         if ($sessionMaxSize === null || $sessionMaxSize >= $sessionSize) {
             return $this->callSafely('write', $sessionId, $data);

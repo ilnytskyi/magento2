@@ -76,7 +76,7 @@ class TranslatedLists implements ListsInterface
         $options = [];
         $allowedLocales = $this->_config->getAllowedLocales();
         foreach ($locales as $locale) {
-            if (!in_array($locale, $allowedLocales)) {
+            if (!\in_array($locale, $allowedLocales)) {
                 continue;
             }
             $language = \Locale::getPrimaryLanguage($locale);
@@ -160,7 +160,7 @@ class TranslatedLists implements ListsInterface
         $options = [];
         $allowed = $this->_config->getAllowedCurrencies();
         foreach ($currencies as $code => $data) {
-            if (!in_array($code, $allowed)) {
+            if (!\in_array($code, $allowed)) {
                 continue;
             }
             $options[] = ['label' => $data[1], 'value' => $code];

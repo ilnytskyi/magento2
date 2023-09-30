@@ -109,13 +109,13 @@ abstract class AbstractServiceCollection extends \Magento\Framework\Data\Collect
      */
     public function addFieldToFilter($field, $condition)
     {
-        if (is_array($field) && is_array($condition) && count($field) != count($condition)) {
+        if (\is_array($field) && \is_array($condition) && \count($field) != \count($condition)) {
             throw new LocalizedException(
                 new \Magento\Framework\Phrase(
                     'The field array failed to pass. The array must have a matching condition array.'
                 )
             );
-        } elseif (is_array($field) && !count($field) > 0) {
+        } elseif (\is_array($field) && !\count($field) > 0) {
             throw new LocalizedException(
                 new \Magento\Framework\Phrase(
                     'The array of fields failed to pass. The array must include at one field.'
@@ -136,14 +136,14 @@ abstract class AbstractServiceCollection extends \Magento\Framework\Data\Collect
     {
         //test if we have multiple conditions per field
         $requiresMultipleFilterGroups = false;
-        if (is_array($field) && is_array($condition)) {
+        if (\is_array($field) && \is_array($condition)) {
             foreach ($condition as $cond) {
-                if (is_array($cond) && count($cond) > 1) {
+                if (\is_array($cond) && \count($cond) > 1) {
                     $requiresMultipleFilterGroups = true;
                     break;
                 }
             }
-        } elseif (is_array($condition)) {
+        } elseif (\is_array($condition)) {
             $requiresMultipleFilterGroups = true;
         }
 
@@ -175,23 +175,23 @@ abstract class AbstractServiceCollection extends \Magento\Framework\Data\Collect
      */
     private function addFilterGroupsForMultipleConditions($field, $condition)
     {
-        if (!is_array($field) && is_array($condition)) {
+        if (!\is_array($field) && \is_array($condition)) {
             foreach ($condition as $key => $value) {
                 $this->fieldFilters[] = ['field' => $field, 'condition' => [$key => $value]];
             }
         } else {
             $cnt = 0;
             foreach ($condition as $cond) {
-                if (is_array($cond)) {
+                if (\is_array($cond)) {
                     //we Do want multiple groups in this case
                     foreach ($cond as $condKey => $condValue) {
                         $this->fieldFilters[] = [
-                            'field' => array_slice($field, $cnt, 1, true),
+                            'field' => \array_slice($field, $cnt, 1, true),
                             'condition' => [$condKey => $condValue]
                         ];
                     }
                 } else {
-                    $this->fieldFilters[] = ['field' => array_slice($field, $cnt, 1, true), 'condition' => $cond];
+                    $this->fieldFilters[] = ['field' => \array_slice($field, $cnt, 1, true), 'condition' => $cond];
                 }
                 $cnt++;
             }
@@ -210,7 +210,7 @@ abstract class AbstractServiceCollection extends \Magento\Framework\Data\Collect
             // array of fields, put filters in array to use 'or' group
             /** @var Filter[] $filterGroup */
             $filterGroup = [];
-            if (!is_array($filter['field'])) {
+            if (!\is_array($filter['field'])) {
                 // just one field
                 $filterGroup = [$this->createFilterData($filter['field'], $filter['condition'])];
             } else {
@@ -243,7 +243,7 @@ abstract class AbstractServiceCollection extends \Magento\Framework\Data\Collect
     {
         $this->filterBuilder->setField($field);
 
-        if (is_array($condition)) {
+        if (\is_array($condition)) {
             $this->filterBuilder->setValue(reset($condition));
             $this->filterBuilder->setConditionType(key($condition));
         } else {

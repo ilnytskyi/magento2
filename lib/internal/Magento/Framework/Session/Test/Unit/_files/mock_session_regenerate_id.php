@@ -22,5 +22,5 @@ function session_regenerate_id($var)
         SessionManagerTest::assertTrue($var);
         return true;
     }
-    return call_user_func_array('\session_regenerate_id', func_get_args());
+    return \call_user_func_array('\session_regenerate_id', \func_get_args());
 }

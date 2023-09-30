@@ -108,10 +108,10 @@ class SortOrder extends AbstractSimpleObject
      */
     private function validateDirectionIsString($direction): void
     {
-        if (!is_string($direction)) {
+        if (!\is_string($direction)) {
             throw new InputException(new Phrase(
                 'The sort order has to be specified as a string, got %1.',
-                [gettype($direction)]
+                [\gettype($direction)]
             ));
         }
     }
@@ -124,7 +124,7 @@ class SortOrder extends AbstractSimpleObject
     private function validateDirectionIsAscOrDesc($direction): void
     {
         $normalizedDirection = $this->normalizeDirectionInput($direction);
-        if (!in_array($normalizedDirection, [SortOrder::SORT_ASC, SortOrder::SORT_DESC], true)) {
+        if (!\in_array($normalizedDirection, [SortOrder::SORT_ASC, SortOrder::SORT_DESC], true)) {
             throw new InputException(new Phrase(
                 'The sort order has to be specified as %1 for ascending order or %2 for descending order.',
                 [SortOrder::SORT_ASC, SortOrder::SORT_DESC]

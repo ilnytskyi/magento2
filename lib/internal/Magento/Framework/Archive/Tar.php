@@ -219,7 +219,7 @@ class Tar extends \Magento\Framework\Archive\AbstractArchive implements \Magento
         if ($this->_skipRoot && is_dir($path)) {
             $this->_currentPath = $path . (substr($path, -1) != '/' ? '/' : '');
         } else {
-            $this->_currentPath = dirname($path) . '/';
+            $this->_currentPath = \dirname($path) . '/';
         }
         return $this;
     }
@@ -323,9 +323,9 @@ class Tar extends \Magento\Framework\Archive\AbstractArchive implements \Magento
         $nameFile = str_replace('\\', '/', $nameFile);
         $packedHeader = '';
         $longHeader = '';
-        if (!$long && strlen($nameFile) > 100) {
+        if (!$long && \strlen($nameFile) > 100) {
             $longHeader = $this->_composeHeader(true);
-            $longHeader .= str_pad($nameFile, floor((strlen($nameFile) + 512 - 1) / 512) * 512, "\0");
+            $longHeader .= str_pad($nameFile, floor((\strlen($nameFile) + 512 - 1) / 512) * 512, "\0");
         }
         $header = [];
         $header['100-name'] = $long ? '././@LongLink' : substr($nameFile, 0, 100);
@@ -339,7 +339,7 @@ class Tar extends \Magento\Framework\Archive\AbstractArchive implements \Magento
         $header['8-gid'] = $long || $infoFile['gid'] == 0 ? "\0\0\0\0\0\0\0" : sprintf("%07o", $infoFile['gid']);
         $header['12-size'] = $long ? sprintf(
             "%011o",
-            strlen($nameFile)
+            \strlen($nameFile)
         ) : sprintf(
             "%011o",
             is_dir($file) ? 0 : filesize($file)
@@ -350,10 +350,10 @@ class Tar extends \Magento\Framework\Archive\AbstractArchive implements \Magento
         $header['100-symlink'] = is_link($file) ? readlink($file) : '';
         $header['6-magic'] = 'ustar ';
         $header['2-version'] = ' ';
-        $a = function_exists('posix_getpwuid') && posix_getpwuid(fileowner($file)) ?
+        $a = \function_exists('posix_getpwuid') && posix_getpwuid(fileowner($file)) ?
             posix_getpwuid(fileowner($file)) : ['name' => ''];
         $header['32-uname'] = $a['name'];
-        $a = function_exists('posix_getgrgid') && posix_getpwuid(fileowner($file)) ?
+        $a = \function_exists('posix_getgrgid') && posix_getpwuid(fileowner($file)) ?
             posix_getgrgid(filegroup($file)) : ['name' => ''];
         $header['32-gname'] = $a['name'];
         $header['8-devmajor'] = '';
@@ -369,7 +369,7 @@ class Tar extends \Magento\Framework\Archive\AbstractArchive implements \Magento
 
         $checksum = 0;
         for ($i = 0; $i < 512; $i++) {
-            $checksum += ord(substr($packedHeader, $i, 1));
+            $checksum += \ord(substr($packedHeader, $i, 1));
         }
         $packedHeader = substr_replace($packedHeader, sprintf("%07o", $checksum) . "\0", 148, 8);
 
@@ -400,9 +400,9 @@ class Tar extends \Magento\Framework\Archive\AbstractArchive implements \Magento
             }
 
             $currentFile = $destination . $header['name'];
-            $dirname = dirname($currentFile);
+            $dirname = \dirname($currentFile);
 
-            if (in_array($header['type'], ["0", chr(0), ''])) {
+            if (\in_array($header['type'], ["0", \chr(0), ''])) {
                 if (!file_exists($dirname)) {
                     $mkdirResult = @mkdir($dirname, 0777, true);
 
@@ -445,7 +445,7 @@ class Tar extends \Magento\Framework\Archive\AbstractArchive implements \Magento
 
         $headerBlock = $archiveReader->read(self::TAR_BLOCK_SIZE);
 
-        if (strlen($headerBlock) < self::TAR_BLOCK_SIZE) {
+        if (\strlen($headerBlock) < self::TAR_BLOCK_SIZE) {
             return false;
         }
 
@@ -466,7 +466,7 @@ class Tar extends \Magento\Framework\Archive\AbstractArchive implements \Magento
         $headerBlock = substr_replace($headerBlock, '        ', 148, 8);
 
         for ($i = 0; $i < 512; $i++) {
-            $checksum += ord(substr($headerBlock, $i, 1));
+            $checksum += \ord(substr($headerBlock, $i, 1));
         }
 
         $checksumOk = $header['checksum'] == $checksum;
@@ -514,7 +514,7 @@ class Tar extends \Magento\Framework\Archive\AbstractArchive implements \Magento
             $data = substr($block, 0, $nonExtractedBytesCount);
             $fileWriter->write($data);
 
-            $bytesExtracted += strlen($block);
+            $bytesExtracted += \strlen($block);
         }
     }
 

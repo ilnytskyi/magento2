@@ -15,7 +15,7 @@ class QueryParamsResolver extends \Magento\Framework\DataObject implements Query
         if (!$this->hasData('query')) {
             $query = '';
             $params = $this->getQueryParams();
-            if (is_array($params)) {
+            if (\is_array($params)) {
                 ksort($params);
                 $query = http_build_query($params, '', $escape ? '&amp;' : '&');
             }
@@ -89,7 +89,7 @@ class QueryParamsResolver extends \Magento\Framework\DataObject implements Query
         }
 
         $params = $this->_getData('query_params');
-        if (!is_array($params)) {
+        if (!\is_array($params)) {
             $params = [];
         }
         foreach ($data as $param => $value) {

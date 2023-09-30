@@ -150,7 +150,7 @@ class PluginListGenerator implements ConfigWriterInterface, ConfigLoaderInterfac
         foreach ($scopes as $scope) {
             $this->scopeConfig->setCurrentScope($scope);
             if (false === isset($this->loadedScopes[$scope])) {
-                if (false === in_array($scope, $this->scopePriorityScheme, true)) {
+                if (false === \in_array($scope, $this->scopePriorityScheme, true)) {
                     $this->scopePriorityScheme[] = $scope;
                 }
                 $cacheId = implode('|', $this->scopePriorityScheme) . "|" . $this->cacheId;
@@ -185,7 +185,7 @@ class PluginListGenerator implements ConfigWriterInterface, ConfigLoaderInterfac
                 if ($scope === 'global') {
                     $this->globalScopePluginData = $this->pluginData;
                 }
-                if (count($this->scopePriorityScheme) > 2) {
+                if (\count($this->scopePriorityScheme) > 2) {
                     array_pop($this->scopePriorityScheme);
                     // merge global & primary scopes plugin data to other scopes by default
                     $this->pluginData = $this->globalScopePluginData;
@@ -224,7 +224,7 @@ class PluginListGenerator implements ConfigWriterInterface, ConfigLoaderInterfac
             if (!isset($loadedScopes[$scopeCode])) {
                 $data = $this->reader->read($scopeCode) ?: [];
                 unset($data['preferences']);
-                if (count($data) > 0) {
+                if (\count($data) > 0) {
                     $pluginData = $this->merge($data, $pluginData);
                     foreach ($data as $class => $config) {
                         if (isset($config['type'])) {
@@ -305,7 +305,7 @@ class PluginListGenerator implements ConfigWriterInterface, ConfigLoaderInterfac
                 }
             }
             $inherited[$type] = null;
-            if (is_array($plugins) && count($plugins)) {
+            if (\is_array($plugins) && \count($plugins)) {
                 $this->filterPlugins($plugins);
                 uasort($plugins, function ($itemA, $itemB) {
                     return ($itemA['sortOrder'] ?? PHP_INT_MIN) - ($itemB['sortOrder'] ?? PHP_INT_MIN);

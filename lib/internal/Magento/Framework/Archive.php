@@ -96,11 +96,11 @@ class Archive
     {
         $archivers = $this->_getArchivers($destination);
         $interimSource = '';
-        for ($i = 0, $count = count($archivers); $i < $count; $i++) {
+        for ($i = 0, $count = \count($archivers); $i < $count; $i++) {
             if ($i == $count - 1) {
                 $packed = $destination;
             } else {
-                $packed = dirname($destination) . '/~tmp-' . microtime(true) . $archivers[$i] . '.' . $archivers[$i];
+                $packed = \dirname($destination) . '/~tmp-' . microtime(true) . $archivers[$i] . '.' . $archivers[$i];
             }
             $source = $this->_getArchiver($archivers[$i])->pack($source, $packed, $skipRoot);
             if ($interimSource && $i < $count) {
@@ -127,7 +127,7 @@ class Archive
     {
         $archivers = $this->_getArchivers($source);
         $interimSource = '';
-        for ($i = count($archivers) - 1; $i >= 0; $i--) {
+        for ($i = \count($archivers) - 1; $i >= 0; $i--) {
             if ($tillTar && $archivers[$i] == self::TAPE_ARCHIVER) {
                 break;
             }
@@ -178,7 +178,7 @@ class Archive
     public function isArchive($file)
     {
         $archivers = $this->_getArchivers($file);
-        if (count($archivers)) {
+        if (\count($archivers)) {
             return true;
         }
         return false;
@@ -193,7 +193,7 @@ class Archive
     public function isTar($file)
     {
         $archivers = $this->_getArchivers($file);
-        if (count($archivers) == 1 && $archivers[0] == self::TAPE_ARCHIVER) {
+        if (\count($archivers) == 1 && $archivers[0] == self::TAPE_ARCHIVER) {
             return true;
         }
         return false;

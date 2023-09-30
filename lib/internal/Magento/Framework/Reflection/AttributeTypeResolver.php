@@ -36,13 +36,13 @@ class AttributeTypeResolver implements AttributeTypeResolverInterface
      */
     public function resolveObjectType($attributeCode, $value, $context)
     {
-        if (!is_object($value)) {
+        if (!\is_object($value)) {
             throw new \InvalidArgumentException('Provided value is not object type');
         }
         $data = $this->config->get();
         $context = trim($context, '\\');
         $config = isset($data[$context]) ? $data[$context] : [];
-        $output = get_class($value);
+        $output = \get_class($value);
         if (isset($config[$attributeCode])) {
             $type = $config[$attributeCode]['type'];
             $output = $this->typeProcessor->getArrayItemType($type);

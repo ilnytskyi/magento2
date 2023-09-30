@@ -117,7 +117,7 @@ class Request extends \Magento\Framework\Webapi\Request
             if ($typeWithQ) {
                 $qAndValue = explode('=', $typeWithQ[0]);
 
-                if (2 == count($qAndValue)) {
+                if (2 == \count($qAndValue)) {
                     $quality = $qAndValue[1];
                 }
             }
@@ -233,7 +233,7 @@ class Request extends \Magento\Framework\Webapi\Request
         }
         $pathParamKey = key($urlPathParams);
         // Check if the request data is a top level object of body
-        if (count($requestBodyParams) == 1 && is_array(end($requestBodyParams))) {
+        if (\count($requestBodyParams) == 1 && \is_array(end($requestBodyParams))) {
             $requestDataKey = key($requestBodyParams);
             $this->substituteParameters($requestBodyParams[$requestDataKey], $pathParamKey, $pathParamValue);
         } else { // Else parameters passed as scalar values in body will be overridden

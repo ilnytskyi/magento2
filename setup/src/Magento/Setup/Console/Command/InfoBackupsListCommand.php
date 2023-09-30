@@ -79,18 +79,18 @@ class InfoBackupsListCommand extends Command
             $tempTable = [];
             foreach ($contents as $path) {
                 $partsOfPath = explode('/', str_replace('\\', '/', $path));
-                $fileName = $partsOfPath[count($partsOfPath) - 1];
+                $fileName = $partsOfPath[\count($partsOfPath) - 1];
                 // if filename starts with '.' skip, e.g. '.git'
                 if (!(strpos($fileName, '.') === 0)) {
                     $filenameWithoutExtension = explode('.', $fileName);
                     // actually first part of $filenameWithoutExtension contains only the filename without extension
                     // and filename contains the type of backup separated by '_'
                     $fileNameParts = explode('_', $filenameWithoutExtension[0]);
-                    if (in_array(Factory::TYPE_MEDIA, $fileNameParts)) {
+                    if (\in_array(Factory::TYPE_MEDIA, $fileNameParts)) {
                         $tempTable[$fileName] = Factory::TYPE_MEDIA;
-                    } elseif (in_array(Factory::TYPE_DB, $fileNameParts)) {
+                    } elseif (\in_array(Factory::TYPE_DB, $fileNameParts)) {
                         $tempTable[$fileName] = Factory::TYPE_DB;
-                    } elseif (in_array('code', $fileNameParts)) {
+                    } elseif (\in_array('code', $fileNameParts)) {
                         $tempTable[$fileName] = 'code';
                     }
                 }

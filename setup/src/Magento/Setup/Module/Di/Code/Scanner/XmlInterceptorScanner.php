@@ -66,13 +66,13 @@ class XmlInterceptorScanner implements ScannerInterface
             if (strrpos(
                 $entityName,
                 $controllerSuffix
-            ) === strlen(
+            ) === \strlen(
                 $entityName
-            ) - strlen(
+            ) - \strlen(
                 $controllerSuffix
             ) && isset(
                 $pathParts[2]
-            ) && !in_array(
+            ) && !\in_array(
                 $pathParts[2],
                 ['Block', 'Helper', 'Model']
             )

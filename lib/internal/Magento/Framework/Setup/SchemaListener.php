@@ -127,7 +127,7 @@ class SchemaListener
      */
     private function castColumnDefinition($definition, $columnName)
     {
-        if (is_string($definition)) {
+        if (\is_string($definition)) {
             $definition = ['type' => $definition];
         }
         $definition = $this->doColumnMapping($definition);
@@ -202,7 +202,7 @@ class SchemaListener
                 unset($definition[$key]);
             }
 
-            if (in_array($key, self::$toUnset)) {
+            if (\in_array($key, self::$toUnset)) {
                 unset($definition[$key]);
             }
         }
@@ -386,7 +386,7 @@ class SchemaListener
         $columnNames = [];
 
         foreach ($indexColumns as $key => $indexColumn) {
-            if (is_array($indexColumn)) {
+            if (\is_array($indexColumn)) {
                 $columnNames[strtolower($key)] = strtolower($key);
             } else {
                 $columnNames[$indexColumn] = $indexColumn;
@@ -412,7 +412,7 @@ class SchemaListener
         $indexType = AdapterInterface::INDEX_TYPE_INDEX,
         $indexAlhoritm = 'btree'
     ) {
-        if (!is_array($fields)) {
+        if (!\is_array($fields)) {
             $fields = [$fields];
         }
         if ($indexType == AdapterInterface::INDEX_TYPE_FULLTEXT || $indexType === AdapterInterface::INDEX_TYPE_INDEX) {

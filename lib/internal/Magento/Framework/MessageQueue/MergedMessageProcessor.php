@@ -63,7 +63,7 @@ class MergedMessageProcessor implements MessageProcessorInterface
                     $originalMessagesIds = $message->getOriginalMessagesIds();
 
                     foreach ($callbacks as $callback) {
-                        call_user_func($callback, $message->getMergedMessage());
+                        \call_user_func($callback, $message->getMergedMessage());
                     }
 
                     $originalMessages = $this->getOriginalMessages($originalMessages, $originalMessagesIds);

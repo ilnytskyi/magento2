@@ -72,7 +72,7 @@ class SchemaDiff
     {
         foreach ($generatedTableNames as $tableName) {
             //If table exists only in db
-            if (!in_array($tableName, $tableNames)) {
+            if (!\in_array($tableName, $tableNames)) {
                 $tableNames[] = $tableName;
             }
         }

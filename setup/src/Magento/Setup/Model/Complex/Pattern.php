@@ -67,7 +67,7 @@ class Pattern
      */
     public function setRowsSet(array $rowsSet)
     {
-        if (!count($rowsSet)) {
+        if (!\count($rowsSet)) {
             throw new \Exception("Rows set must contain at least 1 array representing a row pattern");
         }
         $this->_rowsSet = $rowsSet;
@@ -100,11 +100,11 @@ class Pattern
      */
     public function getRow($index, $generatorKey)
     {
-        $row = $this->_rowsSet[$generatorKey % count($this->_rowsSet)];
+        $row = $this->_rowsSet[$generatorKey % \count($this->_rowsSet)];
         foreach ($this->getHeaders() as $key) {
             if (isset($row[$key])) {
-                if (is_callable($row[$key])) {
-                    $row[$key] = call_user_func($row[$key], $index, $generatorKey);
+                if (\is_callable($row[$key])) {
+                    $row[$key] = \call_user_func($row[$key], $index, $generatorKey);
                 } else {
                     $row[$key] = str_replace('%s', $index, $row[$key]);
                 }
@@ -122,6 +122,6 @@ class Pattern
      */
     public function getRowsCount()
     {
-        return count($this->_rowsSet);
+        return \count($this->_rowsSet);
     }
 }

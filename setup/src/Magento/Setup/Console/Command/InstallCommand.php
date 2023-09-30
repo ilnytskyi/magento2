@@ -255,7 +255,7 @@ class InstallCommand extends AbstractSetupCommand
         } else {
             $configOptionsToValidate = [];
             foreach ($this->configModel->getAvailableOptions() as $option) {
-                if (array_key_exists($option->getName(), $inputOptions)) {
+                if (\array_key_exists($option->getName(), $inputOptions)) {
                     $configOptionsToValidate[$option->getName()] = $inputOptions[$option->getName()];
                 }
             }
@@ -415,7 +415,7 @@ class InstallCommand extends AbstractSetupCommand
                 $answer = $option->getSelectOptions()[$answer] ?? current($option->getSelectOptions());
             }
 
-            $answer = $answer === null ? '' : (is_string($answer) ? trim($answer) : $answer);
+            $answer = $answer === null ? '' : (\is_string($answer) ? trim($answer) : $answer);
 
             if ($validateInline) {
                 $option->validate($answer);

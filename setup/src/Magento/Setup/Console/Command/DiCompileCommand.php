@@ -196,7 +196,7 @@ class DiCompileCommand extends Command
                 \Symfony\Component\Console\Helper\ProgressBar::class,
                 [
                     'output' => $output,
-                    'max' => count($operations)
+                    'max' => \count($operations)
                 ]
             );
             $progressBar->setFormat(

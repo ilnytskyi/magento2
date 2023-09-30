@@ -96,7 +96,7 @@ class FieldDataConverter
         QueryModifierInterface $queryModifier = null
     ) {
         $identifiers = explode(',', (string)$identifier);
-        if (count($identifiers) > 1) {
+        if (\count($identifiers) > 1) {
             $this->processTableWithCompositeIdentifier($connection, $table, $identifiers, $field, $queryModifier);
         } else {
             $this->processTableWithUniqueIdentifier($connection, $table, $identifier, $field, $queryModifier);
@@ -149,7 +149,7 @@ class FieldDataConverter
                             $table,
                             $identifier,
                             implode(', ', $ids),
-                            get_class($this->dataConverter),
+                            \get_class($this->dataConverter),
                             $e->getMessage()
                         )
                     );
@@ -225,7 +225,7 @@ class FieldDataConverter
                             $table,
                             implode(', ', $identifiers),
                             '(' . implode(') OR (', $constraints) . ')',
-                            get_class($this->dataConverter),
+                            \get_class($this->dataConverter),
                             $e->getMessage()
                         )
                     );

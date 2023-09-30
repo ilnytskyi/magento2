@@ -123,7 +123,7 @@ class Size
      */
     protected function _iniGet($param)
     {
-        return trim(ini_get($param));
+        return trim(\ini_get($param));
     }
 
     /**

@@ -48,7 +48,7 @@ class Fields implements ResetAfterRequestInterface
     {
         $queryFields = [];
         try {
-            if (is_string($query)) {
+            if (\is_string($query)) {
                 $query = $this->queryParser->parse($query);
             }
             \GraphQL\Language\Visitor::visit(
@@ -99,10 +99,10 @@ class Fields implements ResetAfterRequestInterface
     private function extractVariables(array &$fields, array $variables): void
     {
         foreach ($variables as $key => $value) {
-            if (is_array($value)) {
+            if (\is_array($value)) {
                 $this->extractVariables($fields, $value);
             } else {
-                if (is_string($key)) {
+                if (\is_string($key)) {
                     $fields[$key] = $key;
                 }
             }

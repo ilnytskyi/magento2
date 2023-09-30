@@ -55,7 +55,7 @@ class Xml extends AbstractAdapter
             }
 
             unset($xml);
-            return is_array($nodes) ? $nodes : [];
+            return \is_array($nodes) ? $nodes : [];
         }
 
         return [];

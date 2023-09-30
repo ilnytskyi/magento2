@@ -218,7 +218,7 @@ class Config implements ConfigInterface
             }
 
             if (isset($this->_arguments[$type])) {
-                if ($arguments && count($arguments)) {
+                if ($arguments && \count($arguments)) {
                     $arguments = array_replace_recursive($arguments, $this->_arguments[$type]);
                     $arguments = $this->sortItemsHelper->sortItems($arguments);
                 } else {

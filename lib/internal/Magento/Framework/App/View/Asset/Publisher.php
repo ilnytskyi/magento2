@@ -73,7 +73,7 @@ class Publisher
         $targetDir = $this->filesystem->getDirectoryWrite(DirectoryList::STATIC_VIEW);
         $fullSource = $asset->getSourceFile();
         $source = basename($fullSource);
-        $sourceDir = $this->writeFactory->create(dirname($fullSource));
+        $sourceDir = $this->writeFactory->create(\dirname($fullSource));
         $destination = $asset->getPath();
         $strategy = $this->materializationStrategyFactory->create($asset);
         return $strategy->publishFile($sourceDir, $targetDir, $source, $destination);

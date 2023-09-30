@@ -35,7 +35,7 @@ class Registry extends \Laminas\Permissions\Acl\Role\Registry
             throw new InvalidArgumentException("Child Role id '{$roleId}' does not exist");
         }
 
-        if (!is_array($parents)) {
+        if (!\is_array($parents)) {
             $parents = [$parents];
         }
         foreach ($parents as $parent) {

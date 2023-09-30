@@ -93,7 +93,7 @@ class ServiceOutputProcessor implements ServicePayloadConverterInterface
         }
         //Check for nested custom_attributes
         foreach ($dataObjectArray as $key => $value) {
-            if (is_array($value)) {
+            if (\is_array($value)) {
                 $dataObjectArray[$key] = $this->processDataObject($value);
             }
         }
@@ -109,11 +109,11 @@ class ServiceOutputProcessor implements ServicePayloadConverterInterface
      */
     public function convertValue($data, $type)
     {
-        if (is_array($data)) {
+        if (\is_array($data)) {
             $result = [];
             $arrayElementType = $type !== null ? substr($type, 0, -2) : '';
             foreach ($data as $datum) {
-                if (is_object($datum)) {
+                if (\is_object($datum)) {
                     $datum = $this->processDataObject(
                         $this->dataObjectProcessor->buildOutputDataArray($datum, $arrayElementType)
                     );
@@ -121,7 +121,7 @@ class ServiceOutputProcessor implements ServicePayloadConverterInterface
                 $result[] = $datum;
             }
             return $result;
-        } elseif (is_object($data)) {
+        } elseif (\is_object($data)) {
             return $this->processDataObject(
                 $this->dataObjectProcessor->buildOutputDataArray($data, $type)
             );

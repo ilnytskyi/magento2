@@ -46,11 +46,11 @@ class NamespaceResolver
     {
         if (!empty($type)
             && substr($type, 0, 1) !== self::NS_SEPARATOR
-            && !in_array($type, $this->scalarTypesProvider->getTypes())
+            && !\in_array($type, $this->scalarTypesProvider->getTypes())
         ) {
             $name = explode(self::NS_SEPARATOR, $type);
             $unqualifiedName = $name[0];
-            $isQualifiedName = count($name) > 1;
+            $isQualifiedName = \count($name) > 1;
             if (isset($availableNamespaces[$unqualifiedName])) {
                 $namespace = $availableNamespaces[$unqualifiedName];
                 if ($isQualifiedName) {
@@ -84,14 +84,14 @@ class NamespaceResolver
 
         $fileContent = token_get_all($fileContent);
         $classStart = array_search('{', $fileContent);
-        $fileContent = array_slice($fileContent, 0, $classStart);
+        $fileContent = \array_slice($fileContent, 0, $classStart);
         $output = [];
 
         foreach ($fileContent as $position => $token) {
-            if (is_array($token) && $token[0] === T_USE) {
-                $import = array_slice($fileContent, $position);
+            if (\is_array($token) && $token[0] === T_USE) {
+                $import = \array_slice($fileContent, $position);
                 $importEnd = array_search(';', $import);
-                $import = array_slice($import, 0, $importEnd);
+                $import = \array_slice($import, 0, $importEnd);
                 $imports = [];
                 $importsCount = 0;
                 foreach ($import as $item) {
@@ -129,7 +129,7 @@ class NamespaceResolver
                         array_shift($import);
                     }
                     $importName = null;
-                    if (in_array('as', $import)) {
+                    if (\in_array('as', $import)) {
                         $importName = array_splice($import, -1)[0];
                         array_pop($import);
                     }

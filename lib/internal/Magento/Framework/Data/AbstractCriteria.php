@@ -39,7 +39,7 @@ abstract class AbstractCriteria implements \Magento\Framework\Api\CriteriaInterf
             throw new \Exception(
                 (string)new \Magento\Framework\Phrase(
                     'Missed Mapper Interface for Criteria Interface: %1',
-                    [get_class($this)]
+                    [\get_class($this)]
                 )
             );
         }
@@ -58,9 +58,9 @@ abstract class AbstractCriteria implements \Magento\Framework\Api\CriteriaInterf
         if ($field === '*') {
             $this->data[self::PART_FIELDS]['list'] = [$field];
         } else {
-            if (is_array($field)) {
+            if (\is_array($field)) {
                 foreach ($field as $key => $value) {
-                    $this->addField($value, is_string($key) ? $key : null);
+                    $this->addField($value, \is_string($key) ? $key : null);
                 }
             } else {
                 if ($alias === null) {

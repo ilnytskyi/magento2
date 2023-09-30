@@ -59,7 +59,7 @@ class ConfigTest extends TestCase
     public function testGetValue($scope, $scopeCode = null)
     {
         $path = 'path';
-        if (!is_string($scope)) {
+        if (!\is_string($scope)) {
             $this->scopeCodeResolver->expects($this->once())
                 ->method('resolve')
                 ->with('stores', $scopeCode)

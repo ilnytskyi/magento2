@@ -172,7 +172,7 @@ class Base implements ActionInterface
     protected function execute(array $ids = [])
     {
         $this->prepareFields();
-        if (!count($ids)) {
+        if (!\count($ids)) {
             $this->getSaveHandler()->cleanIndex([]);
         }
         $this->getSaveHandler()->deleteIndex([], new \ArrayObject($ids));
@@ -219,7 +219,7 @@ class Base implements ActionInterface
      */
     protected function prepareDataSource(array $ids = [])
     {
-        return !count($ids)
+        return !\count($ids)
             ? $this->createResultCollection()
             : $this->createResultCollection()->addFieldToFilter($this->getPrimaryResource()->getIdFieldName(), $ids);
     }

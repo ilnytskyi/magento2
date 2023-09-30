@@ -144,12 +144,12 @@ class SessionManager implements SessionManagerInterface, ResetAfterRequestInterf
      */
     public function __call($method, $args)
     {
-        if (!$method || !in_array(substr($method, 0, 3), ['get', 'set', 'uns', 'has'])) {
+        if (!$method || !\in_array(substr($method, 0, 3), ['get', 'set', 'uns', 'has'])) {
             throw new \InvalidArgumentException(
-                sprintf('Invalid method %s::%s(%s)', get_class($this), $method, print_r($args, 1))
+                sprintf('Invalid method %s::%s(%s)', \get_class($this), $method, print_r($args, 1))
             );
         }
-        $return = call_user_func_array([$this->storage, $method], $args);
+        $return = \call_user_func_array([$this->storage, $method], $args);
         return $return === $this->storage ? $this : $return;
     }
 

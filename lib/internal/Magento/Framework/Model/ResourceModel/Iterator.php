@@ -31,7 +31,7 @@ class Iterator extends \Magento\Framework\DataObject
         while ($row = $stmt->fetch()) {
             $args['row'] = $row;
             foreach ($callbacks as $callback) {
-                $result = call_user_func($callback, $args);
+                $result = \call_user_func($callback, $args);
                 if (!empty($result)) {
                     $args = array_merge($args, (array)$result);
                 }
@@ -60,7 +60,7 @@ class Iterator extends \Magento\Framework\DataObject
             return $query->query();
         }
 
-        if (is_string($query)) {
+        if (\is_string($query)) {
             if (!$connection instanceof AdapterInterface) {
                 throw new LocalizedException(
                     new Phrase('The connection is invalid. Verify the connection and try again.')

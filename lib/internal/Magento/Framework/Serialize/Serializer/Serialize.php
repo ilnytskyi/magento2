@@ -18,7 +18,7 @@ class Serialize implements SerializerInterface
      */
     public function serialize($data)
     {
-        if (is_resource($data)) {
+        if (\is_resource($data)) {
             throw new \InvalidArgumentException('Unable to serialize value.');
         }
         // We have to use serialize

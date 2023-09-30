@@ -43,7 +43,7 @@ class Property extends \Magento\Framework\Validator\Constraint
 
         if ($value instanceof \Magento\Framework\DataObject) {
             $result = $value->getDataUsingMethod($this->_property);
-        } elseif ((is_array($value) || $value instanceof \ArrayAccess) && isset($value[$this->_property])) {
+        } elseif ((\is_array($value) || $value instanceof \ArrayAccess) && isset($value[$this->_property])) {
             $result = $value[$this->_property];
         }
 

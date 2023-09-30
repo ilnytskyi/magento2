@@ -132,7 +132,7 @@ class CompilerPreparation
         $isHelpOption = $this->input->hasParameterOption('--help') || $this->input->hasParameterOption('-h');
         $invalidate = false;
         if (!$isHelpOption) {
-            $invalidate = in_array($cmdName, $compilationCommands);
+            $invalidate = \in_array($cmdName, $compilationCommands);
             if (!$invalidate) {
                 // Check if it's an abbreviation of compilation commands.
                 $expr = preg_replace_callback(
@@ -146,7 +146,7 @@ class CompilerPreparation
                 if (empty($commands)) {
                     $commands = preg_grep('{^' . $expr . '$}i', $compilationCommands);
                 }
-                if (count($commands) === 1) {
+                if (\count($commands) === 1) {
                     $invalidate = true;
                 }
             }

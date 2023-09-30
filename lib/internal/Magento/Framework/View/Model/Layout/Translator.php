@@ -32,7 +32,7 @@ class Translator
             $argumentHierarchy = explode('.', $translatableArg);
             $argumentStack = & $args;
             $canTranslate = true;
-            while (is_array($argumentStack) && count($argumentStack) > 0) {
+            while (\is_array($argumentStack) && \count($argumentStack) > 0) {
                 $argumentName = array_shift($argumentHierarchy);
                 if (isset($argumentStack[$argumentName])) {
                     /*
@@ -46,7 +46,7 @@ class Translator
                     break;
                 }
             }
-            if ($canTranslate && is_string($argumentStack)) {
+            if ($canTranslate && \is_string($argumentStack)) {
                 // $argumentStack is now a reference to target translatable argument so it can be translated
                 $argumentStack = $this->_translateValue($argumentStack);
             }
@@ -66,7 +66,7 @@ class Translator
         if ($this->_isSelfTranslatable($node)) {
             $value = $this->_translateValue($value);
         } elseif ($this->_isNodeTranslatable($node->getParent())) {
-            if (true === in_array($node->getName(), $this->_getNodeNamesToTranslate($node->getParent()))) {
+            if (true === \in_array($node->getName(), $this->_getNodeNamesToTranslate($node->getParent()))) {
                 $value = $this->_translateValue($value);
             }
         }

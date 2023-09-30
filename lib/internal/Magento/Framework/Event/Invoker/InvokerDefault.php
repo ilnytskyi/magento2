@@ -90,14 +90,14 @@ class InvokerDefault implements \Magento\Framework\Event\InvokerInterface
             throw new \LogicException(
                 sprintf(
                     'Observer "%s" must implement interface "%s"',
-                    get_class($object),
+                    \get_class($object),
                     \Magento\Framework\Event\ObserverInterface::class
                 )
             );
         } else {
             $this->logger->warning(sprintf(
                 'Observer "%s" must implement interface "%s"',
-                get_class($object),
+                \get_class($object),
                 \Magento\Framework\Event\ObserverInterface::class
             ));
         }

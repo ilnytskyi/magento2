@@ -80,12 +80,12 @@ class Format implements \Magento\Framework\Locale\FormatInterface
             return null;
         }
 
-        if (!is_string($value)) {
+        if (!\is_string($value)) {
             return (float)$value;
         }
 
         /** Normalize for Arabic locale */
-        if (in_array($this->_localeResolver->getLocale(), self::ARABIC_LOCALE_CODES)) {
+        if (\in_array($this->_localeResolver->getLocale(), self::ARABIC_LOCALE_CODES)) {
             $value = $this->normalizeArabicLocale($value);
         }
 
@@ -149,15 +149,15 @@ class Format implements \Magento\Framework\Locale\FormatInterface
         $totalPrecision = 0;
         $decimalPoint = strpos($format, '.');
         if ($decimalPoint !== false) {
-            $totalPrecision = strlen($format) - (strrpos($format, '.') + 1);
+            $totalPrecision = \strlen($format) - (strrpos($format, '.') + 1);
         } else {
-            $decimalPoint = strlen($format);
+            $decimalPoint = \strlen($format);
         }
         $requiredPrecision = $totalPrecision;
         $t = substr($format, $decimalPoint);
         $pos = strpos($t, '#');
         if ($pos !== false) {
-            $requiredPrecision = strlen($t) - $pos - $totalPrecision;
+            $requiredPrecision = \strlen($t) - $pos - $totalPrecision;
         }
 
         if (strrpos($format, ',') !== false) {

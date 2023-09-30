@@ -357,7 +357,7 @@ abstract class AbstractModel extends DataObject
             }
             $this->_data = $key;
         } else {
-            if (!array_key_exists($key, $this->_data) || $this->_data[$key] !== $value) {
+            if (!\array_key_exists($key, $this->_data) || $this->_data[$key] !== $value) {
                 $this->_hasDataChanges = true;
             }
             $this->_data[$key] = $value;
@@ -375,8 +375,8 @@ abstract class AbstractModel extends DataObject
     {
         if ($key === null) {
             $this->setData([]);
-        } elseif (is_string($key)) {
-            if (isset($this->_data[$key]) || array_key_exists($key, $this->_data)) {
+        } elseif (\is_string($key)) {
+            if (isset($this->_data[$key]) || \array_key_exists($key, $this->_data)) {
                 $this->_hasDataChanges = true;
                 unset($this->_data[$key]);
             }
@@ -493,7 +493,7 @@ abstract class AbstractModel extends DataObject
      */
     public function getResourceName()
     {
-        return $this->_resource ? get_class($this->_resource) : ($this->_resourceName ? $this->_resourceName : null);
+        return $this->_resource ? \get_class($this->_resource) : ($this->_resourceName ? $this->_resourceName : null);
     }
 
     /**
@@ -810,7 +810,7 @@ abstract class AbstractModel extends DataObject
             if ($this->_cacheTag === true) {
                 $tags = [];
             } else {
-                if (is_array($this->_cacheTag)) {
+                if (\is_array($this->_cacheTag)) {
                     $tags = $this->_cacheTag;
                 } else {
                     $tags = [$this->_cacheTag];

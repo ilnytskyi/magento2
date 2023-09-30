@@ -87,7 +87,7 @@ class ResultFactory
 
         $resultInstance = $this->objectManager->create($this->typeMap[$type], $arguments);
         if (!$resultInstance instanceof ResultInterface) {
-            throw new \InvalidArgumentException(get_class($resultInstance) . ' isn\'t instance of ResultInterface');
+            throw new \InvalidArgumentException(\get_class($resultInstance) . ' isn\'t instance of ResultInterface');
         }
 
         /**

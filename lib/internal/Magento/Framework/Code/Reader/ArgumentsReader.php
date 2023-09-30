@@ -70,9 +70,9 @@ class ArgumentsReader
             if ($parameter->isOptional()) {
                 if ($parameter->isDefaultValueAvailable()) {
                     $value = $parameter->getDefaultValue();
-                    if (true == is_array($value)) {
+                    if (true == \is_array($value)) {
                         $default = $this->_varExportMin($value);
-                    } elseif (true == is_int($value)) {
+                    } elseif (true == \is_int($value)) {
                         $default = $value;
                     } else {
                         $default = $parameter->getDefaultValue();
@@ -122,7 +122,7 @@ class ArgumentsReader
             return 'array';
         }
 
-        if (!in_array($type, $this->scalarTypesProvider->getTypes())) {
+        if (!\in_array($type, $this->scalarTypesProvider->getTypes())) {
             $availableNamespaces = $this->namespaceResolver->getImportedNamespaces(file($class->getFileName()));
             $availableNamespaces[0] = $class->getNamespaceName();
             return $this->namespaceResolver->resolveNamespace($type, $availableNamespaces);
@@ -161,7 +161,7 @@ class ArgumentsReader
         $length = $end - $start;
 
         $source = file($class->getFileName());
-        $content = implode('', array_slice($source, $start, $length));
+        $content = implode('', \array_slice($source, $start, $length));
         $pattern = '/parent::__construct\(([ ' .
             PHP_EOL .
             ']*' .
@@ -245,7 +245,7 @@ class ArgumentsReader
      */
     protected function _varExportMin($var)
     {
-        if (is_array($var)) {
+        if (\is_array($var)) {
             $toImplode = [];
             foreach ($var as $key => $value) {
                 $toImplode[] = var_export($key, true) . ' => ' . $this->_varExportMin($value);

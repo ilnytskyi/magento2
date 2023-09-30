@@ -407,7 +407,7 @@ class Files
                 $files,
                 function ($file) use ($excludedFileNames, $collectWithContext) {
                     /** @var ComponentFile $file */
-                    return !in_array(basename($collectWithContext ? $file->getFullPath() : $file), $excludedFileNames);
+                    return !\in_array(basename($collectWithContext ? $file->getFullPath() : $file), $excludedFileNames);
                 }
             );
             self::$_cache[$cacheKey] = $files;
@@ -472,7 +472,7 @@ class Files
             $files = array_filter(
                 $files,
                 function ($file) use ($excludedFileNames) {
-                    return !in_array(basename($file), $excludedFileNames);
+                    return !\in_array(basename($file), $excludedFileNames);
                 }
             );
             self::$_cache[$cacheKey] = $files;
@@ -1054,7 +1054,7 @@ class Files
             $moduleWebPath = $moduleDir . "/view/{$area}/web";
 
             foreach (self::getFiles([$moduleWebPath], $filePattern) as $absolutePath) {
-                $localPath = $absolutePath !== null ? substr($absolutePath, strlen($moduleDir ?? '') + 1) : '';
+                $localPath = $absolutePath !== null ? substr($absolutePath, \strlen($moduleDir ?? '') + 1) : '';
                 if (preg_match('/^view\/([a-z]+)\/web\/(.+)$/i', $localPath, $matches) === 1) {
                     list(, $parsedArea, $parsedPath) = $matches;
                     $result[] = [$parsedArea, '', '', $moduleName, $parsedPath, $absolutePath];
@@ -1167,7 +1167,7 @@ class Files
             $files = array_filter(
                 $files,
                 function ($file) use ($excludedFileNames) {
-                    return !in_array(basename($file), $excludedFileNames);
+                    return !\in_array(basename($file), $excludedFileNames);
                 }
             );
             self::$_cache[$cacheKey] = $files;
@@ -1427,7 +1427,7 @@ class Files
                 return true;
             }
             $classParts = explode('/', $path, 3);
-            if (count($classParts) >= 3) {
+            if (\count($classParts) >= 3) {
                 // Check if it's PSR-4 class with trimmed vendor and package name parts
                 $trimmedFullPath = $dir . '/' . $classParts[2];
                 if ($this->classFileExistsCheckContent($trimmedFullPath, $namespace, $className)) {
@@ -1435,7 +1435,7 @@ class Files
                 }
             }
             $classParts = explode('/', $path, 4);
-            if (count($classParts) >= 4) {
+            if (\count($classParts) >= 4) {
                 // Check if it's a library under framework directory
                 $trimmedFullPath = $dir . '/' . $classParts[3];
                 if ($this->classFileExistsCheckContent($trimmedFullPath, $namespace, $className)) {
@@ -1496,7 +1496,7 @@ class Files
         $result = [];
         foreach (array_keys($this->componentRegistrar->getPaths(ComponentRegistrar::MODULE)) as $moduleName) {
             $namespace = explode('_', $moduleName)[0];
-            if (!in_array($namespace, $result) && $namespace !== 'Zend') {
+            if (!\in_array($namespace, $result) && $namespace !== 'Zend') {
                 $result[] = $namespace;
             }
         }
@@ -1596,10 +1596,10 @@ class Files
             }
             $patternParts = explode(' ', $pattern);
 
-            if (count($patternParts) == 3) {
+            if (\count($patternParts) == 3) {
                 list($componentType, $componentName, $pathPattern) = $patternParts;
                 $files = $this->getPathByComponentPattern($componentType, $componentName, $pathPattern);
-            } elseif (count($patternParts) == 1) {
+            } elseif (\count($patternParts) == 1) {
                 /**
                  * Note that glob() for directories will be returned as is,
                  * but passing directory is supported by the tools (phpcpd, phpmd, phpcs)
@@ -1688,7 +1688,7 @@ class Files
      */
     protected function getFilesSubset(array $dirPatterns, $fileNamePattern, $excludes)
     {
-        if (!is_array($excludes)) {
+        if (!\is_array($excludes)) {
             $excludes = [$excludes];
         }
         $fileSet = self::getFiles($dirPatterns, $fileNamePattern);

@@ -78,7 +78,7 @@ class SelectConfigOption extends AbstractConfigOption
      */
     public function validate($data)
     {
-        if (!in_array($data, $this->getSelectOptions())) {
+        if (!\in_array($data, $this->getSelectOptions())) {
             throw new \InvalidArgumentException("Value specified for '{$this->getName()}' is not supported: '{$data}'");
         }
         parent::validate($data);

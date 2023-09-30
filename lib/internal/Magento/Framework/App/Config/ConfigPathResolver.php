@@ -48,7 +48,7 @@ class ConfigPathResolver
         $scope = $scope !== null ? rtrim($scope, 's') : '';
 
         /** Scope name is currently stored in plural form. */
-        if (in_array($scope, [ScopeInterface::SCOPE_STORE, ScopeInterface::SCOPE_WEBSITE])) {
+        if (\in_array($scope, [ScopeInterface::SCOPE_STORE, ScopeInterface::SCOPE_WEBSITE])) {
             $scope .= 's';
         }
 

@@ -32,7 +32,7 @@ class ZookeeperTest extends TestCase
      */
     protected function setUp(): void
     {
-        if (!extension_loaded('zookeeper')) {
+        if (!\extension_loaded('zookeeper')) {
             $this->markTestSkipped('Test was skipped because php extension Zookeeper is not installed.');
         }
     }

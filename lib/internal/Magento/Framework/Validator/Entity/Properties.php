@@ -59,7 +59,7 @@ class Properties extends \Magento\Framework\Validator\AbstractValidator
                 }
             }
         }
-        return !count($this->_messages);
+        return !\count($this->_messages);
     }
 
     /**

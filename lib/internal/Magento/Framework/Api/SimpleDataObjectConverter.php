@@ -36,7 +36,7 @@ class SimpleDataObjectConverter
     public function toFlatArray(ExtensibleDataInterface $dataObject, $dataObjectType = null)
     {
         if ($dataObjectType === null) {
-            $dataObjectType = get_class($dataObject);
+            $dataObjectType = \get_class($dataObject);
         }
         $data = $this->dataObjectProcessor->buildOutputDataArray($dataObject, $dataObjectType);
         return ConvertArray::toFlatArray($data);
@@ -55,7 +55,7 @@ class SimpleDataObjectConverter
             $dataArray = ExtensibleDataObjectConverter::convertCustomAttributesToSequentialArray($dataArray);
         }
         foreach ($dataArray as $fieldName => $fieldValue) {
-            if (is_array($fieldValue) && !$this->_isSimpleSequentialArray($fieldValue)) {
+            if (\is_array($fieldValue) && !$this->_isSimpleSequentialArray($fieldValue)) {
                 $fieldValue = $this->convertKeysToCamelCase($fieldValue);
             }
             $fieldName = lcfirst(str_replace('_', '', ucwords($fieldName, '_')));
@@ -73,7 +73,7 @@ class SimpleDataObjectConverter
     protected function _isSimpleSequentialArray(array $data)
     {
         foreach ($data as $key => $value) {
-            if (is_string($key) || is_array($value)) {
+            if (\is_string($key) || \is_array($value)) {
                 return false;
             }
         }
@@ -92,7 +92,7 @@ class SimpleDataObjectConverter
      */
     public function convertStdObjectToArray($input, $removeItemNode = false)
     {
-        if (!is_object($input) && !is_array($input)) {
+        if (!\is_object($input) && !\is_array($input)) {
             throw new \InvalidArgumentException("Input argument must be an array or object");
         }
         // @codingStandardsIgnoreStart
@@ -103,12 +103,12 @@ class SimpleDataObjectConverter
              * within any additional node. If several Data object values are passed, they will be wrapped into
              * an indexed array within item or Map node.
              */
-            $input = is_object($node) ? [$node] : $node;
+            $input = \is_object($node) ? [$node] : $node;
         }
         // @codingStandardsIgnoreEnd
         $result = [];
         foreach ((array)$input as $key => $value) {
-            if (is_object($value) || is_array($value)) {
+            if (\is_object($value) || \is_array($value)) {
                 $result[$key] = $this->convertStdObjectToArray($value, $removeItemNode);
             } else {
                 $result[$key] = $value;
@@ -125,11 +125,11 @@ class SimpleDataObjectConverter
      */
     protected function _unpackAssociativeArray($data)
     {
-        if (!is_array($data)) {
+        if (!\is_array($data)) {
             return $data;
         } else {
             foreach ($data as $key => $value) {
-                if (is_array($value) && count($value) == 2 && isset($value['key']) && isset($value['value'])) {
+                if (\is_array($value) && \count($value) == 2 && isset($value['key']) && isset($value['value'])) {
                     $data[$value['key']] = $this->_unpackAssociativeArray($value['value']);
                     unset($data[$key]);
                 } else {

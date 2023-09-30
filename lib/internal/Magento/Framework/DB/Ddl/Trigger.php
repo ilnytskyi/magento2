@@ -85,7 +85,7 @@ class Trigger
      */
     public function setName($name)
     {
-        if (!is_string($name)) {
+        if (!\is_string($name)) {
             throw new \InvalidArgumentException(
                 (string)new \Magento\Framework\Phrase('Trigger name should be a string')
             );
@@ -118,7 +118,7 @@ class Trigger
      */
     public function setTime($time)
     {
-        if (in_array($time, self::$listOfTimes)) {
+        if (\in_array($time, self::$listOfTimes)) {
             $this->time = strtoupper($time);
         } else {
             throw new \InvalidArgumentException((string)new \Magento\Framework\Phrase('Trigger unsupported time type'));
@@ -149,7 +149,7 @@ class Trigger
      */
     public function setEvent($event)
     {
-        if (in_array($event, self::$listOfEvents)) {
+        if (\in_array($event, self::$listOfEvents)) {
             $this->event = strtoupper($event);
         } else {
             throw new \InvalidArgumentException(
@@ -182,7 +182,7 @@ class Trigger
      */
     public function setTable($name)
     {
-        if (!is_string($name)) {
+        if (!\is_string($name)) {
             throw new \InvalidArgumentException(
                 (string)new \Magento\Framework\Phrase('Trigger table name should be a string')
             );
@@ -214,7 +214,7 @@ class Trigger
      */
     public function addStatement($statement)
     {
-        if (!is_string($statement)) {
+        if (!\is_string($statement)) {
             throw new \InvalidArgumentException(
                 (string)new \Magento\Framework\Phrase('Trigger statement should be a string')
             );

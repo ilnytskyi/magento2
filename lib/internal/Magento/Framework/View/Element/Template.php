@@ -233,7 +233,7 @@ class Template extends AbstractBlock
      */
     public function assign($key, $value = null)
     {
-        if (is_array($key)) {
+        if (\is_array($key)) {
             foreach ($key as $subKey => $subValue) {
                 $this->assign($subKey, $subValue);
             }

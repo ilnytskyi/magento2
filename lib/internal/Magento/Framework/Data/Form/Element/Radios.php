@@ -73,7 +73,7 @@ class Radios extends AbstractElement
     {
         $html = '<div class="admin__field admin__field-option">' .
             '<input type="radio"' . $this->getRadioButtonAttributes($option);
-        if (is_array($option)) {
+        if (\is_array($option)) {
             $option = new DataObject($option);
             $optionId = $this->getHtmlId() . $option['value'];
             $html .= 'value="' . $this->_escape(
@@ -94,7 +94,7 @@ class Radios extends AbstractElement
             $html .= 'id="' .$optionId  .'"' .$option->serialize(
                 ['label', 'title', 'value', 'class']
             );
-            if (in_array($option->getValue(), $selected)) {
+            if (\in_array($option->getValue(), $selected)) {
                 $html .= ' checked="checked"';
             }
             $html .= ' />';

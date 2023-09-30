@@ -346,7 +346,7 @@ class BuilderTest extends TestCase
      */
     protected function _getExpectedConstraints($constraint, $optionKey, $optionValue)
     {
-        if (!is_array($constraint['options'])) {
+        if (!\is_array($constraint['options'])) {
             $constraint['options'] = [];
         }
         $constraint['options'][$optionKey] = $optionValue;
@@ -366,7 +366,7 @@ class BuilderTest extends TestCase
     {
         $this->expectException($exception);
         $this->expectExceptionMessage($exceptionMessage);
-        if (array_key_exists('method', $options)) {
+        if (\array_key_exists('method', $options)) {
             $options = ['methods' => [$options]];
         }
         $constraints = [

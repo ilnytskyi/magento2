@@ -138,7 +138,7 @@ class Config implements ConfigInterface
          * Session path
          */
         $savePath = $deploymentConfig->get(self::PARAM_SESSION_SAVE_PATH);
-        if (!$savePath && !ini_get('session.save_path')) {
+        if (!$savePath && !\ini_get('session.save_path')) {
             $sessionDir = $filesystem->getDirectoryWrite(DirectoryList::SESSION);
             $savePath = $sessionDir->getAbsolutePath();
             $sessionDir->create();
@@ -221,8 +221,8 @@ class Config implements ConfigInterface
      */
     public function setOptions($options, $default = [])
     {
-        $options = (!is_array($options) && !$options instanceof \Traversable) ? $default : $options;
-        if (is_array($options) || $options instanceof \Traversable) {
+        $options = (!\is_array($options) && !$options instanceof \Traversable) ? $default : $options;
+        if (\is_array($options) || $options instanceof \Traversable) {
             foreach ($options as $option => $value) {
                 $setter = 'set' . $this->_stringHelper->upperCaseWords($option, '_', '');
                 if (method_exists($this, $setter)) {
@@ -269,7 +269,7 @@ class Config implements ConfigInterface
     public function getOption($option)
     {
         $option = $this->getFixedOptionName($option);
-        if (array_key_exists($option, $this->options)) {
+        if (\array_key_exists($option, $this->options)) {
             return $this->options[$option];
         }
 
@@ -516,8 +516,8 @@ class Config implements ConfigInterface
      */
     protected function getStorageOption($option)
     {
-        $value = ini_get($option);
-        if (in_array($option, $this->booleanOptions)) {
+        $value = \ini_get($option);
+        if (\in_array($option, $this->booleanOptions)) {
             $value = (bool)$value;
         }
 
@@ -571,7 +571,7 @@ class Config implements ConfigInterface
         } elseif ($prefix === 'get') {
             return $this->getOption($key);
         } else {
-            throw new \BadMethodCallException(sprintf('Method "%s" does not exist in %s', $method, get_class($this)));
+            throw new \BadMethodCallException(sprintf('Method "%s" does not exist in %s', $method, \get_class($this)));
         }
     }
 

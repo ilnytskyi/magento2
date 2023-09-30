@@ -75,7 +75,7 @@ class Copy
         if ($fields === null) {
             return $target;
         }
-        $targetIsArray = is_array($target);
+        $targetIsArray = \is_array($target);
 
         foreach ($fields as $code => $node) {
             if (empty($node[$aspect])) {
@@ -182,7 +182,7 @@ class Copy
      */
     private function isInputArgumentValid($object): bool
     {
-        return (is_array($object) || $object instanceof DataObject ||
+        return (\is_array($object) || $object instanceof DataObject ||
             $object instanceof ExtensibleDataInterface ||
             $object instanceof AbstractSimpleObject);
     }
@@ -199,7 +199,7 @@ class Copy
     protected function _getFieldsetFieldValue($source, $code)
     {
         switch (true) {
-            case is_array($source):
+            case \is_array($source):
                 $value = isset($source[$code]) ? $source[$code] : null;
                 break;
             case $source instanceof ExtensibleDataInterface:
@@ -234,7 +234,7 @@ class Copy
     protected function _setFieldsetFieldValue($target, $targetCode, $value)
     {
         switch (true) {
-            case is_array($target):
+            case \is_array($target):
                 $target[$targetCode] = $value;
                 break;
             case $target instanceof ExtensibleDataInterface:
@@ -351,7 +351,7 @@ class Copy
 
         $extensionAttributes = $target->getExtensionAttributes();
         if ($extensionAttributes === null) {
-            $extensionAttributes = $this->extensionAttributesFactory->create(get_class($target));
+            $extensionAttributes = $this->extensionAttributesFactory->create(\get_class($target));
         }
 
         if (method_exists($extensionAttributes, $method)) {

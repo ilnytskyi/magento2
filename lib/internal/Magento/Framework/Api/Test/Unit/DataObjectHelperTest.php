@@ -417,7 +417,7 @@ class DataObjectHelperTest extends TestCase
 
         $this->objectProcessorMock->expects($this->once())
             ->method('buildOutputDataArray')
-            ->with($secondAddressDataObject, get_class($firstAddressDataObject))
+            ->with($secondAddressDataObject, \get_class($firstAddressDataObject))
             ->willReturn($data2);
         $this->methodsMapProcessor
             ->method('getMethodReturnType')
@@ -429,7 +429,7 @@ class DataObjectHelperTest extends TestCase
             ->willReturn($secondRegionDataObject);
 
         $this->dataObjectHelper->mergeDataObjects(
-            get_class($firstAddressDataObject),
+            \get_class($firstAddressDataObject),
             $firstAddressDataObject,
             $secondAddressDataObject
         );

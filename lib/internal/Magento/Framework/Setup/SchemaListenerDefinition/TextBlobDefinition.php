@@ -87,7 +87,7 @@ class TextBlobDefinition implements DefinitionConverterInterface
             'primary' => $definition['primary'] ?? false
         ];
 
-        if (in_array($cType, ['varchar', 'varbinary'])) {
+        if (\in_array($cType, ['varchar', 'varbinary'])) {
             $newDefinition['length'] = $length;
             $newDefinition['default'] = $definition['default'] ?? null;
         }

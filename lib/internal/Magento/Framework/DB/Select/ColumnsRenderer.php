@@ -37,7 +37,7 @@ class ColumnsRenderer implements RendererInterface
      */
     public function render(Select $select, $sql = '')
     {
-        if (!count($select->getPart(Select::COLUMNS))) {
+        if (!\count($select->getPart(Select::COLUMNS))) {
             return null;
         }
         $columns = [];

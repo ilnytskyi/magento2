@@ -32,7 +32,7 @@ class CsvTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->_testFile = str_replace('\\', '/', realpath(dirname(__FILE__))) . '/_files/test.csv';
+        $this->_testFile = str_replace('\\', '/', realpath(\dirname(__FILE__))) . '/_files/test.csv';
 
         $this->_phraseFirstMock = $this->createMock(Phrase::class);
         $this->_phraseSecondMock = $this->createMock(Phrase::class);

@@ -127,7 +127,7 @@ class Mapper
         if (!isset($this->queries[$queryName])) {
             // phpcs:ignore Magento2.Exceptions.DirectThrow
             throw new Exception('Query ' . $queryName . ' does not exist');
-        } elseif (in_array($queryName, $this->mappedQueries)) {
+        } elseif (\in_array($queryName, $this->mappedQueries)) {
             throw new StateException(new Phrase(
                 'A cycle was found. The "%1" query is already used in the request hierarchy.',
                 [$queryName]
@@ -199,7 +199,7 @@ class Mapper
         if (!isset($this->filters[$filterName])) {
             // phpcs:ignore Magento2.Exceptions.DirectThrow
             throw new Exception('Filter ' . $filterName . ' does not exist');
-        } elseif (in_array($filterName, $this->mappedFilters)) {
+        } elseif (\in_array($filterName, $this->mappedFilters)) {
             throw new StateException(
                 new Phrase(
                     'A cycle was found. The "%1" filter is already used in the request hierarchy.',

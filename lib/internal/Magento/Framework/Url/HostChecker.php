@@ -43,6 +43,6 @@ class HostChecker
             $scopeHostNames[] = parse_url($scope->getBaseUrl(UrlInterface::URL_TYPE_LINK, true), PHP_URL_HOST);
         }
         $scopeHostNames = array_unique($scopeHostNames);
-        return in_array($hostName, $scopeHostNames);
+        return \in_array($hostName, $scopeHostNames);
     }
 }

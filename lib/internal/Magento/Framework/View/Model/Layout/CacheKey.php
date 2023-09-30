@@ -25,7 +25,7 @@ class CacheKey implements \Magento\Framework\View\Layout\LayoutCacheKeyInterface
      */
     public function addCacheKeys($cacheKeys)
     {
-        if (!is_array($cacheKeys)) {
+        if (!\is_array($cacheKeys)) {
             $cacheKeys = [$cacheKeys];
         }
         $this->cacheKeys = array_merge($this->cacheKeys, $cacheKeys);

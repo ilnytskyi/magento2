@@ -62,7 +62,7 @@ class Profiler extends \Magento\Framework\DB\Profiler
     {
         $queryTypeParsed = $queryText !== null ? strtolower(substr(ltrim($queryText), 0, 6)) : '';
 
-        if (!in_array($queryTypeParsed, $this->_queryTypes)) {
+        if (!\in_array($queryTypeParsed, $this->_queryTypes)) {
             $queryTypeParsed = 'query';
         }
 

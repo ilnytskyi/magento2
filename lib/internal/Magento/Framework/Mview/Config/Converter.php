@@ -103,7 +103,7 @@ class Converter implements \Magento\Framework\Config\ConverterInterface
                     $subscriptionModel = $this->getAttributeValue($subscription, 'subscription_model');
 
                     if (!empty($subscriptionModel)
-                        && !in_array(
+                        && !\in_array(
                             SubscriptionInterface::class,
                             class_implements(ltrim($subscriptionModel, '\\'))
                         )

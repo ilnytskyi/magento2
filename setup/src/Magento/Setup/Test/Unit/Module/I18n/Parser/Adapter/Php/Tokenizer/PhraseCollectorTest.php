@@ -74,26 +74,26 @@ class PhraseCollectorTest extends TestCase
             ->with($file);
         $this->tokenizerMock->expects($this->atLeastOnce())
             ->method('isEndOfLoop')
-            ->will(call_user_func_array(
+            ->will(\call_user_func_array(
                 [$this, 'onConsecutiveCalls'],
                 $isEndOfLoopReturnValues
             ));
         $this->tokenizerMock->expects($this->any())
             ->method('getNextRealToken')
-            ->will(call_user_func_array(
+            ->will(\call_user_func_array(
                 [$this, 'onConsecutiveCalls'],
                 $getNextRealTokenReturnValues
             ));
         $this->tokenizerMock->expects($this->any())
             ->method('getFunctionArgumentsTokens')
-            ->will(call_user_func_array(
+            ->will(\call_user_func_array(
                 [$this, 'onConsecutiveCalls'],
                 $getFunctionArgumentsTokensReturnValues
             ));
         $this->tokenizerMock->expects($this->any())
             ->method('isMatchingClass')
             ->with($matchingClass)
-            ->will(call_user_func_array(
+            ->will(\call_user_func_array(
                 [$this, 'onConsecutiveCalls'],
                 $isMatchingClassReturnValues
             ));

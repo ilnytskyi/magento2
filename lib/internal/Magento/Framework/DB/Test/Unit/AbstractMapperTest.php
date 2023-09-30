@@ -275,10 +275,10 @@ class AbstractMapperTest extends TestCase
             ->with('quote-field', $condition)
             ->willReturn($resultCondition);
 
-        if (is_array($field)) {
+        if (\is_array($field)) {
             $resultCondition = '(' . implode(
                 ') ' . Select::SQL_OR . ' (',
-                array_fill(0, count($field), $resultCondition)
+                array_fill(0, \count($field), $resultCondition)
             ) . ')';
         }
 

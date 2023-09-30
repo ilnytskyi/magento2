@@ -49,13 +49,13 @@ class Manager
     {
         /** @var OperationInterface $operation */
         foreach ($this->operationsList as $operation) {
-            if (is_callable($beforeCallback)) {
+            if (\is_callable($beforeCallback)) {
                 $beforeCallback($operation);
             }
 
             $operation->doOperation();
 
-            if (is_callable($afterCallback)) {
+            if (\is_callable($afterCallback)) {
                 $afterCallback($operation);
             }
         }

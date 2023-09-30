@@ -149,7 +149,7 @@ class Queue implements QueueInterface
             if ($callback instanceof Closure) {
                 $callback($envelope);
             } else {
-                call_user_func($callback, $envelope);
+                \call_user_func($callback, $envelope);
             }
         };
 
@@ -158,7 +158,7 @@ class Queue implements QueueInterface
         $channel->basic_qos(0, $this->prefetchCount, false);
         $channel->basic_consume($this->queueName, '', false, false, false, false, $callbackConverter);
         // @codingStandardsIgnoreEnd
-        while (count($channel->callbacks)) {
+        while (\count($channel->callbacks)) {
             $channel->wait();
         }
     }

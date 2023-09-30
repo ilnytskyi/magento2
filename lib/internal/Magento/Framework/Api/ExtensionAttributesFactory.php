@@ -58,7 +58,7 @@ class ExtensionAttributesFactory
         }
 
         $interfaceName = '\\' . $interfaceReflection->getName();
-        $extensionClassName = substr($interfaceName, 0, -strlen('Interface')) . 'Extension';
+        $extensionClassName = substr($interfaceName, 0, -\strlen('Interface')) . 'Extension';
         $extensionInterfaceName = $extensionClassName . 'Interface';
 
         /** Ensure that proper return type of getExtensionAttributes() method is specified */

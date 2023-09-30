@@ -76,7 +76,7 @@ class Tree
      */
     public function appendChild($data, $parentNode, $prevNode = null)
     {
-        if (is_array($data)) {
+        if (\is_array($data)) {
             $node = $this->addNode(new Node($data, $parentNode->getIdField(), $this), $parentNode);
         } elseif ($data instanceof Node) {
             $node = $this->addNode($data, $parentNode);

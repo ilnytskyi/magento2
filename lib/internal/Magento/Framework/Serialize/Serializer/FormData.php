@@ -37,7 +37,7 @@ class FormData
     {
         $encodedFields = $this->serializer->unserialize($serializedData);
 
-        if (!is_array($encodedFields)) {
+        if (!\is_array($encodedFields)) {
             throw new \InvalidArgumentException('Unable to unserialize value.');
         }
 

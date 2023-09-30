@@ -224,7 +224,7 @@ class File implements DriverInterface
      */
     public function getParentDirectory($path)
     {
-        return dirname($this->getScheme() . $path);
+        return \dirname($this->getScheme() . $path);
     }
 
     /**
@@ -257,7 +257,7 @@ class File implements DriverInterface
         if (is_dir($path)) {
             return true;
         }
-        $parentDir = dirname($path);
+        $parentDir = \dirname($path);
         while (!is_dir($parentDir)) {
             $this->mkdirRecursive($parentDir, $permissions);
         }
@@ -322,7 +322,7 @@ class File implements DriverInterface
         }
         $globPattern = rtrim((string)$path, '/') . '/' . ltrim((string)$pattern, '/');
         $result = Glob::glob($globPattern, Glob::GLOB_BRACE);
-        return is_array($result) ? $result : [];
+        return \is_array($result) ? $result : [];
     }
 
     /**
@@ -338,7 +338,7 @@ class File implements DriverInterface
     {
         $result = false;
         $targetDriver = $targetDriver ?: $this;
-        if (get_class($targetDriver) === get_class($this)) {
+        if (\get_class($targetDriver) === \get_class($this)) {
             $result = @rename($this->getScheme() . $oldPath, $newPath);
             if ($this->stateful) {
                 clearstatcache(true, $this->getScheme() . $oldPath);
@@ -374,7 +374,7 @@ class File implements DriverInterface
     public function copy($source, $destination, DriverInterface $targetDriver = null)
     {
         $targetDriver = $targetDriver ?: $this;
-        if (get_class($targetDriver) === get_class($this)) {
+        if (\get_class($targetDriver) === \get_class($this)) {
             $result = @copy($this->getScheme() . $source, $destination);
             if ($this->stateful) {
                 clearstatcache(true, $destination);
@@ -410,7 +410,7 @@ class File implements DriverInterface
     public function symlink($source, $destination, DriverInterface $targetDriver = null)
     {
         $result = false;
-        if ($targetDriver === null || get_class($targetDriver) == get_class($this)) {
+        if ($targetDriver === null || \get_class($targetDriver) == \get_class($this)) {
             $result = @symlink($this->getScheme() . $source, $destination);
             if ($this->stateful) {
                 clearstatcache(true, $destination);
@@ -821,7 +821,7 @@ class File implements DriverInterface
     public function fileWrite($resource, $data)
     {
         $data = $data !== null ? $data : '';
-        $lenData = strlen($data);
+        $lenData = \strlen($data);
         for ($result = 0; $result < $lenData; $result += $fwrite) {
             $fwrite = @fwrite($resource, substr($data, $result));
             if (0 === $fwrite) {
@@ -870,10 +870,10 @@ class File implements DriverInterface
          * @var $value string|Phrase
          */
         foreach ($data as $key => $value) {
-            if (!is_string($value)) {
+            if (!\is_string($value)) {
                 $value = (string)$value;
             }
-            if (isset($value[0]) && in_array($value[0], ['=', '+', '-'])) {
+            if (isset($value[0]) && \in_array($value[0], ['=', '+', '-'])) {
                 $data[$key] = ' ' . $value;
             }
         }
@@ -989,7 +989,7 @@ class File implements DriverInterface
     {
         $path = $path !== null ? $this->fixSeparator($path) : '';
         if ($basePath === null || strpos($path, $basePath) === 0 || $basePath == $path . '/') {
-            $result = substr($path, strlen($basePath));
+            $result = substr($path, \strlen($basePath));
         } else {
             $result = $path;
         }
@@ -1093,7 +1093,7 @@ class File implements DriverInterface
 
         $pathParts = explode(DIRECTORY_SEPARATOR, $path);
         if (end($pathParts) == '.') {
-            $pathParts[count($pathParts) - 1] = '';
+            $pathParts[\count($pathParts) - 1] = '';
         }
         $realPath = [];
         foreach ($pathParts as $pathPart) {

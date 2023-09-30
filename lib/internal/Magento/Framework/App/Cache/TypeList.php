@@ -139,7 +139,7 @@ class TypeList implements TypeListInterface
     {
         $types = [];
         foreach ($this->_config->getTypes() as $type => $node) {
-            if (array_key_exists('label', $node)) {
+            if (\array_key_exists('label', $node)) {
                 $types[$type] = $node['label'];
             }
         }
@@ -175,7 +175,7 @@ class TypeList implements TypeListInterface
     public function invalidate($typeCode)
     {
         $types = $this->_getInvalidatedTypes();
-        if (!is_array($typeCode)) {
+        if (!\is_array($typeCode)) {
             $typeCode = [$typeCode];
         }
         foreach ($typeCode as $code) {

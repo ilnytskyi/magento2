@@ -47,12 +47,12 @@ class Console
     {
         $errorsCount = 0;
         foreach ($data as $type => $classes) {
-            if (!count($classes)) {
+            if (!\count($classes)) {
                 continue;
             }
             $this->console->writeln($this->getStartTag($type) . $this->_messages[$type] . $this->getEndTag($type));
             foreach ($classes as $className => $messages) {
-                if (count($messages)) {
+                if (\count($messages)) {
                     $this->console->writeln($this->getStartTag($type) . "\t" . $className . $this->getEndTag($type));
                     foreach ($messages as $message) {
                         if ($message) {

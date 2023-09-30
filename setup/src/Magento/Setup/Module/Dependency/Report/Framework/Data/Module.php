@@ -63,6 +63,6 @@ class Module
      */
     public function getDependenciesCount()
     {
-        return count($this->dependencies);
+        return \count($this->dependencies);
     }
 }

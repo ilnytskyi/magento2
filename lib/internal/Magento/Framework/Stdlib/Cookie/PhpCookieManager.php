@@ -179,7 +179,7 @@ class PhpCookieManager implements CookieManagerInterface
     private function sizeOfCookie($name, $value)
     {
         // The constant '1' is the length of the equal sign in 'name=value'.
-        return strlen($name) + 1 + strlen($value);
+        return \strlen($name) + 1 + \strlen($value);
     }
 
     /**
@@ -201,7 +201,7 @@ class PhpCookieManager implements CookieManagerInterface
             );
         }
 
-        $numCookies = count($_COOKIE);
+        $numCookies = \count($_COOKIE);
 
         if (!isset($_COOKIE[$name])) {
             $numCookies++;
@@ -267,7 +267,7 @@ class PhpCookieManager implements CookieManagerInterface
      */
     private function extractValue($parameter, array $metadataArray, $defaultValue)
     {
-        if (array_key_exists($parameter, $metadataArray)) {
+        if (\array_key_exists($parameter, $metadataArray)) {
             return $metadataArray[$parameter];
         } else {
             return $defaultValue;

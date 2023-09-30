@@ -25,7 +25,7 @@ class FilesCollectorTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->_testDir = str_replace('\\', '/', realpath(dirname(__FILE__))) . '/_files/files_collector/';
+        $this->_testDir = str_replace('\\', '/', realpath(\dirname(__FILE__))) . '/_files/files_collector/';
 
         $objectManagerHelper = new ObjectManager($this);
         $this->_filesCollector = $objectManagerHelper->getObject(FilesCollector::class);

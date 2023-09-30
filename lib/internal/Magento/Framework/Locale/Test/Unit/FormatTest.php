@@ -94,7 +94,7 @@ class FormatTest extends TestCase
         $this->currency->method('getCode')->willReturn($currencyCode);
         $result = $this->formatModel->getPriceFormat($localeCode);
         $intersection = array_intersect_assoc($result, $expectedResult);
-        $this->assertCount(count($expectedResult), $intersection);
+        $this->assertCount(\count($expectedResult), $intersection);
     }
 
     /**

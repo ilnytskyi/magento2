@@ -74,7 +74,7 @@ class ModuleConfigStatusCommand extends Command
         try {
             // the config as currently in app/etc/config.php
             $currentConfig = $this->configReader->load(ConfigFilePool::APP_CONFIG);
-            if (!array_key_exists(ConfigOptionsListConstants::KEY_MODULES, $currentConfig)) {
+            if (!\array_key_exists(ConfigOptionsListConstants::KEY_MODULES, $currentConfig)) {
                 // phpcs:ignore Magento2.Exceptions.DirectThrow
                 throw new \Exception('Can\'t find the modules configuration in the \'app/etc/config.php\' file.');
             }

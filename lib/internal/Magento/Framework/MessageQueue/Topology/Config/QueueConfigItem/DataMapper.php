@@ -188,7 +188,7 @@ class DataMapper
     {
         $pattern = '/^' . str_replace('.', '\.', $wildcardKey);
         $pattern = str_replace(['#', '*'], ['.+', '[^\.]+'], $pattern);
-        $pattern .= strpos($wildcardKey, '#') === strlen($wildcardKey) ? '/' : '$/';
+        $pattern .= strpos($wildcardKey, '#') === \strlen($wildcardKey) ? '/' : '$/';
         return $pattern;
     }
 }

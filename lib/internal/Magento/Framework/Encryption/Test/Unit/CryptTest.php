@@ -39,7 +39,7 @@ class CryptTest extends TestCase
         $result = '';
         do {
             $result .= sha1(microtime());
-        } while (strlen($result) < $length);
+        } while (\strlen($result) < $length);
         return substr($result, -$length);
     }
 
@@ -193,8 +193,8 @@ class CryptTest extends TestCase
         $initVector2 = $crypt2->getInitVector();
 
         $expectedSize = $this->_getInitVectorSize($cipher, $mode);
-        $this->assertEquals($expectedSize, strlen($initVector1));
-        $this->assertEquals($expectedSize, strlen($initVector2));
+        $this->assertEquals($expectedSize, \strlen($initVector1));
+        $this->assertEquals($expectedSize, \strlen($initVector2));
         $this->assertNotEquals($initVector2, $initVector1);
     }
 

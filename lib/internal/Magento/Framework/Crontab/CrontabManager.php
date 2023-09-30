@@ -48,7 +48,7 @@ class CrontabManager implements CrontabManagerInterface
     private function getTasksBlockStart()
     {
         $tasksBlockStart = self::TASKS_BLOCK_START;
-        if (defined('BP')) {
+        if (\defined('BP')) {
             $tasksBlockStart .= ' ' . hash("sha256", BP);
         }
         return $tasksBlockStart;
@@ -62,7 +62,7 @@ class CrontabManager implements CrontabManagerInterface
     private function getTasksBlockEnd()
     {
         $tasksBlockEnd = self::TASKS_BLOCK_END;
-        if (defined('BP')) {
+        if (\defined('BP')) {
             $tasksBlockEnd .= ' ' . hash("sha256", BP);
         }
         return $tasksBlockEnd;
@@ -144,7 +144,7 @@ class CrontabManager implements CrontabManagerInterface
     {
         if ($tasks) {
             // Add EOL symbol to previous line if not exist.
-            if (substr($content, -strlen(PHP_EOL)) !== PHP_EOL) {
+            if (substr($content, -\strlen(PHP_EOL)) !== PHP_EOL) {
                 $content .= PHP_EOL;
             }
 

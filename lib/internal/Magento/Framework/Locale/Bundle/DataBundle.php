@@ -26,7 +26,7 @@ class DataBundle
     public function get($locale)
     {
         $locale = $this->cleanLocale($locale);
-        $class = get_class($this);
+        $class = \get_class($this);
         if (!isset(static::$bundles[$class][$locale])) {
             $bundle = $this->createResourceBundle($locale, $this->path);
             if (!$bundle && $this->path != 'ICUDATA') {

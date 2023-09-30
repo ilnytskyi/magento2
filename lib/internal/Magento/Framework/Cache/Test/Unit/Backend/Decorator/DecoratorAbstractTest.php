@@ -91,7 +91,7 @@ class DecoratorAbstractTest extends TestCase
             [['concrete_backend' => $this->_mockBackend]]
         );
 
-        call_user_func([$decorator, $methodName], null, null);
+        \call_user_func([$decorator, $methodName], null, null);
     }
 
     /**

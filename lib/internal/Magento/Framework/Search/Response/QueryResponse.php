@@ -55,7 +55,7 @@ class QueryResponse implements ResponseInterface
     #[\ReturnTypeWillChange]
     public function count()
     {
-        return count($this->documents);
+        return \count($this->documents);
     }
 
     /**

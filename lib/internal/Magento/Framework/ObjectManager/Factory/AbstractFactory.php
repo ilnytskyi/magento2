@@ -152,7 +152,7 @@ abstract class AbstractFactory implements \Magento\Framework\ObjectManager\Facto
      */
     protected function resolveArgument(&$argument, $paramType, $paramDefault, $paramName, $requestedType)
     {
-        if ($paramType && $argument !== $paramDefault && !is_object($argument)) {
+        if ($paramType && $argument !== $paramDefault && !\is_object($argument)) {
             if (!isset($argument['instance']) || $argument !== (array)$argument) {
                 throw new \UnexpectedValueException(
                     'Invalid parameter configuration provided for $' . $paramName . ' argument of ' . $requestedType
@@ -254,7 +254,7 @@ abstract class AbstractFactory implements \Magento\Framework\ObjectManager\Facto
     {
         list($paramName, $paramType, $paramRequired, $paramDefault, $isVariadic) = $parameter;
         $argument = null;
-        if (!empty($arguments) && (isset($arguments[$paramName]) || array_key_exists($paramName, $arguments))) {
+        if (!empty($arguments) && (isset($arguments[$paramName]) || \array_key_exists($paramName, $arguments))) {
             $argument = $arguments[$paramName];
         } elseif ($paramRequired) {
             if ($paramType) {
@@ -270,7 +270,7 @@ abstract class AbstractFactory implements \Magento\Framework\ObjectManager\Facto
         }
 
         if ($isVariadic) {
-            return is_array($argument) ? $argument : [$argument];
+            return \is_array($argument) ? $argument : [$argument];
         }
 
         $this->resolveArgument($argument, $paramType, $paramDefault, $paramName, $requestedType);

@@ -160,7 +160,7 @@ class ConfigTest extends TestCase
     {
         $this->getModel($this->validatorMock);
         $this->config->setCookieLifetime(0);
-        $this->assertEquals(0, ini_get('session.cookie_lifetime'));
+        $this->assertEquals(0, \ini_get('session.cookie_lifetime'));
     }
 
     public function testSettingInvalidCookieLifetime()
@@ -212,13 +212,13 @@ class ConfigTest extends TestCase
     public function testCookieSecureDefaultsToIniSettings()
     {
         $this->getModel($this->validatorMock);
-        $this->assertSame((bool)ini_get('session.cookie_secure'), $this->config->getCookieSecure());
+        $this->assertSame((bool)\ini_get('session.cookie_secure'), $this->config->getCookieSecure());
     }
 
     public function testCookieSecureIsMutable()
     {
         $this->getModel($this->validatorMock);
-        $value = ini_get('session.cookie_secure') ? false : true;
+        $value = \ini_get('session.cookie_secure') ? false : true;
         $this->config->setCookieSecure($value);
         $this->assertEquals($value, $this->config->getCookieSecure());
     }
@@ -278,13 +278,13 @@ class ConfigTest extends TestCase
     public function testCookieHttpOnlyDefaultsToIniSettings()
     {
         $this->getModel($this->validatorMock);
-        $this->assertSame((bool)ini_get('session.cookie_httponly'), $this->config->getCookieHttpOnly());
+        $this->assertSame((bool)\ini_get('session.cookie_httponly'), $this->config->getCookieHttpOnly());
     }
 
     public function testCookieHttpOnlyIsMutable()
     {
         $this->getModel($this->validatorMock);
-        $value = ini_get('session.cookie_httponly') ? false : true;
+        $value = \ini_get('session.cookie_httponly') ? false : true;
         $this->config->setCookieHttpOnly($value);
         $this->assertEquals($value, $this->config->getCookieHttpOnly());
     }
@@ -292,13 +292,13 @@ class ConfigTest extends TestCase
     public function testUseCookiesDefaultsToIniSettings()
     {
         $this->getModel($this->validatorMock);
-        $this->assertSame((bool)ini_get('session.use_cookies'), $this->config->getUseCookies());
+        $this->assertSame((bool)\ini_get('session.use_cookies'), $this->config->getUseCookies());
     }
 
     public function testUseCookiesIsMutable()
     {
         $this->getModel($this->validatorMock);
-        $value = ini_get('session.use_cookies') ? false : true;
+        $value = \ini_get('session.use_cookies') ? false : true;
         $this->config->setUseCookies($value);
         $this->assertEquals($value, (bool)$this->config->getUseCookies());
     }
@@ -306,13 +306,13 @@ class ConfigTest extends TestCase
     public function testUseOnlyCookiesDefaultsToIniSettings()
     {
         $this->getModel($this->validatorMock);
-        $this->assertSame((bool)ini_get('session.use_only_cookies'), $this->config->getUseOnlyCookies());
+        $this->assertSame((bool)\ini_get('session.use_only_cookies'), $this->config->getUseOnlyCookies());
     }
 
     public function testUseOnlyCookiesIsMutable()
     {
         $this->getModel($this->validatorMock);
-        $value = ini_get('session.use_only_cookies') ? false : true;
+        $value = \ini_get('session.use_only_cookies') ? false : true;
         $this->config->setOption('use_only_cookies', $value);
         $this->assertEquals($value, (bool)$this->config->getOption('use_only_cookies'));
     }
@@ -320,7 +320,7 @@ class ConfigTest extends TestCase
     public function testRefererCheckDefaultsToIniSettings()
     {
         $this->getModel($this->validatorMock);
-        $this->assertSame(ini_get('session.referer_check'), $this->config->getRefererCheck());
+        $this->assertSame(\ini_get('session.referer_check'), $this->config->getRefererCheck());
     }
 
     public function testRefererCheckIsMutable()

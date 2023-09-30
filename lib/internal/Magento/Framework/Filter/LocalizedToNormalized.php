@@ -149,7 +149,7 @@ class LocalizedToNormalized implements FilterInterface
         preg_match_all('/\d+/u', $date, $splitted);
         $split = false;
 
-        if (count($splitted[0]) == 1) {
+        if (\count($splitted[0]) == 1) {
             $split = 0;
         }
         ksort($parse);
@@ -158,7 +158,7 @@ class LocalizedToNormalized implements FilterInterface
         foreach ($parse as $value) {
             if ($value === 'd') {
                 if ($split === false) {
-                    if (count($splitted[0]) > $cnt) {
+                    if (\count($splitted[0]) > $cnt) {
                         $result['day'] = $splitted[0][$cnt];
                     }
                 } else {
@@ -168,7 +168,7 @@ class LocalizedToNormalized implements FilterInterface
             }
             if ($value === 'M') {
                 if ($split === false) {
-                    if (count($splitted[0]) > $cnt) {
+                    if (\count($splitted[0]) > $cnt) {
                         $result['month'] = $splitted[0][$cnt];
                     }
                 } else {
@@ -183,7 +183,7 @@ class LocalizedToNormalized implements FilterInterface
                     $length = 4;
                 }
                 if ($split === false) {
-                    if (count($splitted[0]) > $cnt) {
+                    if (\count($splitted[0]) > $cnt) {
                         $result['year']   = $splitted[0][$cnt];
                     }
                 } else {

@@ -42,7 +42,7 @@ class McryptTest extends TestCase
 
         do {
             $result .= sha1(microtime());
-        } while (strlen($result) < $length);
+        } while (\strlen($result) < $length);
 
         return substr($result, -$length);
     }

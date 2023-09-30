@@ -29,9 +29,9 @@ class StringLength extends LaminasStringLength implements ValidatorInterface
     public function setEncoding($encoding = null)
     {
         if ($encoding !== null) {
-            $orig = ini_get('default_charset');
+            $orig = \ini_get('default_charset');
             ini_set('default_charset', $encoding);
-            if (!ini_get('default_charset')) {
+            if (!\ini_get('default_charset')) {
                 throw new ValidateException('Given encoding not supported on this OS!');
             }
             ini_set('default_charset', $orig);

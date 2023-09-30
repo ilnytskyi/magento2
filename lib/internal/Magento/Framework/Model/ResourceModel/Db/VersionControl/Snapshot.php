@@ -47,7 +47,7 @@ class Snapshot implements ResetAfterRequestInterface
         $metaData = $this->metadata->getFields($entity);
         $filteredData = array_intersect_key($entity->getData(), $metaData);
         $data = array_merge($metaData, $filteredData);
-        $this->snapshotData[get_class($entity)][$entity->getId()] = $data;
+        $this->snapshotData[\get_class($entity)][$entity->getId()] = $data;
     }
 
     /**
@@ -62,7 +62,7 @@ class Snapshot implements ResetAfterRequestInterface
             return true;
         }
 
-        $entityClass = get_class($entity);
+        $entityClass = \get_class($entity);
         if (!isset($this->snapshotData[$entityClass][$entity->getId()])) {
             return true;
         }
@@ -83,7 +83,7 @@ class Snapshot implements ResetAfterRequestInterface
     public function clear(\Magento\Framework\DataObject $entity = null)
     {
         if ($entity !== null) {
-            $this->snapshotData[get_class($entity)] = [];
+            $this->snapshotData[\get_class($entity)] = [];
         } else {
             $this->snapshotData = [];
         }

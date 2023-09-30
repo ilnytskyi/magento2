@@ -141,7 +141,7 @@ class Bundle
         $maxPartSize = $this->getMaxPartSize($asset);
         $minSpace = $maxPartSize;
         $minIndex = -1;
-        if ($maxPartSize && count($parts)) {
+        if ($maxPartSize && \count($parts)) {
             foreach ($parts as $partIndex => $part) {
                 $space = $maxPartSize - $this->getSizePartWithNewAsset($asset, $part['assets']);
                 if ($space >= 0 && $space < $minSpace) {
@@ -151,7 +151,7 @@ class Bundle
             }
         }
 
-        return ($maxPartSize != 0) ? ($minIndex >= 0) ? $minIndex : count($parts) : 0;
+        return ($maxPartSize != 0) ? ($minIndex >= 0) ? $minIndex : \count($parts) : 0;
     }
 
     /**
@@ -296,7 +296,7 @@ class Bundle
             $this->fillContent($parts, $context);
         }
 
-        $this->content[max(0, count($this->content) - 1)] .= $this->getInitJs();
+        $this->content[max(0, \count($this->content) - 1)] .= $this->getInitJs();
 
         foreach ($this->content as $partIndex => $content) {
             $dir->writeFile($this->minification->addMinifiedSign($bundlePath . $partIndex . '.js'), $content);
@@ -313,7 +313,7 @@ class Bundle
      */
     protected function fillContent($parts, $context)
     {
-        $index = count($this->content) > 0 ? count($this->content) - 1 : 0;
+        $index = \count($this->content) > 0 ? \count($this->content) - 1 : 0;
         foreach ($parts as $part) {
             if (!isset($this->content[$index])) {
                 $this->content[$index] = '';

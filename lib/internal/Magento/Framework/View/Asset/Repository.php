@@ -170,7 +170,7 @@ class Repository implements ResetAfterRequestInterface
         }
 
         // Set module
-        if (!array_key_exists('module', $params)) {
+        if (!\array_key_exists('module', $params)) {
             $params['module'] = false;
         }
 

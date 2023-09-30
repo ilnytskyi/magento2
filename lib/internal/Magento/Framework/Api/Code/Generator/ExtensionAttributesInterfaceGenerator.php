@@ -65,7 +65,7 @@ class ExtensionAttributesInterfaceGenerator extends \Magento\Framework\Api\Code\
         $sourceClassName = $this->getSourceClassName();
         $resultClassName = $this->_getResultClassName();
         $interfaceSuffix = 'Interface';
-        $expectedResultClassName = substr($sourceClassName, 0, -strlen($interfaceSuffix))
+        $expectedResultClassName = substr($sourceClassName, 0, -\strlen($interfaceSuffix))
             . self::EXTENSION_INTERFACE_SUFFIX;
         if ($resultClassName !== $expectedResultClassName) {
             $this->_addError(

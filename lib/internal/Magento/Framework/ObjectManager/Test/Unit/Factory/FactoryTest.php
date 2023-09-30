@@ -234,7 +234,7 @@ class FactoryTest extends TestCase
         /**
          * @var \Magento\Framework\ObjectManager\Test\Unit\Factory\Fixture\Variadic $variadic
          */
-        $variadic = is_null($createArgs)
+        $variadic = \is_null($createArgs)
             ? $factory->create($type)
             : $factory->create($type, $createArgs);
 
@@ -359,7 +359,7 @@ class FactoryTest extends TestCase
         /**
          * @var \Magento\Framework\ObjectManager\Test\Unit\Factory\Fixture\SemiVariadic $semiVariadic
          */
-        $semiVariadic = is_null($createArgs)
+        $semiVariadic = \is_null($createArgs)
             ? $factory->create($type)
             : $factory->create($type, $createArgs);
 

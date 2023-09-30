@@ -34,7 +34,7 @@ class CompressionTest extends TestCase
     {
         $options = [
             'concrete_backend' => $this->createMock(\Zend_Cache_Backend_File::class),
-            'compression_threshold' => strlen($this->_testString),
+            'compression_threshold' => \strlen($this->_testString),
         ];
         $this->_decorator = new Compression($options);
     }
@@ -116,7 +116,7 @@ class CompressionTest extends TestCase
 
         $backend->expects($this->once())->method('load')->willReturnCallback([__CLASS__, 'mockLoad']);
 
-        $options = ['concrete_backend' => $backend, 'compression_threshold' => strlen($this->_testString)];
+        $options = ['concrete_backend' => $backend, 'compression_threshold' => \strlen($this->_testString)];
 
         $decorator = new Compression($options);
 
@@ -150,6 +150,6 @@ class CompressionTest extends TestCase
      */
     public static function mockLoad($cacheId)
     {
-        return array_key_exists($cacheId, self::$_cacheStorage) ? self::$_cacheStorage[$cacheId] : false;
+        return \array_key_exists($cacheId, self::$_cacheStorage) ? self::$_cacheStorage[$cacheId] : false;
     }
 }

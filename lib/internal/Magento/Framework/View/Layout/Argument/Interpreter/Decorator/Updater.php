@@ -41,7 +41,7 @@ class Updater implements InterpreterInterface
     {
         $updaters = !empty($data['updater']) ? $data['updater'] : [];
         unset($data['updater']);
-        if (!is_array($updaters)) {
+        if (!\is_array($updaters)) {
             throw new \InvalidArgumentException('Layout argument updaters are expected to be an array of classes.');
         }
         $result = $this->subject->evaluate($data);
@@ -67,7 +67,7 @@ class Updater implements InterpreterInterface
             throw new \UnexpectedValueException(
                 sprintf(
                     'Instance of layout argument updater is expected, got %s instead.',
-                    get_class($updaterInstance)
+                    \get_class($updaterInstance)
                 )
             );
         }

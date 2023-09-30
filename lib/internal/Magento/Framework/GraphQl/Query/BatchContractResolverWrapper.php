@@ -125,15 +125,15 @@ class BatchContractResolverWrapper implements ResolverInterface, ResetAfterReque
      */
     private function resolveForIndex(int $i)
     {
-        if (!array_key_exists($i, $this->requests)) {
+        if (!\array_key_exists($i, $this->requests)) {
             throw new \RuntimeException('No such resolve request.');
         }
 
         if ($this->result === null) {
-            $this->result = call_user_func($this->getContact(), $this->arguments);
+            $this->result = \call_user_func($this->getContact(), $this->arguments);
         }
 
-        if (!array_key_exists($i, $this->result)) {
+        if (!\array_key_exists($i, $this->result)) {
             throw new \RuntimeException('Service contract returned insufficient result');
         }
 
@@ -150,7 +150,7 @@ class BatchContractResolverWrapper implements ResolverInterface, ResetAfterReque
         }
 
         //Add argument.
-        $i = count($this->arguments);
+        $i = \count($this->arguments);
         $request = new ResolveRequest($field, $context, $info, $value, $args);
         $this->arguments[$i] = $this->resolver->convertToServiceArgument($request);
         $this->requests[$i] = $request;

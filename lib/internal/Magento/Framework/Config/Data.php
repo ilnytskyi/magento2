@@ -135,7 +135,7 @@ class Data implements \Magento\Framework\Config\DataInterface
         $keys = explode('/', $path);
         $data = $this->_data;
         foreach ($keys as $key) {
-            if (is_array($data) && array_key_exists($key, $data)) {
+            if (\is_array($data) && \array_key_exists($key, $data)) {
                 $data = $data[$key];
             } else {
                 return $default;

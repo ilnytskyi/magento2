@@ -104,7 +104,7 @@ class TriggerCleaner
     private function processViewTriggers(array $viewTriggers, Subscription $subscription): void
     {
         foreach ($viewTriggers as $viewTrigger) {
-            if (array_key_exists($viewTrigger->getName(), $this->DbTriggers)) {
+            if (\array_key_exists($viewTrigger->getName(), $this->DbTriggers)) {
                 foreach ($this->getStatementsFromViewTrigger($viewTrigger) as $statement) {
                     if (!empty($statement) &&
                         !str_contains($this->DbTriggers[$viewTrigger->getName()]['ACTION_STATEMENT'], $statement)

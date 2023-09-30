@@ -65,7 +65,7 @@ class ModuleResource extends AbstractDb implements ResourceInterface
                 $rowset = $this->getConnection()->fetchAll($select);
                 foreach ($rowset as $row) {
                     self::$schemaVersions[$row['module']] = $row['schema_version'];
-                    if (array_key_exists('data_version', $row)) {
+                    if (\array_key_exists('data_version', $row)) {
                         if (self::$dataVersions === null) {
                             self::$dataVersions = [];
                         }

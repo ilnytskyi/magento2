@@ -35,7 +35,7 @@ class Handlers implements ValidatorInterface
     {
         foreach ($configData as $consumerConfig) {
             $consumerName = $consumerConfig['name'];
-            if (!is_array($consumerConfig['handlers'])) {
+            if (!\is_array($consumerConfig['handlers'])) {
                 throw new \LogicException(
                     sprintf(
                         "'handlers' element must be an array for consumer '%s'",

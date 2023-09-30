@@ -23,7 +23,7 @@ class UnionRenderer implements RendererInterface
     {
         if ($select->getPart(Select::UNION)) {
             $sql = '';
-            $parts = count($select->getPart(Select::UNION));
+            $parts = \count($select->getPart(Select::UNION));
             foreach ($select->getPart(Select::UNION) as $cnt => $union) {
                 list($target, $type) = $union;
                 if ($target instanceof Select) {

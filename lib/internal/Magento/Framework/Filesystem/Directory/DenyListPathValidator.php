@@ -65,7 +65,7 @@ class DenyListPathValidator implements PathValidatorInterface
             $actualPath = $this->driver->getRealPathSafety($path);
         }
 
-        if (in_array($fullPath, $this->exceptionList, true)) {
+        if (\in_array($fullPath, $this->exceptionList, true)) {
             return;
         }
 
@@ -86,7 +86,7 @@ class DenyListPathValidator implements PathValidatorInterface
      */
     public function addException(string $fullPath)
     {
-        if (!in_array($fullPath, $this->exceptionList)) {
+        if (!\in_array($fullPath, $this->exceptionList)) {
             array_push($this->exceptionList, $fullPath);
         }
     }

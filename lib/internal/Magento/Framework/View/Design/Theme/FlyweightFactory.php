@@ -56,7 +56,7 @@ class FlyweightFactory
      */
     public function create($themeKey, $area = \Magento\Framework\View\DesignInterface::DEFAULT_AREA)
     {
-        if (!is_numeric($themeKey) && !is_string($themeKey)) {
+        if (!is_numeric($themeKey) && !\is_string($themeKey)) {
             throw new \InvalidArgumentException('Incorrect theme identification key');
         }
         $themeKey = $this->extractThemeId($themeKey);

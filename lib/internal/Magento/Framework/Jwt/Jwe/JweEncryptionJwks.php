@@ -51,7 +51,7 @@ class JweEncryptionJwks implements JweEncryptionSettingsInterface
      */
     public function getAlgorithmName(): string
     {
-        if (count($this->jwkSet->getKeys()) > 1) {
+        if (\count($this->jwkSet->getKeys()) > 1) {
             return 'jwe-json-serialization';
         } else {
             return $this->jwkSet->getKeys()[0]->getAlgorithm();

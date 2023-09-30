@@ -504,11 +504,11 @@ abstract class AbstractAdapter implements AdapterInterface
     public function backgroundColor($value = null)
     {
         if (null !== $value) {
-            if (!is_array($value) || 3 !== count($value)) {
+            if (!\is_array($value) || 3 !== \count($value)) {
                 return;
             }
             foreach ($value as $color) {
-                if (!is_integer($color) || $color < 0 || $color > 255) {
+                if (!\is_integer($color) || $color < 0 || $color > 255) {
                     return;
                 }
             }

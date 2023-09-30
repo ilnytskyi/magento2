@@ -72,12 +72,12 @@ class DirectoryList
      */
     public static function validate($config)
     {
-        if (!is_array($config)) {
+        if (!\is_array($config)) {
             throw new \InvalidArgumentException('Unexpected value type.');
         }
         $defaultConfig = static::getDefaultConfig();
         foreach ($config as $type => $row) {
-            if (!is_array($row)) {
+            if (!\is_array($row)) {
                 throw new \InvalidArgumentException('Unexpected value type.');
             }
             if (!isset($defaultConfig[$type])) {

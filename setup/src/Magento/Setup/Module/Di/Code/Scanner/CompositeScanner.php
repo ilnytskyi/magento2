@@ -34,7 +34,7 @@ class CompositeScanner implements ScannerInterface
     {
         $output = [];
         foreach ($this->_children as $type => $scanner) {
-            if (!isset($files[$type]) || !is_array($files[$type])) {
+            if (!isset($files[$type]) || !\is_array($files[$type])) {
                 continue;
             }
             $output[$type] = array_unique($scanner->collectEntities($files[$type]));

@@ -204,7 +204,7 @@ class CategoriesFixture extends Fixture
     private function getCategoriesAmount()
     {
         $categoriesAmount = $this->collectionFactory->create()->getSize();
-        $rootCategories = count($this->getRootCategoriesIds());
+        $rootCategories = \count($this->getRootCategoriesIds());
         $categoriesNumber = $this->fixtureModel->getValue('categories', 0) - ($categoriesAmount - $rootCategories - 1);
 
         return max(

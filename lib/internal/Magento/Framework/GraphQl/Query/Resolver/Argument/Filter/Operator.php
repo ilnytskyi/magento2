@@ -46,7 +46,7 @@ class Operator
             $value = self::AND;
         }
         $type = new \ReflectionClass($this);
-        if (!in_array($value, $type->getConstants())) {
+        if (!\in_array($value, $type->getConstants())) {
             throw new \Magento\Framework\GraphQl\Exception\GraphQlInputException(
                 new Phrase('%1 operator not supported', [$value])
             );

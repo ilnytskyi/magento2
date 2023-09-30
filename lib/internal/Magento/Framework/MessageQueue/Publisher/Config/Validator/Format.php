@@ -27,7 +27,7 @@ class Format implements ValidatorInterface
                 $errors[] = sprintf('Missing %s field for publisher %s.', $field, $name);
             }
 
-            if (!array_key_exists('connections', $publisherData) || !is_array($publisherData['connections'])) {
+            if (!\array_key_exists('connections', $publisherData) || !\is_array($publisherData['connections'])) {
                 $errors[] = sprintf('Invalid connections format for publisher %s.', $name);
                 continue;
             }

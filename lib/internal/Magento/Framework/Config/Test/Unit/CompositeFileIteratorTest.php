@@ -67,7 +67,7 @@ class CompositeFileIteratorTest extends TestCase
             $found[] = $file;
         }
         $this->assertEquals(array_merge($existingFiles, $newFiles), $found);
-        $this->assertEquals(count($existingFiles) + count($newFiles), $composite->count());
+        $this->assertEquals(\count($existingFiles) + \count($newFiles), $composite->count());
         $this->assertEquals(array_merge($existingFiles, $newFiles), array_keys($composite->toArray()));
     }
 }

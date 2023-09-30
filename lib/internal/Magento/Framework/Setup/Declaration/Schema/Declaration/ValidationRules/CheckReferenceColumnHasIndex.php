@@ -43,7 +43,7 @@ class CheckReferenceColumnHasIndex implements ValidationInterface
                 );
                 foreach ($indexesAndConstraints as $key) {
                     if ($key instanceof Internal || $key instanceof Index) {
-                        if (in_array($referenceColumnName, $key->getColumnNames())) {
+                        if (\in_array($referenceColumnName, $key->getColumnNames())) {
                             continue 2;
                         }
                     }

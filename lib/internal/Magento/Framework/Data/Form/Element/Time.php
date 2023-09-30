@@ -70,7 +70,7 @@ class Time extends AbstractElement
 
         if ($value = $this->getValue()) {
             $values = explode(',', $value);
-            if (is_array($values) && count($values) == 3) {
+            if (\is_array($values) && \count($values) == 3) {
                 $valueHrs = $values[0];
                 $valueMin = $values[1];
                 $valueSec = $values[2];

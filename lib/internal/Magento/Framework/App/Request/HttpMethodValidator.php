@@ -60,7 +60,7 @@ class HttpMethodValidator implements ValidatorInterface
         if ($action instanceof InterceptorInterface) {
             $actionClass = get_parent_class($action);
         } else {
-            $actionClass = get_class($action);
+            $actionClass = \get_class($action);
         }
         $this->log->debug(
             "URI '$uri'' cannot be accessed with $method method ($actionClass)"
@@ -84,7 +84,7 @@ class HttpMethodValidator implements ValidatorInterface
             //If we don't have an interface for the HTTP method or
             //the action has HTTP method limitations and doesn't allow the
             //received one then the request is invalid.
-            if (!array_key_exists($method, $map)
+            if (!\array_key_exists($method, $map)
                 || (array_intersect($map, class_implements($action, true))
                     && !$action instanceof $map[$method]
                 )

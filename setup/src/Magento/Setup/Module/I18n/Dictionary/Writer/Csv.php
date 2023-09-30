@@ -57,7 +57,7 @@ class Csv implements WriterInterface
      */
     public function __destruct()
     {
-        if ($this->_fileHandler !== STDOUT && is_resource($this->_fileHandler)) {
+        if ($this->_fileHandler !== STDOUT && \is_resource($this->_fileHandler)) {
             fclose($this->_fileHandler);
         }
     }

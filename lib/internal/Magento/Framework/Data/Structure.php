@@ -381,7 +381,7 @@ class Structure implements ResetAfterRequestInterface
                 --$offset;
             }
         } elseif ($position < 0) {
-            if ($position < $currentOffset + 1 - count($this->_elements[$parentId][self::CHILDREN])) {
+            if ($position < $currentOffset + 1 - \count($this->_elements[$parentId][self::CHILDREN])) {
                 if ($position === -1) {
                     $offset = null;
                 } else {
@@ -633,12 +633,12 @@ class Structure implements ResetAfterRequestInterface
 
         // insert
         if (null === $offset) {
-            $offset = count($children);
+            $offset = \count($children);
         }
         $this->_elements[$targetParentId][self::CHILDREN] = array_merge(
-            array_slice($children, 0, $offset),
+            \array_slice($children, 0, $offset),
             [$elementId => $alias],
-            array_slice($children, $offset)
+            \array_slice($children, $offset)
         );
         $this->_elements[$elementId][self::PARENT] = $targetParentId;
     }
@@ -668,7 +668,7 @@ class Structure implements ResetAfterRequestInterface
      */
     private function _assertArray($value)
     {
-        if (!is_array($value)) {
+        if (!\is_array($value)) {
             throw new LocalizedException(
                 new \Magento\Framework\Phrase("An array expected: %1", [var_export($value, 1)])
             );

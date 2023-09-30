@@ -92,7 +92,7 @@ class DomMerger implements DomMergerInterface
      */
     protected function isIdAttribute($attributeName)
     {
-        return in_array($attributeName, $this->idAttributes);
+        return \in_array($attributeName, $this->idAttributes);
     }
 
     /**
@@ -119,7 +119,7 @@ class DomMerger implements DomMergerInterface
      */
     protected function isContextXPath(array $xPath)
     {
-        return count(array_intersect($xPath, $this->contextXPath)) === count($xPath);
+        return \count(array_intersect($xPath, $this->contextXPath)) === \count($xPath);
     }
 
     /**
@@ -283,7 +283,7 @@ class DomMerger implements DomMergerInterface
         }
 
         foreach ($node->attributes as $name => $attribute) {
-            if (in_array($name, $this->idAttributes)) {
+            if (\in_array($name, $this->idAttributes)) {
                 return true;
             }
         }
@@ -322,7 +322,7 @@ class DomMerger implements DomMergerInterface
         $domDocument->loadXML($xml);
         if ($this->validationState->isValidationRequired() && $this->schema) {
             $errors = $this->validateDomDocument($domDocument);
-            if (count($errors)) {
+            if (\count($errors)) {
                 throw new \Magento\Framework\Exception\LocalizedException(
                     new \Magento\Framework\Phrase(implode("\n", $errors))
                 );

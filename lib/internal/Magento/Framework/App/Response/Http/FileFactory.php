@@ -79,7 +79,7 @@ class FileFactory
         $isFile = false;
         $file = null;
         $fileContent = $this->getFileContent($content);
-        if (is_array($content)) {
+        if (\is_array($content)) {
             if (!isset($content['type']) || !isset($content['value'])) {
                 throw new \InvalidArgumentException("Invalid arguments. Keys 'type' and 'value' are required.");
             }
@@ -107,7 +107,7 @@ class FileFactory
                 'contentType' => $contentType,
                 'contentLength' => $contentLength,
                 'directoryCode' => $baseDir,
-                'remove' => is_array($content) && !empty($content['rm'])
+                'remove' => \is_array($content) && !empty($content['rm'])
             ]
         ]);
     }

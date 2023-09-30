@@ -326,13 +326,13 @@ class Session implements ConfigOptionsListInterface
     {
         $errors = [];
         if (isset($options[ConfigOptionsListConstants::INPUT_KEY_SESSION_SAVE])
-            && !in_array($options[ConfigOptionsListConstants::INPUT_KEY_SESSION_SAVE], $this->validSaveHandlers)
+            && !\in_array($options[ConfigOptionsListConstants::INPUT_KEY_SESSION_SAVE], $this->validSaveHandlers)
         ) {
             $errors[] = "Invalid session handler '{$options[ConfigOptionsListConstants::INPUT_KEY_SESSION_SAVE]}'";
         }
 
         if (isset($options[self::INPUT_KEY_SESSION_REDIS_COMPRESSION_LIBRARY])
-            && !in_array($options[self::INPUT_KEY_SESSION_REDIS_COMPRESSION_LIBRARY], $this->validCompressionLibraries)
+            && !\in_array($options[self::INPUT_KEY_SESSION_REDIS_COMPRESSION_LIBRARY], $this->validCompressionLibraries)
         ) {
             $errors[] = "Invalid Redis compression library "
                 . "'{$options[self::INPUT_KEY_SESSION_REDIS_COMPRESSION_LIBRARY]}'";

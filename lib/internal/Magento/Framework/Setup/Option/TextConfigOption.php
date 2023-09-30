@@ -62,7 +62,7 @@ class TextConfigOption extends AbstractConfigOption
      */
     public function validate($data)
     {
-        if (!is_string($data)) {
+        if (!\is_string($data)) {
             throw new \InvalidArgumentException("'{$this->getName()}' must be a string");
         }
         parent::validate($data);

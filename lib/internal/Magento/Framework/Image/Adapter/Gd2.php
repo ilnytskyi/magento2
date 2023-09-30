@@ -77,7 +77,7 @@ class Gd2 extends AbstractAdapter
             throw new \OverflowException('Memory limit has been reached.');
         }
         $this->imageDestroy();
-        $this->_imageHandler = call_user_func(
+        $this->_imageHandler = \call_user_func(
             $this->_getCallback('create', null, sprintf('Unsupported image format. File: %s', $this->_fileName)),
             $this->_fileName
         );
@@ -93,7 +93,7 @@ class Gd2 extends AbstractAdapter
     {
         $allowed_schemes = ['ftp', 'ftps', 'http', 'https'];
         $url = parse_url($filename);
-        if ($url && isset($url['scheme']) && !in_array($url['scheme'], $allowed_schemes)) {
+        if ($url && isset($url['scheme']) && !\in_array($url['scheme'], $allowed_schemes)) {
             return false;
         }
 
@@ -107,7 +107,7 @@ class Gd2 extends AbstractAdapter
      */
     protected function _isMemoryLimitReached()
     {
-        $limit = $this->_convertToByte(ini_get('memory_limit'));
+        $limit = $this->_convertToByte(\ini_get('memory_limit'));
         $requiredMemory = $this->_getImageNeedMemorySize($this->_fileName);
         if ($limit === -1) {
             // A limit of -1 means no limit: http://www.php.net/manual/en/ini.core.php#ini.memory-limit
@@ -218,7 +218,7 @@ class Gd2 extends AbstractAdapter
             $functionParameters[] = $quality;
         }
 
-        call_user_func_array($this->_getCallback('output'), $functionParameters);
+        \call_user_func_array($this->_getCallback('output'), $functionParameters);
     }
 
     /**
@@ -231,7 +231,7 @@ class Gd2 extends AbstractAdapter
     public function getImage()
     {
         ob_start();
-        call_user_func($this->_getCallback('output'), $this->_imageHandler);
+        \call_user_func($this->_getCallback('output'), $this->_imageHandler);
         return ob_get_clean();
     }
 
@@ -369,7 +369,7 @@ class Gd2 extends AbstractAdapter
      */
     public function checkAlpha($fileName)
     {
-        return (ord(file_get_contents((string)$fileName, false, null, 25, 1)) & 6 & 4) == 4;
+        return (\ord(file_get_contents((string)$fileName, false, null, 25, 1)) & 6 & 4) == 4;
     }
 
     /**
@@ -487,7 +487,7 @@ class Gd2 extends AbstractAdapter
     {
         list($watermarkSrcWidth, $watermarkSrcHeight, $watermarkFileType,) = $this->_getImageOptions($imagePath);
         $this->_getFileAttributes();
-        $watermark = call_user_func(
+        $watermark = \call_user_func(
             $this->_getCallback('create', $watermarkFileType, 'Unsupported watermark image format.'),
             $imagePath
         );
@@ -731,7 +731,7 @@ class Gd2 extends AbstractAdapter
     public function checkDependencies()
     {
         foreach ($this->_requiredExtensions as $value) {
-            if (!extension_loaded($value)) {
+            if (!\extension_loaded($value)) {
                 throw new \RuntimeException("Required PHP extension '{$value}' was not loaded.");
             }
         }
@@ -763,7 +763,7 @@ class Gd2 extends AbstractAdapter
      */
     private function imageDestroy()
     {
-        if (is_resource($this->_imageHandler)) {
+        if (\is_resource($this->_imageHandler)) {
             imagedestroy($this->_imageHandler);
         }
     }
@@ -827,7 +827,7 @@ class Gd2 extends AbstractAdapter
      */
     protected function _createImageFromText($text)
     {
-        $width = imagefontwidth($this->_fontSize) * strlen((string)$text);
+        $width = imagefontwidth($this->_fontSize) * \strlen((string)$text);
         $height = imagefontheight($this->_fontSize);
 
         $this->_createEmptyImage($width, $height);

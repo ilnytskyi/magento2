@@ -27,7 +27,7 @@ class Helper extends \Magento\Framework\DB\Helper\AbstractHelper
 
         $orders = [];
         foreach ($selectOrders as $term) {
-            if (is_array($term)) {
+            if (\is_array($term)) {
                 if (!is_numeric($term[0])) {
                     $orders[] = sprintf('%s %s', $this->getConnection()->quoteIdentifier($term[0], true), $term[1]);
                 }
@@ -122,7 +122,7 @@ class Helper extends \Magento\Framework\DB\Helper\AbstractHelper
                  * Looking for column expression in the having clause
                  */
                 if ($having !== null && strpos($having, $correlationName) !== false) {
-                    if (is_string($column)) {
+                    if (\is_string($column)) {
                         /**
                          * Replace column expression to column alias in having clause
                          */
@@ -183,7 +183,7 @@ class Helper extends \Magento\Framework\DB\Helper\AbstractHelper
      */
     public function prepareColumnsList(\Magento\Framework\DB\Select $select, $groupByCondition = null)
     {
-        if (!count($select->getPart(\Magento\Framework\DB\Select::FROM))) {
+        if (!\count($select->getPart(\Magento\Framework\DB\Select::FROM))) {
             return $select->getPart(\Magento\Framework\DB\Select::COLUMNS);
         }
 
@@ -242,7 +242,7 @@ class Helper extends \Magento\Framework\DB\Helper\AbstractHelper
         $fieldsDelimiter = '',
         $additionalWhere = ''
     ) {
-        if (is_array($fields)) {
+        if (\is_array($fields)) {
             $fieldExpr = $this->getConnection()->getConcatSql($fields, $fieldsDelimiter);
         } else {
             $fieldExpr = $fields;

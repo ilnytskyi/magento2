@@ -383,7 +383,7 @@ class Installer
             $script[] = ['Enabling Update by Schedule Indexer Mode...', 'setIndexerModeSchedule', []];
         }
         $estimatedModules = $this->createModulesConfig($request, true);
-        $total = count($script) + 4 * count(array_filter($estimatedModules));
+        $total = \count($script) + 4 * \count(array_filter($estimatedModules));
         $this->progress = new Installer\Progress($total, 0);
 
         $this->log->log('Starting Magento installation:');
@@ -393,7 +393,7 @@ class Installer
             $this->log->log($message);
             try {
                 // phpcs:ignore Magento2.Functions.DiscouragedFunction
-                call_user_func_array([$this, $method], $params);
+                \call_user_func_array([$this, $method], $params);
             } catch (RuntimeException | DriverException $e) {
                 $this->revertRemoteStorageConfiguration();
                 throw $e;
@@ -470,10 +470,10 @@ class Installer
             } else {
                 $result[$module] = 1;
             }
-            if (in_array($module, $disable)) {
+            if (\in_array($module, $disable)) {
                 $result[$module] = 0;
             }
-            if (in_array($module, $enable)) {
+            if (\in_array($module, $enable)) {
                 $result[$module] = 1;
             }
         }
@@ -501,7 +501,7 @@ class Installer
             } else {
                 $result = explode(',', $request[$key]);
                 foreach ($result as $module) {
-                    if (!in_array($module, $all)) {
+                    if (!\in_array($module, $all)) {
                         throw new \LogicException("Unknown module in the requested list: '{$module}'");
                     }
                 }
@@ -587,7 +587,7 @@ class Installer
     {
         $this->checkInstallationFilePermissions();
         $this->createModulesConfig($data);
-        $userData = is_array($data) ? $data : $data->getArrayCopy();
+        $userData = \is_array($data) ? $data : $data->getArrayCopy();
         $this->setupConfigModel->process($userData);
         $deploymentConfigData = $this->deploymentConfig->get(ConfigOptionsListConstants::CONFIG_PATH_CRYPT_KEY);
         if (isset($deploymentConfigData)) {
@@ -1190,7 +1190,7 @@ class Installer
         $appState = $this->objectManagerProvider->get()->get(\Magento\Framework\App\State::class);
         $appState->setAreaCode(\Magento\Framework\App\Area::AREA_GLOBAL);
         $configData = $userConfig->getConfigData($data);
-        if (count($configData) === 0) {
+        if (\count($configData) === 0) {
             return;
         }
 
@@ -1453,7 +1453,7 @@ class Installer
         $cacheStatus = array_filter(
             $cacheManager->getStatus(),
             function (string $key) use ($types) {
-                return in_array($key, $types);
+                return \in_array($key, $types);
             },
             ARRAY_FILTER_USE_KEY
         );
@@ -1544,7 +1544,7 @@ class Installer
 
             $dbName = $connection->quoteIdentifier($config[ConfigOptionsListConstants::KEY_NAME]);
             //If for different shards one database was specified - no need to clean it few times
-            if (!in_array($dbName, $cleanedUpDatabases)) {
+            if (!\in_array($dbName, $cleanedUpDatabases)) {
                 $this->log->log("Cleaning up database {$dbName}");
                 // phpcs:ignore Magento2.SQL.RawQuery
                 $connection->query("DROP DATABASE IF EXISTS {$dbName}");
@@ -1732,7 +1732,7 @@ class Installer
 
         // unload Magento autoloader because it may be using compiled definition
         foreach (spl_autoload_functions() as $autoloader) {
-            if (is_array($autoloader) && $autoloader[0] instanceof \Magento\Framework\Code\Generator\Autoloader) {
+            if (\is_array($autoloader) && $autoloader[0] instanceof \Magento\Framework\Code\Generator\Autoloader) {
                 spl_autoload_unregister([$autoloader[0], $autoloader[1]]);
                 break;
             }
@@ -1757,7 +1757,7 @@ class Installer
         $adminData = array_filter(
             $request,
             function ($value, $key) {
-                return in_array(
+                return \in_array(
                     $key,
                     [
                         AdminAccount::KEY_EMAIL,
@@ -1867,7 +1867,7 @@ class Installer
                     ->get($indexerId);
                 $model->setScheduled(true);
             }
-            $this->log->log(__('%1 indexer(s) are in "Update by Schedule" mode.', count($indexerIds)));
+            $this->log->log(__('%1 indexer(s) are in "Update by Schedule" mode.', \count($indexerIds)));
         } catch (LocalizedException $e) {
             $this->log->log($e->getMessage());
         } catch (\Exception $e) {

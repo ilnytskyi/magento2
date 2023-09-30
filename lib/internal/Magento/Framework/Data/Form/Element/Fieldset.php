@@ -116,7 +116,7 @@ class Fieldset extends AbstractElement
      */
     public function getCountBasicChildren()
     {
-        return count($this->getBasicChildren());
+        return \count($this->getBasicChildren());
     }
 
     /**

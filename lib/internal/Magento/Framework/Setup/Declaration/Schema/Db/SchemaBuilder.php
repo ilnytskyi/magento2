@@ -178,7 +178,7 @@ class SchemaBuilder
      */
     private function resolveInternalRelations(array $columns, array $data)
     {
-        if (!is_array($data['column'])) {
+        if (!\is_array($data['column'])) {
             throw new NotFoundException(
                 new Phrase("Cannot find columns for internal index")
             );

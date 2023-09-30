@@ -102,10 +102,10 @@ class Log
     {
         $this->stats['total']++;
         if ($this->currentItem) {
-            $item = new Item(get_class($object), $this->currentItem);
+            $item = new Item(\get_class($object), $this->currentItem);
             $this->currentItem->addChild($item);
         } else {
-            $item = new Item(get_class($object), null);
+            $item = new Item(\get_class($object), null);
             $this->roots[] = $item;
         }
         $item->setHash(spl_object_hash($object));
@@ -129,7 +129,7 @@ class Log
      */
     public function display()
     {
-        $this->stats['used'] = count($this->used);
+        $this->stats['used'] = \count($this->used);
         $this->stats['unused'] = $this->stats['total'] - $this->stats['used'];
         //phpcs:disable
         echo '<table border="1" cellspacing="0" cellpadding="2">',

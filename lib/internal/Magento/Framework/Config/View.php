@@ -91,7 +91,7 @@ class View extends \Magento\Framework\Config\Reader\Filesystem
 
         $value = $this->data['vars'][$module];
         foreach (explode('/', $var ?: '') as $node) {
-            if (is_array($value) && isset($value[$node])) {
+            if (\is_array($value) && isset($value[$node])) {
                 $value = $value[$node];
             } else {
                 return false;
@@ -141,9 +141,9 @@ class View extends \Magento\Framework\Config\Reader\Filesystem
             '/view/exclude/item' => ['type', 'item'],
         ];
         foreach ($this->xpath as $attribute) {
-            if (is_array($attribute)) {
+            if (\is_array($attribute)) {
                 foreach ($attribute as $key => $id) {
-                    if (count($id) > 1) {
+                    if (\count($id) > 1) {
                         $idAttributes[$key] = array_values($id);
                     } else {
                         $idAttributes[$key] = array_shift($id);

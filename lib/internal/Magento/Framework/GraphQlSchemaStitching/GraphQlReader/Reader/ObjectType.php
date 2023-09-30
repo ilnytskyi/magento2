@@ -125,7 +125,7 @@ class ObjectType implements TypeMetaReaderInterface
         \GraphQL\Type\Definition\InterfaceType  $interfacesType,
         array $interfacesNames
     ) : bool {
-        if (in_array($interfacesType->name, $interfacesNames)) {
+        if (\in_array($interfacesType->name, $interfacesNames)) {
             return true;
         } else {
             return false;

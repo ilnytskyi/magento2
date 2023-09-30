@@ -180,7 +180,7 @@ class State
         $this->_areaCode = $areaCode;
         $this->_isAreaCodeEmulated = true;
         try {
-            $result = call_user_func_array($callback, $params);
+            $result = \call_user_func_array($callback, $params);
         } finally {
             $this->_areaCode = $currentArea;
             $this->_isAreaCodeEmulated = false;
@@ -203,7 +203,7 @@ class State
             $this->getAreaListInstance()->getCodes()
         );
 
-        if (!in_array($areaCode, $areaCodes)) {
+        if (!\in_array($areaCode, $areaCodes)) {
             throw new \Magento\Framework\Exception\LocalizedException(
                 new \Magento\Framework\Phrase('Area code "%1" does not exist', [$areaCode])
             );

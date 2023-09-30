@@ -44,7 +44,7 @@ class ArrayType implements InterpreterInterface
     public function evaluate(array $data): array
     {
         $items = $data['item'] ?? [];
-        if (!is_array($items)) {
+        if (!\is_array($items)) {
             throw new InvalidArgumentException('Array items are expected.');
         }
         $result = [];

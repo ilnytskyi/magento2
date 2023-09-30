@@ -110,7 +110,7 @@ class Phrase
      */
     public function setQuote($quote)
     {
-        if (in_array($quote, [self::QUOTE_SINGLE, self::QUOTE_DOUBLE])) {
+        if (\in_array($quote, [self::QUOTE_SINGLE, self::QUOTE_DOUBLE])) {
             $this->_quote = $quote;
         }
     }
@@ -183,7 +183,7 @@ class Phrase
         if (empty($contextValue)) {
             throw new \DomainException('Context value is empty');
         }
-        if (!in_array($contextValue, $this->_contextValue)) {
+        if (!\in_array($contextValue, $this->_contextValue)) {
             $this->_contextValue[] = $contextValue;
         }
     }
@@ -197,11 +197,11 @@ class Phrase
      */
     public function setContextValue($contextValue)
     {
-        if (is_string($contextValue)) {
+        if (\is_string($contextValue)) {
             $contextValue = explode(',', $contextValue);
         } elseif (null == $contextValue) {
             $contextValue = [];
-        } elseif (!is_array($contextValue)) {
+        } elseif (!\is_array($contextValue)) {
             throw new \DomainException('Wrong context type');
         }
         $this->_contextValue = $contextValue;
@@ -269,7 +269,7 @@ class Phrase
         $encloseQuote = $this->getQuote() == Phrase::QUOTE_DOUBLE ? Phrase::QUOTE_DOUBLE : Phrase::QUOTE_SINGLE;
         /* Find all occurrences of ' and ", with no \ before it for concatenation */
         preg_match_all('/[^\\\\]' . $encloseQuote . '|' . $encloseQuote . '[^\\\\]/', $string, $matches);
-        if (count($matches[0])) {
+        if (\count($matches[0])) {
             $string = preg_replace('/([^\\\\])' . $encloseQuote . ' ?\. ?' . $encloseQuote . '/', '$1', $string);
         }
         /* Remove all occurrences of escaped quotes because it is not desirable in csv file.

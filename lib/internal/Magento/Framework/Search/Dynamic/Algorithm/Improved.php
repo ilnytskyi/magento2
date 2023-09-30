@@ -71,7 +71,7 @@ class Improved implements AlgorithmInterface
 
         $data[0]['from'] = 0;
 
-        $dataSize = count($data);
+        $dataSize = \count($data);
         for ($key = 0; $key < $dataSize; $key++) {
             if (isset($data[$key + 1])) {
                 $data[$key]['to'] = $data[$key + 1]['from'];

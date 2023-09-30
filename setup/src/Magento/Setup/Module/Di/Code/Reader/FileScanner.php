@@ -79,8 +79,8 @@ class FileScanner
         /**
          * Define PHP 5.4 'trait' token constant.
          */
-        if (!defined('T_TRAIT')) {
-            define('T_TRAIT', 42001);
+        if (!\defined('T_TRAIT')) {
+            \define('T_TRAIT', 42001);
         }
 
         $namespaceContentTokenTypes = [
@@ -118,13 +118,13 @@ class FileScanner
 
                 return false;
             }
-            if (is_string($tokens[$tokenIndex]) && $tokens[$tokenIndex] === '"') {
+            if (\is_string($tokens[$tokenIndex]) && $tokens[$tokenIndex] === '"') {
                 do {
                     $tokenIndex++;
-                } while (!(is_string($tokens[$tokenIndex]) && $tokens[$tokenIndex] === '"'));
+                } while (!(\is_string($tokens[$tokenIndex]) && $tokens[$tokenIndex] === '"'));
             }
             $token = $tokens[$tokenIndex];
-            if (is_array($token)) {
+            if (\is_array($token)) {
                 list($this->tokenType, $tokenContent, $tokenLine) = $token;
             } else {
                 $this->tokenType = null;
@@ -146,7 +146,7 @@ class FileScanner
             if ($validTrailingTokens === null) {
                 $validTrailingTokens = [T_WHITESPACE, T_FINAL, T_ABSTRACT, T_INTERFACE, T_CLASS, T_FUNCTION];
             }
-            if ($docCommentIndex !== false && !in_array($this->tokenType, $validTrailingTokens)) {
+            if ($docCommentIndex !== false && !\in_array($this->tokenType, $validTrailingTokens)) {
                 $docCommentIndex = false;
             }
 
@@ -446,7 +446,7 @@ class FileScanner
 
         if ($namespace === null) {
             $namespace = array_shift($namespaces);
-        } elseif (!in_array($namespace, $namespaces, true)) {
+        } elseif (!\in_array($namespace, $namespaces, true)) {
             return null;
         }
 

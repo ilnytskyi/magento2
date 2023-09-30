@@ -26,7 +26,7 @@ class X509Chain implements JwsHeaderParameterInterface, JweHeaderParameterInterf
      */
     public function __construct(array $value)
     {
-        if (count($value) < 1) {
+        if (\count($value) < 1) {
             throw new \InvalidArgumentException('X.509 Certificate chain must contain at least 1 key');
         }
         $this->value = $value;

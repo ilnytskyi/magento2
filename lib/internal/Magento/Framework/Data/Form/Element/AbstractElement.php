@@ -395,7 +395,7 @@ abstract class AbstractElement extends AbstractForm
             $html .= '<label class="addbefore" for="' . $htmlId . '">' . $beforeElementHtml . '</label>';
         }
 
-        if (is_array($this->getValue())) {
+        if (\is_array($this->getValue())) {
             foreach ($this->getValue() as $value) {
                 $html .= $this->getHtmlForInputByValue($this->_escape($value));
             }
@@ -569,12 +569,12 @@ abstract class AbstractElement extends AbstractForm
         if ($this->isLocked() && !empty($attributes)) {
             $attributes[] = $this->lockHtmlAttribute;
         }
-        if (in_array('disabled', $attributes) && !empty($this->_data['disabled'])) {
+        if (\in_array('disabled', $attributes) && !empty($this->_data['disabled'])) {
             $this->_data['disabled'] = 'disabled';
         } else {
             unset($this->_data['disabled']);
         }
-        if (in_array('checked', $attributes) && !empty($this->_data['checked'])) {
+        if (\in_array('checked', $attributes) && !empty($this->_data['checked'])) {
             $this->_data['checked'] = 'checked';
         } else {
             unset($this->_data['checked']);
@@ -631,10 +631,10 @@ abstract class AbstractElement extends AbstractForm
      */
     public function addElementValues($values, $overwrite = false)
     {
-        if (empty($values) || is_string($values) && trim($values) == '') {
+        if (empty($values) || \is_string($values) && trim($values) == '') {
             return $this;
         }
-        if (!is_array($values)) {
+        if (!\is_array($values)) {
             $values = $this->_escaper->escapeHtml(trim($values));
             $values = [$values => $values];
         }

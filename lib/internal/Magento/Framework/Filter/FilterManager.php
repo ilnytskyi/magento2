@@ -78,7 +78,7 @@ class FilterManager
             throw new UnexpectedValueException(sprintf(
                 'Filter object must implement %s interface, %s was given',
                 FilterInterface::class,
-                get_class($filter)
+                \get_class($filter)
             ));
         }
         return $filter;
@@ -120,7 +120,7 @@ class FilterManager
                     throw new UnexpectedValueException(sprintf(
                         'Filter factory must implement %s interface, %s was given.',
                         FactoryInterface::class,
-                        get_class($factory)
+                        \get_class($factory)
                     ));
                 }
                 $this->factoryInstances[] = $factory;
@@ -139,9 +139,9 @@ class FilterManager
     public function __call($filterAlias, array $arguments = [])
     {
         $value = array_shift($arguments);
-        if (count($arguments)) {
+        if (\count($arguments)) {
             $arguments = array_shift($arguments);
-            if (!is_array($arguments)) {
+            if (!\is_array($arguments)) {
                 $arguments = [$arguments];
             }
         }

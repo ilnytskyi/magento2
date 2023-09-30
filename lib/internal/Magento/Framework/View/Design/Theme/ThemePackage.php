@@ -56,7 +56,7 @@ class ThemePackage
     public function __construct($key, $path)
     {
         $keyParts = explode(Theme::THEME_PATH_SEPARATOR, $key);
-        if (count($keyParts) != 3) {
+        if (\count($keyParts) != 3) {
             throw new \UnexpectedValueException(
                 "Theme's key does not correspond to required format: '<area>/<vendor>/<name>'"
             );

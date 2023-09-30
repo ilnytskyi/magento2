@@ -175,7 +175,7 @@ class Customization implements CustomizationInterface
     {
         /** @var $file \Magento\Framework\View\Design\Theme\FileInterface */
         foreach ($this->getFiles() as $file) {
-            if (in_array($file->getId(), $fileIds)) {
+            if (\in_array($file->getId(), $fileIds)) {
                 $file->delete();
             }
         }

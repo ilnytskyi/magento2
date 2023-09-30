@@ -87,13 +87,13 @@ class TemporaryTableService
         $indexMethod = self::INDEX_METHOD_HASH,
         $dbEngine = self::DB_ENGINE_INNODB
     ) {
-        if (!in_array($indexMethod, $this->allowedIndexMethods)) {
+        if (!\in_array($indexMethod, $this->allowedIndexMethods)) {
             throw new \InvalidArgumentException(
                 sprintf('indexMethod must be one of %s', implode(',', $this->allowedIndexMethods))
             );
         }
 
-        if (!in_array($dbEngine, $this->allowedEngines)) {
+        if (!\in_array($dbEngine, $this->allowedEngines)) {
             throw new \InvalidArgumentException(
                 sprintf('dbEngine must be one of %s', implode(',', $this->allowedEngines))
             );

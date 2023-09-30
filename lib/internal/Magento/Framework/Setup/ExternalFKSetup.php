@@ -149,7 +149,7 @@ class ExternalFKSetup
      */
     protected function addDefaultForeignKey()
     {
-        if (!count($this->getForeignKeys(
+        if (!\count($this->getForeignKeys(
             $this->externalTable,
             $this->externalColumn,
             $this->entityTable,
@@ -188,7 +188,7 @@ class ExternalFKSetup
             }
         );
         foreach ($foreignKeys as $foreignKeyInfo) {
-            if (!count($this->getForeignKeys(
+            if (!\count($this->getForeignKeys(
                 $this->externalTable,
                 $this->externalColumn,
                 $this->setup->getTablePlaceholder($foreignKeyInfo['REF_TABLE_NAME']),
@@ -218,7 +218,7 @@ class ExternalFKSetup
      */
     protected function dropOldForeignKey()
     {
-        if (count($this->getForeignKeys(
+        if (\count($this->getForeignKeys(
             $this->externalTable,
             $this->externalColumn,
             $this->entityTable,

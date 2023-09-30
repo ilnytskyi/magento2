@@ -137,7 +137,7 @@ class ArchiveTest extends TestCase
      */
     public function testPackUnpackGzBz($destinationFile, $extensionRequired)
     {
-        if ($extensionRequired && !extension_loaded($extensionRequired)) {
+        if ($extensionRequired && !\extension_loaded($extensionRequired)) {
             $this->markTestSkipped("The extension '{$extensionRequired}' is not enabled.");
         }
         $this->packed = $this->archive->pack($this->sourceFilePath, $this->destinationDir . $destinationFile);
@@ -173,7 +173,7 @@ class ArchiveTest extends TestCase
      */
     public function testPackUnpackTar($destinationFile, $extensionRequired)
     {
-        if ($extensionRequired && !extension_loaded($extensionRequired)) {
+        if ($extensionRequired && !\extension_loaded($extensionRequired)) {
             $this->markTestSkipped("The extension '{$extensionRequired}' is not enabled.");
         }
         $this->packed = $this->archive->pack($this->sourceFilePath, $this->destinationDir . $destinationFile);
@@ -196,7 +196,7 @@ class ArchiveTest extends TestCase
      */
     public function testExtract($destinationFile, $extensionRequired)
     {
-        if ($extensionRequired && !extension_loaded($extensionRequired)) {
+        if ($extensionRequired && !\extension_loaded($extensionRequired)) {
             $this->markTestSkipped("The extension '{$extensionRequired}' is not enabled.");
         }
         $this->packed = $this->archive->pack($this->sourceFilePath, $this->destinationDir . $destinationFile);

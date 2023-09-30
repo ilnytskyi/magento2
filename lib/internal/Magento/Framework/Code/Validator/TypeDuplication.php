@@ -59,7 +59,7 @@ class TypeDuplication implements ValidatorInterface
         foreach ($arguments as $argument) {
             $name = $argument['name'];
             $type = $argument['type'];
-            if (in_array($type, $typeList)) {
+            if (\in_array($type, $typeList)) {
                 $errors[] = 'Multiple type injection [' . $type . ']';
             } elseif (isset($typeList[$name])) {
                 $errors[] = 'Variable name duplication. [$' . $name . ']';
@@ -97,7 +97,7 @@ class TypeDuplication implements ValidatorInterface
         $output = [];
         foreach ($arguments as $argument) {
             $type = $argument['type'];
-            if (!$type || in_array($type, $this->scalarTypesProvider->getTypes())) {
+            if (!$type || \in_array($type, $this->scalarTypesProvider->getTypes())) {
                 continue;
             }
             $reflection = new \ReflectionClass($type);

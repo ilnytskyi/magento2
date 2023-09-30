@@ -74,7 +74,7 @@ class CustomerDataGenerator
             $this->customerGroupIds = $this->groupCollectionFactory->create()->getAllIds();
         }
 
-        return $this->customerGroupIds[$customerId % count($this->customerGroupIds)];
+        return $this->customerGroupIds[$customerId % \count($this->customerGroupIds)];
     }
 
     /**

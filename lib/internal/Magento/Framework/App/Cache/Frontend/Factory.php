@@ -231,7 +231,7 @@ class Factory
     {
         $enableTwoLevels = false;
         $type = isset($cacheOptions['backend']) ? $cacheOptions['backend'] : $this->_defaultBackend;
-        if (isset($cacheOptions['backend_options']) && is_array($cacheOptions['backend_options'])) {
+        if (isset($cacheOptions['backend_options']) && \is_array($cacheOptions['backend_options'])) {
             $options = $cacheOptions['backend_options'];
         } else {
             $options = [];
@@ -240,18 +240,18 @@ class Factory
         $backendType = false;
         switch (strtolower($type)) {
             case 'sqlite':
-                if (extension_loaded('sqlite') && isset($options['cache_db_complete_path'])) {
+                if (\extension_loaded('sqlite') && isset($options['cache_db_complete_path'])) {
                     $backendType = 'Sqlite';
                 }
                 break;
             case 'memcached':
-                if (extension_loaded('memcached')) {
+                if (\extension_loaded('memcached')) {
                     if (isset($cacheOptions['memcached'])) {
                         $options = $cacheOptions['memcached'];
                     }
                     $enableTwoLevels = true;
                     $backendType = 'Libmemcached';
-                } elseif (extension_loaded('memcache')) {
+                } elseif (\extension_loaded('memcache')) {
                     if (isset($cacheOptions['memcached'])) {
                         $options = $cacheOptions['memcached'];
                     }
@@ -260,20 +260,20 @@ class Factory
                 }
                 break;
             case 'apc':
-                if (extension_loaded('apc') && ini_get('apc.enabled')) {
+                if (\extension_loaded('apc') && \ini_get('apc.enabled')) {
                     $enableTwoLevels = true;
                     $backendType = 'Apc';
                 }
                 break;
             case 'xcache':
-                if (extension_loaded('xcache')) {
+                if (\extension_loaded('xcache')) {
                     $enableTwoLevels = true;
                     $backendType = 'Xcache';
                 }
                 break;
             case 'eaccelerator':
             case 'varien_cache_backend_eaccelerator':
-                if (extension_loaded('eaccelerator') && ini_get('eaccelerator.enable')) {
+                if (\extension_loaded('eaccelerator') && \ini_get('eaccelerator.enable')) {
                     $enableTwoLevels = true;
                     $backendType = Eaccelerator::class;
                 }
@@ -296,7 +296,7 @@ class Factory
                     try {
                         if (class_exists($type, true)) {
                             $implements = class_implements($type, true);
-                            if (in_array('Zend_Cache_Backend_Interface', $implements)) {
+                            if (\in_array('Zend_Cache_Backend_Interface', $implements)) {
                                 $backendType = $type;
                             }
                         }
@@ -312,7 +312,7 @@ class Factory
             $cacheDir->create();
         }
         foreach ($this->_backendOptions as $option => $value) {
-            if (!array_key_exists($option, $options)) {
+            if (!\array_key_exists($option, $options)) {
                 $options[$option] = $value;
             }
         }
@@ -399,15 +399,15 @@ class Factory
     protected function _getFrontendOptions(array $cacheOptions)
     {
         $options = isset($cacheOptions['frontend_options']) ? $cacheOptions['frontend_options'] : [];
-        if (!array_key_exists('caching', $options)) {
+        if (!\array_key_exists('caching', $options)) {
             $options['caching'] = true;
         }
-        if (!array_key_exists('lifetime', $options)) {
+        if (!\array_key_exists('lifetime', $options)) {
             $options['lifetime'] = isset(
                 $cacheOptions['lifetime']
             ) ? $cacheOptions['lifetime'] : self::DEFAULT_LIFETIME;
         }
-        if (!array_key_exists('automatic_cleaning_factor', $options)) {
+        if (!\array_key_exists('automatic_cleaning_factor', $options)) {
             $options['automatic_cleaning_factor'] = 0;
         }
         $options['type'] = isset($cacheOptions['frontend']) ? $cacheOptions['frontend'] : Core::class;

@@ -18,5 +18,5 @@ use Magento\Framework\HTTP\Test\Unit\Adapter\CurlTest;
  */
 function curl_exec($resource)
 {
-    return call_user_func(CurlTest::$curlExectClosure);
+    return \call_user_func(CurlTest::$curlExectClosure);
 }

@@ -54,7 +54,7 @@ class ForDirective implements DirectiveProcessorInterface
         $loopTextToReplace = $construction['loopBody'];
         $loopItemVariableName = preg_replace('/\s+/', '', $construction['loopItem']);
 
-        if (is_array($loopData) || $loopData instanceof \Traversable) {
+        if (\is_array($loopData) || $loopData instanceof \Traversable) {
             return $this->getLoopReplacementText(
                 $loopData,
                 $loopItemVariableName,
@@ -79,10 +79,10 @@ class ForDirective implements DirectiveProcessorInterface
         $validFields = array_filter(
             $requiredFields,
             function ($field) use ($construction) {
-                return isset($construction[$field]) && strlen(trim($construction[$field]));
+                return isset($construction[$field]) && \strlen(trim($construction[$field]));
             }
         );
-        return count($requiredFields) == count($validFields);
+        return \count($requiredFields) == \count($validFields);
     }
 
     /**
@@ -111,7 +111,7 @@ class ForDirective implements DirectiveProcessorInterface
             // If loop item is an array, convert it to DataObject
             // to have unified interface if the collection
             if (!$loopItemDataObject instanceof DataObject) {
-                if (!is_array($loopItemDataObject)) {
+                if (!\is_array($loopItemDataObject)) {
                     continue;
                 }
                 $loopItemDataObject = new DataObject($loopItemDataObject);
@@ -134,7 +134,7 @@ class ForDirective implements DirectiveProcessorInterface
                     $text = $this->variableResolver->resolve($attribute[2], $filter, $templateVariables);
                     $subText = str_replace(
                         $attribute[0],
-                        is_array($text) ? $text : (string) $text,
+                        \is_array($text) ? $text : (string) $text,
                         $subText
                     );
                 }

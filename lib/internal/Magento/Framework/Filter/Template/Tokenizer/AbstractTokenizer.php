@@ -33,7 +33,7 @@ abstract class AbstractTokenizer
      */
     public function next()
     {
-        $stringLength = $this->_string !== null ? strlen($this->_string) : 0;
+        $stringLength = $this->_string !== null ? \strlen($this->_string) : 0;
         if ($this->_currentIndex + 1 >= $stringLength) {
             return false;
         }

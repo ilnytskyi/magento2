@@ -40,15 +40,15 @@ class Observer extends \Magento\Framework\DataObject
         $this->setEvent($event);
 
         $_profilerKey = 'OBSERVER: ';
-        if (is_object($callback[0])) {
-            $_profilerKey .= get_class($callback[0]);
+        if (\is_object($callback[0])) {
+            $_profilerKey .= \get_class($callback[0]);
         } else {
             $_profilerKey .= (string)$callback[0];
         }
         $_profilerKey .= ' -> ' . $callback[1];
 
         \Magento\Framework\Profiler::start($_profilerKey);
-        call_user_func($callback, $this);
+        \call_user_func($callback, $this);
         \Magento\Framework\Profiler::stop($_profilerKey);
 
         return $this;

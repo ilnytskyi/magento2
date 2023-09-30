@@ -79,7 +79,7 @@ class Xml implements \Magento\Framework\Webapi\Rest\Response\RendererInterface
      */
     protected function _formatData($data, $isRoot = false)
     {
-        if (!is_array($data) && !is_object($data)) {
+        if (!\is_array($data) && !\is_object($data)) {
             if ($isRoot) {
                 return $this->_formatValue($data);
             }
@@ -92,7 +92,7 @@ class Xml implements \Magento\Framework\Webapi\Rest\Response\RendererInterface
 
         $formattedData = [];
         foreach ($data as $key => $value) {
-            $value = is_array($value) || is_object($value) ? $this->_formatData($value) : $this->_formatValue($value);
+            $value = \is_array($value) || \is_object($value) ? $this->_formatData($value) : $this->_formatValue($value);
             if ($isAssoc) {
                 $formattedData[$this->_prepareKey($key)] = $value;
             } else {
@@ -110,7 +110,7 @@ class Xml implements \Magento\Framework\Webapi\Rest\Response\RendererInterface
      */
     protected function _formatValue($value)
     {
-        if (is_bool($value)) {
+        if (\is_bool($value)) {
             /** Without the following transformation boolean values are rendered incorrectly */
             $value = $value ? 'true' : 'false';
         }

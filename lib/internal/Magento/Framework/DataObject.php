@@ -95,8 +95,8 @@ class DataObject implements \ArrayAccess
     {
         if ($key === null) {
             $this->setData([]);
-        } elseif (is_string($key)) {
-            if (isset($this->_data[$key]) || array_key_exists($key, $this->_data)) {
+        } elseif (\is_string($key)) {
+            if (isset($this->_data[$key]) || \array_key_exists($key, $this->_data)) {
                 unset($this->_data[$key]);
             }
         } elseif ($key === (array)$key) {
@@ -138,7 +138,7 @@ class DataObject implements \ArrayAccess
         if ($index !== null) {
             if ($data === (array)$data) {
                 $data = isset($data[$index]) ? $data[$index] : null;
-            } elseif (is_string($data)) {
+            } elseif (\is_string($data)) {
                 $data = explode(PHP_EOL, $data);
                 $data = isset($data[$index]) ? $data[$index] : null;
             } elseif ($data instanceof \Magento\Framework\DataObject) {
@@ -237,10 +237,10 @@ class DataObject implements \ArrayAccess
      */
     public function hasData($key = '')
     {
-        if (empty($key) || !is_string($key)) {
+        if (empty($key) || !\is_string($key)) {
             return !empty($this->_data);
         }
-        return array_key_exists($key, $this->_data);
+        return \array_key_exists($key, $this->_data);
     }
 
     /**
@@ -419,7 +419,7 @@ class DataObject implements \ArrayAccess
         }
 
         throw new \Magento\Framework\Exception\LocalizedException(
-            new \Magento\Framework\Phrase('Invalid method %1::%2', [get_class($this), $method])
+            new \Magento\Framework\Phrase('Invalid method %1::%2', [\get_class($this), $method])
         );
     }
 
@@ -490,7 +490,7 @@ class DataObject implements \ArrayAccess
         }
 
         foreach ($this->_data as $key => $value) {
-            if (in_array($key, $keys)) {
+            if (\in_array($key, $keys)) {
                 $data[] = $key . $valueSeparator . $quote . $value . $quote;
             }
         }
@@ -517,12 +517,12 @@ class DataObject implements \ArrayAccess
         }
         $debug = [];
         foreach ($data as $key => $value) {
-            if (is_scalar($value)) {
+            if (\is_scalar($value)) {
                 $debug[$key] = $value;
-            } elseif (is_array($value)) {
+            } elseif (\is_array($value)) {
                 $debug[$key] = $this->debug($value, $objects);
             } elseif ($value instanceof \Magento\Framework\DataObject) {
-                $debug[$key . ' (' . get_class($value) . ')'] = $value->debug(null, $objects);
+                $debug[$key . ' (' . \get_class($value) . ')'] = $value->debug(null, $objects);
             }
         }
         return $debug;
@@ -552,7 +552,7 @@ class DataObject implements \ArrayAccess
     #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
-        return isset($this->_data[$offset]) || array_key_exists($offset, $this->_data);
+        return isset($this->_data[$offset]) || \array_key_exists($offset, $this->_data);
     }
 
     /**
@@ -594,7 +594,7 @@ class DataObject implements \ArrayAccess
         return array_filter(
             $this->_data,
             function ($v) {
-                return is_scalar($v) || is_array($v);
+                return \is_scalar($v) || \is_array($v);
             }
         );
     }

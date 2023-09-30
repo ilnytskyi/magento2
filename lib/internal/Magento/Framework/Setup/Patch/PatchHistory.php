@@ -120,6 +120,6 @@ class PatchHistory
      */
     public function isApplied($patchName)
     {
-        return in_array($patchName, $this->getAppliedPatches());
+        return \in_array($patchName, $this->getAppliedPatches());
     }
 }

@@ -85,7 +85,7 @@ class Transaction
     protected function _runCallbacks()
     {
         foreach ($this->_beforeCommitCallbacks as $callback) {
-            call_user_func($callback);
+            \call_user_func($callback);
         }
         return $this;
     }

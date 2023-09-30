@@ -99,7 +99,7 @@ class ConfigOptionsListTest extends TestCase
         );
         $this->assertInstanceOf(TextConfigOption::class, $options[10]);
         $this->assertSame('http Cache hosts', $options[10]->getDescription());
-        $this->assertGreaterThanOrEqual(11, count($options));
+        $this->assertGreaterThanOrEqual(11, \count($options));
     }
 
     public function testCreateOptions()
@@ -113,7 +113,7 @@ class ConfigOptionsListTest extends TestCase
         $this->generator->expects($this->once())->method('createCacheHostsConfig')->willReturn($configDataMock);
 
         $configData = $this->object->createConfig([Lock::INPUT_KEY_LOCK_PROVIDER => 'db'], $this->deploymentConfig);
-        $this->assertGreaterThanOrEqual(6, count($configData));
+        $this->assertGreaterThanOrEqual(6, \count($configData));
     }
 
     public function testCreateOptionsWithOptionalNull()
@@ -127,7 +127,7 @@ class ConfigOptionsListTest extends TestCase
         $this->generator->expects($this->once())->method('createCacheHostsConfig')->willReturn($configDataMock);
 
         $configData = $this->object->createConfig([Lock::INPUT_KEY_LOCK_PROVIDER => 'db'], $this->deploymentConfig);
-        $this->assertGreaterThanOrEqual(6, count($configData));
+        $this->assertGreaterThanOrEqual(6, \count($configData));
     }
 
     public function testValidateSuccess()

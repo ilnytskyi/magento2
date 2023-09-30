@@ -27,7 +27,7 @@ class Mysql extends \Zend_Db_Statement_Pdo
         // Check whether we deal with named bind
         $isPositionalBind = true;
         foreach ($params as $k => $v) {
-            if (!is_int($k)) {
+            if (!\is_int($k)) {
                 $isPositionalBind = false;
                 break;
             }
@@ -39,7 +39,7 @@ class Mysql extends \Zend_Db_Statement_Pdo
         // Separate array with values, as they are bound by reference
         foreach ($params as $name => $param) {
             $dataType = \PDO::PARAM_STR;
-            $length = is_string($param) ? strlen($param) : 0;
+            $length = \is_string($param) ? \strlen($param) : 0;
             $driverOptions = null;
 
             if ($param instanceof Parameter) {

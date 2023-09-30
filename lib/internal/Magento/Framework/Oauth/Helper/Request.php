@@ -111,7 +111,7 @@ class Request
      */
     protected function _fetchProtocolParamsFromQuery(&$protocolParams, $queryString)
     {
-        if (is_array($queryString)) {
+        if (\is_array($queryString)) {
             foreach ($queryString as $queryParamName => $queryParamValue) {
                 if ($this->_isProtocolParameter($queryParamName)) {
                     $protocolParams[$queryParamName] = $queryParamValue;
@@ -147,7 +147,7 @@ class Request
             foreach (explode(',', $authHeaderValue) as $paramStr) {
                 $nameAndValue = explode('=', trim($paramStr), 2);
 
-                if (count($nameAndValue) < 2) {
+                if (\count($nameAndValue) < 2) {
                     continue;
                 }
                 if ($this->_isProtocolParameter($nameAndValue[0])) {
@@ -172,7 +172,7 @@ class Request
             foreach (explode('&', $queryString) as $paramToValue) {
                 $paramData = explode('=', $paramToValue);
 
-                if (2 === count($paramData) && !$this->_isProtocolParameter($paramData[0])) {
+                if (2 === \count($paramData) && !$this->_isProtocolParameter($paramData[0])) {
                     $protocolParams[rawurldecode($paramData[0])] = rawurldecode($paramData[1]);
                 }
             }

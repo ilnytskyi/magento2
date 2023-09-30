@@ -94,7 +94,7 @@ class Boolean implements DbDefinitionProcessorInterface
     {
         if ($data['type'] === self::INTEGER_TYPE &&
             (
-                array_key_exists('padding', $data) &&
+                \array_key_exists('padding', $data) &&
                 $data['padding'] === self::INTEGER_PADDING
             )
         ) {

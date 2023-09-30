@@ -41,7 +41,7 @@ class FieldsFilter
     public function filter($response)
     {
         $filter = $this->_request->getParam(self::FILTER_PARAMETER);
-        if (!is_string($filter)) {
+        if (!\is_string($filter)) {
             return [];
         }
         $filterArray = $this->parse($filter);
@@ -85,7 +85,7 @@ class FieldsFilter
      */
     protected function parse($filterString)
     {
-        $length = strlen($filterString);
+        $length = \strlen($filterString);
         //Permissible characters in filter string: letter, number, underscore, square brackets and comma
         if ($length == 0 || preg_match('/[^\w\[\],]+/', $filterString)) {
             return null;
@@ -99,7 +99,7 @@ class FieldsFilter
 
         for ($position = 0; $position < $length; $position++) {
             //Extracting field when encountering field separators
-            if (in_array($filterString[$position], ['[', ']', ','])) {
+            if (\in_array($filterString[$position], ['[', ']', ','])) {
                 if ($start !== null) {
                     $currentElement = substr($filterString, $start, $position - $start);
                     $current[$currentElement] = 1;
@@ -158,7 +158,7 @@ class FieldsFilter
         $arrayIntersect = null;
         //Check if its a sequential array. Presence of sequential arrays mean that the filed is a collection
         //and the filtering will be applied to all the collection items
-        if (!(bool)count(array_filter(array_keys($responseArray), 'is_string'))) {
+        if (!(bool)\count(array_filter(array_keys($responseArray), 'is_string'))) {
             foreach ($responseArray as $key => &$item) {
                 $arrayIntersect[$key] = $this->recursiveArrayIntersectKey($item, $filter);
             }
@@ -181,7 +181,7 @@ class FieldsFilter
         $arrayIntersect = array_intersect_key($array1, $array2);
         foreach ($arrayIntersect as $key => &$value) {
             if ($key == AbstractExtensibleObject::CUSTOM_ATTRIBUTES_KEY
-                && is_array($array2[AbstractExtensibleObject::CUSTOM_ATTRIBUTES_KEY])
+                && \is_array($array2[AbstractExtensibleObject::CUSTOM_ATTRIBUTES_KEY])
             ) {
                 $value = $this->filterCustomAttributes(
                     $value,
@@ -189,7 +189,7 @@ class FieldsFilter
                 );
                 continue;
             }
-            if (is_array($value) && is_array($array2[$key])) {
+            if (\is_array($value) && \is_array($array2[$key])) {
                 $value = $this->applyFilter($value, $array2[$key]);
             }
         }
@@ -208,7 +208,7 @@ class FieldsFilter
         $fieldResult = [];
         foreach ($item as $key => $field) {
             $filterKeys = array_keys($filter);
-            if (in_array($field[AttributeInterface::ATTRIBUTE_CODE], $filterKeys)) {
+            if (\in_array($field[AttributeInterface::ATTRIBUTE_CODE], $filterKeys)) {
                 $fieldResult[$key][AttributeInterface::ATTRIBUTE_CODE] = $field[AttributeInterface::ATTRIBUTE_CODE];
                 $fieldResult[$key][AttributeInterface::VALUE] = $field[AttributeInterface::VALUE];
             } else {

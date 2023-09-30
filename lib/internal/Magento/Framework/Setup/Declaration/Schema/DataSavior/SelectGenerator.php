@@ -59,7 +59,7 @@ class SelectGenerator
         $data = $adapter->fetchAll($select);
         yield $data;
 
-        while (count($data)) {
+        while (\count($data)) {
             ++$page;
             $select->limit($this->batchSize, $page * $this->batchSize + 1);
             $data = $adapter->fetchAll($select);

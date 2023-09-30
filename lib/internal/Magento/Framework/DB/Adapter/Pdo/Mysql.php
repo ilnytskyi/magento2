@@ -447,7 +447,7 @@ class Mysql extends \Zend_Db_Adapter_Pdo_Mysql implements AdapterInterface, Rese
             return;
         }
 
-        if (!extension_loaded('pdo_mysql')) {
+        if (!\extension_loaded('pdo_mysql')) {
             throw new Zend_Db_Adapter_Exception('pdo_mysql extension is not installed');
         }
 
@@ -582,7 +582,7 @@ class Mysql extends \Zend_Db_Adapter_Pdo_Mysql implements AdapterInterface, Rese
             $sql = $sql !== null ? ltrim(preg_replace('/\s+/', ' ', $sql)) : '';
             $sqlMessage = explode(' ', $sql, 3);
             $startSql = strtolower(substr($sqlMessage[0], 0, 3));
-            if (in_array($startSql, $this->_ddlRoutines) && strcasecmp($sqlMessage[1], 'temporary') !== 0) {
+            if (\in_array($startSql, $this->_ddlRoutines) && strcasecmp($sqlMessage[1], 'temporary') !== 0) {
                 throw new ConnectionException(AdapterInterface::ERROR_DDL_MESSAGE, E_USER_ERROR);
             }
         }
@@ -636,7 +636,7 @@ class Mysql extends \Zend_Db_Adapter_Pdo_Mysql implements AdapterInterface, Rese
 
                 // Check to reconnect
                 if ($pdoException && $triesCount < self::MAX_CONNECTION_RETRIES
-                    && in_array($pdoException->errorInfo[1], $connectionErrors)
+                    && \in_array($pdoException->errorInfo[1], $connectionErrors)
                 ) {
                     $retry = true;
                     $triesCount++;
@@ -677,7 +677,7 @@ class Mysql extends \Zend_Db_Adapter_Pdo_Mysql implements AdapterInterface, Rese
     {
         if ($sql !== null &&
             strpos(rtrim($sql, " \t\n\r\0;"), ';') !== false &&
-            count($this->_splitMultiQuery($sql)) > 1
+            \count($this->_splitMultiQuery($sql)) > 1
         ) {
             throw new \Magento\Framework\Exception\LocalizedException(
                 new Phrase("Multiple queries can't be executed. Run a single query and try again.")
@@ -720,14 +720,14 @@ class Mysql extends \Zend_Db_Adapter_Pdo_Mysql implements AdapterInterface, Rese
     protected function _prepareQuery(&$sql, &$bind = [])
     {
         $sql = (string) $sql;
-        if (!is_array($bind)) {
+        if (!\is_array($bind)) {
             $bind = [$bind];
         }
 
         // Mixed bind is not supported - so remember whether it is named bind, to normalize later if required
         if ($bind) {
             foreach ($bind as $k => $v) {
-                if (!is_int($k)) {
+                if (!\is_int($k)) {
                     if ($k[0] != ':') {
                         $bind[":{$k}"] = $v;
                         unset($bind[$k]);
@@ -818,7 +818,7 @@ class Mysql extends \Zend_Db_Adapter_Pdo_Mysql implements AdapterInterface, Rese
         $map = [];
         foreach ($bind as $k => $v) {
             // positional
-            if (is_int($k)) {
+            if (\is_int($k)) {
                 if (!isset($positions[$k])) {
                     continue;
                 }
@@ -830,7 +830,7 @@ class Mysql extends \Zend_Db_Adapter_Pdo_Mysql implements AdapterInterface, Rese
                     if ($pos === false) {
                         break;
                     } else {
-                        $offset = $pos + strlen($k);
+                        $offset = $pos + \strlen($k);
                         $bindResult[$pos] = $v;
                     }
                 }
@@ -1043,7 +1043,7 @@ class Mysql extends \Zend_Db_Adapter_Pdo_Mysql implements AdapterInterface, Rese
         }
 
         $primaryKey = '';
-        if (is_array($definition)) {
+        if (\is_array($definition)) {
             $definition = array_change_key_case($definition, CASE_UPPER);
             if (empty($definition['COMMENT'])) {
                 throw new \Zend_Db_Exception("Impossible to create a column without comment.");
@@ -1177,7 +1177,7 @@ class Mysql extends \Zend_Db_Adapter_Pdo_Mysql implements AdapterInterface, Rese
             );
         }
 
-        if (is_array($definition)) {
+        if (\is_array($definition)) {
             $definition = $this->_getColumnDefinition($definition);
         }
 
@@ -1220,7 +1220,7 @@ class Mysql extends \Zend_Db_Adapter_Pdo_Mysql implements AdapterInterface, Rese
         if (!$this->tableColumnExists($tableName, $columnName, $schemaName)) {
             throw new \Zend_Db_Exception(sprintf('Column "%s" does not exist in table "%s".', $columnName, $tableName));
         }
-        if (is_array($definition)) {
+        if (\is_array($definition)) {
             $definition = $this->_getColumnDefinition($definition);
         }
 
@@ -1580,7 +1580,7 @@ class Mysql extends \Zend_Db_Adapter_Pdo_Mysql implements AdapterInterface, Rese
      */
     public function quoteInto($text, $value, $type = null, $count = null)
     {
-        if (is_array($value) && empty($value)) {
+        if (\is_array($value) && empty($value)) {
             $value = new \Zend_Db_Expr('NULL');
         }
 
@@ -1829,7 +1829,7 @@ class Mysql extends \Zend_Db_Adapter_Pdo_Mysql implements AdapterInterface, Rese
             $options['unsigned'] = true;
         }
         if ($columnData['NULLABLE'] === false
-            && !($type == Table::TYPE_TEXT && isset($columnData['DEFAULT']) && strlen($columnData['DEFAULT']) != 0)
+            && !($type == Table::TYPE_TEXT && isset($columnData['DEFAULT']) && \strlen($columnData['DEFAULT']) != 0)
         ) {
             $options['nullable'] = false;
         }
@@ -1839,10 +1839,10 @@ class Mysql extends \Zend_Db_Adapter_Pdo_Mysql implements AdapterInterface, Rese
         if ($columnData['DEFAULT'] !== null && $type != Table::TYPE_TEXT) {
             $options['default'] = $this->quote($columnData['DEFAULT']);
         }
-        if (isset($columnData['SCALE']) && strlen($columnData['SCALE']) > 0) {
+        if (isset($columnData['SCALE']) && \strlen($columnData['SCALE']) > 0) {
             $options['scale'] = $columnData['SCALE'];
         }
-        if (isset($columnData['PRECISION']) && strlen($columnData['PRECISION']) > 0) {
+        if (isset($columnData['PRECISION']) && \strlen($columnData['PRECISION']) > 0) {
             $options['precision'] = $columnData['PRECISION'];
         }
 
@@ -1941,7 +1941,7 @@ class Mysql extends \Zend_Db_Adapter_Pdo_Mysql implements AdapterInterface, Rese
     {
         $definition = array_change_key_case($definition, CASE_UPPER);
         $definition['COLUMN_TYPE'] = $this->_getColumnTypeByDdl($definition);
-        if (array_key_exists('DEFAULT', $definition) && $definition['DEFAULT'] === null) {
+        if (\array_key_exists('DEFAULT', $definition) && $definition['DEFAULT'] === null) {
             unset($definition['DEFAULT']);
         }
 
@@ -2063,7 +2063,7 @@ class Mysql extends \Zend_Db_Adapter_Pdo_Mysql implements AdapterInterface, Rese
         $bind   = []; // SQL bind array
         $values = [];
 
-        if (is_array($row)) { // Array of column-value pairs
+        if (\is_array($row)) { // Array of column-value pairs
             $cols = array_keys($row);
             foreach ($data as $row) {
                 if (array_diff($cols, array_keys($row))) {
@@ -2095,17 +2095,17 @@ class Mysql extends \Zend_Db_Adapter_Pdo_Mysql implements AdapterInterface, Rese
                     $value = $v->__toString();
                 } elseif ($v instanceof \Laminas\Db\Sql\Expression) {
                     $value = $v->getExpression();
-                } elseif (is_string($v)) {
+                } elseif (\is_string($v)) {
                     $value = sprintf('VALUES(%s)', $this->quoteIdentifier($v));
                 } elseif (is_numeric($v)) {
                     $value = $this->quoteInto('?', $v);
                 }
-            } elseif (is_string($v)) {
+            } elseif (\is_string($v)) {
                 $value = sprintf('VALUES(%s)', $this->quoteIdentifier($v));
                 $field = $this->quoteIdentifier($v);
             }
 
-            if ($field && is_string($value) && $value !== '') {
+            if ($field && \is_string($value) && $value !== '') {
                 $updateFields[] = sprintf('%s = %s', $field, $value);
             }
         }
@@ -2133,7 +2133,7 @@ class Mysql extends \Zend_Db_Adapter_Pdo_Mysql implements AdapterInterface, Rese
     {
         $row = reset($data);
         // support insert syntaxes
-        if (!is_array($row)) {
+        if (!\is_array($row)) {
             return $this->insert($table, $data);
         }
 
@@ -2178,9 +2178,9 @@ class Mysql extends \Zend_Db_Adapter_Pdo_Mysql implements AdapterInterface, Rese
     {
         $values       = [];
         $bind         = [];
-        $columnsCount = count($columns);
+        $columnsCount = \count($columns);
         foreach ($data as $row) {
-            if (is_array($row) && $columnsCount != count($row)) {
+            if (\is_array($row) && $columnsCount != \count($row)) {
                 throw new \Zend_Db_Exception('Invalid data for insert');
             }
             $values[] = $this->_prepareInsertData($row, $bind);
@@ -2334,7 +2334,7 @@ class Mysql extends \Zend_Db_Adapter_Pdo_Mysql implements AdapterInterface, Rese
      */
     public function renameTablesBatch(array $tablePairs)
     {
-        if (count($tablePairs) == 0) {
+        if (\count($tablePairs) == 0) {
             throw new \Zend_Db_Exception('Please provide tables for rename');
         }
 
@@ -2626,10 +2626,10 @@ class Mysql extends \Zend_Db_Adapter_Pdo_Mysql implements AdapterInterface, Rese
                 break;
         }
 
-        if (array_key_exists('DEFAULT', $options)) {
+        if (\array_key_exists('DEFAULT', $options)) {
             $cDefault = $options['DEFAULT'];
         }
-        if (array_key_exists('NULLABLE', $options)) {
+        if (\array_key_exists('NULLABLE', $options)) {
             $cNullable = (bool)$options['NULLABLE'];
         }
         if (!empty($options['IDENTITY']) || !empty($options['AUTO_INCREMENT'])) {
@@ -2640,7 +2640,7 @@ class Mysql extends \Zend_Db_Adapter_Pdo_Mysql implements AdapterInterface, Rese
          *  where default value can be quoted already.
          *  We need to avoid "double-quoting" here
          */
-        if ($cDefault !== null && is_string($cDefault) && strlen($cDefault)) {
+        if ($cDefault !== null && \is_string($cDefault) && \strlen($cDefault)) {
             $cDefault = str_replace("'", '', $cDefault);
         }
 
@@ -2852,7 +2852,7 @@ class Mysql extends \Zend_Db_Adapter_Pdo_Mysql implements AdapterInterface, Rese
             }
         }
 
-        if (!is_array($fields)) {
+        if (!\is_array($fields)) {
             $fields = [$fields];
         }
 
@@ -2893,7 +2893,7 @@ class Mysql extends \Zend_Db_Adapter_Pdo_Mysql implements AdapterInterface, Rese
                 $result = $this->rawQuery($query);
                 $cycle  = false;
             } catch (\Exception $e) {
-                if ($indexType !== null && in_array(strtolower($indexType), ['primary', 'unique'])) {
+                if ($indexType !== null && \in_array(strtolower($indexType), ['primary', 'unique'])) {
                     $match = [];
                     // phpstan:ignore
                     if (preg_match('#SQLSTATE\[23000\]: [^:]+: 1062[^\']+\'([\d.-]+)\'#', $e->getMessage(), $match)) {
@@ -3115,7 +3115,7 @@ class Mysql extends \Zend_Db_Adapter_Pdo_Mysql implements AdapterInterface, Rese
         ];
 
         $query = '';
-        if (is_array($condition)) {
+        if (\is_array($condition)) {
             $key = key(array_intersect_key($condition, $conditionKeyMap));
 
             if (isset($condition['from']) || isset($condition['to'])) {
@@ -3129,12 +3129,12 @@ class Mysql extends \Zend_Db_Adapter_Pdo_Mysql implements AdapterInterface, Rese
                     $to     = $this->_prepareSqlDateCondition($condition, 'to');
                     $query = $query . $this->_prepareQuotedSqlCondition($conditionKeyMap['to'], $to, $fieldName);
                 }
-            } elseif (array_key_exists($key, $conditionKeyMap)) {
+            } elseif (\array_key_exists($key, $conditionKeyMap)) {
                 $value = $condition[$key];
                 if (($key == 'seq') || ($key == 'sneq')) {
                     $key = $this->_transformStringSqlCondition($key, $value);
                 }
-                if (($key == 'in' || $key == 'nin') && is_string($value)) {
+                if (($key == 'in' || $key == 'nin') && \is_string($value)) {
                     $value = explode(',', $value);
                 }
                 $query = $this->_prepareQuotedSqlCondition($conditionKeyMap[$key], $value, $fieldName);
@@ -3224,7 +3224,7 @@ class Mysql extends \Zend_Db_Adapter_Pdo_Mysql implements AdapterInterface, Rese
                 $value = (int)$value;
                 break;
             case 'bigint':
-                if (!is_integer($value)) {
+                if (!\is_integer($value)) {
                     $value = sprintf('%.0f', (float)$value);
                 }
                 break;
@@ -3563,7 +3563,7 @@ class Mysql extends \Zend_Db_Adapter_Pdo_Mysql implements AdapterInterface, Rese
      */
     public function getIndexName($tableName, $fields, $indexType = '')
     {
-        if (is_array($fields)) {
+        if (\is_array($fields)) {
             $fields = implode('_', $fields);
         }
 
@@ -3648,9 +3648,9 @@ class Mysql extends \Zend_Db_Adapter_Pdo_Mysql implements AdapterInterface, Rese
             $query .= ' IGNORE';
         }
         $query = sprintf('%s INTO %s', $query, $this->quoteIdentifier($table));
-        $countFieldsInSelect = count($select->getPart(Select::COLUMNS));
+        $countFieldsInSelect = \count($select->getPart(Select::COLUMNS));
         if (empty($fields) && $countFieldsInSelect > 1) {
-            $fields = array_slice(
+            $fields = \array_slice(
                 array_keys($this->describeTable($table)),
                 0,
                 $countFieldsInSelect
@@ -3692,7 +3692,7 @@ class Mysql extends \Zend_Db_Adapter_Pdo_Mysql implements AdapterInterface, Rese
             $update[] = sprintf('%1$s = VALUES(%1$s)', $this->quoteIdentifier($field));
         }
 
-        return count($update) ? ' ON DUPLICATE KEY UPDATE ' . join(', ', $update) : '';
+        return \count($update) ? ' ON DUPLICATE KEY UPDATE ' . join(', ', $update) : '';
     }
 
     /**
@@ -3744,7 +3744,7 @@ class Mysql extends \Zend_Db_Adapter_Pdo_Mysql implements AdapterInterface, Rese
      */
     public function updateFromSelect(Select $select, $table)
     {
-        if (!is_array($table)) {
+        if (!\is_array($table)) {
             $table = [$table => $table];
         }
 
@@ -3840,7 +3840,7 @@ class Mysql extends \Zend_Db_Adapter_Pdo_Mysql implements AdapterInterface, Rese
     public function getTablesChecksum($tableNames, $schemaName = null)
     {
         $result     = [];
-        $tableNames = is_array($tableNames) ? $tableNames : [$tableNames];
+        $tableNames = \is_array($tableNames) ? $tableNames : [$tableNames];
 
         foreach ($tableNames as $tableName) {
             $query = 'CHECKSUM TABLE ' . $this->_getTableName($tableName, $schemaName);
@@ -4182,7 +4182,7 @@ class Mysql extends \Zend_Db_Adapter_Pdo_Mysql implements AdapterInterface, Rese
     {
         $indexName = $this->getPrimaryKeyName($tableName, $schemaName);
         $indexes = $this->getIndexList($tableName);
-        if ($indexName && isset($indexes[$indexName]) && count($indexes[$indexName]['COLUMNS_LIST']) == 1) {
+        if ($indexName && isset($indexes[$indexName]) && \count($indexes[$indexName]['COLUMNS_LIST']) == 1) {
             return current($indexes[$indexName]['COLUMNS_LIST']);
         }
         return false;

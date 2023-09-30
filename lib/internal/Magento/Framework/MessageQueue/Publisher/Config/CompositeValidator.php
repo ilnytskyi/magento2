@@ -43,7 +43,7 @@ class CompositeValidator implements ValidatorInterface
                     sprintf(
                         'Validator [%s] does not implements ' .
                         'Magento\Framework\MessageQueue\Publisher\Config\ValidatorInterface',
-                        get_class($validator)
+                        \get_class($validator)
                     )
                 );
             }

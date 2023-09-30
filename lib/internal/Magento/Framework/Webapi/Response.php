@@ -76,7 +76,7 @@ class Response extends \Magento\Framework\HTTP\PhpEnvironment\Response implement
      */
     public function hasMessages()
     {
-        return (bool)count($this->_messages) > 0;
+        return (bool)\count($this->_messages) > 0;
     }
 
     /**

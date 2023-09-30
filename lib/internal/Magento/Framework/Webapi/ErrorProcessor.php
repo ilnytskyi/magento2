@@ -140,7 +140,7 @@ class ErrorProcessor
                 $exception->getCode(),
                 $httpCode,
                 $exception->getParameters(),
-                get_class($exception),
+                \get_class($exception),
                 $errors,
                 $stackTrace
             );

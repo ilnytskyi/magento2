@@ -82,7 +82,7 @@ class EavVariationsFixture extends Fixture
     public function execute()
     {
         if (!$this->fixtureModel->getValue('configurable_products', [])
-            || in_array($this->getAttributeCode(), $this->eavConfig->getEntityAttributeCodes(Product::ENTITY))) {
+            || \in_array($this->getAttributeCode(), $this->eavConfig->getEntityAttributeCodes(Product::ENTITY))) {
             return;
         }
 

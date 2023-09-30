@@ -59,12 +59,12 @@ class Factory
      */
     public function getStrategy($object)
     {
-        if (!is_object($object)) {
+        if (!\is_object($object)) {
             throw new \InvalidArgumentException('Provided argument is not an object');
         }
 
         $classHierarchy = array_merge(
-            [get_class($object) => get_class($object)],
+            [\get_class($object) => \get_class($object)],
             class_parents($object),
             class_implements($object)
         );

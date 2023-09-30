@@ -82,7 +82,7 @@ class Xml extends AbstractContentType
             'data' => [],
         ];
         foreach ($view->getRenderContext()->getStorage()->getData($view->getName()) as $key => $value) {
-            if (is_object($value)) {
+            if (\is_object($value)) {
                 if (method_exists($value, 'toXml')) {
                     $result['data'][$key] = $value->toXml();
                 } else {

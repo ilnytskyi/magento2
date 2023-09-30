@@ -98,7 +98,7 @@ class Validator extends ConfigValidator
                 )
             );
         }
-        if (($requestResponseSchema || $responseSchema) && (count($handlers) >= 2)) {
+        if (($requestResponseSchema || $responseSchema) && (\count($handlers) >= 2)) {
             throw new \LogicException(
                 sprintf(
                     'Topic "%s" is configured for synchronous requests, that is why it must have exactly one '

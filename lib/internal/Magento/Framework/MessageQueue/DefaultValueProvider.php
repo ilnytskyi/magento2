@@ -61,7 +61,7 @@ class DefaultValueProvider
         if (isset($this->config)) {
             if ($this->config->get('queue/default_connection')) {
                 $this->connection = $this->config->get('queue/default_connection');
-            } elseif ($this->config->get('queue/amqp') && count($this->config->get('queue/amqp')) > 0) {
+            } elseif ($this->config->get('queue/amqp') && \count($this->config->get('queue/amqp')) > 0) {
                 $this->connection = 'amqp';
             }
         }

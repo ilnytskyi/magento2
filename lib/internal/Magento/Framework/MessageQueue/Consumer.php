@@ -164,12 +164,12 @@ class Consumer implements ConsumerInterface
             if ($messageSchemaType == CommunicationConfig::TOPIC_REQUEST_TYPE_METHOD) {
                 foreach ($handlers as $callback) {
                     // The `array_values` is a workaround to ensure the same behavior in PHP 7 and 8.
-                    $result = call_user_func_array($callback, array_values($decodedMessage));
+                    $result = \call_user_func_array($callback, array_values($decodedMessage));
                     return $this->processSyncResponse($topicName, $result);
                 }
             } else {
                 foreach ($handlers as $callback) {
-                    $result = call_user_func($callback, $decodedMessage);
+                    $result = \call_user_func($callback, $decodedMessage);
                     if ($isSync) {
                         return $this->processSyncResponse($topicName, $result);
                     }
@@ -237,7 +237,7 @@ class Consumer implements ConsumerInterface
                     $this->sendResponse($responseMessage);
                 } else {
                     $allowedTopics = $this->configuration->getTopicNames();
-                    if (in_array($topicName, $allowedTopics)) {
+                    if (\in_array($topicName, $allowedTopics)) {
                         $this->dispatchMessage($message);
                     } else {
                         $queue->reject($message);

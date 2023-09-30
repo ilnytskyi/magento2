@@ -108,7 +108,7 @@ class Mime
         $result = null;
         $extension = $this->getFileExtension($path);
 
-        if (function_exists('mime_content_type')) {
+        if (\function_exists('mime_content_type')) {
             $result = $this->getNativeMimeType($path);
         } else {
             $imageInfo = getimagesize($path);
@@ -140,7 +140,7 @@ class Mime
             && (
                 strpos($result, 'text/') === 0
                 || strpos($result, 'image/svg') === 0
-                || in_array($result, $this->genericMimeTypes, true)
+                || \in_array($result, $this->genericMimeTypes, true)
             )
         ) {
             $result = $this->mimeTypes[$extension];

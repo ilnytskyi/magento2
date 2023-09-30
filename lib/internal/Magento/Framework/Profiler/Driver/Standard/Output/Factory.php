@@ -64,7 +64,7 @@ class Factory
             throw new \InvalidArgumentException(
                 sprintf(
                     "Output class \"%s\" must implement \Magento\Framework\Profiler\Driver\Standard\OutputInterface.",
-                    get_class($output)
+                    \get_class($output)
                 )
             );
         }

@@ -51,6 +51,6 @@ class HelperMethod implements InterpreterInterface
         $methodParams = array_values($methodParams);
         // Use positional argument binding instead of named binding
         $helperInstance = $this->objectManager->get($helperClass);
-        return call_user_func_array([$helperInstance, $methodName], $methodParams);
+        return \call_user_func_array([$helperInstance, $methodName], $methodParams);
     }
 }

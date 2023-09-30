@@ -101,7 +101,7 @@ class LockBackendFactoryTest extends TestCase
             ],
         ];
 
-        if (extension_loaded('zookeeper')) {
+        if (\extension_loaded('zookeeper')) {
             $data['zookeeper'] = [
                 'lockProvider' => LockBackendFactory::LOCK_ZOOKEEPER,
                 'lockProviderClass' => ZookeeperLock::class,

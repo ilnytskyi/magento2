@@ -120,14 +120,14 @@ class Collection implements \ArrayAccess, \IteratorAggregate, \Countable
             $this->_elements[] = $element;
         } elseif ($after === '^') {
             array_unshift($this->_elements, $element);
-        } elseif (is_string($after)) {
+        } elseif (\is_string($after)) {
             $newOrderElements = [];
             foreach ($this->_elements as $index => $currElement) {
                 if ($currElement->getId() == $after) {
                     $newOrderElements[] = $currElement;
                     $newOrderElements[] = $element;
                     // phpcs:ignore Magento2.Performance.ForeachArrayMerge
-                    $this->_elements = array_merge($newOrderElements, array_slice($this->_elements, $index + 1));
+                    $this->_elements = array_merge($newOrderElements, \array_slice($this->_elements, $index + 1));
                     return $element;
                 }
                 $newOrderElements[] = $currElement;
@@ -176,7 +176,7 @@ class Collection implements \ArrayAccess, \IteratorAggregate, \Countable
     #[\ReturnTypeWillChange]
     public function count()
     {
-        return count($this->_elements);
+        return \count($this->_elements);
     }
 
     /**

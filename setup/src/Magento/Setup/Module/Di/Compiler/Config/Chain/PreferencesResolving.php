@@ -48,7 +48,7 @@ class PreferencesResolving implements ModificationInterface
      */
     private function resolvePreferences(&$argument, &$preferences)
     {
-        if (!is_array($argument)) {
+        if (!\is_array($argument)) {
             return;
         }
 

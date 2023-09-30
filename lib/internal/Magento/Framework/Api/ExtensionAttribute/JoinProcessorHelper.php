@@ -49,7 +49,7 @@ class JoinProcessorHelper
     public function getSelectFieldsMap($attributeCode, $selectFields)
     {
         $referenceTableAlias = $this->getReferenceTableAlias($attributeCode);
-        $useFieldInAlias = (count($selectFields) > 1);
+        $useFieldInAlias = (\count($selectFields) > 1);
         $selectFieldsAliases = [];
 
         foreach ($selectFields as $selectField) {

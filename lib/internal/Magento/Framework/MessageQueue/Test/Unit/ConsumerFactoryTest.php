@@ -77,7 +77,7 @@ class ConsumerFactoryTest extends TestCase
         $consumerFactory = $this->getConsumerFactoryInstance($consumers);
         $consumerInstanceMock = $this->getMockBuilder($consumerTypeValue)
             ->getMock();
-        $this->assertInstanceOf(get_class($consumerInstanceMock), $consumerFactory->get(self::TEST_CONSUMER_NAME));
+        $this->assertInstanceOf(\get_class($consumerInstanceMock), $consumerFactory->get(self::TEST_CONSUMER_NAME));
     }
 
     /**

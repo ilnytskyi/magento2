@@ -292,10 +292,10 @@ class Converter implements ConverterInterface
          * Used this algorithm of sorting not quicksort, because it guarantees
          * correct sequence of indexers with multiple dependencies.
          */
-        $maxIndex = count($expanded) - 1;
+        $maxIndex = \count($expanded) - 1;
         for ($i = 0; $i < $maxIndex; $i++) {
             for ($j = $i + 1; $j <= $maxIndex; $j++) {
-                if (in_array($expanded[$j]['indexerId'], $expanded[$i]['dependencies'], true)) {
+                if (\in_array($expanded[$j]['indexerId'], $expanded[$i]['dependencies'], true)) {
                     $temp = $expanded[$i];
                     $expanded[$i] = $expanded[$j];
                     $expanded[$j] = $temp;
@@ -335,7 +335,7 @@ class Converter implements ConverterInterface
         $accumulated[] = $indexerId;
         $result = $list[$indexerId]['dependencies'] ?? [];
         foreach ($result as $relatedIndexerId) {
-            if (in_array($relatedIndexerId, $accumulated)) {
+            if (\in_array($relatedIndexerId, $accumulated)) {
                 throw new ConfigurationMismatchException(
                     new Phrase(
                         "Circular dependency references from '%indexerId' to '%relatedIndexerId'.",

@@ -308,7 +308,7 @@ class TypeProcessor
             }
         }
 
-        $nullable = in_array('null', $types);
+        $nullable = \in_array('null', $types);
 
         return [
             'type' => $returnType,
@@ -330,7 +330,7 @@ class TypeProcessor
         $methodDocBlock = $methodReflection->getDocBlock();
         if ($methodDocBlock->hasTag('throws')) {
             $throwsTypes = $methodDocBlock->getTags('throws');
-            if (is_array($throwsTypes)) {
+            if (\is_array($throwsTypes)) {
                 /** @var $throwsType \Laminas\Code\Reflection\DocBlock\Tag\ThrowsTag */
                 foreach ($throwsTypes as $throwsType) {
                     // phpcs:ignore
@@ -360,7 +360,7 @@ class TypeProcessor
             self::ANY_TYPE => self::NORMALIZED_ANY_TYPE,
         ];
 
-        return is_string($type) && isset($normalizationMap[$type]) ? $normalizationMap[$type] : $type;
+        return \is_string($type) && isset($normalizationMap[$type]) ? $normalizationMap[$type] : $type;
     }
 
     /**
@@ -371,7 +371,7 @@ class TypeProcessor
      */
     public function isTypeSimple($type)
     {
-        return in_array(
+        return \in_array(
             $this->getNormalizedType($type),
             [
                 self::NORMALIZED_STRING_TYPE,
@@ -493,7 +493,7 @@ class TypeProcessor
     public function processSimpleAndAnyType($value, $type)
     {
         $isArrayType = $this->isArrayType($type);
-        if ($isArrayType && is_array($value)) {
+        if ($isArrayType && \is_array($value)) {
             $arrayItemType = $this->getArrayItemType($type);
             foreach (array_keys($value) as $key) {
                 if ($value !== null && !settype($value[$key], $arrayItemType)) {
@@ -508,7 +508,7 @@ class TypeProcessor
             }
         } elseif ($isArrayType && $value === null) {
             return null;
-        } elseif (!$isArrayType && !is_array($value)) {
+        } elseif (!$isArrayType && !\is_array($value)) {
             if ($value !== null && !$this->isTypeAny($type) && !$this->setType($value, $type)) {
                 throw new SerializationException(
                     new Phrase(
@@ -521,7 +521,7 @@ class TypeProcessor
             throw new SerializationException(
                 new Phrase(
                     'The "%value" value\'s type is invalid. The "%type" type was expected. Verify and try again.',
-                    ['value' => gettype($value), 'type' => $type]
+                    ['value' => \gettype($value), 'type' => $type]
                 )
             );
         }
@@ -734,12 +734,12 @@ class TypeProcessor
         // settype doesn't work for boolean string values.
         // ex: custom_attributes passed from SOAP client can have boolean values as string
         $booleanTypes = ['bool', 'boolean'];
-        if (in_array($type, $booleanTypes)) {
+        if (\in_array($type, $booleanTypes)) {
             $value = filter_var($value, FILTER_VALIDATE_BOOLEAN);
             return true;
         }
         $numType = ['int', 'float'];
-        if (in_array($type, $numType) && !is_numeric($value)) {
+        if (\in_array($type, $numType) && !is_numeric($value)) {
             return false;
         }
         return settype($value, $type);

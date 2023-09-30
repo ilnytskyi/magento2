@@ -145,7 +145,7 @@ class Source
         $path = '';
         if ($sourceFile) {
             $path = basename($sourceFile);
-            $dir = dirname($sourceFile);
+            $dir = \dirname($sourceFile);
         }
 
         $chain = $this->createChain($asset, $dir, $path);
@@ -213,7 +213,7 @@ class Source
         } elseif ($context instanceof \Magento\Framework\View\Asset\File\Context) {
             $result = $this->findFile($asset, $context);
         } else {
-            $type = get_class($context);
+            $type = \get_class($context);
             throw new \LogicException("Support for {$type} is not implemented.");
         }
         return $result;

@@ -72,7 +72,7 @@ class ListsTest extends TestCase
     public function testGetTimezoneList()
     {
         $resultTimezone = array_keys($this->lists->getTimezoneList());
-        $timeZone = in_array('Europe/Kyiv', $resultTimezone) ? 'Europe/Kyiv' : 'Europe/Kiev';
+        $timeZone = \in_array('Europe/Kyiv', $resultTimezone) ? 'Europe/Kyiv' : 'Europe/Kiev';
         $expectedTimezones = $this->getExpectedTimezones($timeZone);
         $timezones = array_intersect($expectedTimezones, $resultTimezone);
         $this->assertEquals($expectedTimezones, $timezones);

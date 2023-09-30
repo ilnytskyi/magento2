@@ -126,7 +126,7 @@ class Redirect extends Template
      */
     public function isHtmlFormRedirect()
     {
-        return is_array($this->_getFormFields()) && count($this->_getFormFields()) > 0;
+        return \is_array($this->_getFormFields()) && \count($this->_getFormFields()) > 0;
     }
 
     /**
@@ -166,7 +166,7 @@ class Redirect extends Template
      */
     protected function _getFormFields()
     {
-        if (!is_array($this->formFields) || count($this->formFields) == 0) {
+        if (!\is_array($this->formFields) || \count($this->formFields) == 0) {
             $this->formFields = $this->getFormFields();
         }
         return $this->formFields;

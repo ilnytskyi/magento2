@@ -219,16 +219,16 @@ class InlineTest extends TestCase
         $isJson = true;
         $this->prepareIsAllowed(true, true, true, $scope);
 
-        $jsonCall = is_array($body) ? 2 * (count($body) + 1) : 2;
+        $jsonCall = \is_array($body) ? 2 * (\count($body) + 1) : 2;
         $this->parserMock->expects($this->exactly($jsonCall))
             ->method('setIsJson')
             ->willReturnMap([[$isJson, $this->returnSelf()], [!$isJson, $this->returnSelf()]]);
         $this->parserMock->expects($this->once())
             ->method('processResponseBodyString')
-            ->with(is_array($body) ? reset($body) : $body);
+            ->with(\is_array($body) ? reset($body) : $body);
         $this->parserMock->expects($this->exactly(2))
             ->method('getContent')
-            ->willReturn(is_array($body) ? reset($body) : $body);
+            ->willReturn(\is_array($body) ? reset($body) : $body);
 
         $model = $this->objectManager->getObject(
             Inline::class,
@@ -276,16 +276,16 @@ class InlineTest extends TestCase
         $isJson = true;
         $this->prepareIsAllowed(true, true, true, $scope);
 
-        $jsonCall = is_array($body) ? 2 * (count($body) + 1) : 2;
+        $jsonCall = \is_array($body) ? 2 * (\count($body) + 1) : 2;
         $this->parserMock->expects($this->exactly($jsonCall))
             ->method('setIsJson')
             ->willReturnMap([[$isJson, $this->returnSelf()], [!$isJson, $this->returnSelf()]]);
         $this->parserMock->expects($this->once())
             ->method('processResponseBodyString')
-            ->with(is_array($body) ? reset($body) : $body);
+            ->with(\is_array($body) ? reset($body) : $body);
         $this->parserMock->expects($this->exactly(2))
             ->method('getContent')
-            ->willReturn(is_array($body) ? reset($body) : $body);
+            ->willReturn(\is_array($body) ? reset($body) : $body);
 
         $model = $this->objectManager->getObject(
             Inline::class,

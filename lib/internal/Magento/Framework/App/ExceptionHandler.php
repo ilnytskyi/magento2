@@ -121,13 +121,13 @@ class ExceptionHandler implements ExceptionHandlerInterface
             $exceptions[] = $exception;
         } while ($exception = $exception->getPrevious());
 
-        $buffer = sprintf("%d exception(s):\n", count($exceptions));
+        $buffer = sprintf("%d exception(s):\n", \count($exceptions));
 
         foreach ($exceptions as $index => $exception) {
             $buffer .= sprintf(
                 "Exception #%d (%s): %s\n",
                 $index,
-                get_class($exception),
+                \get_class($exception),
                 $exception->getMessage()
             );
         }
@@ -136,7 +136,7 @@ class ExceptionHandler implements ExceptionHandlerInterface
             $buffer .= sprintf(
                 "\nException #%d (%s): %s\n%s\n",
                 $index,
-                get_class($exception),
+                \get_class($exception),
                 $exception->getMessage(),
                 Debug::trace(
                     $exception->getTrace(),

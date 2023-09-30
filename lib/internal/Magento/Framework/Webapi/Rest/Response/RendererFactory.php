@@ -116,7 +116,7 @@ class RendererFactory
             if ($typeWithQ) {
                 $qAndValue = explode('=', $typeWithQ[0]);
 
-                if (2 == count($qAndValue)) {
+                if (2 == \count($qAndValue)) {
                     $quality = $qAndValue[1];
                 }
             }

@@ -83,7 +83,7 @@ class Generator
         $parser->parse($optionResolver->getOptions());
 
         $phraseList = $parser->getPhrases();
-        if (!count($phraseList)) {
+        if (!\count($phraseList)) {
             throw new \UnexpectedValueException('No phrases found in the specified dictionary file.');
         }
         foreach ($phraseList as $phrase) {

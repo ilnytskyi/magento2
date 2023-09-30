@@ -358,7 +358,7 @@ class UiComponentFactory extends DataObject
             foreach ($bundleComponents as &$childData) {
                 if (isset($childData['attributes']['class'])
                     && is_a($childData['attributes']['class'], \Magento\Ui\Component\Container::class, true)
-                    && isset($childData['children']) && is_array($childData['children'])
+                    && isset($childData['children']) && \is_array($childData['children'])
                 ) {
                     list($childData['children'], $isMerged) = $this->mergeMetadataElement(
                         $childData['children'],
@@ -420,7 +420,7 @@ class UiComponentFactory extends DataObject
                 $bundleComponents[$name]['children'] = [];
             }
 
-            if (isset($data['children']) && is_array($data['children'])) {
+            if (isset($data['children']) && \is_array($data['children'])) {
                 $bundleComponents[$name]['children'] = $this->mergeMetadataItem(
                     $bundleComponents[$name]['children'],
                     $data['children'],

@@ -190,7 +190,7 @@ class OperationsExecutor
             $this->dryRunLogger->prepareToDryRun();
         }
 
-        if (is_array($tableHistories)) {
+        if (\is_array($tableHistories)) {
             foreach ($tableHistories as $tableHistory) {
                 $destructiveElements = [];
                 $oppositeToDestructiveElements = [];

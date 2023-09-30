@@ -37,7 +37,7 @@ class DataPersistor implements DataPersistorInterface
     public function set($key, $data)
     {
         $method = 'set' . SimpleDataObjectConverter::snakeCaseToUpperCamelCase($key) . 'Data';
-        call_user_func_array([$this->session, $method], [$data]);
+        \call_user_func_array([$this->session, $method], [$data]);
     }
 
     /**
@@ -49,7 +49,7 @@ class DataPersistor implements DataPersistorInterface
     public function get($key)
     {
         $method = 'get' . SimpleDataObjectConverter::snakeCaseToUpperCamelCase($key) . 'Data';
-        return call_user_func_array([$this->session, $method], []);
+        return \call_user_func_array([$this->session, $method], []);
     }
 
     /**
@@ -61,6 +61,6 @@ class DataPersistor implements DataPersistorInterface
     public function clear($key)
     {
         $method = 'uns' . SimpleDataObjectConverter::snakeCaseToUpperCamelCase($key) . 'Data';
-        call_user_func_array([$this->session, $method], []);
+        \call_user_func_array([$this->session, $method], []);
     }
 }

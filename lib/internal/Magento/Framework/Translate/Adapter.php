@@ -24,8 +24,8 @@ class Adapter extends AbstractAdapter
     {
         $translator = $this->getTranslator();
 
-        if (is_callable($translator)) {
-            return call_user_func($translator, $messageId);
+        if (\is_callable($translator)) {
+            return \call_user_func($translator, $messageId);
         }
 
         return $translator !== null ? $translator->translate($messageId, $textDomain, $locale) : $messageId;
@@ -40,10 +40,10 @@ class Adapter extends AbstractAdapter
      */
     public function __()
     {
-        $args = func_get_args();
+        $args = \func_get_args();
         $messageId = array_shift($args);
         $string = $this->translate($messageId);
-        if (count($args) > 0) {
+        if (\count($args) > 0) {
             $string = vsprintf($string, $args);
         }
         return $string;

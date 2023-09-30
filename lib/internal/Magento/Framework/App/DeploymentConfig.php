@@ -101,7 +101,7 @@ class DeploymentConfig
         if ($result === null) {
             if (empty($this->flatData)
                 || !isset($this->flatData[$key]) && !isset($this->noConfigData[$key])
-                || count($this->getAllEnvOverrides())
+                || \count($this->getAllEnvOverrides())
             ) {
                 $this->resetData();
                 $this->reloadData();
@@ -275,7 +275,7 @@ class DeploymentConfig
                 throw new RuntimeException(new Phrase("Key collision '%1' is already defined.", [$newPath]));
             }
 
-            if (is_array($param)) {
+            if (\is_array($param)) {
                 $flattenResult[$newPath] = $param;
                 $this->flattenParams($param, $newPath, $flattenResult);
             } else {
@@ -301,7 +301,7 @@ class DeploymentConfig
      */
     private function getByKey(?string $key)
     {
-        if (array_key_exists($key, $this->flatData) && $this->flatData[$key] === null) {
+        if (\array_key_exists($key, $this->flatData) && $this->flatData[$key] === null) {
             return '';
         }
 

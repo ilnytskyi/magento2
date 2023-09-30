@@ -89,7 +89,7 @@ class Database extends \Zend_Cache_Backend implements \Zend_Cache_Backend_Extend
     {
         if (!$this->_connection) {
             if (!empty($this->_options['adapter_callback'])) {
-                $connection = call_user_func($this->_options['adapter_callback']);
+                $connection = \call_user_func($this->_options['adapter_callback']);
             } else {
                 $connection = $this->_options['adapter'];
             }
@@ -113,7 +113,7 @@ class Database extends \Zend_Cache_Backend implements \Zend_Cache_Backend_Extend
     protected function _getDataTable()
     {
         if (empty($this->_options['data_table'])) {
-            $this->setOption('data_table', call_user_func($this->_options['data_table_callback']));
+            $this->setOption('data_table', \call_user_func($this->_options['data_table_callback']));
             if (empty($this->_options['data_table'])) {
                 \Zend_Cache::throwException('Failed to detect data_table option');
             }
@@ -130,7 +130,7 @@ class Database extends \Zend_Cache_Backend implements \Zend_Cache_Backend_Extend
     protected function _getTagsTable()
     {
         if (empty($this->_options['tags_table'])) {
-            $this->setOption('tags_table', call_user_func($this->_options['tags_table_callback']));
+            $this->setOption('tags_table', \call_user_func($this->_options['tags_table_callback']));
             if (empty($this->_options['tags_table'])) {
                 \Zend_Cache::throwException('Failed to detect tags_table option');
             }
@@ -357,7 +357,7 @@ class Database extends \Zend_Cache_Backend implements \Zend_Cache_Backend_Extend
         )->group(
             'cache_id'
         )->having(
-            'COUNT(cache_id)=' . count($tags)
+            'COUNT(cache_id)=' . \count($tags)
         );
         return $this->_getConnection()->fetchCol($select);
     }
@@ -492,7 +492,7 @@ class Database extends \Zend_Cache_Backend implements \Zend_Cache_Backend_Extend
      */
     protected function _saveTags($id, $tags)
     {
-        if (!is_array($tags)) {
+        if (!\is_array($tags)) {
             $tags = [$tags];
         }
         if (empty($tags)) {
@@ -538,7 +538,7 @@ class Database extends \Zend_Cache_Backend implements \Zend_Cache_Backend_Extend
             $select = $connection->select()->from($this->_getTagsTable(), 'cache_id');
             switch ($mode) {
                 case \Zend_Cache::CLEANING_MODE_MATCHING_TAG:
-                    $select->where('tag IN (?)', $tags)->group('cache_id')->having('COUNT(cache_id)=' . count($tags));
+                    $select->where('tag IN (?)', $tags)->group('cache_id')->having('COUNT(cache_id)=' . \count($tags));
                     break;
                 case \Zend_Cache::CLEANING_MODE_NOT_MATCHING_TAG:
                     $select->where('tag NOT IN (?)', $tags);

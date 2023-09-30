@@ -94,8 +94,8 @@ class Manager
     {
         if (isset($this->outputConfigPaths[$moduleName])) {
             $configPath = $this->outputConfigPaths[$moduleName];
-            if (defined($configPath)) {
-                $configPath = constant($configPath);
+            if (\defined($configPath)) {
+                $configPath = \constant($configPath);
             }
             return $this->outputConfig->isSetFlag($configPath);
         }

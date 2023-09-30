@@ -28,7 +28,7 @@ abstract class AbstractDecorator extends \Zend_Cache_Backend implements \Zend_Ca
      */
     public function __construct(array $options = [])
     {
-        if (array_key_exists(
+        if (\array_key_exists(
             'concrete_backend',
             $options
         ) && $options['concrete_backend'] instanceof \Zend_Cache_Backend_Interface
@@ -41,7 +41,7 @@ abstract class AbstractDecorator extends \Zend_Cache_Backend implements \Zend_Ca
             );
         }
         foreach ($options as $optionName => $optionValue) {
-            if (array_key_exists($optionName, $this->_decoratorOptions)) {
+            if (\array_key_exists($optionName, $this->_decoratorOptions)) {
                 $this->_decoratorOptions[$optionName] = $optionValue;
             }
         }

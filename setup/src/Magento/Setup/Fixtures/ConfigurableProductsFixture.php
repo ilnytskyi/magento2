@@ -277,7 +277,7 @@ class ConfigurableProductsFixture extends Fixture
             };
             $fixture = [
                 '_variation_sku_pattern' => $this->getFirstVariationSkuPattern($configurableConfig),
-                '_attributes_count' => count($attributeSet['attributes']),
+                '_attributes_count' => \count($attributeSet['attributes']),
                 '_variation_count' => $variationCount,
                 '_attributes' => $attributeSet['attributes'],
                 'type_id' => Configurable::TYPE_CODE,
@@ -319,7 +319,7 @@ class ConfigurableProductsFixture extends Fixture
     private function getDefaultAttributeSetsConfig(array $defaultAttributeSets, $configurableProductsCount)
     {
         $attributeSetClosure = function ($index) use ($defaultAttributeSets) {
-            $attributeSetAmount = count(array_keys($defaultAttributeSets));
+            $attributeSetAmount = \count(array_keys($defaultAttributeSets));
             // phpcs:ignore
             mt_srand($index);
 
@@ -454,14 +454,14 @@ class ConfigurableProductsFixture extends Fixture
         $attributeSets = $this->fixtureModel->getValue('attribute_sets', null);
         $attributeSetData = [];
 
-        if ($attributeSets !== null && array_key_exists('attribute_set', $attributeSets)) {
+        if ($attributeSets !== null && \array_key_exists('attribute_set', $attributeSets)) {
             foreach ($attributeSets['attribute_set'] as $attributeSet) {
-                $attributesData = array_key_exists(0, $attributeSet['attributes']['attribute'])
+                $attributesData = \array_key_exists(0, $attributeSet['attributes']['attribute'])
                     ? $attributeSet['attributes']['attribute'] : [$attributeSet['attributes']['attribute']];
                 $attributes = [];
                 foreach ($attributesData as $attributeData) {
                     $values = [];
-                    $optionsData = array_key_exists(0, $attributeData['options']['option'])
+                    $optionsData = \array_key_exists(0, $attributeData['options']['option'])
                         ? $attributeData['options']['option'] : [$attributeData['options']['option']];
                     foreach ($optionsData as $optionData) {
                         $values[] = $optionData['label'];
@@ -530,12 +530,12 @@ class ConfigurableProductsFixture extends Fixture
             if ($attributeSet && isset($defaultAttributeSets[$attributeSet])) {
                 // process default attribute sets
                 $attributeSet = $defaultAttributeSets[$attributeSet];
-                $attributes = count($attributeSet['attributes']);
-                $options = count($attributeSet['attributes'][0]['values']);
-            } elseif (is_array($attributes)) {
+                $attributes = \count($attributeSet['attributes']);
+                $options = \count($attributeSet['attributes'][0]['values']);
+            } elseif (\is_array($attributes)) {
                 $attributeSet = $this->getCustomAttributeSet($attributes);
                 $options = array_column($attributes, 'options');
-                $attributes = count($attributes);
+                $attributes = \count($attributes);
             } elseif ($attributes && $options) {
                 $attributes  = (int)$attributes;
                 // convert attributes and options to array for process custom attribute set creation
@@ -547,7 +547,7 @@ class ConfigurableProductsFixture extends Fixture
             }
 
             // do not process if any required option is missed
-            if (count(array_filter([$attributeSet, $attributes, $options])) !== 3) {
+            if (\count(array_filter([$attributeSet, $attributes, $options])) !== 3) {
                 unset($configurableProductConfig[$i]);
                 continue;
             }
@@ -557,11 +557,11 @@ class ConfigurableProductsFixture extends Fixture
             $config['attributeSet'] = $this->convertAttributesToDBFormat($attributeSet);
             $config['attributes'] = $attributes;
             $config['options'] = $options;
-            $config['variationCount'] = is_array($options) ? array_product($options) : pow($options, $attributes);
+            $config['variationCount'] = \is_array($options) ? array_product($options) : pow($options, $attributes);
             $skuPull[] = $config['sku'];
         }
 
-        if (count($skuPull) !== count(array_unique($skuPull))) {
+        if (\count($skuPull) !== \count(array_unique($skuPull))) {
             throw new ValidatorException(
                 __("The configurable product's SKU pattern must be unique in an attribute set.")
             );
@@ -583,8 +583,8 @@ class ConfigurableProductsFixture extends Fixture
     private function prepareConfigurableConfig($defaultAttributeSets)
     {
         $configurableConfigs = $this->fixtureModel->getValue('configurable_products', []);
-        $configurableConfigs = is_array($configurableConfigs) ? $configurableConfigs : (int)$configurableConfigs;
-        if (is_int($configurableConfigs)) {
+        $configurableConfigs = \is_array($configurableConfigs) ? $configurableConfigs : (int)$configurableConfigs;
+        if (\is_int($configurableConfigs)) {
             $configurableConfigs = $this->getDefaultAttributeSetsConfig($defaultAttributeSets, $configurableConfigs);
         } elseif (isset($configurableConfigs['config'])) {
             if (!isset($configurableConfigs['config'][0])) {
@@ -595,7 +595,7 @@ class ConfigurableProductsFixture extends Fixture
             }
 
             foreach ($configurableConfigs as &$config) {
-                if (isset($config['attributes']) && is_array($config['attributes'])) {
+                if (isset($config['attributes']) && \is_array($config['attributes'])) {
                     if (!isset($config['attributes']['attribute'][0])) {
                         $config['attributes'] = [$config['attributes']['attribute']];
                     } else {
@@ -670,7 +670,7 @@ class ConfigurableProductsFixture extends Fixture
 
         $pattern = $this->attributePattern->generateAttributeSet(
             $attributeSetName,
-            count($attributes),
+            \count($attributes),
             array_column($attributes, 'options'),
             function ($index, $attribute) use ($attributeSetName, $attributes, $attributeSetHash) {
                 $swatch = [];
@@ -743,7 +743,7 @@ class ConfigurableProductsFixture extends Fixture
     {
         $searchTerms = $this->fixtureModel->getValue('search_terms', null);
         if ($searchTerms !== null) {
-            $searchTerms = array_key_exists(0, $searchTerms['search_term'])
+            $searchTerms = \array_key_exists(0, $searchTerms['search_term'])
                 ? $searchTerms['search_term'] : [$searchTerms['search_term']];
         } else {
             $searchTerms = [];
@@ -772,9 +772,9 @@ class ConfigurableProductsFixture extends Fixture
     private function getAdditionalAttributesClosure(array $attributes, $variationCount)
     {
         $optionsPerAttribute = array_map(function ($attr) {
-            return count($attr['values']);
+            return \count($attr['values']);
         }, $attributes);
-        $variationsMatrix = $this->generateVariationsMatrix(count($attributes), $optionsPerAttribute);
+        $variationsMatrix = $this->generateVariationsMatrix(\count($attributes), $optionsPerAttribute);
 
         return function ($attributeSetId, $index, $entityNumber) use ($attributes, $variationCount, $variationsMatrix) {
             $variationIndex = $this->getConfigurableVariationIndex($entityNumber, $variationCount) - 1;
@@ -874,7 +874,7 @@ class ConfigurableProductsFixture extends Fixture
             $minAmountOfWordsDescription,
             $descriptionPrefix
         ) {
-            $countSearchTerms = is_array($searchTerms) ? count($searchTerms) : 0;
+            $countSearchTerms = \is_array($searchTerms) ? \count($searchTerms) : 0;
             $count = !$searchTerms
                 ? 0
                 : round(

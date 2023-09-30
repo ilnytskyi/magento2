@@ -64,7 +64,7 @@ class AstConverter
             if (key_exists($argumentName, $attributes)) {
                 $argumentName = $attributes[$argumentName]['fieldName'] ?? $argumentName;
                 foreach ($argument as $clauseType => $clause) {
-                    if (is_array($clause)) {
+                    if (\is_array($clause)) {
                         $value = [];
                         foreach ($clause as $item) {
                             $value[] = $item;
@@ -78,7 +78,7 @@ class AstConverter
                         $value
                     );
                 }
-            } elseif (is_array($argument)) {
+            } elseif (\is_array($argument)) {
                 $conditions[] =
                     $this->connectiveFactory->create(
                         $this->getClausesFromAst($fieldName, $argument),

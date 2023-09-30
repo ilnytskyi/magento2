@@ -219,7 +219,7 @@ class RemoteServiceGenerator extends \Magento\Framework\Code\Generator\EntityAbs
         $sourceClassName = $this->getSourceClassName();
         $resultClassName = $this->_getResultClassName();
         $interfaceSuffix = 'Interface';
-        if (substr($sourceClassName, -strlen($interfaceSuffix)) !== $interfaceSuffix) {
+        if (substr($sourceClassName, -\strlen($interfaceSuffix)) !== $interfaceSuffix) {
             $this->_addError(
                 sprintf(
                     'Remote service class "%s" should be set as preference for an interface, "%s" given',

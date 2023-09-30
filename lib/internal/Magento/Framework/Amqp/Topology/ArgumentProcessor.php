@@ -26,16 +26,16 @@ trait ArgumentProcessor
     {
         $output = [];
         foreach ($arguments as $key => $value) {
-            if (is_array($value)) {
+            if (\is_array($value)) {
                 $output[$key] = ['A', $value];
             } elseif (is_numeric($value)) {
                 $output[$key] = ['I', (int) $value];
-            } elseif (is_bool($value)) {
+            } elseif (\is_bool($value)) {
                 $output[$key] = ['t', $value];
-            } elseif (is_string($value)) {
+            } elseif (\is_string($value)) {
                 $output[$key] = ['S', $value];
             } else {
-                throw new InvalidArgumentException('Unknown argument type ' . gettype($value));
+                throw new InvalidArgumentException('Unknown argument type ' . \gettype($value));
             }
         }
 

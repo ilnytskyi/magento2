@@ -48,7 +48,7 @@ class ConsumerInstance implements ValidatorInterface
             );
         }
         $implementedInterfaces = class_implements($consumerInstance);
-        if (!in_array(ConsumerInterface::class, $implementedInterfaces)) {
+        if (!\in_array(ConsumerInterface::class, $implementedInterfaces)) {
             throw new \LogicException(
                 sprintf(
                     "'%s' cannot be specified as 'consumerInstance' for '%s' consumer,"

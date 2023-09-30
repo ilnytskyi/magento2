@@ -204,7 +204,7 @@ class BatchRangeIterator implements BatchIteratorInterface
             $this->totalItemCount = (int)$row['cnt'];
         }
 
-        $rangeField = is_array($this->rangeField) ? $this->rangeField : [$this->rangeField];
+        $rangeField = \is_array($this->rangeField) ? $this->rangeField : [$this->rangeField];
 
         /**
          * Reset sort order section from origin select object

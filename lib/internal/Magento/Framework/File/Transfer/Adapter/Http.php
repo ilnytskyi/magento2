@@ -95,9 +95,9 @@ class Http
      */
     private function getFilePath($options): string
     {
-        if (is_string($options)) {
+        if (\is_string($options)) {
             $filePath = $options;
-        } elseif (is_array($options) && isset($options['filepath'])) {
+        } elseif (\is_array($options) && isset($options['filepath'])) {
             $filePath = $options['filepath'];
         } else {
             throw new \InvalidArgumentException("Filename is not set.");
@@ -115,7 +115,7 @@ class Http
     private function prepareResponse($options, string $filepath): void
     {
         $mimeType = $this->mime->getMimeType($filepath);
-        if (is_array($options) && isset($options['headers']) && $options['headers'] instanceof Headers) {
+        if (\is_array($options) && isset($options['headers']) && $options['headers'] instanceof Headers) {
             $this->response->setHeaders($options['headers']);
         }
         $this->response->setHeader('Content-length', filesize($filepath));

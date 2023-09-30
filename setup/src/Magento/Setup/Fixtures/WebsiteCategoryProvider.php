@@ -70,10 +70,10 @@ class WebsiteCategoryProvider
             return $this->getAllWebsites();
         } else {
             $categoriesPerWebsite = $this->getCategoriesAndWebsites();
-            if (!count($categoriesPerWebsite)) {
+            if (!\count($categoriesPerWebsite)) {
                 throw new \Exception('Cannot find categories. Please, be sure that you have generated categories');
             }
-            return [$categoriesPerWebsite[$productIndex % count($categoriesPerWebsite)]['website']];
+            return [$categoriesPerWebsite[$productIndex % \count($categoriesPerWebsite)]['website']];
         }
     }
 
@@ -87,10 +87,10 @@ class WebsiteCategoryProvider
     {
         if ($this->isAssignToAllWebsites()) {
             $categories = $this->getAllCategories();
-            return $categories[$productIndex % count($categories)];
+            return $categories[$productIndex % \count($categories)];
         } else {
             $categoriesPerWebsite = $this->getCategoriesAndWebsites();
-            return $categoriesPerWebsite[$productIndex % count($categoriesPerWebsite)]['category'];
+            return $categoriesPerWebsite[$productIndex % \count($categoriesPerWebsite)]['category'];
         }
     }
 

@@ -120,7 +120,7 @@ class Manager
     protected function isExcludedDirectory($directoryPath, $asset)
     {
         /** @var $asset LocalInterface */
-        $assetDirectory = dirname($asset->getFilePath());
+        $assetDirectory = \dirname($asset->getFilePath());
         $assetDirectory .= substr($assetDirectory, -1) != '/' ? '/' : '';
         $directoryPath .= substr($directoryPath, -1) != '/' ? '/' : '';
 
@@ -211,7 +211,7 @@ class Manager
     {
         $sourceFile = $asset->getSourceFile();
         $extension = $asset->getContentType();
-        if (in_array($sourceFile, $this->excluded)) {
+        if (\in_array($sourceFile, $this->excluded)) {
             return false;
         }
 
@@ -256,7 +256,7 @@ class Manager
     protected function isValidType(LocalInterface $asset)
     {
         $type = $asset->getContentType();
-        if (!in_array($type, self::$availableTypes)) {
+        if (!\in_array($type, self::$availableTypes)) {
             return false;
         }
 

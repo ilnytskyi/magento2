@@ -47,7 +47,7 @@ class FieldFactory
         $isList = false;
 
         //check if type ends with []
-        if ($fieldType[strlen((string)$fieldType) - 2] == '[' && $fieldType[strlen((string)$fieldType) - 1] == ']') {
+        if ($fieldType[\strlen((string)$fieldType) - 2] == '[' && $fieldType[\strlen((string)$fieldType) - 1] == ']') {
             $isList = true;
             $fieldData['type'] = str_replace('[]', '', $fieldData['type'] ?? '');
             $fieldData['itemType'] = str_replace('[]', '', $fieldData['type'] ?? '');

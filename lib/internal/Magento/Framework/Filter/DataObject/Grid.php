@@ -14,7 +14,7 @@ class Grid extends \Magento\Framework\Filter\DataObject
     public function filter($grid)
     {
         $out = [];
-        if (is_array($grid)) {
+        if (\is_array($grid)) {
             foreach ($grid as $key => $gridItem) {
                 $out[$key] = parent::filter($gridItem);
             }

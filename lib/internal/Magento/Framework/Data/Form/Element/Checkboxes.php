@@ -63,16 +63,16 @@ class Checkboxes extends AbstractElement
         $values = [];
 
         if ($this->getValues()) {
-            if (!is_array($this->getValues())) {
+            if (!\is_array($this->getValues())) {
                 $options = [$this->getValues()];
             } else {
                 $options = $this->getValues();
             }
-        } elseif ($this->getOptions() && is_array($this->getOptions())) {
+        } elseif ($this->getOptions() && \is_array($this->getOptions())) {
             $options = $this->getOptions();
         }
         foreach ($options as $k => $v) {
-            if (is_array($v)) {
+            if (\is_array($v)) {
                 if (isset($v['value'])) {
                     if (!isset($v['label'])) {
                         $v['label'] = $v['value'];
@@ -121,14 +121,14 @@ class Checkboxes extends AbstractElement
         if (!$checked) {
             return null;
         }
-        if (!is_array($checked)) {
+        if (!\is_array($checked)) {
             $checked = [(string)$checked];
         } else {
             foreach ($checked as $k => $v) {
                 $checked[$k] = (string)$v;
             }
         }
-        if (in_array((string)$value, $checked)) {
+        if (\in_array((string)$value, $checked)) {
             return 'checked';
         }
         return null;
@@ -143,14 +143,14 @@ class Checkboxes extends AbstractElement
     public function getDisabled($value)
     {
         if ($disabled = $this->getData('disabled')) {
-            if (!is_array($disabled)) {
+            if (!\is_array($disabled)) {
                 $disabled = [(string)$disabled];
             } else {
                 foreach ($disabled as $k => $v) {
                     $disabled[$k] = (string)$v;
                 }
             }
-            if (in_array((string)$value, $disabled)) {
+            if (\in_array((string)$value, $disabled)) {
                 return 'disabled';
             }
         }

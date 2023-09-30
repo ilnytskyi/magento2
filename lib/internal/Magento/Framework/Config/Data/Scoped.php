@@ -84,7 +84,7 @@ class Scoped extends \Magento\Framework\Config\Data
     {
         $scope = $this->_configScope->getCurrentScope();
         if (false == isset($this->_loadedScopes[$scope])) {
-            if (false == in_array($scope, $this->_scopePriorityScheme)) {
+            if (false == \in_array($scope, $this->_scopePriorityScheme)) {
                 $this->_scopePriorityScheme[] = $scope;
             }
             foreach ($this->_scopePriorityScheme as $scopeCode) {

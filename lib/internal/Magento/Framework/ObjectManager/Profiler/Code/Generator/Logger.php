@@ -120,7 +120,7 @@ class Logger extends \Magento\Framework\Code\Generator\EntityAbstract
         $publicMethods   = $reflectionClass->getMethods(\ReflectionMethod::IS_PUBLIC);
         foreach ($publicMethods as $method) {
             if (!($method->isConstructor() || $method->isFinal() || $method->isStatic() || $method->isDestructor())
-                && !in_array($method->getName(), ['__sleep', '__wakeup', '__clone'])
+                && !\in_array($method->getName(), ['__sleep', '__wakeup', '__clone'])
             ) {
                 $methods[] = $this->_getMethodInfo($method);
             }

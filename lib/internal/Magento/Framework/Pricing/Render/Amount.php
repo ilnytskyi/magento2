@@ -155,7 +155,7 @@ class Amount extends Template implements AmountRenderInterface
      */
     public function hasAdjustmentsHtml()
     {
-        return (bool) count($this->adjustmentsHtml);
+        return (bool) \count($this->adjustmentsHtml);
     }
 
     /**

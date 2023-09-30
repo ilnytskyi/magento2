@@ -17,7 +17,7 @@ class Bz extends \Magento\Framework\Archive\Helper\File
      */
     protected function _open($mode)
     {
-        if (!extension_loaded('bz2')) {
+        if (!\extension_loaded('bz2')) {
             throw new \RuntimeException('PHP extension bz2 is required.');
         }
         $this->_fileHandler = bzopen($this->_filePath, $mode);

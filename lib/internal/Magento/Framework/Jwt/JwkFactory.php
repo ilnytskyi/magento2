@@ -27,26 +27,26 @@ class JwkFactory
      */
     public function createFromData(array $data): Jwk
     {
-        if (!array_key_exists('kty', $data)) {
+        if (!\array_key_exists('kty', $data)) {
             throw new \InvalidArgumentException('Missing key type in JWK data (kty)');
         }
         $kty = $data['kty'];
         unset($data['kty']);
-        $use = array_key_exists('use', $data) ? $data['use'] : null;
+        $use = \array_key_exists('use', $data) ? $data['use'] : null;
         unset($data['use']);
-        $keyOps = array_key_exists('key_ops', $data) ? $data['key_ops'] : null;
+        $keyOps = \array_key_exists('key_ops', $data) ? $data['key_ops'] : null;
         unset($data['key_ops']);
-        $alg = array_key_exists('alg', $data) ? $data['alg'] : null;
+        $alg = \array_key_exists('alg', $data) ? $data['alg'] : null;
         unset($data['alg']);
-        $x5u = array_key_exists('x5u', $data) ? $data['x5u'] : null;
+        $x5u = \array_key_exists('x5u', $data) ? $data['x5u'] : null;
         unset($data['use']);
-        $x5c = array_key_exists('x5c', $data) ? $data['x5c'] : null;
+        $x5c = \array_key_exists('x5c', $data) ? $data['x5c'] : null;
         unset($data['x5c']);
-        $x5t = array_key_exists('x5t', $data) ? $data['x5t'] : null;
+        $x5t = \array_key_exists('x5t', $data) ? $data['x5t'] : null;
         unset($data['x5t']);
-        $x5tS256 = array_key_exists('x5t#S256', $data) ? $data['x5t#S256'] : null;
+        $x5tS256 = \array_key_exists('x5t#S256', $data) ? $data['x5t#S256'] : null;
         unset($data['x5t#S256']);
-        $kid = array_key_exists('kid', $data) ? $data['kid'] : null;
+        $kid = \array_key_exists('kid', $data) ? $data['kid'] : null;
         unset($data['kid']);
 
         return new Jwk(
@@ -507,7 +507,7 @@ class JwkFactory
      */
     public function createDir(string $key, string $contentEncryptionAlgorithm, ?string $kid = null): Jwk
     {
-        if (strlen($key) < 2048) {
+        if (\strlen($key) < 2048) {
             throw new \InvalidArgumentException('Shared secret key must be at least 2048 bits.');
         }
 
@@ -763,7 +763,7 @@ class JwkFactory
 
     private function createOct(string $key, string $use, string $algo, ?string $kid): Jwk
     {
-        if (strlen($key) < 2048) {
+        if (\strlen($key) < 2048) {
             throw new \InvalidArgumentException('Shared secret key must be at least 2048 bits.');
         }
 
@@ -798,7 +798,7 @@ class JwkFactory
         ];
         $jwkData = [];
         foreach ($keysMap as $jwkKey => $rsaKey) {
-            if (array_key_exists($rsaKey, $keyData)) {
+            if (\array_key_exists($rsaKey, $keyData)) {
                 $jwkData[$jwkKey] = self::base64Encode($keyData[$rsaKey]);
             }
         }
@@ -828,7 +828,7 @@ class JwkFactory
         ];
         $jwkData = [];
         foreach ($keysMap as $jwkKey => $rsaKey) {
-            if (array_key_exists($rsaKey, $keyData)) {
+            if (\array_key_exists($rsaKey, $keyData)) {
                 $jwkData[$jwkKey] = self::base64Encode($keyData[$rsaKey]);
             }
         }
@@ -858,7 +858,7 @@ class JwkFactory
         $resource = openssl_get_privatekey($key, (string)$pass);
         $keyData = openssl_pkey_get_details($resource)['ec'];
         $this->freeResource($resource);
-        if (!array_key_exists($keyData['curve_oid'], self::EC_CURVE_MAP)) {
+        if (!\array_key_exists($keyData['curve_oid'], self::EC_CURVE_MAP)) {
             throw new \RuntimeException('Unsupported EC curve');
         }
         if ($validateCurveBits && $validateCurveBits !== self::EC_CURVE_MAP[$keyData['curve_oid']]['bits']) {
@@ -896,7 +896,7 @@ class JwkFactory
         $resource = openssl_get_publickey($key);
         $keyData = openssl_pkey_get_details($resource)['ec'];
         $this->freeResource($resource);
-        if (!array_key_exists($keyData['curve_oid'], self::EC_CURVE_MAP)) {
+        if (!\array_key_exists($keyData['curve_oid'], self::EC_CURVE_MAP)) {
             throw new \RuntimeException('Unsupported EC curve');
         }
         if ($validateCurveBits && $validateCurveBits !== self::EC_CURVE_MAP[$keyData['curve_oid']]['bits']) {

@@ -35,7 +35,7 @@ class DataObject implements InterpreterInterface
     public function evaluate(array $data): array
     {
         $result = ['instance' => $data['value']];
-        if (array_key_exists('sortOrder', $data)) {
+        if (\array_key_exists('sortOrder', $data)) {
             $result['sortOrder'] = $data['sortOrder'];
         }
         if (isset($data['shared'])) {

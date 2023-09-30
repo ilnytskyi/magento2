@@ -56,7 +56,7 @@ XML;
     public static function toFlatArray($data)
     {
         foreach ($data as $key => $value) {
-            if (is_array($value)) {
+            if (\is_array($value)) {
                 $value = self::toFlatArray($value);
                 unset($data[$key]);
                 $data = array_merge($data, $value);
@@ -79,8 +79,8 @@ XML;
         $hasNumericKey = false;
         $hasStringKey = false;
         foreach ($array as $key => $value) {
-            if (!is_array($value)) {
-                if (is_string($key)) {
+            if (!\is_array($value)) {
+                if (\is_string($key)) {
                     if ($key === $rootName) {
                         throw new LocalizedException(
                             new \Magento\Framework\Phrase(
@@ -91,7 +91,7 @@ XML;
                     }
                     $hasStringKey = true;
                     $xml->addChild($key, $value);
-                } elseif (is_int($key)) {
+                } elseif (\is_int($key)) {
                     $hasNumericKey = true;
                     $xml->addChild($key, $value);
                 }

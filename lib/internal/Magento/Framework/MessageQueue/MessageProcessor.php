@@ -91,7 +91,7 @@ class MessageProcessor implements MessageProcessorInterface
             foreach ($messages as $message) {
                 $callbacks = $configuration->getHandlers($topicName);
                 foreach ($callbacks as $callback) {
-                    call_user_func($callback, $message);
+                    \call_user_func($callback, $message);
                 }
             }
         }

@@ -62,7 +62,7 @@ class ConfigurableWYSIWYGValidator implements WYSIWYGValidatorInterface
         $this->attributesAllowedByTags = array_filter(
             $attributesAllowedByTags,
             function (string $tag) use ($allowedTags): bool {
-                return in_array($tag, $allowedTags, true);
+                return \in_array($tag, $allowedTags, true);
             },
             ARRAY_FILTER_USE_KEY
         );
@@ -109,7 +109,7 @@ class ConfigurableWYSIWYGValidator implements WYSIWYGValidatorInterface
                 )
                 .']'
         );
-        if (count($found)) {
+        if (\count($found)) {
             throw new ValidationException(
                 __('Allowed HTML tags are: %1', implode(', ', $this->allowedTags))
             );
@@ -139,7 +139,7 @@ class ConfigurableWYSIWYGValidator implements WYSIWYGValidatorInterface
                         .']';
                 }
                 $found = $xpath->query("//$tag/@*$allowedQuery");
-                if (count($found)) {
+                if (\count($found)) {
                     throw new ValidationException(
                         __('Allowed HTML attributes for tag "%1" are: %2', $tag, implode(',', $allowed))
                     );
@@ -161,7 +161,7 @@ class ConfigurableWYSIWYGValidator implements WYSIWYGValidatorInterface
                     .']';
             }
             $found = $xpath->query("//@*$allowed");
-            if (count($found)) {
+            if (\count($found)) {
                 throw new ValidationException(
                     __('Allowed HTML attributes are: %1', implode(',', $this->allowedAttributes))
                 );

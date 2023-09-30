@@ -50,11 +50,11 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
         $arrQueryParams = [];
         foreach ($param as $key => $value) {
-            if (is_numeric($key) || is_object($value)) {
+            if (is_numeric($key) || \is_object($value)) {
                 continue;
             }
 
-            if (is_array($value)) {
+            if (\is_array($value)) {
                 // ex: $key[]=$value1&$key[]=$value2 ...
                 $arrQueryParams[] = $key . '[]=' . implode('&' . $key . '[]=', $value);
             } elseif ($value === null) {

@@ -49,7 +49,7 @@ class SqlCollector
             $table = $queryMatches[1];
             $fields = preg_replace('~[\s+`]+~', '', $queryMatches[2]);
             $fields = $fields ? explode(',', $fields) : [];
-            $sqlBindGroupAmount = count(explode('), (', $queryMatches[3]));
+            $sqlBindGroupAmount = \count(explode('), (', $queryMatches[3]));
             preg_match(' ~\((.*?)\)~', $queryMatches[3], $sqlBind);
             $sqlBind = preg_replace(['~,\s*~', '~\'~'], [',', ''], $sqlBind[1]);
             $sqlBind = $sqlBind ? explode(',', $sqlBind) : [];
@@ -57,7 +57,7 @@ class SqlCollector
 
             // process multi queries
             if ($sqlBindGroupAmount > 1) {
-                $valuesCount = count($bind)/$sqlBindGroupAmount;
+                $valuesCount = \count($bind)/$sqlBindGroupAmount;
                 for ($i = 0; $i < $sqlBindGroupAmount; $i++) {
                     $binds[] = array_combine(
                         $fields,

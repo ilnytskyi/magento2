@@ -59,7 +59,7 @@ class ImageMagick extends AbstractAdapter
     public function backgroundColor($color = null)
     {
         if ($color) {
-            if (is_array($color)) {
+            if (\is_array($color)) {
                 $color = "rgb(" . join(',', $color) . ")";
             }
 
@@ -104,7 +104,7 @@ class ImageMagick extends AbstractAdapter
         $this->_getFileAttributes();
 
         try {
-            if (is_callable('exif_imagetype')) {
+            if (\is_callable('exif_imagetype')) {
                 $fileType = exif_imagetype($this->_fileName);
 
                 if ($fileType === IMAGETYPE_ICO) {
@@ -138,7 +138,7 @@ class ImageMagick extends AbstractAdapter
     {
         $allowed_schemes = ['ftp', 'ftps', 'http', 'https'];
         $url = parse_url($filename);
-        if ($url && isset($url['scheme']) && !in_array($url['scheme'], $allowed_schemes)) {
+        if ($url && isset($url['scheme']) && !\in_array($url['scheme'], $allowed_schemes)) {
             return false;
         }
 

@@ -106,7 +106,7 @@ class Element extends \SimpleXMLElement
     {
         # $node = $this->xpath($path);
         # return $node[0];
-        if (is_array($path)) {
+        if (\is_array($path)) {
             $pathArr = $path;
         } else {
             // Simple exploding by / does not suffice,
@@ -264,7 +264,7 @@ class Element extends \SimpleXMLElement
         if ($this->hasChildren()) {
             $out .= '>';
             $value = trim((string)$this);
-            if (strlen($value)) {
+            if (\strlen($value)) {
                 $out .= $this->xmlentities($value);
             }
             $out .= $nl;
@@ -274,7 +274,7 @@ class Element extends \SimpleXMLElement
             $out .= $pad . '</' . $this->getName() . '>' . $nl;
         } else {
             $value = (string)$this;
-            if (strlen($value)) {
+            if (\strlen($value)) {
                 $out .= '>' . $this->xmlentities($value) . '</' . $this->getName() . '>' . $nl;
             } else {
                 $out .= '/>' . $nl;
@@ -454,7 +454,7 @@ class Element extends \SimpleXMLElement
                 $arr[] = $v;
             }
         }
-        $last = count($arr) - 1;
+        $last = \count($arr) - 1;
         $node = $this;
         foreach ($arr as $i => $nodeName) {
             if ($last === $i) {
@@ -484,7 +484,7 @@ class Element extends \SimpleXMLElement
         $uniqueId = uniqid();
         $this['_unique_id'] = $uniqueId;
         $children = $this->getParent()->xpath('*');
-        for ($i = count($children); $i > 0; $i--) {
+        for ($i = \count($children); $i > 0; $i--) {
             if ($children[$i - 1][0]['_unique_id'] == $uniqueId) {
                 unset($children[$i - 1][0]);
                 return;

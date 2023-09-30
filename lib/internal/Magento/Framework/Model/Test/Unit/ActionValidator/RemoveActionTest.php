@@ -56,13 +56,13 @@ class RemoveActionTest extends TestCase
             ],
             [
                 'modelToCheck' => $bannerMock,
-                'protectedModel' => get_class($bannerMock),
+                'protectedModel' => \get_class($bannerMock),
                 'secureArea' => false,
                 'expectedResult' => false
             ],
             [
                 'modelToCheck' => $bannerMock,
-                'protectedModel' => get_class($bannerMock),
+                'protectedModel' => \get_class($bannerMock),
                 'secureArea' => true,
                 'expectedResult' => true
             ],

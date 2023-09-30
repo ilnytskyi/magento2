@@ -81,16 +81,16 @@ class RouteParamsResolver extends \Magento\Framework\DataObject implements Route
         }
 
         if (isset($data['_current'])) {
-            if (is_array($data['_current'])) {
+            if (\is_array($data['_current'])) {
                 foreach ($data['_current'] as $key) {
-                    if (array_key_exists($key, $data) || !$this->request->getUserParam($key)) {
+                    if (\array_key_exists($key, $data) || !$this->request->getUserParam($key)) {
                         continue;
                     }
                     $data[$key] = $this->request->getUserParam($key);
                 }
             } elseif ($data['_current']) {
                 foreach ($this->request->getUserParams() as $key => $value) {
-                    if (array_key_exists($key, $data) || $this->getRouteParam($key)) {
+                    if (\array_key_exists($key, $data) || $this->getRouteParam($key)) {
                         continue;
                     }
                     $data[$key] = $value;
@@ -107,7 +107,7 @@ class RouteParamsResolver extends \Magento\Framework\DataObject implements Route
         }
 
         foreach ($data as $key => $value) {
-            if (!is_scalar($value) || $key == 'key' || !$this->getData('escape_params')) {
+            if (!\is_scalar($value) || $key == 'key' || !$this->getData('escape_params')) {
                 $this->setRouteParam($key, $value);
             } else {
                 $this->setRouteParam(

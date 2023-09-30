@@ -33,7 +33,7 @@ class Grid extends IndexerHandler
     {
         $onDuplicate = [];
         foreach ($this->fields as $field) {
-            if (in_array($field['type'], $this->dataTypes)) {
+            if (\in_array($field['type'], $this->dataTypes)) {
                 $onDuplicate[] = $field['name'];
             }
         }
@@ -55,7 +55,7 @@ class Grid extends IndexerHandler
         foreach ($documents as $entityId => $document) {
             $documentFlat = ['entity_id' => $entityId];
             foreach ($this->fields as $field) {
-                if (in_array($field['type'], $this->dataTypes)) {
+                if (\in_array($field['type'], $this->dataTypes)) {
                     $documentFlat[$field['name']] = $document[$field['name']];
                 }
             }

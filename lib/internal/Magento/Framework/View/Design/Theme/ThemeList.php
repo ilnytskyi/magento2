@@ -131,7 +131,7 @@ class ThemeList extends \Magento\Framework\Data\Collection implements ListInterf
      */
     private function isAcceptable($constraintType, $value)
     {
-        return empty($this->constraints[$constraintType]) || in_array($value, $this->constraints[$constraintType]);
+        return empty($this->constraints[$constraintType]) || \in_array($value, $this->constraints[$constraintType]);
     }
 
     /**
@@ -234,7 +234,7 @@ class ThemeList extends \Magento\Framework\Data\Collection implements ListInterf
         $media = $themeConfig->getMedia();
 
         $parentPathPieces = $themeConfig->getParentTheme();
-        if (is_array($parentPathPieces) && count($parentPathPieces) == 1) {
+        if (\is_array($parentPathPieces) && \count($parentPathPieces) == 1) {
             $pathPieces = $pathData['theme_path_pieces'];
             array_pop($pathPieces);
             $parentPathPieces = array_merge($pathPieces, $parentPathPieces);

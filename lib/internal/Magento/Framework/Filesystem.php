@@ -65,7 +65,7 @@ class Filesystem
     public function getDirectoryRead($directoryCode, $driverCode = DriverPool::FILE)
     {
         $code = $directoryCode . '_' . $driverCode;
-        if (!array_key_exists($code, $this->readInstances)) {
+        if (!\array_key_exists($code, $this->readInstances)) {
             $this->readInstances[$code] = $this->readFactory->create($this->getDirPath($directoryCode), $driverCode);
         }
         return $this->readInstances[$code];
@@ -97,7 +97,7 @@ class Filesystem
     public function getDirectoryWrite($directoryCode, $driverCode = DriverPool::FILE)
     {
         $code = $directoryCode . '_' . $driverCode;
-        if (!array_key_exists($code, $this->writeInstances)) {
+        if (!\array_key_exists($code, $this->writeInstances)) {
             $this->writeInstances[$code] = $this->writeFactory->create($this->getDirPath($directoryCode), $driverCode);
         }
         return $this->writeInstances[$code];

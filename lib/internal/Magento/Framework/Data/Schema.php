@@ -13,9 +13,9 @@ class Schema extends \Magento\Framework\DataObject
      */
     public function load($schema)
     {
-        if (is_array($schema)) {
+        if (\is_array($schema)) {
             $this->setData($schema);
-        } elseif (is_string($schema)) {
+        } elseif (\is_string($schema)) {
             if (is_file($schema)) {
                 include $schema;
                 $this->setData($schema);

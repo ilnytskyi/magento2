@@ -95,7 +95,7 @@ abstract class AbstractResource
             $callbacks = CallbackPool::get(spl_object_hash($this->getConnection()));
             foreach ($callbacks as $callback) {
                 try {
-                    call_user_func($callback);
+                    \call_user_func($callback);
                 } catch (\Exception $e) {
                     $this->getLogger()->critical($e);
                 }

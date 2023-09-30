@@ -41,12 +41,12 @@ class Options implements InterpreterInterface
         $modelInstance = $this->objectManager->get($modelClass);
         if (!$modelInstance instanceof \Magento\Framework\Data\OptionSourceInterface) {
             throw new \UnexpectedValueException(
-                sprintf("Instance of the options source model is expected, got %s instead.", get_class($modelInstance))
+                sprintf("Instance of the options source model is expected, got %s instead.", \get_class($modelInstance))
             );
         }
         $result = [];
         foreach ($modelInstance->toOptionArray() as $value => $label) {
-            if (is_array($label)) {
+            if (\is_array($label)) {
                 $result[] = $label;
             } else {
                 $result[] = ['value' => $value, 'label' => $label];

@@ -142,7 +142,7 @@ class FilterProcessor implements CollectionProcessorInterface
         foreach ($conditions as $condition) {
             $_conditions[array_key_first($condition)] = reset($condition);
         }
-        if ((count($_fields) == 1) && (count($_conditions) == 2)
+        if ((\count($_fields) == 1) && (\count($_conditions) == 2)
             && isset($_conditions['from']) && isset($_conditions['to'])
         ) {
             $fields = $_fields;

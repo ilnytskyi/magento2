@@ -292,7 +292,7 @@ class Context implements ContextInterface
     {
         if (!empty($buttons)) {
             foreach ($buttons as $buttonId => $buttonData) {
-                if (is_array($buttonData)) {
+                if (\is_array($buttonData)) {
                     $buttons[$buttonId] = $buttonData;
                     continue;
                 }
@@ -437,7 +437,7 @@ class Context implements ContextInterface
                 list($contentType, $q) = explode(';q=', $contentType);
             }
 
-            if (array_key_exists($q, $acceptTypes)) {
+            if (\array_key_exists($q, $acceptTypes)) {
                 $acceptTypes[$q] = $acceptTypes[$q] . ',' . $contentType;
             } else {
                 $acceptTypes[$q] = $contentType;

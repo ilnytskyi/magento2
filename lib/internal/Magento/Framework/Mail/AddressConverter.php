@@ -65,7 +65,7 @@ class AddressConverter
                 return $email;
             }
 
-            if ($userEncoded === false && array_key_exists('result', $idnaInfo)) {
+            if ($userEncoded === false && \array_key_exists('result', $idnaInfo)) {
                 $userEncoded = $idnaInfo['result'];
             }
             $email = sprintf('%s@%s', $userEncoded, $hostname);
@@ -86,16 +86,16 @@ class AddressConverter
         $addressList = [];
         foreach ($addresses as $key => $value) {
 
-            if (is_int($key) || is_numeric($key)) {
+            if (\is_int($key) || is_numeric($key)) {
                 $addressList[] = $this->convert($value);
                 continue;
             }
 
-            if (!is_string($key)) {
+            if (!\is_string($key)) {
                 throw new InvalidArgumentException(
                     sprintf(
                         'Invalid key type in provided addresses array ("%s")',
-                        (is_object($key) ? get_class($key) : var_export($key, 1))
+                        (\is_object($key) ? \get_class($key) : var_export($key, 1))
                     )
                 );
             }

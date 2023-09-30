@@ -26,7 +26,7 @@ class Format implements ValidatorInterface
                 $errors[] = sprintf('Missing [%s] field for exchange %s.', $field, $name);
             }
 
-            if (!array_key_exists('bindings', $data) || !is_array($data['bindings'])) {
+            if (!\array_key_exists('bindings', $data) || !\is_array($data['bindings'])) {
                 $errors[] = sprintf('Invalid bindings format for exchange %s.', $name);
                 continue;
             }

@@ -76,17 +76,17 @@ class Escaper
      */
     public function escapeHtml($data, $allowedTags = null)
     {
-        if (!is_array($data)) {
+        if (!\is_array($data)) {
             $data = (string)$data;
         }
 
-        if (is_array($data)) {
+        if (\is_array($data)) {
             $result = [];
             foreach ($data as $item) {
                 $result[] = $this->escapeHtml($item, $allowedTags);
             }
         } elseif (!empty($data)) {
-            if (is_array($allowedTags) && !empty($allowedTags)) {
+            if (\is_array($allowedTags) && !empty($allowedTags)) {
                 $allowedTags = $this->filterProhibitedTags($allowedTags);
                 $wrapperElementId = uniqid();
                 $domDocument = new \DOMDocument('1.0', 'UTF-8');
@@ -261,7 +261,7 @@ class Escaper
      */
     private function escapeAttributeValue($name, $value)
     {
-        return in_array($name, $this->escapeAsUrlAttributes) ? $this->escapeUrl($value) : $this->escapeHtml($value);
+        return \in_array($name, $this->escapeAsUrlAttributes) ? $this->escapeUrl($value) : $this->escapeHtml($value);
     }
 
     /**
@@ -319,7 +319,7 @@ class Escaper
      */
     public function escapeJs($string)
     {
-        if (!is_string($string)) {
+        if (!\is_string($string)) {
             // In PHP > 8, preg_replace_callback throws an error if the 3rd param type is incorrect.
             // This check emulates an old behavior.
             $string = (string) $string;
@@ -333,7 +333,7 @@ class Escaper
             '/[^a-z0-9,\._]/iSu',
             function ($matches) {
                 $chr = $matches[0];
-                if (strlen($chr) != 1) {
+                if (\strlen($chr) != 1) {
                     $chr = mb_convert_encoding($chr, 'UTF-16BE', 'UTF-8');
                     $chr = ($chr === false) ? '' : $chr;
                 }
@@ -366,7 +366,7 @@ class Escaper
      */
     public function escapeJsQuote($data, $quote = '\'')
     {
-        if (is_array($data)) {
+        if (\is_array($data)) {
             $result = [];
             foreach ($data as $item) {
                 $result[] = $this->escapeJsQuote($item, $quote);
@@ -521,7 +521,7 @@ class Escaper
     private function inlineSensitiveEscapeHthmlAttr(string $text): string
     {
         $escaper = $this->getEscaper();
-        $textLength = strlen($text);
+        $textLength = \strlen($text);
 
         if ($textLength < 6) {
             return $escaper->escapeHtmlAttr($text);

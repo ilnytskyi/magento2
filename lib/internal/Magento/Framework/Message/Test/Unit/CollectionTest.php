@@ -171,7 +171,7 @@ class CollectionTest extends TestCase
 
         $this->assertCount($this->model->getCount(), $messages);
         $this->model->deleteMessageByIdentifier('notice_id');
-        $this->assertEquals(count($messages) - 1, $this->model->getCount());
+        $this->assertEquals(\count($messages) - 1, $this->model->getCount());
 
         $this->assertEmpty($this->model->getMessageByIdentifier('notice_id'));
     }

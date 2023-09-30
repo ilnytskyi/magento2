@@ -232,7 +232,7 @@ class BackupRollback
         $dbRollback->setBackupsDir($this->backupsDir);
         $dbRollback->setBackupExtension('sql');
         $time = explode('_', $rollbackFile);
-        if (count($time) === 3) {
+        if (\count($time) === 3) {
             $thirdPart = explode('.', $time[2] ?? '');
             $dbRollback->setName($thirdPart[0]);
         }

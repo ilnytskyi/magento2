@@ -122,7 +122,7 @@ class Resolver implements ResolverInterface, ResetAfterRequestInterface
      */
     public function setLocale($locale = null)
     {
-        if ($locale !== null && is_string($locale)) {
+        if ($locale !== null && \is_string($locale)) {
             $this->locale = $locale;
         } else {
             $this->locale = $this->getDefaultLocale();

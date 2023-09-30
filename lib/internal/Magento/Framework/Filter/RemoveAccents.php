@@ -176,7 +176,7 @@ class RemoveAccents implements FilterInterface
 
             $replacements[$this->german] = [];
             foreach ($substitutions as $code => $value) {
-                $replacements[$this->german][$code < 256 ? chr($code) : '&#' . $code . ';'] = $value;
+                $replacements[$this->german][$code < 256 ? \chr($code) : '&#' . $code . ';'] = $value;
             }
         }
 

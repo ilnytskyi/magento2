@@ -24,7 +24,7 @@ class Metadata
      */
     public function getFields(\Magento\Framework\DataObject $entity)
     {
-        $entityClass = get_class($entity);
+        $entityClass = \get_class($entity);
         if (!isset($this->metadataInfo[$entityClass])) {
             $this->metadataInfo[$entityClass] =
                 array_fill_keys(

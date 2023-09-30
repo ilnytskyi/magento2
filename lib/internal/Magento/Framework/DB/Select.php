@@ -120,7 +120,7 @@ class Select extends \Zend_Db_Select
         } elseif ((string)$type === self::TYPE_CONDITION) {
             $type = null;
         }
-        if (is_array($value)) {
+        if (\is_array($value)) {
             $cond = $this->getConnection()->quoteInto($cond, $value, $type);
             $value = null;
         }
@@ -257,12 +257,12 @@ class Select extends \Zend_Db_Select
         $position = 0;
         $result = 0;
         $needle = [];
-        while (is_integer($result)) {
+        while (\is_integer($result)) {
             $result = strpos($cond, $table . '.', $position);
 
-            if (is_integer($result)) {
+            if (\is_integer($result)) {
                 $needle[] = $result;
-                $position = $result + strlen($table) + 1;
+                $position = $result + \strlen($table) + 1;
             }
         }
 
@@ -387,7 +387,7 @@ class Select extends \Zend_Db_Select
     public function setPart($part, $value)
     {
         $part = $part !== null ? strtolower($part) : '';
-        if (!array_key_exists($part, $this->_parts)) {
+        if (!\array_key_exists($part, $this->_parts)) {
             throw new \Zend_Db_Select_Exception("Invalid Select part '{$part}'");
         }
         $this->_parts[$part] = $value;
@@ -433,7 +433,7 @@ class Select extends \Zend_Db_Select
      */
     protected function _tableCols($correlationName, $cols, $afterCorrelationName = null)
     {
-        if (!is_array($cols)) {
+        if (!\is_array($cols)) {
             $cols = [$cols];
         }
 

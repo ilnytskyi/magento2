@@ -46,7 +46,7 @@ class StrictResolver implements VariableResolverInterface
         $stackArgs = $tokenizer->tokenize();
         $result = null;
         $last = 0;
-        for ($i = 0, $count = count($stackArgs); $i < $count; $i++) {
+        for ($i = 0, $count = \count($stackArgs); $i < $count; $i++) {
             if ($i === 0 && isset($templateVariables[$stackArgs[$i]['name']])) {
                 // Getting of template value
                 $stackArgs[$i]['variable'] = &$templateVariables[$stackArgs[$i]['name']];
@@ -58,7 +58,7 @@ class StrictResolver implements VariableResolverInterface
         }
 
         if (isset($stackArgs[$last]['variable'])
-            && (is_scalar($stackArgs[$last]['variable']) || is_array($stackArgs[$last]['variable']))
+            && (\is_scalar($stackArgs[$last]['variable']) || \is_array($stackArgs[$last]['variable']))
         ) {
             // If value for construction exists set it
             $result = $stackArgs[$last]['variable'];
@@ -79,7 +79,7 @@ class StrictResolver implements VariableResolverInterface
     {
         // If data object calling methods or getting properties
         if ($stackArgs[$i]['type'] == 'property') {
-            if (is_array($stackArgs[$i - 1]['variable'])) {
+            if (\is_array($stackArgs[$i - 1]['variable'])) {
                 $stackArgs[$i]['variable'] = $stackArgs[$i - 1]['variable'][$stackArgs[$i]['name']];
             } else {
                 // Strict mode should not call getter methods except DataObject's getData
@@ -131,7 +131,7 @@ class StrictResolver implements VariableResolverInterface
     private function getStackArgs($stack, Template $filter, array $templateVariables): array
     {
         foreach ($stack as $i => $value) {
-            if (is_array($value)) {
+            if (\is_array($value)) {
                 $stack[$i] = $this->getStackArgs($value, $filter, $templateVariables);
             } elseif (substr((string)$value, 0, 1) === '$') {
                 $stack[$i] = $this->resolve(substr($value, 1), $filter, $templateVariables);
@@ -165,7 +165,7 @@ class StrictResolver implements VariableResolverInterface
             && (
                 $stackArgs[$i - 1]['variable'] instanceof DataObject
                 || $stackArgs[$i - 1]['variable'] instanceof AbstractTemplate
-                || is_array($stackArgs[$i - 1]['variable'])
+                || \is_array($stackArgs[$i - 1]['variable'])
             );
     }
 }

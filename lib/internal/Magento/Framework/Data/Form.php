@@ -257,7 +257,7 @@ class Form extends \Magento\Framework\Data\Form\AbstractForm
      */
     public function addValues($values)
     {
-        if (!is_array($values)) {
+        if (!\is_array($values)) {
             return $this;
         }
         foreach ($values as $elementId => $value) {
@@ -361,7 +361,7 @@ class Form extends \Magento\Framework\Data\Form\AbstractForm
         if ($useContainer) {
             $html .= '<form ' . $this->serialize($this->getHtmlAttributes()) . '>';
             $html .= '<div>';
-            $method = is_string($this->getData('method')) ? strtolower($this->getData('method')) : '';
+            $method = \is_string($this->getData('method')) ? strtolower($this->getData('method')) : '';
 
             if ($method == 'post') {
                 $html .= '<input name="form_key" type="hidden" value="' . $this->formKey->getFormKey() . '" />';

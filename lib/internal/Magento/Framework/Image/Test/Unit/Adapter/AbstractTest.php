@@ -106,11 +106,11 @@ class AbstractTest extends TestCase
      */
     public function testPrepareDestination($destination, $newName, $expectedResult)
     {
-        $property = new \ReflectionProperty(get_class($this->_model), '_fileSrcPath');
+        $property = new \ReflectionProperty(\get_class($this->_model), '_fileSrcPath');
         $property->setAccessible(true);
         $property->setValue($this->_model, '_fileSrcPath');
 
-        $property = new \ReflectionProperty(get_class($this->_model), '_fileSrcName');
+        $property = new \ReflectionProperty(\get_class($this->_model), '_fileSrcName');
         $property->setAccessible(true);
         $property->setValue($this->_model, '_fileSrcName');
 

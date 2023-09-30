@@ -116,7 +116,7 @@ class Container implements Layout\GeneratorInterface
     protected function validateOptions($options)
     {
         if (!empty($options[Layout\Element::CONTAINER_OPT_HTML_TAG])
-            && !in_array(
+            && !\in_array(
                 $options[Layout\Element::CONTAINER_OPT_HTML_TAG],
                 $this->allowedTags
             )

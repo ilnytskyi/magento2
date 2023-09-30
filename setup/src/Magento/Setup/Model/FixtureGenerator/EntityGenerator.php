@@ -238,7 +238,7 @@ class EntityGenerator
     private function bindWithCustomHandler($table, $entityId, $entityNumber, $fixtureMap, $binds)
     {
         if (isset($this->customTableMap[$table]['handler'])
-            && is_callable($this->customTableMap[$table]['handler'])
+            && \is_callable($this->customTableMap[$table]['handler'])
         ) {
             $binds = $this->customTableMap[$table]['handler']($entityId, $entityNumber, $fixtureMap, $binds);
         }
@@ -489,10 +489,10 @@ class EntityGenerator
      */
     private function getBindValue($fixture, $entityId, $entityNumber)
     {
-        $bindValue = is_callable($fixture)
-            ? call_user_func($fixture, $entityId, $entityNumber)
+        $bindValue = \is_callable($fixture)
+            ? \call_user_func($fixture, $entityId, $entityNumber)
             : $fixture;
 
-        return is_array($bindValue) ? array_shift($bindValue) : $bindValue;
+        return \is_array($bindValue) ? array_shift($bindValue) : $bindValue;
     }
 }

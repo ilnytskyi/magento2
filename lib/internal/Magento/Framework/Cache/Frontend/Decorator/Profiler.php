@@ -39,7 +39,7 @@ class Profiler extends \Magento\Framework\Cache\Frontend\Decorator\Bare
         return [
             'group' => 'cache',
             'operation' => 'cache:' . $operation,
-            'frontend_type' => get_class($this->getLowLevelFrontend()),
+            'frontend_type' => \get_class($this->getLowLevelFrontend()),
             'backend_type' => $this->_getBackendType()
         ];
     }
@@ -51,10 +51,10 @@ class Profiler extends \Magento\Framework\Cache\Frontend\Decorator\Bare
      */
     protected function _getBackendType()
     {
-        $result = get_class($this->getBackend());
+        $result = \get_class($this->getBackend());
         foreach ($this->_backendPrefixes as $backendClassPrefix) {
-            if (substr($result, 0, strlen($backendClassPrefix)) == $backendClassPrefix) {
-                $result = substr($result, strlen($backendClassPrefix));
+            if (substr($result, 0, \strlen($backendClassPrefix)) == $backendClassPrefix) {
+                $result = substr($result, \strlen($backendClassPrefix));
                 break;
             }
         }

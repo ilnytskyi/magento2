@@ -104,7 +104,7 @@ class ImageFactory
         if (class_exists('finfo', false) && !empty($filepath)) {
             $finfo = new finfo(FILEINFO_MIME_TYPE);
             $classicMimeType = $finfo->file($filepath);
-        } elseif (function_exists('mime_content_type') && !empty($filepath)) {
+        } elseif (\function_exists('mime_content_type') && !empty($filepath)) {
             $classicMimeType = mime_content_type($filepath);
         } else {
             $classicMimeType = $this->fetchFallbackMimeType($baseFileName);

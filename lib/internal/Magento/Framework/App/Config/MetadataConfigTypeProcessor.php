@@ -71,7 +71,7 @@ class MetadataConfigTypeProcessor implements PostProcessorInterface
     {
         $keys = explode('/', $path);
         foreach ($keys as $key) {
-            if (is_array($data) && array_key_exists($key, $data)) {
+            if (\is_array($data) && \array_key_exists($key, $data)) {
                 $data = $data[$key];
             } else {
                 return null;

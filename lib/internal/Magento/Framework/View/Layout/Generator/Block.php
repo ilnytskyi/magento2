@@ -250,7 +250,7 @@ class Block implements Layout\GeneratorInterface
     public function createBlock($block, $name, array $arguments = [])
     {
         $block = $this->getBlockInstance($block, $arguments);
-        $block->setType(get_class($block));
+        $block->setType(\get_class($block));
         $block->setNameInLayout($name);
         $block->addData(isset($arguments['data']) ? $arguments['data'] : []);
         return $block;
@@ -267,7 +267,7 @@ class Block implements Layout\GeneratorInterface
     protected function getBlockInstance($block, array $arguments = [])
     {
         $e = null;
-        if ($block && is_string($block)) {
+        if ($block && \is_string($block)) {
             try {
                 $block = $this->blockFactory->createBlock($block, $arguments);
             } catch (\ReflectionException $e) {
@@ -278,7 +278,7 @@ class Block implements Layout\GeneratorInterface
             throw new LocalizedException(
                 new \Magento\Framework\Phrase(
                     'Invalid block type: %1',
-                    [is_object($block) ? get_class($block) : (string) $block]
+                    [\is_object($block) ? \get_class($block) : (string) $block]
                 ),
                 $e
             );
@@ -300,7 +300,7 @@ class Block implements Layout\GeneratorInterface
         \Magento\Framework\Profiler::start($profilerKey);
         $args = $this->evaluateArguments($actionArguments);
         // The `array_values` is a workaround to ensure the same behavior in PHP 7 and 8.
-        call_user_func_array([$block, $methodName], array_values($args));
+        \call_user_func_array([$block, $methodName], array_values($args));
         \Magento\Framework\Profiler::stop($profilerKey);
     }
 

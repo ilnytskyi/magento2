@@ -27,7 +27,7 @@ class StringType extends \GraphQL\Type\Definition\StringType
      */
     public function parseValue($value): string
     {
-        if (!is_array($value)) {
+        if (!\is_array($value)) {
             $value = (string)$value;
         }
         return parent::parseValue($value);

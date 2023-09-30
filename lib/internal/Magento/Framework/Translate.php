@@ -331,8 +331,8 @@ class Translate implements \Magento\Framework\TranslateInterface, ResetAfterRequ
                 continue;
             }
 
-            $key = is_array($key) ? $key : (string) $key;
-            $value = is_array($value) ? $value : (string) $value;
+            $key = \is_array($key) ? $key : (string) $key;
+            $value = \is_array($value) ? $value : (string) $value;
             $key = str_replace('""', '"', $key);
             $value = str_replace('""', '"', $value);
 

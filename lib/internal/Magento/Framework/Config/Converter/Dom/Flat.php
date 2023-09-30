@@ -96,7 +96,7 @@ class Flat
             }
         }
         $result = $this->getNodeAttributes($source);
-        if (is_array($value)) {
+        if (\is_array($value)) {
             $result = array_merge($result, $value);
             if (!$result) {
                 $result = '';

@@ -156,7 +156,7 @@ class AbstractBlockTest extends TestCase
                 }
             );
         $this->block->setNameInLayout($nameInLayout);
-        $this->assertEquals($expectedResult, call_user_func_array([$this->block, 'getUiId'], $methodArguments));
+        $this->assertEquals($expectedResult, \call_user_func_array([$this->block, 'getUiId'], $methodArguments));
     }
 
     /**

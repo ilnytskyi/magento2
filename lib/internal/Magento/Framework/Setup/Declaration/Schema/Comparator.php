@@ -24,7 +24,7 @@ class Comparator
      */
     public function compare(ElementInterface $first, ElementInterface $second)
     {
-        return get_class($first) === get_class($second) &&
+        return \get_class($first) === \get_class($second) &&
             $first->getDiffSensitiveParams() === $second->getDiffSensitiveParams();
     }
 }

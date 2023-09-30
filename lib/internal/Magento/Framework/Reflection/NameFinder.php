@@ -23,13 +23,13 @@ class NameFinder
     {
         if ((strpos($getterName, 'get') === 0)) {
             /** Remove 'get' prefix and make the first letter lower case */
-            $fieldName = substr($getterName, strlen('get'));
+            $fieldName = substr($getterName, \strlen('get'));
         } elseif ((strpos($getterName, 'is') === 0)) {
             /** Remove 'is' prefix and make the first letter lower case */
-            $fieldName = substr($getterName, strlen('is'));
+            $fieldName = substr($getterName, \strlen('is'));
         } elseif ((strpos($getterName, 'has') === 0)) {
             /** Remove 'has' prefix and make the first letter lower case */
-            $fieldName = substr($getterName, strlen('has'));
+            $fieldName = substr($getterName, \strlen('has'));
         } else {
             $fieldName = $getterName;
         }

@@ -38,7 +38,7 @@ class BaseStringUtils implements InterpreterInterface
     {
         if (isset($data['value'])) {
             $result = $data['value'];
-            if (!is_string($result)) {
+            if (!\is_string($result)) {
                 throw new \InvalidArgumentException('String value is expected.');
             }
         } else {

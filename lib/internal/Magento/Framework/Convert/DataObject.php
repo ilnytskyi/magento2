@@ -28,7 +28,7 @@ class DataObject
     {
         $result = [];
         foreach ($data as $key => $value) {
-            if (is_object($value) || is_array($value)) {
+            if (\is_object($value) || \is_array($value)) {
                 $result[$key] = $this->_convertObjectToArray($value);
             } else {
                 $result[$key] = $value;
@@ -47,7 +47,7 @@ class DataObject
     protected function _convertObjectToArray($obj, &$objects = [])
     {
         $data = [];
-        if (is_object($obj)) {
+        if (\is_object($obj)) {
             $hash = spl_object_hash($obj);
             if (!empty($objects[$hash])) {
                 return self::CYCLE_DETECTED_MARK;
@@ -58,15 +58,15 @@ class DataObject
             } else {
                 $data = (array)$obj;
             }
-        } elseif (is_array($obj)) {
+        } elseif (\is_array($obj)) {
             $data = $obj;
         }
 
         $result = [];
         foreach ($data as $key => $value) {
-            if (is_scalar($value)) {
+            if (\is_scalar($value)) {
                 $result[$key] = $value;
-            } elseif (is_array($value)) {
+            } elseif (\is_array($value)) {
                 $result[$key] = $this->_convertObjectToArray($value, $objects);
             } elseif ($value instanceof \Magento\Framework\DataObject) {
                 $result[$key] = $this->_convertObjectToArray($value, $objects);
@@ -133,7 +133,7 @@ class DataObject
      */
     protected function _invokeGetter($item, $field)
     {
-        if (is_callable($field)) {
+        if (\is_callable($field)) {
             // if $field is a closure, use that on the item
             return $field($item);
         } else {

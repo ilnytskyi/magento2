@@ -54,7 +54,7 @@ class AmountFactory
 
         if (!$amountModel instanceof \Magento\Framework\Pricing\Amount\AmountInterface) {
             throw new \InvalidArgumentException(
-                get_class($amountModel) . ' doesn\'t implement \Magento\Framework\Pricing\Amount\AmountInterface'
+                \get_class($amountModel) . ' doesn\'t implement \Magento\Framework\Pricing\Amount\AmountInterface'
             );
         }
 

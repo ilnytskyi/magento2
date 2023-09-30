@@ -157,9 +157,9 @@ class Multiline extends AbstractElement
     public function getEscapedValue($index = null)
     {
         $value = $this->getValue();
-        if (is_string($value)) {
+        if (\is_string($value)) {
             $value = explode("\n", $value);
-            if (is_array($value)) {
+            if (\is_array($value)) {
                 $this->setValue($value);
             }
         }

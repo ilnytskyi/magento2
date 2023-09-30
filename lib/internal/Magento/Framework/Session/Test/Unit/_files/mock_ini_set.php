@@ -25,5 +25,5 @@ function ini_set($varName, $newValue)
         SessionManagerTest::assertSame(SessionManagerTest::SESSION_USE_ONLY_COOKIES_ENABLE, $newValue);
         return true;
     }
-    return call_user_func_array('\ini_set', func_get_args());
+    return \call_user_func_array('\ini_set', \func_get_args());
 }

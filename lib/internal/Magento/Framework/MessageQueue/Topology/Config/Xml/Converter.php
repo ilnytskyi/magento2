@@ -72,7 +72,7 @@ class Converter implements \Magento\Framework\Config\ConverterInterface
             $exchangeArguments = [];
             /** @var \DOMNode $node */
             foreach ($exchange->childNodes as $node) {
-                if (!in_array($node->nodeName, ['binding', 'arguments']) || $node->nodeType != XML_ELEMENT_NODE) {
+                if (!\in_array($node->nodeName, ['binding', 'arguments']) || $node->nodeType != XML_ELEMENT_NODE) {
                     continue;
                 }
                 switch ($node->nodeName) {
@@ -87,10 +87,10 @@ class Converter implements \Magento\Framework\Config\ConverterInterface
             }
 
             // @codingStandardsIgnoreStart
-            if (isset($result[$name . '--' . $connection]['bindings']) && count($bindings) > 0) {
+            if (isset($result[$name . '--' . $connection]['bindings']) && \count($bindings) > 0) {
                 $bindings = array_merge($result[$name . '--' . $connection]['bindings'], $bindings);
             }
-            if (isset($result[$name . '--' . $connection]['arguments']) && count($exchangeArguments) > 0) {
+            if (isset($result[$name . '--' . $connection]['arguments']) && \count($exchangeArguments) > 0) {
                 $exchangeArguments = array_merge($result[$name . '--' . $connection]['arguments'], $exchangeArguments);
             }
             // @codingStandardsIgnoreEnd

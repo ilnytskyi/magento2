@@ -176,11 +176,11 @@ class WriteTest extends TestCase
                 ->willReturn($targetDirPath . $targetPath);
             $targetDir->expects($this->once())
                 ->method('isExists')
-                ->with(dirname($targetPath))
+                ->with(\dirname($targetPath))
                 ->willReturn(false);
             $targetDir->expects($this->once())
                 ->method('create')
-                ->with(dirname($targetPath));
+                ->with(\dirname($targetPath));
         }
 
         $this->driver->expects($this->any())
@@ -198,7 +198,7 @@ class WriteTest extends TestCase
         $this->driver->expects($this->any())
             ->method('getParentDirectory')
             ->with($targetPath)
-            ->willReturn(dirname($targetPath));
+            ->willReturn(\dirname($targetPath));
         $this->write->renameFile($sourcePath, $targetPath, $targetDir);
     }
 

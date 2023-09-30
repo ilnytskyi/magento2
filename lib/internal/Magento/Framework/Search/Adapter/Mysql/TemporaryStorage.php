@@ -91,7 +91,7 @@ class TemporaryStorage
      */
     private function populateTemporaryTable(Table $table, $data)
     {
-        if (count($data)) {
+        if (\count($data)) {
             $this->getConnection()->insertArray(
                 $table->getName(),
                 [

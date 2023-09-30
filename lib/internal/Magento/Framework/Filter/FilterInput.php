@@ -223,7 +223,7 @@ class FilterInput
         if ($fieldName === null) {
             return $this->_escapeRecursive($this->_validFields);
         }
-        if (array_key_exists($fieldName, $this->_validFields)) {
+        if (\array_key_exists($fieldName, $this->_validFields)) {
             return $this->_escapeRecursive($this->_validFields[$fieldName]);
         }
         return null;
@@ -242,7 +242,7 @@ class FilterInput
             return $data;
         }
 
-        if (!is_array($data)) {
+        if (!\is_array($data)) {
             return $this->_getDefaultEscapeFilter()->filter($data);
         }
         foreach ($data as &$element) {
@@ -265,7 +265,7 @@ class FilterInput
         if ($fieldName === null) {
             return $this->_validFields;
         }
-        if (array_key_exists($fieldName, $this->_validFields)) {
+        if (\array_key_exists($fieldName, $this->_validFields)) {
             return $this->_validFields[$fieldName];
         }
         return null;
@@ -329,7 +329,7 @@ class FilterInput
         if ($fieldName === null) {
             return !($this->hasMissing() || $this->hasInvalid());
         }
-        return array_key_exists($fieldName, $this->_validFields);
+        return \array_key_exists($fieldName, $this->_validFields);
     }
 
     /**
@@ -393,7 +393,7 @@ class FilterInput
      */
     public function setDefaultEscapeFilter($escapeFilter)
     {
-        if (is_string($escapeFilter) || is_array($escapeFilter)) {
+        if (\is_string($escapeFilter) || \is_array($escapeFilter)) {
             $escapeFilter = $this->_getFilter($escapeFilter);
         }
         if (!$escapeFilter instanceof FilterInterface) {
@@ -501,13 +501,13 @@ class FilterInput
     protected function _filter()
     {
         foreach ($this->_filterRules as $ruleName => &$filterRule) {
-            if (!is_array($filterRule)) {
+            if (!\is_array($filterRule)) {
                 $filterRule = [$filterRule];
             }
             $filterList = [];
 
             foreach ($filterRule as $key => $value) {
-                if (is_int($key)) {
+                if (\is_int($key)) {
                     $filterList[] = $value;
                 }
             }
@@ -519,7 +519,7 @@ class FilterInput
             if (!isset($filterRule[self::FILTER_CHAIN])) {
                 $filterRule[self::FILTER_CHAIN] = new FilterChain();
                 foreach ($filterList as $filter) {
-                    if (is_string($filter) || is_array($filter)) {
+                    if (\is_string($filter) || \is_array($filter)) {
                         $filter = $this->_getFilter($filter);
                     }
                     $filterRule[self::FILTER_CHAIN]->setOptions(['callbacks' => [['callback' => $filter]]]);
@@ -546,10 +546,10 @@ class FilterInput
     protected function _filterRule(array $filterRule)
     {
         $field = $filterRule[self::FIELDS];
-        if (!array_key_exists($field, $this->_data)) {
+        if (!\array_key_exists($field, $this->_data)) {
             return;
         }
-        if (is_array($this->_data[$field])) {
+        if (\is_array($this->_data[$field])) {
             foreach ($this->_data[$field] as $key => $value) {
                 $this->_data[$field][$key] = $filterRule[self::FILTER_CHAIN]->filter($value);
             }
@@ -644,13 +644,13 @@ class FilterInput
         $preserveDefaultNotEmptyMessage = $this->_defaults[self::NOT_EMPTY_MESSAGE];
 
         foreach ($this->_validatorRules as $ruleName => &$validatorRule) {
-            if (!is_array($validatorRule)) {
+            if (!\is_array($validatorRule)) {
                 $validatorRule = [$validatorRule];
             }
             $validatorList = [];
 
             foreach ($validatorRule as $key => $value) {
-                if (is_int($key)) {
+                if (\is_int($key)) {
                     $validatorList[$key] = $value;
                 }
             }
@@ -673,7 +673,7 @@ class FilterInput
                         $foundNotEmptyValidator = true;
                         break;
                     }
-                    if (is_array($rule)) {
+                    if (\is_array($rule)) {
                         $keys = array_keys($rule);
                         $classKey  = array_shift($keys);
                         if (isset($rule[$classKey])) {
@@ -684,7 +684,7 @@ class FilterInput
                             }
                         }
                     }
-                    if (!is_object($rule)) {
+                    if (!\is_object($rule)) {
                         continue;
                     }
                     if ($rule instanceof NotEmpty) {
@@ -701,14 +701,14 @@ class FilterInput
 
             if (!isset($validatorRule[self::MESSAGES])) {
                 $validatorRule[self::MESSAGES] = [];
-            } elseif (!is_array($validatorRule[self::MESSAGES])) {
+            } elseif (!\is_array($validatorRule[self::MESSAGES])) {
                 $validatorRule[self::MESSAGES] = [$validatorRule[self::MESSAGES]];
             } elseif (array_intersect_key($validatorList, $validatorRule[self::MESSAGES])) {
                 $unifiedMessages = $validatorRule[self::MESSAGES];
                 $validatorRule[self::MESSAGES] = [];
 
                 foreach ($validatorList as $key => $validator) {
-                    if (array_key_exists($key, $unifiedMessages)) {
+                    if (\array_key_exists($key, $unifiedMessages)) {
                         $validatorRule[self::MESSAGES][$key] = $unifiedMessages[$key];
                     }
                 }
@@ -717,19 +717,19 @@ class FilterInput
                 $validatorRule[self::VALIDATOR_CHAIN] = new ValidatorChain();
 
                 foreach ($validatorList as $key => $validator) {
-                    if (is_string($validator) || is_array($validator)) {
+                    if (\is_string($validator) || \is_array($validator)) {
                         $validator = $this->_getValidator($validator);
                     }
 
                     if (isset($validatorRule[self::MESSAGES][$key])) {
                         $value = $validatorRule[self::MESSAGES][$key];
-                        if (is_array($value)) {
+                        if (\is_array($value)) {
                             $validator->setMessages($value);
                         } else {
                             $validator->setMessage($value);
                         }
                         if ($validator instanceof NotEmpty) {
-                            if (is_array($value)) {
+                            if (\is_array($value)) {
                                 $temp = $value;
                                 $this->_defaults[self::NOT_EMPTY_MESSAGE] = array_pop($temp);
                                 unset($temp);
@@ -741,7 +741,7 @@ class FilterInput
 
                     $validatorRule[self::VALIDATOR_CHAIN]->addValidator($validator, $validatorRule[self::BREAK_CHAIN]);
                 }
-                $validatorRule[self::VALIDATOR_CHAIN_COUNT] = count($validatorList);
+                $validatorRule[self::VALIDATOR_CHAIN_COUNT] = \count($validatorList);
             }
             if ($ruleName == self::RULE_WILDCARD) {
                 foreach (array_keys($this->_data) as $field) {
@@ -782,10 +782,10 @@ class FilterInput
         $data = [];
 
         foreach ((array) $validatorRule[self::FIELDS] as $key => $field) {
-            if (array_key_exists($field, $this->_data)) {
+            if (\array_key_exists($field, $this->_data)) {
                 $data[$field] = $this->_data[$field];
             } elseif (isset($validatorRule[self::DEFAULT_VALUE])) {
-                if (!is_array($validatorRule[self::DEFAULT_VALUE])) {
+                if (!\is_array($validatorRule[self::DEFAULT_VALUE])) {
                     $data[$field] = $validatorRule[self::DEFAULT_VALUE];
                 } else {
                     if (isset($validatorRule[self::DEFAULT_VALUE][$key])) {
@@ -801,11 +801,11 @@ class FilterInput
             }
         }
         if (isset($this->_missingFields[$validatorRule[self::RULE]]) &&
-            count($this->_missingFields[$validatorRule[self::RULE]]) > 0
+            \count($this->_missingFields[$validatorRule[self::RULE]]) > 0
         ) {
             return;
         }
-        if (count((array) $validatorRule[self::FIELDS]) > 1) {
+        if (\count((array) $validatorRule[self::FIELDS]) > 1) {
             if (!$validatorRule[self::ALLOW_EMPTY]) {
                 $emptyFieldsFound = false;
                 $errorsList = $messages = [];
@@ -832,7 +832,7 @@ class FilterInput
                 if ($emptyFieldsFound) {
                     $this->_invalidMessages[$validatorRule[self::RULE]] = $messages;
                     $this->_invalidErrors[$validatorRule[self::RULE]] = array_unique(
-                        call_user_func_array('array_merge', $errorsList)
+                        \call_user_func_array('array_merge', $errorsList)
                     );
 
                     return;
@@ -845,13 +845,13 @@ class FilterInput
                 $this->_invalidErrors[$validatorRule[self::RULE]] = $validatorRule[self::VALIDATOR_CHAIN]->getErrors();
                 return;
             }
-        } elseif (count($data) > 0) {
+        } elseif (\count($data) > 0) {
             $fieldNames = array_keys($data);
             $fieldName = reset($fieldNames);
             $field = reset($data);
             $failed = false;
 
-            if (!is_array($field)) {
+            if (!\is_array($field)) {
                 $field = [$field];
             }
             if (!($notEmptyValidator = $this->_getNotEmptyValidatorInstance($validatorRule))) {
@@ -907,7 +907,7 @@ class FilterInput
             }
         }
         foreach ((array) $validatorRule[self::FIELDS] as $field) {
-            if (array_key_exists($field, $data)) {
+            if (\array_key_exists($field, $data)) {
                 $this->_validFields[$field] = $data[$field];
             }
         }
@@ -923,7 +923,7 @@ class FilterInput
     protected function _getNotEmptyValidatorInstance($validatorRule)
     {
         foreach ($validatorRule as $value) {
-            if (is_object($value) && $value instanceof NotEmpty) {
+            if (\is_object($value) && $value instanceof NotEmpty) {
                 return $value;
             }
         }
@@ -970,7 +970,7 @@ class FilterInput
         try {
             $args = [];
 
-            if (is_array($classBaseName)) {
+            if (\is_array($classBaseName)) {
                 $args = $classBaseName;
                 $classBaseName = array_shift($classBaseName);
             }

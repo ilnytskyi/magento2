@@ -49,7 +49,7 @@ class FilterPool
                 $filterApplier = $this->appliers[$filter->getConditionType()] ?? $this->appliers['regular'];
                 $filterApplier->apply($collection, $filter);
                 $whereParts = $collection->getSelect()->getPart(Select::WHERE);
-                if (is_array($whereParts) && count($whereParts)) {
+                if (\is_array($whereParts) && \count($whereParts)) {
                     $appliedParts = array_diff($whereParts, $groupedParts);
                     foreach ($appliedParts as $part) {
                         $filterParts[] = $this->preparePart($part);
@@ -58,13 +58,13 @@ class FilterPool
                 $collection->getSelect()->reset(Select::WHERE);
                 $collection->getSelect()->setPart(Select::WHERE, $groupedParts);
             }
-            if (count($filterParts)) {
+            if (\count($filterParts)) {
                 $resultCondition = '((' . implode(') ' . Select::SQL_OR . ' (', $filterParts) . '))';
-                $groupedParts[] = (count($groupedParts) ? Select::SQL_AND : '') . ' ' . $resultCondition;
+                $groupedParts[] = (\count($groupedParts) ? Select::SQL_AND : '') . ' ' . $resultCondition;
                 $collection->getSelect()->setPart(Select::WHERE, $groupedParts);
             }
         }
-        if (count($groupedParts)) {
+        if (\count($groupedParts)) {
             $collection->getSelect()->setPart(Select::WHERE, $groupedParts);
         }
     }

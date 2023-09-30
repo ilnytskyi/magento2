@@ -23,7 +23,7 @@ class RandomTest extends TestCase
         $mathRandom = new Random();
         $string = $mathRandom->getRandomString($length, $chars);
 
-        $this->assertEquals($length, strlen($string));
+        $this->assertEquals($length, \strlen($string));
         if ($chars !== null) {
             $this->_assertContainsOnlyChars($string, $chars);
         }

@@ -428,7 +428,7 @@ class TransportBuilder
      */
     private function addAddressByType(string $addressType, $email, ?string $name = null): void
     {
-        if (is_string($email)) {
+        if (\is_string($email)) {
             $this->messageData[$addressType][] = $this->addressConverter->convert($email, $name);
             return;
         }

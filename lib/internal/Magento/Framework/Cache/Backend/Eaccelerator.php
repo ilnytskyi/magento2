@@ -25,7 +25,7 @@ class Eaccelerator extends \Zend_Cache_Backend implements \Zend_Cache_Backend_Ex
      */
     public function __construct(array $options = [])
     {
-        if (!extension_loaded('eaccelerator')) {
+        if (!\extension_loaded('eaccelerator')) {
             \Zend_Cache::throwException('The eaccelerator extension must be loaded for using this backend !');
         }
         parent::__construct($options);
@@ -44,7 +44,7 @@ class Eaccelerator extends \Zend_Cache_Backend implements \Zend_Cache_Backend_Ex
     public function load($id, $doNotTestCacheValidity = false)
     {
         $tmp = eaccelerator_get($id);
-        if (is_array($tmp)) {
+        if (\is_array($tmp)) {
             return $tmp[0];
         }
         return false;
@@ -59,7 +59,7 @@ class Eaccelerator extends \Zend_Cache_Backend implements \Zend_Cache_Backend_Ex
     public function test($id)
     {
         $tmp = eaccelerator_get($id);
-        if (is_array($tmp)) {
+        if (\is_array($tmp)) {
             return $tmp[1];
         }
         return false;
@@ -81,7 +81,7 @@ class Eaccelerator extends \Zend_Cache_Backend implements \Zend_Cache_Backend_Ex
     {
         $lifetime = $this->getLifetime($specificLifetime);
         $result = eaccelerator_put($id, [$data, time(), $lifetime], $lifetime);
-        if (count($tags) > 0) {
+        if (\count($tags) > 0) {
             $this->_log(self::TAGS_UNSUPPORTED_BY_SAVE_OF_EACCELERATOR_BACKEND);
         }
         return $result;
@@ -245,7 +245,7 @@ class Eaccelerator extends \Zend_Cache_Backend implements \Zend_Cache_Backend_Ex
     public function getMetadatas($id)
     {
         $tmp = eaccelerator_get($id);
-        if (is_array($tmp)) {
+        if (\is_array($tmp)) {
             $data = $tmp[0];
             $mtime = $tmp[1];
             if (!isset($tmp[2])) {
@@ -269,7 +269,7 @@ class Eaccelerator extends \Zend_Cache_Backend implements \Zend_Cache_Backend_Ex
     public function touch($id, $extraLifetime)
     {
         $tmp = eaccelerator_get($id);
-        if (is_array($tmp)) {
+        if (\is_array($tmp)) {
             $data = $tmp[0];
             $mtime = $tmp[1];
             if (!isset($tmp[2])) {

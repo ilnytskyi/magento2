@@ -53,7 +53,7 @@ class FieldsTypes implements ValidatorInterface
         ];
 
         foreach ($fields as $fieldName => $expectedType) {
-            $actualType = gettype($exchangeConfig[$fieldName]);
+            $actualType = \gettype($exchangeConfig[$fieldName]);
             if ($actualType !== $expectedType['type']) {
                 throw new \LogicException(
                     sprintf(
@@ -67,7 +67,7 @@ class FieldsTypes implements ValidatorInterface
                 );
             }
 
-            if ($expectedType['value'] && !in_array($exchangeConfig[$fieldName], $expectedType['value'])) {
+            if ($expectedType['value'] && !\in_array($exchangeConfig[$fieldName], $expectedType['value'])) {
                 throw new \LogicException(
                     sprintf(
                         "Value of '%s' field specified in configuration of '%s' exchange is invalid. "
@@ -97,7 +97,7 @@ class FieldsTypes implements ValidatorInterface
     {
         foreach ($bindingFields as $bindFieldName => $bindExpectedType) {
             foreach ($exchangeConfig['bindings'] as $bindingConfig) {
-                $actualType = gettype($bindingConfig[$bindFieldName]);
+                $actualType = \gettype($bindingConfig[$bindFieldName]);
                 if ($actualType !== $bindExpectedType['type']) {
                     throw new \LogicException(
                         sprintf(
@@ -112,7 +112,7 @@ class FieldsTypes implements ValidatorInterface
                 }
 
                 if ($bindExpectedType['value'] &&
-                    !in_array($bindingConfig[$bindFieldName], $bindExpectedType['value'])
+                    !\in_array($bindingConfig[$bindFieldName], $bindExpectedType['value'])
                 ) {
                     throw new \LogicException(
                         sprintf(

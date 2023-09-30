@@ -197,7 +197,7 @@ class ConfigurableWYSIWYGValidatorTest extends TestCase
         $attributeValidator->method('validate')
             ->willReturnCallback(
                 function (string $tag, string $attribute) use ($attributeValidityMap): void {
-                    if (array_key_exists($attribute, $attributeValidityMap) && !$attributeValidityMap[$attribute]) {
+                    if (\array_key_exists($attribute, $attributeValidityMap) && !$attributeValidityMap[$attribute]) {
                         throw new ValidationException(__('Invalid attribute for %1', $tag));
                     }
                 }
@@ -216,7 +216,7 @@ class ConfigurableWYSIWYGValidatorTest extends TestCase
                             throw new \RuntimeException();
                         }
                         foreach (array_keys($attrs) as $attr) {
-                            if (array_key_exists($attr, $allowedAttributes) && !$allowedAttributes[$attr]) {
+                            if (\array_key_exists($attr, $allowedAttributes) && !$allowedAttributes[$attr]) {
                                 throw new ValidationException(__('Invalid tag'));
                             }
                         }

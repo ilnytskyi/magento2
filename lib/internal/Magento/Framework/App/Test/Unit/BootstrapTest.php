@@ -144,7 +144,7 @@ class BootstrapTest extends TestCase
 
     public function testCreateFilesystemDriverPool()
     {
-        $driverClass = get_class($this->getMockForAbstractClass(DriverInterface::class));
+        $driverClass = \get_class($this->getMockForAbstractClass(DriverInterface::class));
         $result = Bootstrap::createFilesystemDriverPool(
             [Bootstrap::INIT_PARAM_FILESYSTEM_DRIVERS => ['custom' => $driverClass]]
         );

@@ -131,7 +131,7 @@ class Validator
     protected function _instantiateValidators(array &$validators)
     {
         foreach ($validators as &$validator) {
-            if (is_string($validator['class'])) {
+            if (\is_string($validator['class'])) {
                 $validator['class'] = new $validator['class']($validator['options']);
             }
         }

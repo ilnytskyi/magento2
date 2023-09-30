@@ -132,7 +132,7 @@ class Core extends \Zend_Cache_Core
     protected function _validateIdOrTag($string)
     {
         if ($this->_backend instanceof Redis) {
-            if (!is_string($string)) {
+            if (!\is_string($string)) {
                 Zend_Cache::throwException('Invalid id or tag : must be a string');
             }
             if (substr($string, 0, 9) == 'internal-') {
@@ -168,17 +168,17 @@ class Core extends \Zend_Cache_Core
      */
     protected function _decorateBackend(\Zend_Cache_Backend $backendObject)
     {
-        if (!is_array($this->_specificOptions['backend_decorators'])) {
+        if (!\is_array($this->_specificOptions['backend_decorators'])) {
             \Zend_Cache::throwException("'backend_decorator' option should be an array");
         }
 
         foreach ($this->_specificOptions['backend_decorators'] as $decoratorName => $decoratorOptions) {
-            if (!is_array($decoratorOptions) || !array_key_exists('class', $decoratorOptions)) {
+            if (!\is_array($decoratorOptions) || !\array_key_exists('class', $decoratorOptions)) {
                 \Zend_Cache::throwException(
                     "Concrete decorator options in '" . $decoratorName . "' should be an array containing 'class' key"
                 );
             }
-            $classOptions = array_key_exists('options', $decoratorOptions) ? $decoratorOptions['options'] : [];
+            $classOptions = \array_key_exists('options', $decoratorOptions) ? $decoratorOptions['options'] : [];
             $classOptions['concrete_backend'] = $backendObject;
 
             if (!class_exists($decoratorOptions['class'])) {

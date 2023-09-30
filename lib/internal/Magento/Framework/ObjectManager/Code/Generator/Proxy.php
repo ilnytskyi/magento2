@@ -133,7 +133,7 @@ class Proxy extends \Magento\Framework\Code\Generator\EntityAbstract
                     $method->isStatic() ||
                     $method->isDestructor()
                 )
-                && !in_array(
+                && !\in_array(
                     $method->getName(),
                     ['__sleep', '__wakeup', '__clone', '__debugInfo', '_resetState']
                 )
@@ -258,7 +258,7 @@ class Proxy extends \Magento\Framework\Code\Generator\EntityAbstract
         array $parameters = [],
         bool $withoutReturn = false
     ) {
-        if (count($parameters) == 0) {
+        if (\count($parameters) == 0) {
             $methodCall = sprintf('%s()', $name);
         } else {
             $methodCall = sprintf('%s(%s)', $name, implode(', ', $parameters));

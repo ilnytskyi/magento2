@@ -103,7 +103,7 @@ class SortItems
         $isSortOrder = false;
 
         array_walk($items, function ($value) use (&$isSortOrder) {
-            if (!!is_array($value)) {
+            if (!!\is_array($value)) {
                 if (isset($value['sortOrder'])) {
                     $isSortOrder = true;
                 } else {
@@ -129,7 +129,7 @@ class SortItems
         $isMultiSortOrder = false;
 
         array_walk($items, function ($value) use (&$isMultiSortOrder) {
-            if (!!is_array($value)) {
+            if (!!\is_array($value)) {
                 array_walk($value, function ($valueData) use (&$isMultiSortOrder) {
                     $isMultiSortOrder = isset($valueData['sortOrder']);
                 });

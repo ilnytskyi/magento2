@@ -68,7 +68,7 @@ class MaintenanceMode
             return false;
         }
         $info = $this->getAddressInfo();
-        return !in_array($remoteAddr, $info);
+        return !\in_array($remoteAddr, $info);
     }
 
     /**

@@ -178,7 +178,7 @@ class ProductGenerator
             ],
         ];
         $websiteIdsFixtures = $fixtureMap['website_ids'](1, 0);
-        if (is_array($websiteIdsFixtures) && count($websiteIdsFixtures) === 1) {
+        if (\is_array($websiteIdsFixtures) && \count($websiteIdsFixtures) === 1) {
             // Get website id from fixture in case when one site is assigned per product
             $customTableMap['catalog_product_website'] = [
                 'fields' => [
@@ -263,7 +263,7 @@ class ProductGenerator
      */
     private function getBindValue($fixtureValue, $productId, $entityNumber)
     {
-        return is_callable($fixtureValue)
+        return \is_callable($fixtureValue)
             ? $fixtureValue($productId, $entityNumber)
             : $fixtureValue;
     }
@@ -281,7 +281,7 @@ class ProductGenerator
     {
         $binds = [];
         $websiteIds = $fixtureMap['website_ids']($productId, $entityNumber);
-        $websiteIds = is_array($websiteIds) ? $websiteIds : [$websiteIds];
+        $websiteIds = \is_array($websiteIds) ? $websiteIds : [$websiteIds];
 
         $bindPerStore = [];
         $requestPath = $this->getFixtureValue('url_key', $productId, $entityNumber, $fixtureMap);

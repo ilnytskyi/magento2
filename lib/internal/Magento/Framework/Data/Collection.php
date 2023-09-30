@@ -196,7 +196,7 @@ class Collection implements
      */
     public function getFilter($field)
     {
-        if (is_array($field)) {
+        if (\is_array($field)) {
             // empty array: get all filters
             if (empty($field)) {
                 return $this->_filters;
@@ -204,7 +204,7 @@ class Collection implements
             // non-empty array: collect all filters that match specified field names
             $result = [];
             foreach ($this->_filters as $filter) {
-                if (in_array($filter['field'], $field)) {
+                if (\in_array($filter['field'], $field)) {
                     $result[] = $filter;
                 }
             }
@@ -292,7 +292,7 @@ class Collection implements
     {
         $this->load();
         if ($this->_totalRecords === null) {
-            $this->_totalRecords = count($this->getItems());
+            $this->_totalRecords = \count($this->getItems());
         }
         return (int)$this->_totalRecords;
     }
@@ -306,7 +306,7 @@ class Collection implements
     {
         $this->load();
 
-        if (count($this->_items)) {
+        if (\count($this->_items)) {
             reset($this->_items);
             return current($this->_items);
         }
@@ -323,7 +323,7 @@ class Collection implements
     {
         $this->load();
 
-        if (count($this->_items)) {
+        if (\count($this->_items)) {
             return end($this->_items);
         }
 
@@ -412,7 +412,7 @@ class Collection implements
             if (isset($this->_items[$itemId])) {
                 //phpcs:ignore Magento2.Exceptions.DirectThrow
                 throw new \Exception(
-                    'Item (' . get_class($item) . ') with the same ID "' . $item->getId() . '" already exists.'
+                    'Item (' . \get_class($item) . ') with the same ID "' . $item->getId() . '" already exists.'
                 );
             }
             $this->_items[$itemId] = $item;
@@ -509,7 +509,7 @@ class Collection implements
     public function walk($callback, array $args = [])
     {
         $results = [];
-        $useItemCallback = is_string($callback) && strpos($callback, '::') === false;
+        $useItemCallback = \is_string($callback) && strpos($callback, '::') === false;
         foreach ($this->getItems() as $id => $item) {
             $params = $args;
             if ($useItemCallback) {
@@ -519,7 +519,7 @@ class Collection implements
                 array_unshift($params, $item);
             }
             // The `array_values` is a workaround to ensure the same behavior in PHP 7 and 8.
-            $results[$id] = call_user_func_array($cb, array_values($params));
+            $results[$id] = \call_user_func_array($cb, array_values($params));
         }
         return $results;
     }
@@ -537,9 +537,9 @@ class Collection implements
             foreach ($this->getItems() as $item) {
                 $objMethod($item, ...$args);
             }
-        } elseif (is_array($objMethod)) {
+        } elseif (\is_array($objMethod)) {
             foreach ($this->getItems() as $item) {
-                call_user_func($objMethod, $item, ...$args);
+                \call_user_func($objMethod, $item, ...$args);
             }
         } else {
             foreach ($this->getItems() as $item) {
@@ -557,7 +557,7 @@ class Collection implements
      */
     public function setDataToAll($key, $value = null)
     {
-        if (is_array($key)) {
+        if (\is_array($key)) {
             foreach ($key as $k => $v) {
                 $this->setDataToAll($k, $v);
             }
@@ -857,7 +857,7 @@ class Collection implements
     public function count()
     {
         $this->load();
-        return count($this->_items);
+        return \count($this->_items);
     }
 
     /**
@@ -892,7 +892,7 @@ class Collection implements
      */
     public function hasFlag($flag)
     {
-        return array_key_exists($flag, $this->_flags);
+        return \array_key_exists($flag, $this->_flags);
     }
 
     /**

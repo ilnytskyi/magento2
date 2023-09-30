@@ -92,7 +92,7 @@ class Editor extends Textarea
      */
     protected function getJsonConfig()
     {
-        if (is_object($this->getConfig()) && method_exists($this->getConfig(), 'toJson')) {
+        if (\is_object($this->getConfig()) && method_exists($this->getConfig(), 'toJson')) {
             return $this->getConfig()->toJson();
         } else {
             return $this->serializer->serialize(
@@ -110,7 +110,7 @@ class Editor extends Textarea
      */
     public function getPluginConfigOptions($pluginName, $key = null)
     {
-        if (!is_array($this->getConfig('plugins'))) {
+        if (!\is_array($this->getConfig('plugins'))) {
             return null;
         }
 
@@ -335,7 +335,7 @@ script
             );
         }
 
-        if (is_array($this->getConfig('plugins'))) {
+        if (\is_array($this->getConfig('plugins'))) {
             foreach ($this->getConfig('plugins') as $plugin) {
                 if (isset($plugin['options']) && $this->_checkPluginButtonOptions($plugin['options'])) {
                     $buttonOptions = $this->_prepareButtonOptions($plugin['options']);
@@ -398,7 +398,7 @@ script
     {
         $preparedOptions = [];
         foreach ($options as $name => $value) {
-            if (is_array($value) && isset($value['search']) && isset($value['subject'])) {
+            if (\is_array($value) && isset($value['search']) && isset($value['subject'])) {
                 $subject = $value['subject'];
                 foreach ($value['search'] as $part) {
                     $subject = str_replace('{{' . $part . '}}', $this->getDataUsingMethod($part), $subject);

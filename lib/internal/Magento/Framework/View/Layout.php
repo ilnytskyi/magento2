@@ -292,7 +292,7 @@ class Layout extends \Magento\Framework\Simplexml\Config implements \Magento\Fra
      */
     public function __destruct()
     {
-        if (isset($this->_update) && is_object($this->_update)) {
+        if (isset($this->_update) && \is_object($this->_update)) {
             $this->_update->__destruct();
             $this->_update = null;
         }
@@ -819,7 +819,7 @@ class Layout extends \Magento\Framework\Simplexml\Config implements \Magento\Fra
         $name = $this->structure->createStructuralElement(
             $name,
             Element::TYPE_BLOCK,
-            $name ?: get_class($block)
+            $name ?: \get_class($block)
         );
         $this->setBlock($name, $block);
         $block->setNameInLayout($name);
@@ -1106,7 +1106,7 @@ class Layout extends \Magento\Framework\Simplexml\Config implements \Magento\Fra
      */
     protected function _prepareMessageGroup($messageGroups)
     {
-        if (!is_array($messageGroups)) {
+        if (!\is_array($messageGroups)) {
             $messageGroups = [$messageGroups];
         } elseif (empty($messageGroups)) {
             $messageGroups[] = $this->messageManager->getDefaultGroup();

@@ -82,7 +82,7 @@ class MaintenanceModeEnabler
         $this->enableMaintenanceMode($output);
 
         try {
-            $result = call_user_func($task);
+            $result = \call_user_func($task);
         } catch (\Throwable $e) {
             if (!$holdMaintenanceOnFailure) {
                 $this->disableMaintenanceMode($output);

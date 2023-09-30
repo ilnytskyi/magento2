@@ -97,7 +97,7 @@ class DataObjectProcessorTest extends TestCase
             ]
         );
 
-        if (in_array('getExtensionAttributes', $excludedMethodsClassMap[TestDataInterface::class] ?? [])) {
+        if (\in_array('getExtensionAttributes', $excludedMethodsClassMap[TestDataInterface::class] ?? [])) {
             $expectedTimes = $this->never();
         } else {
             $expectedTimes = $this->once();

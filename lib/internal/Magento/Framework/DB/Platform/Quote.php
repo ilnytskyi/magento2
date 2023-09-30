@@ -59,10 +59,10 @@ class Quote
         } elseif ($identifier instanceof \Magento\Framework\DB\Select) {
             $quoted = '(' . $identifier->assemble() . ')';
         } else {
-            if (is_string($identifier)) {
+            if (\is_string($identifier)) {
                 $identifier = explode('.', $identifier);
             }
-            if (is_array($identifier)) {
+            if (\is_array($identifier)) {
                 $segments = [];
                 foreach ($identifier as $segment) {
                     if ($segment instanceof \Zend_Db_Expr) {

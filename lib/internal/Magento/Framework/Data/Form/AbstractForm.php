@@ -256,7 +256,7 @@ class AbstractForm extends \Magento\Framework\DataObject
         $keys = array_merge($keys, array_keys(array_diff($this->customAttributes, $customAttributes)));
 
         foreach ($this->_data as $key => $value) {
-            if (in_array($key, $keys)) {
+            if (\in_array($key, $keys)) {
                 $data[] = $key . $valueSeparator . $quote . $value . $quote;
             }
         }

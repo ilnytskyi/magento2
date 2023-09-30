@@ -114,7 +114,7 @@ class Generic implements LayoutInterface
         }
 
         $config = $component->getConfiguration();
-        if (is_string($config)) {
+        if (\is_string($config)) {
             $topNode[$config] = $config;
         } else {
             $nodeData = [

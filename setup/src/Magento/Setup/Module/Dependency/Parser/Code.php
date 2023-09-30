@@ -76,7 +76,7 @@ class Code implements ParserInterface
     {
         if (!isset(
             $options['files_for_parse']
-        ) || !is_array(
+        ) || !\is_array(
             $options['files_for_parse']
         ) || !$options['files_for_parse']
         ) {
@@ -85,7 +85,7 @@ class Code implements ParserInterface
 
         if (!isset(
             $options['declared_namespaces']
-        ) || !is_array(
+        ) || !\is_array(
             $options['declared_namespaces']
         ) || !$options['declared_namespaces']
         ) {

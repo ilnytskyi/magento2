@@ -59,7 +59,7 @@ abstract class AbstractFactory implements FactoryInterface
      */
     public function canCreateFilter($alias)
     {
-        return array_key_exists($alias, $this->invokableClasses);
+        return \array_key_exists($alias, $this->invokableClasses);
     }
 
     /**

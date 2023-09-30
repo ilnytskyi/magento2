@@ -99,7 +99,7 @@ class OperationFactory
      */
     public function create($operationAlias, $arguments = null)
     {
-        if (!array_key_exists($operationAlias, $this->operationsDefinitions)) {
+        if (!\array_key_exists($operationAlias, $this->operationsDefinitions)) {
             throw new OperationException(
                 sprintf('Unrecognized operation "%s"', $operationAlias),
                 OperationException::UNAVAILABLE_OPERATION

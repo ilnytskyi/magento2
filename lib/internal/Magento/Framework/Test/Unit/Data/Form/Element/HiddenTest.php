@@ -49,7 +49,7 @@ class HiddenTest extends TestCase
         $this->element->setValue($value);
         $html = $this->element->getElementHtml();
 
-        if (is_array($value)) {
+        if (\is_array($value)) {
             foreach ($value as $item) {
                 $this->assertStringContainsString($item, $html);
             }

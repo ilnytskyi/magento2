@@ -38,7 +38,7 @@ class CookieMetadata
      */
     public function __construct($metadata = [])
     {
-        if (!is_array($metadata)) {
+        if (!\is_array($metadata)) {
             $metadata = [];
         }
         $this->metadata = $metadata;
@@ -156,7 +156,7 @@ class CookieMetadata
      */
     public function setSameSite(string $sameSite): CookieMetadata
     {
-        if (!array_key_exists(strtolower($sameSite), self::SAME_SITE_ALLOWED_VALUES)) {
+        if (!\array_key_exists(strtolower($sameSite), self::SAME_SITE_ALLOWED_VALUES)) {
             throw new \InvalidArgumentException(
                 'Invalid argument provided for SameSite directive expected one of: Strict, Lax or None'
             );

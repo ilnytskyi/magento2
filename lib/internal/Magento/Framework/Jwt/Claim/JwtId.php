@@ -71,7 +71,7 @@ class JwtId implements ClaimInterface
     {
         return implode('', array_map(
             function($value) {
-                return chr($value);
+                return \chr($value);
             },
             array_map(
                 function() {

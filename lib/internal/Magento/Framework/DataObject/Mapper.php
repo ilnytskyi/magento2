@@ -44,51 +44,51 @@ class Mapper
     public static function &accumulateByMap($from, $to, array $map, array $defaults = [])
     {
         $get = 'getData';
-        if (is_array(
+        if (\is_array(
             $from
         ) && isset(
             $from[0]
-        ) && is_object(
+        ) && \is_object(
             $from[0]
         ) && isset(
             $from[1]
-        ) && is_string(
+        ) && \is_string(
             $from[1]
-        ) && is_callable(
+        ) && \is_callable(
             $from
         )
         ) {
             list($from, $get) = $from;
         }
-        $fromIsArray = is_array($from);
+        $fromIsArray = \is_array($from);
         $fromIsVO = $from instanceof \Magento\Framework\DataObject;
 
         $set = 'setData';
-        if (is_array(
+        if (\is_array(
             $to
         ) && isset(
             $to[0]
-        ) && is_object(
+        ) && \is_object(
             $to[0]
         ) && isset(
             $to[1]
-        ) && is_string(
+        ) && \is_string(
             $to[1]
-        ) && is_callable(
+        ) && \is_callable(
             $to
         )
         ) {
             list($to, $set) = $to;
         }
-        $toIsArray = is_array($to);
+        $toIsArray = \is_array($to);
         $toIsVO = $to instanceof \Magento\Framework\DataObject;
 
         foreach ($map as $keyFrom => $keyTo) {
-            if (!is_string($keyFrom)) {
+            if (!\is_string($keyFrom)) {
                 $keyFrom = $keyTo;
             }
             if ($fromIsArray) {
-                if (array_key_exists($keyFrom, $from)) {
+                if (\array_key_exists($keyFrom, $from)) {
                     if ($toIsArray) {
                         $to[$keyTo] = $from[$keyFrom];
                     } elseif ($toIsVO) {

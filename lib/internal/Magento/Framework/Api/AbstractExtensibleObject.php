@@ -54,7 +54,7 @@ abstract class AbstractExtensibleObject extends AbstractSimpleObject implements 
         $this->extensionFactory = $extensionFactory;
         $this->attributeValueFactory = $attributeValueFactory;
         parent::__construct($data);
-        if (isset($data[self::EXTENSION_ATTRIBUTES_KEY]) && is_array($data[self::EXTENSION_ATTRIBUTES_KEY])) {
+        if (isset($data[self::EXTENSION_ATTRIBUTES_KEY]) && \is_array($data[self::EXTENSION_ATTRIBUTES_KEY])) {
             $this->populateExtensionAttributes($data[self::EXTENSION_ATTRIBUTES_KEY]);
         }
     }
@@ -98,7 +98,7 @@ abstract class AbstractExtensibleObject extends AbstractSimpleObject implements 
                 throw new \LogicException('Custom Attribute array elements can only be type of AttributeValue');
             }
             $attributeCode = $attribute->getAttributeCode();
-            if (in_array($attributeCode, $customAttributesCodes)) {
+            if (\in_array($attributeCode, $customAttributesCodes)) {
                 $this->_data[AbstractExtensibleObject::CUSTOM_ATTRIBUTES_KEY][$attributeCode] = $attribute;
             }
         }
@@ -116,7 +116,7 @@ abstract class AbstractExtensibleObject extends AbstractSimpleObject implements 
     {
         $customAttributesCodes = $this->getCustomAttributesCodes();
         /* If key corresponds to custom attribute code, populate custom attributes */
-        if (in_array($attributeCode, $customAttributesCodes)) {
+        if (\in_array($attributeCode, $customAttributesCodes)) {
             /** @var AttributeValue $attribute */
             $attribute = $this->attributeValueFactory->create();
             $attribute->setAttributeCode($attributeCode)
@@ -149,8 +149,8 @@ abstract class AbstractExtensibleObject extends AbstractSimpleObject implements 
     protected function getEavAttributesCodes(\Magento\Framework\Api\MetadataServiceInterface $metadataService)
     {
         $attributeCodes = [];
-        $customAttributesMetadata = $metadataService->getCustomAttributesMetadata(get_class($this));
-        if (is_array($customAttributesMetadata)) {
+        $customAttributesMetadata = $metadataService->getCustomAttributesMetadata(\get_class($this));
+        if (\is_array($customAttributesMetadata)) {
             /** @var $attribute \Magento\Framework\Api\MetadataObjectInterface */
             foreach ($customAttributesMetadata as $attribute) {
                 $attributeCodes[] = $attribute->getAttributeCode();
@@ -180,7 +180,7 @@ abstract class AbstractExtensibleObject extends AbstractSimpleObject implements 
      */
     private function populateExtensionAttributes(array $extensionAttributesData = [])
     {
-        $extensionAttributes = $this->extensionFactory->create(get_class($this), $extensionAttributesData);
+        $extensionAttributes = $this->extensionFactory->create(\get_class($this), $extensionAttributesData);
         $this->_setExtensionAttributes($extensionAttributes);
     }
 

@@ -71,7 +71,7 @@ abstract class AbstractSimpleObjectBuilder implements SimpleBuilderInterface, Re
     {
         $dataObjectType = '';
         $pattern = '/(?<data_object>.*?)Builder(\\\\Interceptor)?/';
-        if (preg_match($pattern, get_class($this), $match)) {
+        if (preg_match($pattern, \get_class($this), $match)) {
             $dataObjectType = $match['data_object'];
         }
 

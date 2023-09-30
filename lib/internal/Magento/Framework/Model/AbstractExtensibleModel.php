@@ -72,7 +72,7 @@ abstract class AbstractExtensibleModel extends AbstractModel implements
         if (isset($data['id'])) {
             $this->setId($data['id']);
         }
-        if (isset($data[self::EXTENSION_ATTRIBUTES_KEY]) && is_array($data[self::EXTENSION_ATTRIBUTES_KEY])) {
+        if (isset($data[self::EXTENSION_ATTRIBUTES_KEY]) && \is_array($data[self::EXTENSION_ATTRIBUTES_KEY])) {
             $this->populateExtensionAttributes($data[self::EXTENSION_ATTRIBUTES_KEY]);
         }
     }
@@ -94,7 +94,7 @@ abstract class AbstractExtensibleModel extends AbstractModel implements
             function (array $acc, array $customAttribute): array {
                 if (!isset($customAttribute['value'])
                     && isset($customAttribute['selected_options'])
-                    && is_array($customAttribute['selected_options'])
+                    && \is_array($customAttribute['selected_options'])
                 ) {
                     $customAttribute['value'] = implode(
                         ',',
@@ -212,7 +212,7 @@ abstract class AbstractExtensibleModel extends AbstractModel implements
     {
         $customAttributesCodes = $this->getCustomAttributesCodes();
         /* If key corresponds to custom attribute code, populate custom attributes */
-        if (in_array($attributeCode, $customAttributesCodes)) {
+        if (\in_array($attributeCode, $customAttributesCodes)) {
             $attribute = $this->customAttributeFactory->create();
             $attribute->setAttributeCode($attributeCode)
                 ->setValue($attributeValue);
@@ -230,7 +230,7 @@ abstract class AbstractExtensibleModel extends AbstractModel implements
      */
     public function setData($key, $value = null)
     {
-        if (is_array($key)) {
+        if (\is_array($key)) {
             $key = $this->filterCustomAttributes($key);
         } elseif ($key == self::CUSTOM_ATTRIBUTES) {
             $filteredData = $this->filterCustomAttributes([self::CUSTOM_ATTRIBUTES => $value]);
@@ -249,7 +249,7 @@ abstract class AbstractExtensibleModel extends AbstractModel implements
      */
     public function unsetData($key = null)
     {
-        if (is_string($key) && isset($this->_data[self::CUSTOM_ATTRIBUTES][$key])) {
+        if (\is_string($key) && isset($this->_data[self::CUSTOM_ATTRIBUTES][$key])) {
             unset($this->_data[self::CUSTOM_ATTRIBUTES][$key]);
         }
         return parent::unsetData($key);
@@ -341,8 +341,8 @@ abstract class AbstractExtensibleModel extends AbstractModel implements
     protected function getEavAttributesCodes(\Magento\Framework\Api\MetadataServiceInterface $metadataService)
     {
         $attributeCodes = [];
-        $customAttributesMetadata = $metadataService->getCustomAttributesMetadata(get_class($this));
-        if (is_array($customAttributesMetadata)) {
+        $customAttributesMetadata = $metadataService->getCustomAttributesMetadata(\get_class($this));
+        if (\is_array($customAttributesMetadata)) {
             /** @var $attribute \Magento\Framework\Api\MetadataObjectInterface */
             foreach ($customAttributesMetadata as $attribute) {
                 $attributeCodes[] = $attribute->getAttributeCode();
@@ -396,7 +396,7 @@ abstract class AbstractExtensibleModel extends AbstractModel implements
      */
     private function populateExtensionAttributes(array $extensionAttributesData = [])
     {
-        $extensionAttributes = $this->extensionAttributesFactory->create(get_class($this), $extensionAttributesData);
+        $extensionAttributes = $this->extensionAttributesFactory->create(\get_class($this), $extensionAttributesData);
         $this->_setExtensionAttributes($extensionAttributes);
     }
 

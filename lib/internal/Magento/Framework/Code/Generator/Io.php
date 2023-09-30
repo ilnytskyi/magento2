@@ -65,7 +65,7 @@ class Io
     {
         $fileName = $this->generateResultFileName($className);
         $pathParts = explode('/', $fileName);
-        unset($pathParts[count($pathParts) - 1]);
+        unset($pathParts[\count($pathParts) - 1]);
 
         return implode('/', $pathParts) . '/';
     }

@@ -68,7 +68,7 @@ class Translate implements RendererInterface
             throw $e;
         }
 
-        $source[] = array_key_exists($text, $data) ? $data[$text] : end($source);
+        $source[] = \array_key_exists($text, $data) ? $data[$text] : end($source);
 
         return $this->messageFormatter->render($source, $arguments);
     }

@@ -101,7 +101,7 @@ class Reader
             $filePath = $path . '/' . $this->configFilePool->getPath($fileKey);
             if ($fileDriver->isExists($filePath)) {
                 $result = include $filePath;
-                if (!is_array($result)) {
+                if (!\is_array($result)) {
                     throw new RuntimeException(new Phrase("Invalid configuration file: '%1'", [$filePath]));
                 }
             }
@@ -111,7 +111,7 @@ class Reader
                 $configFile = $path . '/' . $file;
                 if ($fileDriver->isExists($configFile)) {
                     $fileData = include $configFile;
-                    if (!is_array($fileData)) {
+                    if (!\is_array($fileData)) {
                         throw new RuntimeException(new Phrase("Invalid configuration file: '%1'", [$configFile]));
                     }
                 } else {

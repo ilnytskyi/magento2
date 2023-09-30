@@ -67,7 +67,7 @@ class DictionaryTest extends TestCase
         $file = $this->getMockForAbstractClass(ReadInterface::class);
         $willReturnArgs = [];
 
-        for ($i = 0, $count = count($data); $i < $count; $i++) {
+        for ($i = 0, $count = \count($data); $i < $count; $i++) {
             $willReturnArgs[] = $data[$i];
         }
         $willReturnArgs[] = false;

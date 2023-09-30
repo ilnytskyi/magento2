@@ -41,7 +41,7 @@ class Locale
         $isValid = true;
         $allowedLocaleCodes = array_keys($this->lists->getLocaleList());
 
-        if (!$localeCode || !in_array($localeCode, $allowedLocaleCodes)) {
+        if (!$localeCode || !\in_array($localeCode, $allowedLocaleCodes)) {
             $isValid = false;
         }
 

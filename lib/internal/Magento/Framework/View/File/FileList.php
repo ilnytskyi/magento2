@@ -59,7 +59,7 @@ class FileList
     {
         foreach ($files as $file) {
             $identifier = $file->getFileIdentifier();
-            if (array_key_exists($identifier, $this->files)) {
+            if (\array_key_exists($identifier, $this->files)) {
                 $filename = $this->files[$identifier]->getFilename();
                 throw new \LogicException(
                     "View file '{$file->getFilename()}' is indistinguishable from the file '{$filename}'."

@@ -194,8 +194,8 @@ class Classes
             $pattern = '/^' . preg_quote($modulePath, '/') . '\/(' . $subTypePattern . '\/.+)\.php$/';
             foreach (Files::init()->getFiles([$modulePath], '*.php') as $file) {
                 if ($file && preg_match($pattern, $file)) {
-                    $partialFileName = substr($file, strlen($modulePath ?? '') + 1);
-                    $partialFileName = substr($partialFileName, 0, strlen($partialFileName) - strlen('.php'));
+                    $partialFileName = substr($file, \strlen($modulePath ?? '') + 1);
+                    $partialFileName = substr($partialFileName, 0, \strlen($partialFileName) - \strlen('.php'));
                     $partialClassName = str_replace('/', '\\', $partialFileName);
                     $className = str_replace('_', '\\', $moduleName) . '\\' . $partialClassName;
                     $result[$className] = $moduleName;
@@ -246,7 +246,7 @@ class Classes
         //init virtual classes if necessary
         self::getVirtualClasses();
 
-        return array_key_exists($className, self::$_virtualClasses);
+        return \array_key_exists($className, self::$_virtualClasses);
     }
 
     /**

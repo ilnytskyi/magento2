@@ -148,7 +148,7 @@ class ClassesScanner implements ClassesScannerInterface
      */
     private function isExclude($fileItemPath, $patterns)
     {
-        if (!is_array($patterns)) {
+        if (!\is_array($patterns)) {
             $patterns = (array)$patterns;
         }
         foreach ($patterns as $pattern) {

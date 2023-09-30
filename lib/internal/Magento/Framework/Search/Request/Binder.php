@@ -85,16 +85,16 @@ class Binder
             $item = $item !== null ? trim($item) : '';
         });
         $bindData = array_filter($bindData, function ($element) {
-            return is_array($element) ? count($element) : strlen($element);
+            return \is_array($element) ? \count($element) : \strlen($element);
         });
 
         foreach ($data as $key => $value) {
-            if (is_array($value)) {
+            if (\is_array($value)) {
                 $data[$key] = $this->processData($value, $bindData);
             } else {
                 foreach ($bindData as $bindKey => $bindValue) {
                     if (strpos($value, $bindKey) !== false) {
-                        if (is_string($bindValue)) {
+                        if (\is_string($bindValue)) {
                             $data[$key] = str_replace($bindKey, $bindValue, $value);
                         } else {
                             $data[$key] = $bindValue;
